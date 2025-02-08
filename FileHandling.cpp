@@ -10,11 +10,12 @@
 
 #include "FileHandling.h"
 
-#include "Array.cpp"
+#include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
-#include "SimpleLogger.h"
 
+#include "Service.h"
+#include "SimpleConsoleLogger.h"
 namespace PerformanceEvaluation {
 
     void FileHandling::appendFileContent(const std::string& src_file_path, const std::string& dest_file_path) {
@@ -34,7 +35,10 @@ namespace PerformanceEvaluation {
         std::string_view message = "Contents of file " + src_file_path 
             + " was successfully appended to file " + dest_file_path + ".";
             
-        SimpleLogger::Info(message, LogHandler::FILE);
+        SimpleConsoleLogger console;
+        Service service(&console);
+        
+        service.UseInfoLogger(message);
 
         input_file.close();
         output_file.close();
@@ -44,25 +48,17 @@ namespace PerformanceEvaluation {
         std::ifstream file(file_path);
         
         checkReadFileValidity(file_path, file);
-
-        // std::vector<Dataset> datasets;
-        Dataset dataset;
+        
         std::string data;
         
         if (std::getline(file, data)) {
-            while (std::getline(file, data)) {                                        
+            while (std::getline(file, data)) {      
                 Dataset dataset = parseCSV(data);
-                // datasets.push_back(dataset);
                 linked_list.insertEnd(dataset);
             }
         }
 
         file.close();
-        
-        // for (const auto& dataset : datasets) {
-        //     dataset.display();
-        //     std::cout << "------------\n";
-        // }
     }
 
     void FileHandling::writeFile(const std::string& file_path, std::string_view message) {
