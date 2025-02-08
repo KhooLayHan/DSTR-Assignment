@@ -8,7 +8,7 @@
 #include <string>
 #include <string_view>
 
-// #include "Array.cpp"
+#include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
 #include "SimpleLogger.h"

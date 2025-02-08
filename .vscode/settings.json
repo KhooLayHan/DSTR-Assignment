@@ -1,4 +1,6 @@
 {
+    "editor.tabSize": 4,
+
     "files.associations": {
         "chrono": "cpp",
         "array": "cpp",

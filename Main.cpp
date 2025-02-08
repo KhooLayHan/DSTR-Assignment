@@ -11,14 +11,16 @@
 
 #include "Assignment.cpp"
 
+
 // #include "Algorithms.cpp" 
 // #include "FileHandling.h"
 // #include "Benchmark.h"
-// #include "LinkedList.h"
+#include "LinkedList.h"
 // #include "Dataset.h"
 // #include "SimpleLogger.h"
 
 // ! Not allow to use this list of built-in containers: https://www.geeksforgeeks.org/containers-cpp-stl/
+
 
 static int s_AllocationCount = 0; 
 
@@ -30,7 +32,8 @@ void* operator new(size_t size) {
 
 int main(/* int argc, char** argv */)
 {
-    PerformanceEvaluation::Assignment::Question_1();
+    // PerformanceEvaluation::Assignment::Question_1();
+    PerformanceEvaluation::Assignment::Question_2();
 
     // PerformanceEvaluation::LinkedList linked_list_true;
     // PerformanceEvaluation::LinkedList linked_list_fake;
@@ -89,13 +92,15 @@ int main(/* int argc, char** argv */)
         // linked_list_2.display();
     }
 
-    std::cout << s_AllocationCount << " allocations.\n";
-}
-
     // int *x = new int[42];
     // delete [] x;
 
-    // ... some complex body of code
+    // // ... some complex body of code
 
     // delete [] x;
+
+    std::cout << s_AllocationCount << " allocations.\n";
+}
+
+
 
