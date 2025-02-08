@@ -1,0 +1,69 @@
+#include <iostream>
+
+#include "SimpleConsoleLogger.h"
+
+namespace PerformanceEvaluation {
+    #ifdef SOURCE_LOCATION_SUPPORTED
+        void SimpleConsoleLogger::Log(std::string_view message, LogLevel level, const Location& location) const {
+            PrintConsole(message, level, location);
+        }
+                
+        void SimpleConsoleLogger::Debug(std::string_view message, const Location& location) const {
+            PrintConsole(message, LogLevel::DEBUG, location);    
+        }
+                
+        void SimpleConsoleLogger::Info(std::string_view message, const Location& location) const {
+            PrintConsole(message, LogLevel::INFO, location);
+        }
+                
+        void SimpleConsoleLogger::Warn(std::string_view message, const Location& location) const {
+            PrintConsole(message, LogLevel::WARN, location);
+        }
+                
+        void SimpleConsoleLogger::Error(std::string_view message, const Location& location) const {
+            PrintConsole(message, LogLevel::ERROR, location);
+        }
+                
+        void SimpleConsoleLogger::Fatal(std::string_view message, const Location& location) const {
+            PrintConsole(message, LogLevel::FATAL, location);
+        }
+
+        void SimpleConsoleLogger::PrintConsole(std::string_view message, LogLevel level, const Location& location) const {
+            static int32_t id;
+
+            std::cerr 
+                << ++id << " [" 
+                << __DATE__ << "|"
+                << __TIME__ << "|"
+                << location.file_name() << "|" 
+                << "Line " << location.line() << "|"
+                << location.function_name() << "|"
+                << "Column " << location.column() 
+                << "]\n"
+                << SetLogLevel(level) << ": " << message 
+                << "\n\n"
+            ;        
+        }
+    #else
+        void SimpleConsoleLogger::Log(std::string_view message, const char* file, int32_t line, LogLevel level) const {
+            printConsole(message, file, line, level);
+        }
+
+        void SimpleLogger::printConsole(std::string_view message, const char* file, int32_t line, LogLevel level) const {
+            static int32_t id;
+
+            std::cerr 
+                << ++id << " [" 
+                << __DATE__ << "|"
+                << __TIME__ << "|"
+                << file << "|" // __FILE__
+                << "Line " << line << "|" // __LINE__
+                // * Note: __FUNCTION__ is not standard C++ 
+                // * Note: __COLUMN__ predefined macro does not exist 
+                << "]\n" 
+                << SimpleLogger::SetLogLevel(level) << ": " << message
+                << "\n"
+            ;
+        }
+    #endif
+}
