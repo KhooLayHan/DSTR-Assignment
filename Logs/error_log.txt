@@ -1,0 +1,12 @@
+[Feb 20 2025|15:01:01|./FileHandling.cpp|Line 171|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 20 2025|15:01:01|./FileHandling.cpp|Line 171|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 20 2025|15:04:45|./FileHandling.cpp|Line 171|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 20 2025|15:04:45|./FileHandling.cpp|Line 171|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+

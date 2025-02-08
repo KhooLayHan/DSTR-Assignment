@@ -37,6 +37,8 @@ namespace PerformanceEvaluation {
             LinkedList(LinkedList&& other)
                 : m_Head(std::move(other.m_Head)), m_Length(0) {
             }
+
+            
             
             ~LinkedList() {
                 LinkedListNode* temp;
