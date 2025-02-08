@@ -16,6 +16,7 @@
 
 #include "Service.h"
 #include "SimpleConsoleLogger.h"
+#include "SimpleFileLogger.h"
 namespace PerformanceEvaluation {
 
     void FileHandling::appendFileContent(const std::string& src_file_path, const std::string& dest_file_path) {
@@ -35,8 +36,8 @@ namespace PerformanceEvaluation {
         std::string_view message = "Contents of file " + src_file_path 
             + " was successfully appended to file " + dest_file_path + ".";
             
-        SimpleConsoleLogger console;
-        Service service(&console);
+        SimpleFileLogger file_logger;
+        Service service(&file_logger);
         
         service.UseInfoLogger(message);
 
@@ -68,6 +69,10 @@ namespace PerformanceEvaluation {
 
         file << message;                
         file.close();
+
+        SimpleFileLogger file_logger;
+        Service service(&file_logger);
+        service.UseInfoLogger(message);
 
         SimpleLogger::Info("Successfully write to file " + file_path, LogHandler::FILE);
     }
@@ -166,6 +171,10 @@ namespace PerformanceEvaluation {
             SimpleLogger::Warn("Appending file " + file_path + "is not found.", LogHandler::FILE);
             return; 
         }
+    }
+
+    void cleanFile() {
+        
     }
 
     Dataset FileHandling::parseCSV(const std::string& line) {
