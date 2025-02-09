@@ -97,7 +97,8 @@ namespace PerformanceEvaluation {
 
             void incrementLength();
 
-            constexpr bool contains(const std::string&, std::string_view) const;
+            // constexpr bool contains(const std::string&, std::string_view) const;
+            bool contains(const std::string&, std::string_view) const;
 
             void isHeadEmpty() const;
 
