@@ -32,8 +32,8 @@ void* operator new(size_t size) {
 
 int main(/* int argc, char** argv */)
 {
-    // PerformanceEvaluation::Assignment::Question_1();
-    PerformanceEvaluation::Assignment::Question_2();
+    PerformanceEvaluation::Assignment::Question_1();
+    // PerformanceEvaluation::Assignment::Question_2();
 
     // PerformanceEvaluation::LinkedList linked_list_true;
     // PerformanceEvaluation::LinkedList linked_list_fake;
