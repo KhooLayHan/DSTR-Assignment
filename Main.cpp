@@ -48,7 +48,6 @@ int main(/* int argc, char** argv */)
     // linked_list_true.displayLength(file_path_fake);
 
     // using namespace PerformanceEvaluation;
-
     {
         // PerformanceEvaluation::SimpleLogger::Info("\033[31;42mRed TEXT \033[0m", PerformanceEvaluation::LogHandler::CONSOLE);
         // std::cout << "\033[31;42;1mRed TEXT \033[0m" << "\n";
