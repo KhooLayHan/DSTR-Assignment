@@ -1,5 +1,6 @@
 #include <array>
 #include <iostream>
+#include <string_view>
 #include <sstream>
 #include <vector>
 
@@ -15,34 +16,13 @@ namespace PerformanceEvaluation {
         
         CheckReadFileValidity(file_path, file);
 
-        Dataset dataset;
-        std::string data;
-        
-        if (std::getline(file, data)) {
+        if (std::string data; std::getline(file, data)) {
             while (std::getline(file, data)) {                                        
                 const auto& [id, title, text, subject, date] = ParseCSV(data);
                 linked_list.insertEnd({ id, title, text, subject, date });
             }
         }
 
-        file.close();
-    }
-
-    void FileHandling::ReadCSV(const FilePath& file_path, LinkedList& linked_list) {
-        std::ifstream file(file_path, std::ios::binary);
-        
-        CheckReadFileValidity(file_path, file);
-        
-        Dataset dataset;
-        std::string data;
-
-        if (std::getline(file, data)) {
-            while (std::getline(file, data)) {                                    
-                const auto& [id, title, text, subject, date] = ParseCSV(data);
-                linked_list.insertEnd({ id, title, text, subject, date });
-            }
-        }
-    
         file.close();
     }
 
@@ -55,10 +35,9 @@ namespace PerformanceEvaluation {
         file.close();
     
         const std::string& ref_file_path = file_path; 
-        std::string_view log = "Successfully written to file " + ref_file_path + " with message: " + message + "\n";
 
         SimpleFileLogger file_logger;
-        SimpleLoggingService::UseInfoLogger(file_logger, log);
+        SimpleLoggingService::UseInfoLogger(file_logger, "Successfully written to file " + ref_file_path + " with message: " + message + ".");
     }
 
     void FileHandling::AppendFile(const FilePath& file_path, const std::string& message) {
@@ -70,10 +49,9 @@ namespace PerformanceEvaluation {
         file.close();
         
         const std::string& ref_file_path = file_path; 
-        std::string_view log = "Successfully appended to file " + ref_file_path + " with message: " + message + "\n";
 
         SimpleFileLogger file_logger;
-        SimpleLoggingService::UseInfoLogger(file_logger, log);
+        SimpleLoggingService::UseInfoLogger(file_logger, "Successfully appended to file " + ref_file_path + " with message: " + message + ".");
     }
 
     void FileHandling::AppendFileContent(const FilePath& src_file_path, const FilePath& dest_file_path) {
@@ -83,9 +61,7 @@ namespace PerformanceEvaluation {
         CheckReadFileValidity(src_file_path, input_file);
         CheckWriteFileValidity(dest_file_path, output_file);
 
-        std::string line;
-        
-        if (std::getline(input_file, line)) {
+        if (std::string line; std::getline(input_file, line)) {
             while (std::getline(input_file, line)) 
                 output_file << line << "\n";
         }
@@ -93,10 +69,8 @@ namespace PerformanceEvaluation {
         const std::string& source = src_file_path;
         const std::string& destination = dest_file_path;
 
-        std::string_view message = "Contents of file " + source + " was successfully appended to file " + destination + ".";
-            
         SimpleFileLogger file_logger;
-        SimpleLoggingService::UseInfoLogger(file_logger, message);
+        SimpleLoggingService::UseInfoLogger(file_logger, "Contents of file " + source + " was successfully appended to file " + destination + ".");
         
         input_file.close();
         output_file.close();
@@ -157,7 +131,7 @@ namespace PerformanceEvaluation {
         }
     }
 
-    Dataset& FileHandling::ParseCSV(const FilePath& line) {
+    Dataset FileHandling::ParseCSV(const FilePath& line) {
         constexpr size_t MAX_FIELDS_SIZE = 4;
         
         std::array<std::string, MAX_FIELDS_SIZE> field = { "" };
@@ -246,40 +220,3 @@ namespace PerformanceEvaluation {
         return {};
     }
 }
-
-
-
-
-
-            // void readFile() {
-            //     std::ifstream file(file_path);
-                
-            //     checkFileValidity(file);
-
-            //     std::string data;
-
-            //     while (std::getline(file, data)) {
-            //         std::cout << data << std::endl;
-            //     }
-            // }
-
-                   // // std::cout << line << "\n";
-
-            // std::getline(line, dataset.title, COMMA);
-            // std::getline(line, dataset.text, COMMA);
-            // std::getline(line, dataset.subject, COMMA);
-            // std::getline(line, dataset.date, COMMA);
-        
-            // linked_list.insertBegin(dataset);
-            // linked_list.addBegin(dataset.subject);
-            // linked_list.addBegin(dataset.text);
-            // linked_list.addBegin(title);
-
-            // insertLinkedList(title, text, subject, date);
-
-            // std::cout << "\nLine " << ++i << ": \n\t";
-            // std::cout << dataset.title << "\n\t" 
-            //     << dataset.text << "\n\t"
-            //     << dataset.subject << "\n\t"
-            //     << dataset.text << "\n"; 
-        // }
