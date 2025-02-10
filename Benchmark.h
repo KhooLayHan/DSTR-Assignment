@@ -1,11 +1,6 @@
 #pragma once
 
-#ifndef BENCHMARK_H
-#define BENCHMARK
-
 #include <chrono>
-#include <iostream>
-#include <string>
 
 #include "SimpleLogger.h"
 
@@ -27,54 +22,44 @@ namespace PerformanceEvaluation {
 
         public:
             Benchmark() 
-                : is_running(false) {
-                // startTimer();
+                : m_IsRunning(false) {
+                StartTimer();
             }
 
             ~Benchmark() {
-                // endTimer();
+                EndTimer();
             }
            
-            void startTimer();
+            void StartTimer();    
+            void EndTimer();
+            void Duration(TimeUnit time_unit = TimeUnit::MICROSECONDS) const;
             
-            void endTimer();
-
-            void duration(TimeUnit time_unit = TimeUnit::MICROSECONDS);
-            
-            // template <typename Func>
-            // auto duration(Func func) {
-            //     return [func]{ 
-            //         startTimer();
-            //     func();
-            //     endTimer(); }
-                
-            // }
+            void DurationSeconds() const;
+            void DurationMicroseconds() const;
+            void DurationMilliseconds() const;
+            void DurationNanoseconds() const;
 
             template<typename Func>
-            auto measureDuration(Func func) {
-                startTimer();
+            void MeasureDuration(Func func) const {
+                StartTimer();
                 func();
-                endTimer(); 
+                EndTimer(); 
             }
-            
-            void durationSeconds();
-
-            void durationMicroseconds();
-
-            void durationMilliseconds();
-
-            void durationNanoseconds();
-
-            void checkBenchmarkIsRunning();
-
         protected:
-            std::string_view setTimeUnit(TimeUnit);
-
+            void CheckBenchmarkIsRunning() const;
+            
+            static const std::string Benchmark::SetTimeUnit(TimeUnit time_unit) {
+                switch (time_unit) {
+                    case TimeUnit::SECONDS:         return "s";
+                    case TimeUnit::MICROSECONDS:    return "μs";
+                    case TimeUnit::MILLISECONDS:    return "ms";
+                    case TimeUnit::NANOSECONDS:     return "ns";
+                    default:                        return "TIME_UNIT_UNKNOWN";
+                }
+            } 
         private:
-            TimePoint start_time;
-            TimePoint end_time;
-            bool is_running;
+            TimePoint m_StartTime;
+            TimePoint m_EndTime;
+            bool m_IsRunning;
     }; 
 } // namespace PerformanceEvaluation
-
-#endif
