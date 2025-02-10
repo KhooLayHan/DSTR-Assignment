@@ -14,9 +14,10 @@
 #include "Dataset.h"
 #include "LinkedList.h"
 
-#include "Service.h"
+#include "SimpleLoggingService.h"
 #include "SimpleConsoleLogger.h"
 #include "SimpleFileLogger.h"
+
 namespace PerformanceEvaluation {
 
     void FileHandling::appendFileContent(const std::string& src_file_path, const std::string& dest_file_path) {
@@ -37,9 +38,7 @@ namespace PerformanceEvaluation {
             + " was successfully appended to file " + dest_file_path + ".";
             
         SimpleFileLogger file_logger;
-        Service service(&file_logger);
-        
-        service.UseInfoLogger(message);
+        SimpleLoggingService::UseInfoLogger(file_logger, message);
 
         input_file.close();
         output_file.close();
@@ -154,6 +153,12 @@ namespace PerformanceEvaluation {
 
     void FileHandling::checkReadFileValidity(const std::string& file_path, const std::ifstream& file) {
         if (!file) { 
+            
+            SimpleFileLogger file_logger;  
+            Service service(&file_logger);
+
+
+
             SimpleLogger::Warn("Reading file " + file_path + " is not found.", LogHandler::FILE);
             return; 
         }

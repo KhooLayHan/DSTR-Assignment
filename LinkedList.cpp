@@ -9,6 +9,9 @@
 #include "Dataset.h"
 #include "DateUtility.cpp"
 #include "SimpleLogger.h"
+
+#include "SimpleLoggingService.h"
+
 namespace PerformanceEvaluation {
     
     void LinkedList::insertBegin(const Dataset& dataset) {
@@ -54,6 +57,9 @@ namespace PerformanceEvaluation {
             temp = temp->next;
 
         if (temp == nullptr) {
+            
+            SimpleFileLogger file_logger;
+            SimpleLoggingService::
             SimpleLogger::Fatal("Position is out of bounds.", LogHandler::FILE);
             
             delete node;
