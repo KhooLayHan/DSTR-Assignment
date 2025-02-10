@@ -49,7 +49,7 @@ namespace PerformanceEvaluation {
             printConsole(message, file, line, level);
         }
 
-        void SimpleLogger::printConsole(std::string_view message, const char* file, int32_t line, LogLevel level) const {
+        void SimpleLogger::PrintConsole(std::string_view message, const char* file, int32_t line, LogLevel level) const {
             static int32_t id;
 
             std::cerr 
