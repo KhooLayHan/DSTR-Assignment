@@ -42,8 +42,7 @@ namespace PerformanceEvaluation {
              */
             static void Question_1() {
                 Benchmark benchmark;
-
-        
+                      
                 benchmark.startTimer();
 
                 LinkedList linked_list_true;
