@@ -42,6 +42,8 @@ namespace PerformanceEvaluation {
                 getAlgorithm().mergeSortImpl(linked_list);
             }
             
+            // virtual void MergeSort() const = 0;
+
             // static void QuickSort(LinkedList& linked_list) {
             //     getAlgorithm().quickSortImpl(linked_list);
             // }

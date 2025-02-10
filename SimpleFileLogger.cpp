@@ -46,6 +46,7 @@ namespace PerformanceEvaluation {
             ;
 
             FileHandling::appendFile("./Logs/error_log.txt", output_stream.str());
+        }
     #else
         void SimpleFileLogger::Log(std::string_view message, const char* file, int32_t line, LogLevel level) const {
             printConsole(message, file, line, level);

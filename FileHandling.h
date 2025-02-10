@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef FILEHANDLING_H
-#define FILEHANDLING_H
-
 #include <fstream>
 #include <memory>
 #include <string>
@@ -18,15 +15,15 @@ namespace PerformanceEvaluation {
         public:
             FileHandling() {}
         
-            // FileHandling(const std::string& file_path)
-            //     : file_path(file_path) {}
+            FileHandling(const std::string& file_path)
+                : m_FilePath(file_path) {}
 
-            // FileHandling(std::string&& file_path)
-            //     : file_path(std::move(file_path)) {}
+            FileHandling(std::string&& file_path)
+                : m_FilePath(std::move(file_path)) {}
 
-            static void readFile(const std::string&, LinkedList&);
+            static void ReadFile(const std::string&, LinkedList&);
             
-            static void readCSV(const std::string&, LinkedList&);
+            static void ReadCSV(const std::string&, LinkedList&);
             // static void readCSV(const std::string& file_path, LinkedList& linked_list) {
             //     std::ifstream file(file_path);
         
@@ -117,12 +114,11 @@ namespace PerformanceEvaluation {
             // }
 
         private:
-            std::string file_path;
+            std::string m_FilePath;
             // LinkedList linked_list;
     };
 } // namespace PerformanceEvaluation
 
-#endif
 
             // ~FileHandling() {
             //     file_path.close();
