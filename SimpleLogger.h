@@ -37,8 +37,6 @@ namespace PerformanceEvaluation {
 
     protected: 
         static constexpr std::string SetLogLevel(LogLevel log_level) {
-            // std::string_view level = {};
-            
             switch (log_level) {
                 case LogLevel::DEBUG:   return "DEBUG";
                 case LogLevel::INFO:    return "INFO";
@@ -47,8 +45,6 @@ namespace PerformanceEvaluation {
                 case LogLevel::FATAL:   return "FATAL";
                 default:                return "UNKNOWN";
             }
-    
-            // return level;
         }
     private:            
         SimpleLogger(const SimpleLogger&) = delete;
