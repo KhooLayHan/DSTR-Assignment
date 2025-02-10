@@ -1,6 +1,4 @@
 {
-    "editor.tabSize": 4,
-
     "files.associations": {
         "chrono": "cpp",
         "array": "cpp",
@@ -62,6 +60,8 @@
         "format": "cpp",
         "span": "cpp",
         "variant": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "codecvt": "cpp",
+        "future": "cpp"
     }
 }
