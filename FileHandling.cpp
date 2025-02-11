@@ -33,7 +33,7 @@ namespace PerformanceEvaluation {
         
         CheckReadFileValidity(file_path, file);
 
-        const std::string& cleaned_file = CleanFile(file_path, file);  
+        const std::string& cleaned_file = CleanFile(file);  
         std::istringstream stream(cleaned_file);
         std::string line;
 
@@ -133,7 +133,7 @@ namespace PerformanceEvaluation {
         }
     }
 
-    const std::string FileHandling::CleanFile(const FilePath& file_path, const std::ifstream& file) {        
+    const std::string FileHandling::CleanFile(const std::ifstream& file) {        
         // Read the entire file into a string
         std::ostringstream buffer;
         buffer << file.rdbuf();
@@ -237,9 +237,9 @@ namespace PerformanceEvaluation {
     Dataset FileHandling::CleanParseAndMoreClean(const std::string& line) {        
         const auto& [title, text, subject, date] = ParseCSVLine(line);
 
-        auto clean_field = [&](const std::string& field, const std::string& placeholder) {
-            return field.empty() ? placeholder : field;
-        };
+        // auto clean_field = [&](const std::string& field, const std::string& placeholder) {
+        //     return field.empty() ? placeholder : field;
+        // };
 
         Dataset dataset;
         
