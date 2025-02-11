@@ -332,7 +332,7 @@ namespace PerformanceEvaluation {
     //     return "";
     // }
 
-    constexpr bool LinkedList::contains(const std::string& data, std::string_view target) const {
+    bool LinkedList::contains(const std::string& data, std::string_view target) const {
         return data.find(target) != std::string::npos;
     }
 
