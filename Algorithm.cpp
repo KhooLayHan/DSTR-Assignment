@@ -91,6 +91,16 @@ namespace PerformanceEvaluation {
             //     insertionSort(linked_list.getHead());
             // }
 
+
+            void MergeSortImpl(std::array<Dataset, 4>& linked_list) {
+                // int arr[5];
+
+                // std::array<int, 5> modern_array;
+                // // arr[0].
+                // modern_array.
+                
+                // insertionSort(linked_list.getHead());
+            }
         protected:
             static Algorithm& getAlgorithm() {
                 static Algorithm algorithm;
