@@ -1,5 +1,6 @@
 #include <array>
 #include <iostream>
+#include <string>
 #include <string_view>
 #include <sstream>
 #include <vector>
@@ -11,18 +12,41 @@
 #include "SimpleLoggingService.h"
 
 namespace PerformanceEvaluation {
+    // TODO: Update ReadFile() to support Array implementation instead, not LinkedList
+    // void FileHandling::ReadFile(const FilePath& file_path, Array& array) {
+    //     std::ifstream file(file_path);
+        
+    //     CheckReadFileValidity(file_path, file);
+
+    //     if (std::string data;std::getline(file, data)) {
+    //         while (std::getline(file, data)) {                                    
+    //             const auto& [id, title, text, subject, date] = ParseCSV(data);
+    //             // * array code here...
+    //         }
+    //     }
+    
+    //     file.close();
+    // }
+
     void FileHandling::ReadFile(const FilePath& file_path, LinkedList& linked_list) {
-        std::ifstream file(file_path);
+        std::ifstream file(file_path, std::ios::binary);
         
         CheckReadFileValidity(file_path, file);
 
-        if (std::string data; std::getline(file, data)) {
-            while (std::getline(file, data)) {                                        
-                const auto& [id, title, text, subject, date] = ParseCSV(data);
-                linked_list.insertEnd({ id, title, text, subject, date });
-            }
-        }
+        const std::string& cleaned_file = CleanFile(file_path, file);  
+        std::istringstream stream(cleaned_file);
+        std::string line;
 
+        while (std::getline(stream, line)) {
+            // if (line == "title,text,subject,date" || line == "title,text,subject,date\r") 
+                // continue;
+
+            const auto& [id, title, text, subject, date] = CleanParseAndMoreClean(line);
+            linked_list.insertEnd({ id, title, text, subject, date });
+        }
+        
+        // 1051, Title: "Ex-GOP Congressman Shreds Fellow Republicans For Not ‘Howling’ For Trump’s Impeachment (VIDEO)\r\r\r\r\r\r\r"
+        
         file.close();
     }
 
@@ -76,28 +100,6 @@ namespace PerformanceEvaluation {
         output_file.close();
     }
 
-    // TODO: Update this to support Array implementation
-    // void FileHandling::readCSV(const std::string& file_path, LinkedList& linked_list) {
-    //     std::ifstream file(file_path, std::ios::binary);
-        
-    //     checkReadFileValidity(file_path, file);
-
-    //     Dataset dataset;
-    //     std::string data;
-
-    //     if (std::getline(file, data)) {
-    //         while (std::getline(file, data)) {                                    
-            
-    //             // Dataset dataset = parseCSV(data);
-    //             auto [id, title, text, subject, date] = parseCSV(data);
-    //             // datasets.push_back(dataset);
-    //             linked_list.insertEnd({ id, title, text, subject, date });
-    //         }
-    //     }
-    
-    //     file.close();
-    // }
-
     void FileHandling::CheckReadFileValidity(const FilePath& file_path, const std::ifstream& file) {
         const std::string& ref_file_path = file_path;
         
@@ -131,7 +133,19 @@ namespace PerformanceEvaluation {
         }
     }
 
-    Dataset FileHandling::ParseCSV(const FilePath& line) {
+    const std::string FileHandling::CleanFile(const FilePath& file_path, const std::ifstream& file) {        
+        // Read the entire file into a string
+        std::ostringstream buffer;
+        buffer << file.rdbuf();
+        std::string file_content = buffer.str();
+
+        // Remove all '\r' characters
+        file_content.erase(std::remove(file_content.begin(), file_content.end(), '\r'), file_content.end());
+
+        return file_content;
+    }
+
+    Dataset FileHandling::ParseCSV(const std::string& line) {
         constexpr size_t MAX_FIELDS_SIZE = 4;
         
         std::array<std::string, MAX_FIELDS_SIZE> field = { "" };
@@ -218,5 +232,88 @@ namespace PerformanceEvaluation {
         }
         
         return {};
+    }
+
+    Dataset FileHandling::CleanParseAndMoreClean(const std::string& line) {        
+        const auto& [title, text, subject, date] = ParseCSVLine(line);
+
+        auto clean_field = [&](const std::string& field, const std::string& placeholder) {
+            return field.empty() ? placeholder : field;
+        };
+
+        Dataset dataset;
+        
+        dataset.id++;
+        dataset.title = CleanField(title, "No Title");
+        dataset.text = CleanField(text, "No Text");
+        dataset.subject = CleanField(subject, "No Subject");
+        dataset.date = CleanField(date, "No Date");
+
+        return dataset;
+    }
+
+    const std::string FileHandling::CleanField(const std::string& field, const std::string& placeholder) {
+        if (field.empty()) 
+            return placeholder;
+            
+        std::string cleaned;
+        for (char character : field) {
+            // Keep only non-control characters (e.g., skip \r, \n)
+            if (!std::iscntrl(character) || character == '\n') { // Preserve newlines if needed
+                cleaned += character;
+            }
+        }
+
+        // Trim whitespace, carriage returns ('\r'), and newlines ('\n') characters trailing '\r' characters
+        cleaned.erase(0, cleaned.find_first_not_of(" \t\r\n")); // Trim leading
+        cleaned.erase(cleaned.find_last_not_of(" \t\r\n") + 1); // Trim trailing
+        
+        return cleaned;
+    }
+
+    // ! 1052; Text fields crashes due to \r\r\r\r\r from title (I think)
+
+    FileHandling::OldDataset FileHandling::ParseCSVLine(const std::string& line) {
+        static constexpr size_t MAX_FIELD_SIZE = 4;
+        
+        std::array<std::string, MAX_FIELD_SIZE> fields;
+        size_t field_index = 0;
+        std::string token;
+        bool in_quotes = false;
+        bool escape_next = false;
+        
+        // std::string line_ = CleanField(line, "");
+
+        for (size_t i = 0; i < line.size(); ++i) {
+            char character = line[i];
+    
+            if (escape_next) {
+                token += character;
+                escape_next = false;
+            } else if (character == '\\') {
+                escape_next = true;
+            } else if (character == '"') {
+                in_quotes = !in_quotes;
+            } else if (character == ',' && !in_quotes) {
+                if (field_index < MAX_FIELD_SIZE)
+                    fields[field_index++] = token;
+                token.clear();
+            } else {
+                token += character;
+            }
+        }
+    
+        // If there are more than 4 fields, then error!
+        if (field_index > MAX_FIELD_SIZE - 1) {
+            std::cout << token << "\n";
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseFatalLogger(console, "Unexpected number of fields in line; field_index == " + field_index + '.');
+        }
+        
+        // Add the last field
+        if (field_index < MAX_FIELD_SIZE)
+            fields[field_index] = token;
+        
+        return { fields };
     }
 }
