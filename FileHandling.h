@@ -45,7 +45,7 @@ namespace PerformanceEvaluation {
             static Dataset ParseCSV(const std::string&);
             static Dataset CleanParseAndMoreClean(const std::string&);
 
-            static const std::string CleanFile(const FilePath&, const std::ifstream&);
+            static const std::string CleanFile(const std::ifstream&);
 
             static const std::string CleanField(const std::string&, const std::string&);
 
