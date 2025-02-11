@@ -5,6 +5,7 @@
     #include <source_location>
 #endif
 
+#include <string>
 #include <string_view>
 
 namespace PerformanceEvaluation {

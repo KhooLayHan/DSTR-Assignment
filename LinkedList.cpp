@@ -58,9 +58,9 @@ namespace PerformanceEvaluation {
 
         if (temp == nullptr) {
             
-            SimpleFileLogger file_logger;
-            SimpleLoggingService::
-            SimpleLogger::Fatal("Position is out of bounds.", LogHandler::FILE);
+            // SimpleFileLogger file_logger;
+            // SimpleLoggingService::
+            // SimpleLogger::Fatal("Position is out of bounds.", LogHandler::FILE);
             
             delete node;
             node = nullptr;
@@ -124,7 +124,7 @@ namespace PerformanceEvaluation {
         std::cout << "TITLE\n-----------\n";
         
         while (temp != nullptr) {
-            SimpleLogger::Info(temp->data.title, LogHandler::FILE);
+            // SimpleLogger::Info(temp->data.title, LogHandler::FILE);
             // std::cout << temp->data.title << "\n";
             temp = temp->next;
         } 
@@ -171,7 +171,7 @@ namespace PerformanceEvaluation {
 
         while (temp != nullptr) {
             
-            SimpleLogger::Info(temp->data.date, LogHandler::FILE);
+            // SimpleLogger::Info(temp->data.date, LogHandler::FILE);
         
             // std::cout << temp->data.date << "\n";
             temp = temp->next;
@@ -209,14 +209,14 @@ namespace PerformanceEvaluation {
     }
 
     void LinkedList::displayAfterSearch(const std::string& source, std::string_view target) const {
-        if (contains(source, target)) 
-            SimpleLogger::Info("Found: " + source, LogHandler::FILE);
+        if (contains(source, target)) {}
+            // SimpleLogger::Info("Found: " + source, LogHandler::FILE);
     }    
 
     void LinkedList::displayAllAfterSearch(const Dataset& dataset, const std::string& source, std::string_view target) const {
         if (contains(source, target)) {
-            SimpleLogger::Info(dataset.display(), LogHandler::FILE);
-            
+            // SimpleLogger::Info(dataset.display(), LogHandler::FILE);
+            dataset.display();
             // FileHandling::appendFile("./Logs/log_test.txt", source);  
         }    
     }    
@@ -254,7 +254,7 @@ namespace PerformanceEvaluation {
 
     void LinkedList::deleteNode(const Dataset& dataset) {
         if (m_Head == nullptr) {
-            SimpleLogger::Warn("List is empty.", LogHandler::FILE);
+            // SimpleLogger::Warn("List is empty.", LogHandler::FILE);
             return;
         }
 
@@ -281,7 +281,7 @@ namespace PerformanceEvaluation {
         }
 
         if (temp->next == nullptr) { 
-            SimpleLogger::Warn("Value cannot be found in the list.", LogHandler::FILE);
+            // SimpleLogger::Warn("Value cannot be found in the list.", LogHandler::FILE);
             return;
         }
 
@@ -310,7 +310,7 @@ namespace PerformanceEvaluation {
         }
 
         m_Head = nullptr;
-        SimpleLogger::Info("All nodes has been deleted.", LogHandler::FILE);
+        // SimpleLogger::Info("All nodes has been deleted.", LogHandler::FILE);
     }
 
     LinkedListNode* LinkedList::getHead() const {
@@ -338,7 +338,7 @@ namespace PerformanceEvaluation {
     //     return "";
     // }
 
-    constexpr bool LinkedList::contains(const std::string& data, std::string_view target) const {
+    bool LinkedList::contains(const std::string& data, std::string_view target) const {
         return data.find(target) != std::string::npos;
     }
 
@@ -392,14 +392,14 @@ namespace PerformanceEvaluation {
 
     void LinkedList::isHeadEmpty() const {
         if (m_Head == nullptr) {
-            SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
+            // SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
             return;
         }
     }
 
     void LinkedList::isHeadOrNextEmpty() const {
         if (m_Head == nullptr || m_Head->next == nullptr) {
-            SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
+            // SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
             return;
         }
     }

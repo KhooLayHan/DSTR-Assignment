@@ -40,7 +40,7 @@ namespace PerformanceEvaluation {
             void DurationNanoseconds() const;
 
             template<typename Func>
-            void MeasureDuration(Func func) const {
+            void MeasureDuration(Func func) {
                 StartTimer();
                 func();
                 EndTimer(); 
@@ -48,7 +48,7 @@ namespace PerformanceEvaluation {
         protected:
             void CheckBenchmarkIsRunning() const;
             
-            static const std::string Benchmark::SetTimeUnit(TimeUnit time_unit) {
+            static const std::string SetTimeUnit(TimeUnit time_unit) {
                 switch (time_unit) {
                     case TimeUnit::SECONDS:         return "s";
                     case TimeUnit::MICROSECONDS:    return "μs";
