@@ -17,7 +17,9 @@
                 "./FileHandling.cpp",
                 "./Benchmark.cpp",
                 "./Dataset.cpp",
-                "./SimpleLogger.cpp",
+                "./SimpleFileLogger.cpp",
+                "./SimpleConsoleLogger.cpp",
+                "./SimpleLoggingService.cpp",
                 "./LinkedList.cpp",
                 "-o",
                 "./Main"
@@ -52,7 +54,9 @@
                 "./FileHandling.cpp",
                 "./Benchmark.cpp",
                 "./Dataset.cpp",
-                "./SimpleLogger.cpp",
+                "./SimpleFileLogger.cpp",
+                "./SimpleConsoleLogger.cpp",
+                "./SimpleLoggingService.cpp",
                 "./LinkedList.cpp",
                 "-o",
                 "./Main"
