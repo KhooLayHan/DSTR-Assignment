@@ -61,5 +61,6 @@
         "span": "cpp",
         "variant": "cpp",
         "source_location": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

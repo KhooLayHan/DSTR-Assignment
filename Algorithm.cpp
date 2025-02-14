@@ -42,9 +42,9 @@ namespace PerformanceEvaluation {
                 getAlgorithm().mergeSortImpl(linked_list);
             }
             
-            // static void QuickSort(LinkedList& linked_list) {
-            //     getAlgorithm().quickSortImpl(linked_list);
-            // }
+            static void QuickSort(LinkedList& linked_list) {
+                 getAlgorithm().quickSortImpl(linked_list);
+             }
             
             // static void HeapSort(LinkedList& linked_list) {
             //     getAlgorithm().heapSortImpl(linked_list);
@@ -71,9 +71,13 @@ namespace PerformanceEvaluation {
                 linked_list.setHead(head);
             }
             
-            // void quickSortImpl(LinkedList& linked_list) {
-            //     quickSort(linked_list.getHead());
-            // }
+            void quickSortImpl(LinkedList& linked_list) {
+                LinkedListNode* head = linked_list.getHead();
+                head = quickSort(head);
+                linked_list.setHead(head);
+            }
+            
+            
             
             // void heapSortImpl(LinkedList& linked_list) {
             //     heapSort(linked_list.getHead());
@@ -97,9 +101,80 @@ namespace PerformanceEvaluation {
                 return algorithm;
             }
 
-            // LinkedListNode* quickSort(LinkedListNode* temp) {
-                
-            // }
+            LinkedListNode* quickSort(LinkedListNode* head) {
+                if(!head || !head->next) {
+                    return head;
+                }
+
+                LinkedListNode *left = nullptr, *right = nullptr;
+                LinkedListNode *pivot = partition(head, nullptr, &left, &right);
+
+                // Rescursively sort the left half & right half
+                left = quickSort(left);
+                right = quickSort(pivot->next);
+
+                LinkedListNode* tail = left;
+                if (tail){
+                    while (tail->next){
+                        tail = tail->next; // Find the last node of left part
+                    }
+                    tail->next = pivot; // Connect left part to pivot
+                } else {
+                    left = pivot; // If left is empty then pivot become the head
+                }
+                pivot->next = right;
+
+                return left;
+            }
+
+            LinkedListNode* partition(LinkedListNode* head, LinkedListNode* end, LinkedListNode** left, LinkedListNode** right) {
+                DateUtility date_utility;
+        
+                LinkedListNode* pivot = head;
+                LinkedListNode* curr = head->next;
+                LinkedListNode* leftHead = nullptr;
+                LinkedListNode* leftTail = nullptr;
+                LinkedListNode* rightHead = nullptr;
+                LinkedListNode* rightTail = nullptr;
+        
+                while (curr != end) {
+                    LinkedListNode* next = curr->next;
+        
+                    auto [curr_day, curr_month, curr_year] = date_utility.parseDate(curr->data.date);
+                    auto [pivot_day, pivot_month, pivot_year] = date_utility.parseDate(pivot->data.date);
+        
+                    bool isLess = (curr_year < pivot_year) ||
+                                  (curr_year == pivot_year && curr_month < pivot_month) ||
+                                  (curr_year == pivot_year && curr_month == pivot_month && curr_day < pivot_day);
+        
+                    if (isLess) {
+                        if (!leftHead) {
+                            leftHead = curr;
+                            leftTail = curr;
+                        } else {
+                            leftTail->next = curr;
+                            leftTail = curr;
+                        }
+                    } else {
+                        if (!rightHead) {
+                            rightHead = curr;
+                            rightTail = curr;
+                        } else {
+                            rightTail->next = curr;
+                            rightTail = curr;
+                        }
+                    }
+                    curr = next;
+                }
+        
+                if (leftTail) leftTail->next = nullptr;
+                if (rightTail) rightTail->next = nullptr;
+        
+                *left = leftHead;
+                *right = rightHead;
+        
+                return pivot;
+            }
             
             // LinkedListNode* heapSort(LinkedListNode* temp) {
 
