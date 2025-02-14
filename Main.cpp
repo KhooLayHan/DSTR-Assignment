@@ -31,7 +31,14 @@ void* operator new(size_t size) {
 int main(/* int argc, char** argv */)
 {
     PerformanceEvaluation::Assignment::Question_1();
-
+    Algorithm::QuickSort(linked_list_true);
+    Algorithm::QuickSort(linked_list_fake);
+    
+    // OR
+    
+    Algorithm::HeapSort(linked_list_true);
+    Algorithm::HeapSort(linked_list_fake);
+    
     // PerformanceEvaluation::
 
     // PerformanceEvaluation::LinkedList linked_list_true;

@@ -11,6 +11,8 @@
 #include "LinkedList.h"
 #include "DateUtility.cpp"
 
+using namespace std;
+
 namespace PerformanceEvaluation {
 
     // TODO: Can implement each of the various searching and sorting algorithms.
@@ -46,9 +48,9 @@ namespace PerformanceEvaluation {
                  getAlgorithm().quickSortImpl(linked_list);
              }
             
-            // static void HeapSort(LinkedList& linked_list) {
-            //     getAlgorithm().heapSortImpl(linked_list);
-            // }
+            static void HeapSort(LinkedList& linked_list) {
+                 getAlgorithm().heapSortImpl(linked_list);
+            }
             
             // static void SelectionSort(LinkedList& linked_list) {
             //     getAlgorithm().selectionSortImpl(linked_list);
@@ -78,10 +80,12 @@ namespace PerformanceEvaluation {
             }
             
             
-            
-            // void heapSortImpl(LinkedList& linked_list) {
-            //     heapSort(linked_list.getHead());
-            // }
+            void heapSortImpl(LinkedList& linked_list) {
+                LinkedListNode* head = linked_list.getHead();
+                head = heapSort(head);
+                linked_list.setHead(head);
+            }
+        
             
             // void bubbleSortImpl(LinkedList& linked_list) {
             //     bubbleSort(linked_list.getHead());
@@ -102,83 +106,155 @@ namespace PerformanceEvaluation {
             }
 
             LinkedListNode* quickSort(LinkedListNode* head) {
-                if(!head || !head->next) {
+                if (!head || !head->next) {
                     return head;
                 }
-
+            
                 LinkedListNode *left = nullptr, *right = nullptr;
-                LinkedListNode *pivot = partition(head, nullptr, &left, &right);
-
-                // Rescursively sort the left half & right half
+                LinkedListNode *pivot = partition(head, &left, &right);
+            
                 left = quickSort(left);
-                right = quickSort(pivot->next);
-
-                LinkedListNode* tail = left;
-                if (tail){
-                    while (tail->next){
-                        tail = tail->next; // Find the last node of left part
+                right = quickSort(right);
+            
+                LinkedListNode* result = nullptr;
+                LinkedListNode* tail = nullptr;
+            
+                // Connect left part to pivot
+                if (left) {
+                    result = left;
+                    tail = left;
+                    while (tail->next) {
+                        tail = tail->next;
                     }
-                    tail->next = pivot; // Connect left part to pivot
+                    tail->next = pivot;
                 } else {
-                    left = pivot; // If left is empty then pivot become the head
+                    result = pivot;
                 }
+            
                 pivot->next = right;
-
-                return left;
+            
+                return result;
             }
-
-            LinkedListNode* partition(LinkedListNode* head, LinkedListNode* end, LinkedListNode** left, LinkedListNode** right) {
+            
+            LinkedListNode* partition(LinkedListNode* head, LinkedListNode** left, LinkedListNode** right) {
                 DateUtility date_utility;
-        
+            
                 LinkedListNode* pivot = head;
-                LinkedListNode* curr = head->next;
-                LinkedListNode* leftHead = nullptr;
+                LinkedListNode* current = head->next;
+                pivot->next = nullptr;
+            
                 LinkedListNode* leftTail = nullptr;
-                LinkedListNode* rightHead = nullptr;
                 LinkedListNode* rightTail = nullptr;
-        
-                while (curr != end) {
-                    LinkedListNode* next = curr->next;
-        
-                    auto [curr_day, curr_month, curr_year] = date_utility.parseDate(curr->data.date);
+            
+                while (current) {
+                    LinkedListNode* next = current->next;
+                    current->next = nullptr;
+            
+                    auto [curr_day, curr_month, curr_year] = date_utility.parseDate(current->data.date);
                     auto [pivot_day, pivot_month, pivot_year] = date_utility.parseDate(pivot->data.date);
-        
+            
                     bool isLess = (curr_year < pivot_year) ||
                                   (curr_year == pivot_year && curr_month < pivot_month) ||
                                   (curr_year == pivot_year && curr_month == pivot_month && curr_day < pivot_day);
-        
+            
                     if (isLess) {
-                        if (!leftHead) {
-                            leftHead = curr;
-                            leftTail = curr;
+                        if (!*left) {
+                            *left = current;
+                            leftTail = current;
                         } else {
-                            leftTail->next = curr;
-                            leftTail = curr;
+                            leftTail->next = current;
+                            leftTail = current;
                         }
                     } else {
-                        if (!rightHead) {
-                            rightHead = curr;
-                            rightTail = curr;
+                        if (!*right) {
+                            *right = current;
+                            rightTail = current;
                         } else {
-                            rightTail->next = curr;
-                            rightTail = curr;
+                            rightTail->next = current;
+                            rightTail = current;
                         }
                     }
-                    curr = next;
+                    current = next;
                 }
-        
-                if (leftTail) leftTail->next = nullptr;
-                if (rightTail) rightTail->next = nullptr;
-        
-                *left = leftHead;
-                *right = rightHead;
-        
+            
                 return pivot;
             }
             
-            // LinkedListNode* heapSort(LinkedListNode* temp) {
-
-            // }
+            
+            LinkedListNode* heapSort(LinkedListNode* head) {
+                if (!head || !head->next) {
+                    return head;
+                }
+            
+                // Convert linked list to array
+                int length = 0;
+                LinkedListNode* temp = head;
+                while (temp) {
+                    length++;
+                    temp = temp->next;
+                }
+            
+                LinkedListNode** nodeArray = new LinkedListNode*[length];
+            
+                temp = head;
+                for (int i = 0; i < length; i++) {
+                    nodeArray[i] = temp;
+                    temp = temp->next;
+                }
+            
+                // Perform heap sort on nodeArray based on dates
+                heapSortArray(nodeArray, length);
+            
+                // Reconstruct the linked list from the sorted array
+                for (int i = 0; i < length - 1; ++i) {
+                    nodeArray[i]->next = nodeArray[i + 1];
+                }
+                nodeArray[length - 1]->next = nullptr;
+            
+                LinkedListNode* newHead = nodeArray[0];
+            
+                delete[] nodeArray;
+                return newHead;
+            }
+            
+            void heapSortArray(LinkedListNode** arr, int n) {
+                // Build Min Heap (ascending order)
+                for (int i = n / 2 - 1; i >= 0; i--) {
+                    heapify(arr, n, i);
+                }
+            
+                // Extract elements from heap one by one
+                for (int i = n - 1; i > 0; i--) {
+                    std::swap(arr[0], arr[i]);
+                    heapify(arr, i, 0);
+                }
+            }
+            
+            void heapify(LinkedListNode** arr, int n, int i) {
+                int smallest = i;  // We need Min-Heap
+                int left = 2 * i + 1;
+                int right = 2 * i + 2;
+            
+                DateUtility date_utility;
+            
+                auto getDateKey = [&](LinkedListNode* node) -> std::tuple<int, int, int> {
+                    return date_utility.parseDate(node->data.date);
+                };
+            
+                if (left < n && getDateKey(arr[left]) < getDateKey(arr[smallest])) {
+                    smallest = left;
+                }
+            
+                if (right < n && getDateKey(arr[right]) < getDateKey(arr[smallest])) {
+                    smallest = right;
+                }
+            
+                if (smallest != i) {
+                    std::swap(arr[i], arr[smallest]);
+                    heapify(arr, n, smallest);
+                }
+            }
+            
             
             // LinkedListNode* bubbleSort(LinkedListNode* temp) {
 
