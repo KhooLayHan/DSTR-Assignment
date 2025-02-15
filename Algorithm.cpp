@@ -56,9 +56,9 @@ namespace PerformanceEvaluation {
             //     getAlgorithm().selectionSortImpl(linked_list);
             // }
             
-            // static void InsertionSort(LinkedList& linked_list) {
-            //     getAlgorithm().insertionSortImpl(linked_list);
-            // }
+            static void InsertionSort(LinkedList& linked_list) {
+                getAlgorithm().insertionSortImpl(linked_list);
+            }
 
             // static void BubbleSort(LinkedList& linked_list) {
             //     getAlgorithm().bubbleSortImpl(linked_list);
@@ -91,9 +91,11 @@ namespace PerformanceEvaluation {
             //     bubbleSort(linked_list.getHead());
             // }
             
-            // void selectionSortImpl(LinkedList& linked_list) {
-            //     selectionSort(linked_list.getHead());
-            // }
+            void selectionSortImpl(LinkedList& linked_list) {
+                LinkedListNode* head = linked_list.getHead();
+                head = InsertionSort(head);
+                linked_list.setHead(head);
+            }
             
             // void insertionSortImpl(LinkedList& linked_list) {
             //     insertionSort(linked_list.getHead());
@@ -264,9 +266,52 @@ namespace PerformanceEvaluation {
 
             // }
             
-            // LinkedListNode* insertionSort(LinkedListNode* temp) {
+            LinkedListNode* insertionSort(LinkedListNode* head) {
+                if (!head || !head->next) {
+                    return head; // Already sorted if 0 or 1 node
+                }
+            
+                DateUtility date_utility;
+                LinkedListNode* dummy = new LinkedListNode(Dataset()); // Dummy node for sorted list
+                LinkedListNode* current = head;
+            
+                while (current != nullptr) {
+                    LinkedListNode* next = current->next; // Save next node before moving current
+            
+                    // Insert current node into the sorted part
+                    LinkedListNode* sorted_prev = dummy;
+                    LinkedListNode* sorted_current = dummy->next;
+            
+                    // Find the correct position in the sorted list
+                    while (sorted_current != nullptr) {
+                        auto [current_day, current_month, current_year] = date_utility.parseDate(current->data.date);
+                        auto [sorted_day, sorted_month, sorted_year] = date_utility.parseDate(sorted_current->data.date);
+            
+                        if ((current_year < sorted_year) ||
+                            (current_year == sorted_year && current_month < sorted_month) ||
+                            (current_year == sorted_year && current_month == sorted_month && current_day < sorted_day)) {
+                            break;
+                        }
+            
+                        sorted_prev = sorted_current;
+                        sorted_current = sorted_current->next;
+                    }
+            
+                    // Insert current node into the sorted list
+                    current->next = sorted_current;
+                    sorted_prev->next = current;
+            
+                    // Move to the next node in the unsorted list
+                    current = next;
+                }
+            
+                LinkedListNode* newHead = dummy->next;
+                delete dummy; // Clean up dummy node
+            
+                return newHead;
+            }
+            
 
-            // }
 
             // Applies merge sort recursively 
             void mergeSort(LinkedListNode** head) {                
