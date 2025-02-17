@@ -6,96 +6,109 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <fstream>
+#include <sstream>
 
 // Header files
-
+#include "Dataset.h"
+#include "DateUtility.cpp"
 #include "Assignment.cpp"
+#include "Algorithm.cpp"
+#include "Array.h"
 
-// #include "Algorithms.cpp" 
-// #include "FileHandling.h"
-// #include "Benchmark.h"
-// #include "LinkedList.h"
-// #include "Dataset.h"
-// #include "SimpleLogger.h"
+static int s_AllocationCount = 0;
 
-// ! Not allow to use this list of built-in containers: https://www.geeksforgeeks.org/containers-cpp-stl/
-
-static int s_AllocationCount = 0; 
-
-void* operator new(size_t size) {
+void *operator new(size_t size)
+{
     // std::cout << "Allocated " << size << " bytes\n";
     s_AllocationCount++;
     return malloc(size);
+}
+
+// Function to read data from CSV and insert into Array
+void readCSV(const std::string &filename, PerformanceEvaluation::Array &newsArray)
+{
+    std::ifstream file(filename);
+    if (!file.is_open())
+    {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return;
+    }
+
+    std::string line, title, text, subject, date;
+    int id = 1; // Assigning incremental ID
+
+    // Read header line and ignore it
+    getline(file, line);
+
+    while (getline(file, line))
+    {
+        std::stringstream ss(line);
+
+        // Read CSV values
+        getline(ss, title, ',');
+        getline(ss, text, ',');
+        getline(ss, subject, ',');
+        getline(ss, date, ',');
+
+        // Convert date from string to integer (assuming YYYY format)
+        int year = std::stoi(date.substr(date.length() - 4));
+
+        // Insert into newsArray
+        newsArray.insertEnd(PerformanceEvaluation::Dataset{id++, title, text, subject, date});
+    }
+
+    file.close();
 }
 
 int main(/* int argc, char** argv */)
 {
     PerformanceEvaluation::Assignment::Question_1();
 
-    // PerformanceEvaluation::LinkedList linked_list_true;
-    // PerformanceEvaluation::LinkedList linked_list_fake;
+    // --- START OF ARRAY SORTING IMPLEMENTATIONS ---
 
-    // std::string file_path_true = "./CSV/true.csv"; 
-    // // std::string file_path_fake = "./CSV/fake.csv";
+    using namespace PerformanceEvaluation;
 
-    // // PerformanceEvaluation::FileHandling::readCSV(file_path_true, linked_list_true);
-    // // FileHandling::readCSV(file_path_fake, linked_list_fake);
+    Array newsArray;
 
-    // Algorithm::MergeSort(linked_list_true);
-    // // Algorithm::MergeSort(linked_list_fake);
+    // Load data from CSV files
+    readCSV("true.csv", newsArray);
+    readCSV("fake.csv", newsArray);
 
-    // linked_list_true.displayLength(file_path_true);
-    // linked_list_true.displayLength(file_path_fake);
+    std::cout << "Total articles loaded: " << newsArray.getLength() << "\n\n";
 
-    // using namespace PerformanceEvaluation;
+    // QuickSort
+    clock_t start = clock();
+    Array *sortedQuick = Algorithm::QuickSort(&newsArray);
+    clock_t end = clock();
+    std::cout << "QuickSort took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+    sortedQuick->displayFirst(5);
 
-    {
-        // PerformanceEvaluation::SimpleLogger::Info("\033[31;42mRed TEXT \033[0m", PerformanceEvaluation::LogHandler::CONSOLE);
-        // std::cout << "\033[31;42;1mRed TEXT \033[0m" << "\n";
-        // std::cerr << "\033[31mRed TEXT \033[0m" << "\n";
+    // MergeSort
+    start = clock();
+    Array *sortedMerge = Algorithm::MergeSort(&newsArray);
+    end = clock();
+    std::cout << "MergeSort took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+    sortedMerge->displayFirst(5);
 
-        // PerformanceEvaluation::Benchmark benchmark;
-        // PerformanceEvaluation::LinkedList linked_list;
-        
-        // PerformanceEvaluation::FileHandling::readCSV("./CSV/test.csv", linked_list);
-        
-        // PerformanceEvaluation::FileHandling::appendFileContent("./CSV/test.csv", "./CSV/assignment.csv");
-        // PerformanceEvaluation::FileHandling::appendFileContent("./CSV/fake.csv", "./CSV/assignment.csv");
-        
-        // linked_list.mergeSort();
-        
-        // linked_list.displayAll();
-        // linked_list.displayTitle();
-        // linked_list.displayText();
-        // linked_list.displaySubject();
+    // HeapSort
+    start = clock();
+    Array *sortedHeap = Algorithm::HeapSort(&newsArray);
+    end = clock();
+    std::cout << "HeapSort took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+    sortedHeap->displayFirst(5);
 
-        // linked_list.search("2017", PerformanceEvaluation::Criteria::DATE);
-        // std::cout << linked_list.getLength() << "\n";
-        // linked_list.displayDate();
+    // --- END OF ARRAY SORTING IMPLEMENTATIONS ---
 
-        // benchmark.duration([&]{ linked_list.displayAll(); });
-        // linked_list.displayAll();
-        // linked_list.deleteAll();
-    }
-    {
-        // PerformanceEvaluation::Benchmark benchmark_2;
-        // PerformanceEvaluation::LinkedList linked_list_2;
-        // linked_list_2.addBegin({ "text", "title", "subject", "2016" });
-        // // linked_list.addBegin("text 2016");
-        // linked_list_2.insertEnd({ "text1", "title1", "subject1", "December 15, 2015" });
-        // linked_list_2.insertEnd({ "text2", "title2", "subject2", "October 10, 2012" });
-        // linked_list_2.insertEnd({ "text3", "title3", "subject3", "January 14, 2017" });
-        // linked_list_2.insertEnd({ "text4", "title4", "subject4", "March 20, 2011" });
-        // linked_list_2.display();
-    }
+    std::cout << "\n"
+              << s_AllocationCount << " allocations.\n";
 
-    std::cout << s_AllocationCount << " allocations.\n";
+    // Example usage of DateUtility
+    PerformanceEvaluation::DateUtility date = PerformanceEvaluation::DateUtility::parseDate("January 1, 2023");
+    std::cout << "Day: " << date.getDay("January 1, 2023") << std::endl;
+    std::cout << "Month: " << date.getMonth("January 1, 2023") << std::endl;
+    std::cout << "Year: " << date.getYear("January 1, 2023") << std::endl;
+
+    return 0;
 }
-
-    // int *x = new int[42];
-    // delete [] x;
-
-    // ... some complex body of code
-
-    // delete [] x;
-

@@ -114,7 +114,11 @@ namespace PerformanceEvaluation
         }
 
         // Iterator support
-        Dataset *begin();
+        Dataset *begin() {
+            
+                return m_Array;
+            
+        }
         Dataset *end();
         const Dataset *begin() const;
         const Dataset *end() const;

@@ -20,7 +20,7 @@ namespace PerformanceEvaluation {
             int32_t number;
         };
 
-        static DateUtility parseDate(const std::string& date_str) {   
+        static DateUtility parseDate(const std::string &date_str) {   
             static const MonthMap month_map[] = {
                 { "January",  1 }, { "February",  2 }, { "March",     3 }, 
                 { "April",    4 }, { "May",       5 }, { "June",      6 }, 
@@ -70,7 +70,7 @@ namespace PerformanceEvaluation {
 
             // std::cout << day << " " << month << " " << year << "\n";
 
-            return { std::stoi(day), month_num, std::stoi(year) };
+            return { std::stoi(day), month_num, std::stoi(year)};
 
             // DateUtility date;
             // date.month = month_map[month];
@@ -93,21 +93,34 @@ namespace PerformanceEvaluation {
         //     return date.year;
         // }
 
-        int32_t getDay(const std::string& date) const {
+        int32_t getDay(const std::string &date) const 
+        {
             auto [day, month, year] = parseDate(date);
             return day;
         }
         
-        int32_t getMonth(const std::string& date) const {
+        int32_t getMonth(const std::string &date) const 
+        {
             auto [day, month, year] = parseDate(date);
             return year;
         }
         
-        int32_t getYear(const std::string& date) const {
+        int32_t getYear(const std::string &date) const 
+        {
             auto [day, month, year] = parseDate(date);
 
             return year;
         }
+
+        // static bool isDateEarlier(const std::string &date1, const std::string &date2)
+        // {
+        //     std::tm tm1 = {}, tm2 = {}; 
+        //     std::istringstream ss1(date1), ss2(date2);
+        //     ss1 >> std::get_time(&tm1, "%Y-%m-%d"); 
+        //     ss2 >> std::get_time(&tm2, "%Y-%m-%d"); 
+
+        //     return std::mktime(&tm1) < std::mktime(&tm2);
+        // }
 
         int32_t m_Day;
         int32_t m_Month;

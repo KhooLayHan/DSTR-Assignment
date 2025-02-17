@@ -19,6 +19,7 @@
                 "./Dataset.cpp",
                 "./SimpleLogger.cpp",
                 "./LinkedList.cpp",
+                "./Algorithm.cpp",
                 "-o",
                 "./Main"
             ],
@@ -54,6 +55,7 @@
                 "./Dataset.cpp",
                 "./SimpleLogger.cpp",
                 "./LinkedList.cpp",
+                "./Algorithm.cpp",
                 "-o",
                 "./Main"
             ],

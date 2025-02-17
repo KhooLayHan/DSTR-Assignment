@@ -10,7 +10,7 @@
 
 #include "FileHandling.h"
 
-#include "Array.cpp"
+#include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
 #include "SimpleLogger.h"
