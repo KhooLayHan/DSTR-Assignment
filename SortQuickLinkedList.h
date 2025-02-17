@@ -7,17 +7,14 @@
 
 namespace PerformanceEvaluation {
     class SortQuickLinkedList final : public Sort<LinkedList, LinkedListNode*> {
-        // protected:
-        //     void Sort(LinkedList&);
-        // private:
-        //     // Applies merge sort recursively 
-        //     void Merge(LinkedListNode**);
+        protected:
+            void SortBy(LinkedList&) override;
+        private:
+            // Applies quick sort
+            LinkedListNode* QuickSort(LinkedListNode*);
 
-        //     // Helper function to split the linked list into two halves
-        //     void SplitAndGetMiddle(LinkedListNode*, LinkedListNode**, LinkedListNode**);
-
-        //     // Helper function to merge two sorted linked lists 
-        //     LinkedListNode* SortAndMerge(LinkedListNode*, LinkedListNode*);
+            // Partition the linked list around a pivot, ensuring smaller values comes before it and is to the left
+            LinkedListNode* Partition(LinkedListNode*, LinkedListNode**, LinkedListNode**);
     };
 } // namespace PerformanceEvaluation
 

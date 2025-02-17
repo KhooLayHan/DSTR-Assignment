@@ -7,17 +7,17 @@
 
 namespace PerformanceEvaluation {
     class SortHeapLinkedList final : public Sort<LinkedList, LinkedListNode*> {
-        // protected:
-        //     void Sort(LinkedList&);
-        // private:
-        //     // Applies merge sort recursively 
-        //     void Merge(LinkedListNode**);
+        protected:
+            void SortBy(LinkedList&) override;
+        private:
+            // Applies heap sort
+            LinkedListNode* HeapSort(LinkedListNode*);
 
-        //     // Helper function to split the linked list into two halves
-        //     void SplitAndGetMiddle(LinkedListNode*, LinkedListNode**, LinkedListNode**);
-
-        //     // Helper function to merge two sorted linked lists 
-        //     LinkedListNode* SortAndMerge(LinkedListNode*, LinkedListNode*);
+            // Convert to array
+            void HeapSortArray(LinkedListNode**, size_t);        
+        
+            // Min-heap for ascending order, ensures the smallest element is always at the top
+            void Heapify(LinkedListNode**, int32_t, int32_t);
     };
 } // namespace PerformanceEvaluation
 

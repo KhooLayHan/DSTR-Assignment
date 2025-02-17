@@ -45,14 +45,18 @@ namespace PerformanceEvaluation {
             }
 
             ~LinkedList() {
-                LinkedListNode* temp;
+                LinkedListNode* current = m_Head;
 
-                while (m_Head != nullptr) {
-                    temp = m_Head;
-                    m_Head = m_Head->m_Next;
+                while (current != nullptr) {
+                    LinkedListNode* next = current->m_Next;
+                    delete current;
+                    current = next;
+                    
+                    // temp = m_Head;
+                    // m_Head = m_Head->m_Next;
 
-                    delete temp;
-                    temp = nullptr;
+                    // delete temp;
+                    // temp = nullptr;
                 }
             }
 
