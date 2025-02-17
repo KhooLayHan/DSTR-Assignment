@@ -17,18 +17,18 @@ namespace PerformanceEvaluation
 
     class Dataset {
         public:
-            int32_t id;
-            std::string title;
-            std::string text;
-            std::string subject;
-            std::string date; 
+            int32_t m_Id;
+            std::string m_Title;
+            std::string m_Text;
+            std::string m_Subject;
+            std::string m_Date; 
 
             Dataset() {}
 
-            Dataset(int32_t id) : id(id) {}
+            Dataset(int32_t id) : m_Id(id) {}
             
             Dataset(int32_t id, std::string_view title, std::string_view text, std::string_view subject, std::string_view date) 
-                : id(id), title(title), text(text), subject(subject), date(date) {
+                : m_Id(id), m_Title(title), m_Text(text), m_Subject(subject), m_Date(date) {
 
             }
 
@@ -54,7 +54,7 @@ namespace PerformanceEvaluation
             
             bool operator>(const Dataset&);
 
-            void display();
+            void Display();
             
             std::string display() const;
 

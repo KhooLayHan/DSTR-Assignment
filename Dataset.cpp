@@ -7,7 +7,7 @@
 
 #include "Dataset.h"
 
-#include "DateUtility.cpp"
+#include "DateUtility.h"
 #include "SimpleLogger.h"
 
 namespace PerformanceEvaluation
@@ -15,10 +15,10 @@ namespace PerformanceEvaluation
     bool Dataset::operator==(const Dataset& other) const {
         return 
             // id      == other.id         &&
-            title   == other.title      &&
-            text    == other.text       &&
-            subject == other.subject    &&
-            date    == other.date
+            m_Title   == other.m_Title      &&
+            m_Text    == other.m_Text       &&
+            m_Subject == other.m_Subject    &&
+            m_Date    == other.m_Date
         ;
     }
 
@@ -30,23 +30,24 @@ namespace PerformanceEvaluation
         return !criteria(other); // Descending order
     }
 
-    void Dataset::display() {
-        std::cout << "ID: " << id << "\n"
-            << "Title: " << title << "\n"
-            << "Text: " << text << "\n"
-            << "Subject: " << subject << "\n"
-            << "Date: " << date << "\n";
+    void Dataset::Display() {
+        std::cout << "ID: " << m_Id << "\n"
+            << "Title: " << m_Title << "\n"
+            << "Text: " << m_Text << "\n"
+            << "Subject: " << m_Subject << "\n"
+            << "Date: " << m_Date << "\n"
+        ;
     }
             
     std::string Dataset::display() const {
         std::stringstream output_stream{};
 
         output_stream 
-            << "ID: " << id << "\n"
-            << "Title: " << title << "\n"
-            << "Text: " << text << "\n"
-            << "Subject: " << subject << "\n"
-            << "Date: " << date 
+            << "ID: " << m_Id << "\n"
+            << "Title: " << m_Title << "\n"
+            << "Text: " << m_Text << "\n"
+            << "Subject: " << m_Subject << "\n"
+            << "Date: " << m_Date 
         ;
 
         return output_stream.str();
@@ -57,13 +58,13 @@ namespace PerformanceEvaluation
         
         DateUtility date_utility{};
 
-        int32_t year = date_utility.getYear(date);
-        int32_t other_year = date_utility.getYear(other.date);
+        int32_t year = date_utility.GetYear(m_Date);
+        int32_t other_year = date_utility.GetYear(other.m_Date);
         
         if (year != other_year)
             return compareYearAscending(year, other_year);
 
-        return compareSubjectAscending(subject, other.subject);
+        return compareSubjectAscending(m_Subject, other.m_Subject);
     }
 
     constexpr bool Dataset::compareTitleAscending(std::string_view first_title, std::string_view second_title) const {
