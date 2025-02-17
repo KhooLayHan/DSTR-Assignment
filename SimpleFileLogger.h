@@ -3,7 +3,7 @@
 #include "SimpleLogger.h"
 
 namespace PerformanceEvaluation {
-    class SimpleFileLogger : public SimpleLogger {        
+    class SimpleFileLogger final : public SimpleLogger {        
         public: 
             SimpleFileLogger() {}
                 #ifdef SOURCE_LOCATION_SUPPORTED

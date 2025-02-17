@@ -29,22 +29,23 @@ namespace PerformanceEvaluation {
     // }
 
     void FileHandling::ReadFile(const FilePath& file_path, LinkedList& linked_list) {
-        std::ifstream file(file_path, std::ios::binary);
+        // std::ifstream file(file_path, std::ios::binary);
+        std::ifstream file(file_path);
         
         CheckReadFileValidity(file_path, file);
 
-        const std::string& cleaned_file = CleanFile(file);  
-        std::istringstream stream(cleaned_file);
+        // const std::string& cleaned_file = CleanFile(file);  
+        // std::istringstream stream(cleaned_file);
         std::string line;
 
-        while (std::getline(stream, line)) {
-            // if (line == "title,text,subject,date" || line == "title,text,subject,date\r") 
-                // continue;
+        while (std::getline(file, line)) {
+            if (line == "title,text,subject,date" || line == "title,text,subject,date\r") 
+                continue;
 
             const auto& [id, title, text, subject, date] = CleanParseAndMoreClean(line);
             linked_list.insertEnd({ id, title, text, subject, date });
         }
-        
+
         // 1051, Title: "Ex-GOP Congressman Shreds Fellow Republicans For Not ‘Howling’ For Trump’s Impeachment (VIDEO)\r\r\r\r\r\r\r"
         
         file.close();
@@ -57,7 +58,7 @@ namespace PerformanceEvaluation {
 
         file << message;                
         file.close();
-    
+
         const std::string& ref_file_path = file_path; 
 
         SimpleFileLogger file_logger;
@@ -140,7 +141,7 @@ namespace PerformanceEvaluation {
         std::string file_content = buffer.str();
 
         // Remove all '\r' characters
-        file_content.erase(std::remove(file_content.begin(), file_content.end(), '\r'), file_content.end());
+        // file_content.erase(std::remove(file_content.begin(), file_content.end(), '\r'), file_content.end());
 
         return file_content;
     }
@@ -211,7 +212,7 @@ namespace PerformanceEvaluation {
         
         // To ensure there are exactly four fields
         if (field_index != MAX_FIELDS_SIZE - 1) {
-            std::string message = std::to_string(dataset.id) 
+            std::string message = std::to_string(dataset.m_Id) 
                 + ": Unexpected number of fields in line:\n" + mock_line + "\n\n=>Original:\n\n" + line + "\n\n-----------";    
 
             // SimpleLogger::Fatal(message, LogHandler::CONSOLE);
@@ -223,10 +224,10 @@ namespace PerformanceEvaluation {
             // dataset.id = 0;
         } else {
             id++;
-            dataset.title   = field[0];
-            dataset.text    = field[1];
-            dataset.subject = field[2];
-            dataset.date    = field[3];
+            dataset.m_Title   = field[0];
+            dataset.m_Text    = field[1];
+            dataset.m_Subject = field[2];
+            dataset.m_Date    = field[3];
 
             return { id, field[0], field[1], field[2], field[3] };
         }
@@ -243,11 +244,11 @@ namespace PerformanceEvaluation {
 
         Dataset dataset;
         
-        dataset.id++;
-        dataset.title = CleanField(title, "No Title");
-        dataset.text = CleanField(text, "No Text");
-        dataset.subject = CleanField(subject, "No Subject");
-        dataset.date = CleanField(date, "No Date");
+        dataset.m_Id++;
+        dataset.m_Title = CleanField(title, "No Title");
+        dataset.m_Text = CleanField(text, "No Text");
+        dataset.m_Subject = CleanField(subject, "No Subject");
+        dataset.m_Date = CleanField(date, "No Date");
 
         return dataset;
     }
