@@ -1,0 +1,34 @@
+#pragma once
+
+#ifndef SORT_HPP
+#define SORT_HPP
+
+#include "DateUtility.h"
+
+#include "Array.h"
+#include "LinkedList.h"
+
+namespace PerformanceEvaluation
+{
+    template<typename T, typename N = nullptr_t>
+    class Sort {
+        public:
+            void UseSortingAlgorithm(T& linked_list) {
+                SortBy(linked_list);
+            }
+
+            virtual ~Sort() = default;
+        protected:
+            virtual void SortBy(T&) = 0;
+
+            constexpr auto CompareAndSortDate(const DateUtility& date_utility, const std::string& first_date, const std::string& second_date) {
+                const auto& [left_day, left_month, left_year] = date_utility.ParseDate(first_date);
+                const auto& [right_day, right_month, right_year] = date_utility.ParseDate(second_date);
+            
+                // TODO: Might need to replace this with own implementation for std::tie() 
+                return std::tie(left_year, left_month, left_day) <= std::tie(right_year, right_month, right_day);
+            };
+    };
+} // namespace PerformanceEvaluation
+
+#endif 

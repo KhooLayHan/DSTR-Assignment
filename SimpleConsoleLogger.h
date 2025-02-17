@@ -3,7 +3,7 @@
 #include "SimpleLogger.h"
 
 namespace PerformanceEvaluation {
-    class SimpleConsoleLogger : public SimpleLogger {        
+    class SimpleConsoleLogger final : public SimpleLogger {        
       public: 
           #ifdef SOURCE_LOCATION_SUPPORTED
               void Log    (std::string_view, LogLevel, const Location& location) const override;
