@@ -10,7 +10,7 @@
 
 #include "FileHandling.h"
 
-#include "Array.cpp"
+#include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
 #include "SimpleLogger.h"
@@ -104,28 +104,24 @@ namespace PerformanceEvaluation {
                 linked_list.insertEnd({ id, title, text, subject, date });
             }
         }
-            
-            // // std::cout << line << "\n";
 
-            // std::getline(line, dataset.title, COMMA);
-            // std::getline(line, dataset.text, COMMA);
-            // std::getline(line, dataset.subject, COMMA);
-            // std::getline(line, dataset.date, COMMA);
+        file.close();
+    }
+
+    void FileHandling::readCSV(const std::string& file_path, Array& array_list) {
+        std::ifstream file(file_path, std::ios::binary);
         
-            // linked_list.insertBegin(dataset);
-            // linked_list.addBegin(dataset.subject);
-            // linked_list.addBegin(dataset.text);
-            // linked_list.addBegin(title);
+        checkReadFileValidity(file_path, file);
+    
+        std::string data;
+        if (std::getline(file, data)) { // Skip header line
+            while (std::getline(file, data)) {
+                auto [id, title, text, subject, date] = parseCSV(data);
+                array_list.insertEnd({ id, title, text, subject, date });
+            }
 
-            // insertLinkedList(title, text, subject, date);
-
-            // std::cout << "\nLine " << ++i << ": \n\t";
-            // std::cout << dataset.title << "\n\t" 
-            //     << dataset.text << "\n\t"
-            //     << dataset.subject << "\n\t"
-            //     << dataset.text << "\n"; 
-        // }
-
+        }
+        // SimpleLogger::Info("Success!", LogHandler::CONSOLE);
         file.close();
     }
 

@@ -8,8 +8,9 @@
 #include <string>
 #include <string_view>
 
-// #include "Array.cpp"
+// #include "Array.h"
 #include "Dataset.h"
+#include "Array.h"
 #include "LinkedList.h"
 #include "SimpleLogger.h"
 
@@ -27,6 +28,7 @@ namespace PerformanceEvaluation {
             static void readFile(const std::string&, LinkedList&);
             
             static void readCSV(const std::string&, LinkedList&);
+            static void readCSV(const std::string&, Array&);
             // static void readCSV(const std::string& file_path, LinkedList& linked_list) {
             //     std::ifstream file(file_path);
         

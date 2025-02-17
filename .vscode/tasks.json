@@ -54,6 +54,7 @@
                 "./Dataset.cpp",
                 "./SimpleLogger.cpp",
                 "./LinkedList.cpp",
+                "./Array.cpp",
                 "-o",
                 "./Main"
             ],

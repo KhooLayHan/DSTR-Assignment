@@ -6,7 +6,7 @@
 #include "Dataset.h"
 
 // Data structures
-#include "Array.cpp"
+#include "Array.h"
 #include "LinkedList.h"
 
 // Search and sort algorithms 
@@ -36,36 +36,58 @@ namespace PerformanceEvaluation {
              * display the total number of articles in both datasets? 
              */
             static void Question_1() {
+                Benchmark benchmark;
+                benchmark.startTimer();
                 LinkedList linked_list_true;
                 LinkedList linked_list_fake;
+
+                Array array_list_true;
+                Array array_list_fake;
                 
                 static constexpr int32_t MAX_DISPLAY_COUNT = 5;
                 std::string file_path_true = "./CSV/true.csv"; 
                 std::string file_path_fake = "./CSV/fake.csv";
 
+                // Linked List
                 FileHandling::readCSV(file_path_true, linked_list_true);
                 FileHandling::readCSV(file_path_fake, linked_list_fake);
 
-                std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
-                linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
+                // Array
+                FileHandling::readCSV(file_path_true, array_list_true);
+                FileHandling::readCSV(file_path_fake, array_list_fake);
 
-                std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
-                linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
-                
-                // linked_list_true.mergeSort();
-                Algorithm::MergeSort(linked_list_true);
-                Algorithm::MergeSort(linked_list_fake);
+                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
+                // linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
 
-                // linked_list_true.displayDate();
-                
-                std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
-                linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
-                
-                std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
-                linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
+                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
+                // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
-                linked_list_true.displayLength(file_path_true);
-                linked_list_fake.displayLength(file_path_fake);
+                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
+                // array_list_true.displayFirst(MAX_DISPLAY_COUNT);
+
+                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
+                // array_list_fake.displayFirst(MAX_DISPLAY_COUNT);
+
+                // array_list_true.displayTitle();
+                
+                
+                // Algorithm::MergeSort(linked_list_true);
+                // Algorithm::MergeSort(linked_list_fake);
+
+                // Merge/ Quick/ Heap/ (Sally)
+
+                // Algorithm::LinearSearch(array_list_true);
+                // Algorithm::LinearSearch(array_list_fake);
+                
+                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
+                // linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
+                
+                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
+                // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
+
+                // linked_list_true.displayLength(file_path_true);
+                // linked_list_fake.displayLength(file_path_fake);
+                benchmark.endTimer();
             }
 
             /**
