@@ -1,7 +1,7 @@
 #include "Algorithm.h"
 
 namespace PerformanceEvaluation {
-    LinkedListNode* Algorithm::LinearSearch(LinkedList& linked_list, const std::unique_ptr<Search<LinkedList, LinkedListNode*>>& search_interface, std::string_view target, Criteria criteria, SearchType type) {
+    LinkedListNode* Algorithm::LinearSearch(LinkedList& linked_list, Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
         if (search_interface) {
             return search_interface->UseLinearSearchAlgorithm(target, linked_list, criteria, type);
         }
@@ -9,7 +9,7 @@ namespace PerformanceEvaluation {
         return nullptr;
     }
 
-    LinkedList Algorithm::LinearSearchAndCopy(LinkedList& linked_list, const std::unique_ptr<Search<LinkedList, LinkedListNode*>>& search_interface, std::string_view target, Criteria criteria, SearchType type) {
+    LinkedList Algorithm::LinearSearchAndCopy(LinkedList& linked_list, Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
         if (search_interface) {
             return search_interface->UseLinearSearchAndCopyAlgorithm(target, linked_list, criteria, type);
         }
@@ -17,13 +17,13 @@ namespace PerformanceEvaluation {
         return {};
     }
     
-    void Algorithm::LinearSearchAndDisplay(LinkedList& linked_list, const std::unique_ptr<Search<LinkedList, LinkedListNode*>>& search_interface, std::string_view target, Criteria criteria, SearchType type) {
+    void Algorithm::LinearSearchAndDisplay(LinkedList& linked_list, Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
         if (search_interface) {
             search_interface->UseLinearSearchAndDisplayAlgorithm(target, linked_list, criteria, type);
         }
     }
 
-    void Algorithm::SortBy(LinkedList& linked_list, const std::unique_ptr<Sort<LinkedList, LinkedListNode*>>& sort_interface) {
+    void Algorithm::SortBy(LinkedList& linked_list, Sort<LinkedList, LinkedListNode*>* sort_interface) {
         if (sort_interface) {
             sort_interface->UseSortingAlgorithm(linked_list);
         }
