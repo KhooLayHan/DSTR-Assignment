@@ -24,37 +24,45 @@ void* operator new(size_t size) {
     return malloc(size);
 }
 
-
 namespace PerformanceEvaluation {
     class System {      
         public:
+            static void Init(int argc, int** argv) {
+                assert(!s_Instance && "System is not initialize.");
+                
+                s_Instance = new System;
+            }
+
+            static void Run() {
+                
+                ConfigManager
+            }
+            
+            static void ShutDown() {
+                delete s_Instance;
+                s_Instance = nullptr;
+            }
+        protected:
+            static System& GetInstance() {
+                if (s_Instance == nullptr)
+                    s_Instance = new System();
+
+                return *s_Instance;
+            }
+
+            System(const System&) = delete;
+            System& operator=(const System&) = delete;
+        private:
             System() {
-                s_System = new System;
+                std::cout << "System constructor.\n";  
             }
 
             ~System() {
-                if (s_System == nullptr) {
-                    s_System = new System;
-                }
-
+                std::cout << "System destructor.\n";
                 std::cout << s_AllocationCount << " allocations.\n";
-                
-                delete s_System;
             }
 
-            void Init(int argc, int** argv) {
-                ConfigManager
-            }
-
-            void Run() {
-                
-            }
-
-            void ShutDown() {
-
-            }
-        private:
-            inline static System* s_System;
+            inline static System* s_Instance = nullptr;
     };
 }
 
