@@ -34,10 +34,10 @@ namespace PerformanceEvaluation {
 
     class Algorithm {
         public:
-            static LinkedListNode*  LinearSearch            (LinkedList&, const std::unique_ptr<Search<LinkedList, LinkedListNode*>>&, std::string_view, Criteria, SearchType);
-            static LinkedList       LinearSearchAndCopy     (LinkedList&, const std::unique_ptr<Search<LinkedList, LinkedListNode*>>&, std::string_view, Criteria, SearchType);
-            static void             LinearSearchAndDisplay  (LinkedList&, const std::unique_ptr<Search<LinkedList, LinkedListNode*>>&, std::string_view, Criteria, SearchType);
+            static LinkedListNode*  LinearSearch            (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
+            static LinkedList       LinearSearchAndCopy     (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
+            static void             LinearSearchAndDisplay  (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
             
-            static void SortBy                  (LinkedList&, const std::unique_ptr<Sort<LinkedList, LinkedListNode*>>&);
+            static void SortBy                  (LinkedList&, Sort<LinkedList, LinkedListNode*>*);
     };
 } // namespace PerformanceEvaluation
