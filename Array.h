@@ -120,15 +120,20 @@ namespace PerformanceEvaluation
         const Dataset* end() const;
 
         void displayAll() const;
+        void displayLength(std::string_view) const;
         size_t getLength() const;
+        size_t getSize() const;
         void insertEnd(const Dataset &dataset);
         void clear();
         void deleteElement(const Dataset &dataset);
+        void setElement(size_t index, const Dataset &dataset);
+        Dataset getElement(size_t index) const;
         void displayFirst(int32_t count) const;
         void displayTitle() const;
         void displayText() const;
         void displaySubject() const;
         void displayDate() const;
+        void swap(size_t i, size_t j);
     };
 } // namespace PerformanceEvaluation
 #endif // ARRAYLIST_H

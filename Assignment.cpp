@@ -49,12 +49,12 @@ namespace PerformanceEvaluation {
                 std::string file_path_fake = "./CSV/fake.csv";
 
                 // Linked List
-                FileHandling::readCSV(file_path_true, linked_list_true);
-                FileHandling::readCSV(file_path_fake, linked_list_fake);
+                // FileHandling::readCSV(file_path_true, linked_list_true);
+                // FileHandling::readCSV(file_path_fake, linked_list_fake);
 
                 // Array
                 FileHandling::readCSV(file_path_true, array_list_true);
-                FileHandling::readCSV(file_path_fake, array_list_fake);
+                // FileHandling::readCSV(file_path_fake, array_list_fake);
 
                 // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
                 // linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
@@ -62,18 +62,24 @@ namespace PerformanceEvaluation {
                 // std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
                 // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
-                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
-                // array_list_true.displayFirst(MAX_DISPLAY_COUNT);
+                std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
+                array_list_true.displayFirst(MAX_DISPLAY_COUNT);
 
                 // std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
                 // array_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
                 // array_list_true.displayTitle();
                 
-                
                 // Algorithm::MergeSort(linked_list_true);
                 // Algorithm::MergeSort(linked_list_fake);
 
+                // Algorithm::MergeSort(array_list_true);
+                // Algorithm::MergeSort(array_list_fake);
+
+                // Algorithm::QuickSort(array_list_true);
+
+                Algorithm::HeapSort(array_list_true);
+                
                 // Merge/ Quick/ Heap/ (Sally)
 
                 // Algorithm::LinearSearch(array_list_true);
@@ -85,8 +91,14 @@ namespace PerformanceEvaluation {
                 // std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
                 // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
+                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
+                // array_list_true.displayFirst(MAX_DISPLAY_COUNT);
+
                 // linked_list_true.displayLength(file_path_true);
                 // linked_list_fake.displayLength(file_path_fake);
+
+                array_list_true.displayLength(file_path_true);
+
                 benchmark.endTimer();
             }
 

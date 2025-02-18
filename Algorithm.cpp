@@ -62,6 +62,18 @@ namespace PerformanceEvaluation {
             //     getAlgorithm().bubbleSortImpl(linked_list);
             // }
 
+            static void MergeSort(Array& array) {
+                getAlgorithm().mergeSortImpl(array, 0, array.getSize() - 1);
+            }
+
+            static void QuickSort(Array& array) {
+                getAlgorithm().quickSortImpl(array, 0, array.getSize() - 1);
+            }
+
+            static void HeapSort(Array& array) {
+                getAlgorithm().heapSortImpl(array);
+            }
+
         private:
             Algorithm() {}
 
@@ -253,6 +265,139 @@ namespace PerformanceEvaluation {
                 // dummy = nullptr;
                 
                 // return merged_head;
+            }
+
+            // Merge Sort Implementation for Array
+            void mergeSortImpl(Array& array, int left, int right) {
+                if (left >= right) return;
+
+                int mid = left + (right - left) / 2;
+                mergeSortImpl(array, left, mid);
+                mergeSortImpl(array, mid + 1, right);
+                merge(array, left, mid, right);
+            }
+
+            void merge(Array& array, int left, int mid, int right) {
+                int n1 = mid - left + 1;
+                int n2 = right - mid;
+
+                std::vector<Dataset> leftArray(n1);
+                std::vector<Dataset> rightArray(n2);
+
+                for (int i = 0; i < n1; ++i) leftArray[i] = array.getElement(left + i);
+                for (int i = 0; i < n2; ++i) rightArray[i] = array.getElement(mid + 1 + i);
+
+                int i = 0, j = 0, k = left;
+                DateUtility date_utility;
+
+                while (i < n1 && j < n2) {
+                    auto [left_day, left_month, left_year] = date_utility.parseDate(leftArray[i].date);
+                    auto [right_day, right_month, right_year] = date_utility.parseDate(rightArray[j].date);
+
+                    if (left_year < right_year || (left_year == right_year && left_month < right_month) ||
+                        (left_year == right_year && left_month == right_month && left_day <= right_day)) {
+                        array.setElement(k++, leftArray[i++]);
+                    } else {
+                        array.setElement(k++, rightArray[j++]);
+                    }
+                }
+
+                while (i < n1) array.setElement(k++, leftArray[i++]);
+                while (j < n2) array.setElement(k++, rightArray[j++]);
+            }
+
+            // QuickSort Implementation for Array
+            void quickSortImpl(Array& array, int low, int high) {
+                if (low < high) {
+                    // Partition the array
+                    int pivot = partition(array, low, high);
+                    // Recursively sort the two subarrays
+                    quickSortImpl(array, low, pivot - 1);
+                    quickSortImpl(array, pivot + 1, high);
+                }
+            }
+
+            // Partition function to divide the array into two subarrays based on the pivot
+            int partition(Array& array, int low, int high) {
+                Dataset pivot = array.getElement(high); // Pivot is the last element
+                int i = low - 1; // Index of the smaller element
+
+                DateUtility date_utility;
+
+                // Iterate through the array and rearrange elements
+                for (int j = low; j < high; ++j) {
+                    auto [day, month, year] = date_utility.parseDate(array.getElement(j).date);
+                    auto [pivot_day, pivot_month, pivot_year] = date_utility.parseDate(pivot.date);
+
+                    // Compare the current element with the pivot
+                    if (year < pivot_year || 
+                    (year == pivot_year && month < pivot_month) ||
+                    (year == pivot_year && month == pivot_month && day <= pivot_day)) {
+                        // Swap elements if they are smaller than the pivot
+                        ++i;
+                        array.swap(i, j);
+                    }
+                }
+
+                // Swap the pivot element to the correct position
+                array.swap(i + 1, high);
+                return i + 1; // Return the pivot index
+            }
+
+            // HeapSort Implementation for Array
+            void heapSortImpl(Array& array) {
+                int n = array.getSize();
+
+                // Build a max heap
+                for (int i = n / 2 - 1; i >= 0; --i) {
+                    heapify(array, n, i);
+                }
+
+                // Extract elements from the heap one by one
+                for (int i = n - 1; i > 0; --i) {
+                    // Swap the root (maximum element) with the last element
+                    array.swap(0, i);
+
+                    // Heapify the reduced heap
+                    heapify(array, i, 0);
+                }
+            }
+
+            // Helper function to maintain the max heap property
+            void heapify(Array& array, int n, int i) {
+                int largest = i; // Initialize largest as root
+                int left = 2 * i + 1; // Left child
+                int right = 2 * i + 2; // Right child
+
+                DateUtility date_utility;
+
+                // If left child is larger than root
+                if (left < n) {
+                    auto [left_day, left_month, left_year] = date_utility.parseDate(array.getElement(left).date);
+                    auto [root_day, root_month, root_year] = date_utility.parseDate(array.getElement(largest).date);
+
+                    if (left_year > root_year || (left_year == root_year && left_month > root_month) ||
+                        (left_year == root_year && left_month == root_month && left_day > root_day)) {
+                        largest = left;
+                    }
+                }
+
+                // If right child is larger than largest so far
+                if (right < n) {
+                    auto [right_day, right_month, right_year] = date_utility.parseDate(array.getElement(right).date);
+                    auto [largest_day, largest_month, largest_year] = date_utility.parseDate(array.getElement(largest).date);
+
+                    if (right_year > largest_year || (right_year == largest_year && right_month > largest_month) ||
+                        (right_year == largest_year && right_month == largest_month && right_day > largest_day)) {
+                        largest = right;
+                    }
+                }
+
+                // If largest is not root, swap and continue heapifying
+                if (largest != i) {
+                    array.swap(i, largest);
+                    heapify(array, n, largest);
+                }
             }
     };
 } // namespace PerformanceEvaluation
