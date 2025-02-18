@@ -32,6 +32,16 @@ namespace PerformanceEvaluation
 
             }
 
+            bool operator==(const Dataset& other) {
+                return 
+                    m_Id == other.m_Id &&
+                    m_Title == other.m_Title &&
+                    m_Text == other.m_Text &&
+                    m_Subject == other.m_Subject &&
+                    m_Date == other.m_Date
+                ;
+            }
+
             // Dataset(const Dataset& dataset) {
                 // SimpleLogger::Info("Dataset: Copy constructor was called.\n", LogHandler::CONSOLE);
             // }

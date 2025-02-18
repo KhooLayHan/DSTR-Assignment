@@ -41,7 +41,7 @@ namespace PerformanceEvaluation
         LinkedListNode* new_tail = nullptr;
         LinkedListNode* temp = linked_list.getHead();
     
-        int32_t i = 0;
+        // int32_t i = 0;
         while (temp) {
             const Dataset& dataset = temp->m_Data;
 
@@ -61,7 +61,7 @@ namespace PerformanceEvaluation
                         new_tail->m_Next = new_node;
                         new_tail = new_node;
                         
-                        new_list.setLength(++i);
+                        // new_list.setLength(++i);
                     }
                 }
             };
@@ -90,7 +90,8 @@ namespace PerformanceEvaluation
             }
             
             if (Contains(target, dataset_str, type)) {
-                temp->m_Data.Display();
+                // temp->m_Data.Display();
+                temp->Display();
             }
         };
         
