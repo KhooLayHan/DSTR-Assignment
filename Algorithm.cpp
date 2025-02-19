@@ -3,16 +3,14 @@
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
 
-#include <array>
 #include <iostream>
 #include <string>
 #include <memory>
-#include <vector>
 
-#include "Array.cpp"
+#include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
-#include "DateUtility.cpp"
+#include "DateUtility.h"
 
 namespace PerformanceEvaluation
 {
@@ -40,9 +38,9 @@ namespace PerformanceEvaluation
         Algorithm &operator=(const Algorithm &) = delete;
         ~Algorithm() {} // Destructor
 
-        static void QuickSort(Dataset arr[], int length);
-        static void MergeSort(Dataset arr[], int length);
-        static void HeapSort(Dataset arr[], int length);
+        static Array* QuickSort(Array& arr);
+        static Array* MergeSort(Array& arr);
+        static Array* HeapSort(Array& arr);
 
     private:
         Algorithm() {}
@@ -54,15 +52,14 @@ namespace PerformanceEvaluation
         static void heapSortImpl(Dataset arr[], int n);
         static void heapify(Dataset arr[], int n, int i);
     };
-    //chnahhh
 
     // --- QuickSort Functions ---
     int Algorithm::partition(Dataset arr[], int low, int high)
     {
         constexpr auto CompareAndSortDate = [](const DateUtility &date_utility, const std::string &first_date, const std::string &second_date)
         {
-            const auto &[left_day, left_month, left_year] = date_utility.parseDate(first_date);
-            const auto &[right_day, right_month, right_year] = date_utility.parseDate(second_date);
+            const auto &[left_day, left_month, left_year] = date_utility.ParseDate(first_date);
+            const auto &[right_day, right_month, right_year] = date_utility.ParseDate(second_date);
             return std::tie(left_year, left_month, left_day) <= std::tie(right_year, right_month, right_day);
         };
 
@@ -92,9 +89,11 @@ namespace PerformanceEvaluation
         }
     }
 
-    void Algorithm::QuickSort(Dataset arr[], int length)
+    Array* Algorithm::QuickSort(Array& arr)
     {
-        _quickSortImpl(arr, 0, length - 1);
+        Array* sortedArray = new Array(arr);
+        _quickSortImpl(sortedArray->data(), 0, sortedArray->getLength() - 1);
+        return sortedArray;
     }
 
     // --- MergeSort Functions ---
@@ -103,43 +102,27 @@ namespace PerformanceEvaluation
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
-        Dataset *leftArr = new Dataset[n1];
-        Dataset *rightArr = new Dataset[n2];
+        Dataset* leftArr = new Dataset[n1];
+        Dataset* rightArr = new Dataset[n2];
 
         for (int i = 0; i < n1; i++)
             leftArr[i] = arr[left + i];
-        for (int i = 0; i < n2; i++)
-            rightArr[i] = arr[mid + 1 + i];
+        for (int j = 0; j < n2; j++)
+            rightArr[j] = arr[mid + 1 + j];
 
         int i = 0, j = 0, k = left;
         while (i < n1 && j < n2)
         {
             if (leftArr[i].date <= rightArr[j].date)
-            {
-                arr[k] = leftArr[i];
-                i++;
-            }
+                arr[k++] = leftArr[i++];
             else
-            {
-                arr[k] = rightArr[j];
-                j++;
-            }
-            k++;
+                arr[k++] = rightArr[j++];
         }
 
         while (i < n1)
-        {
-            arr[k] = leftArr[i];
-            i++;
-            k++;
-        }
-
+            arr[k++] = leftArr[i++];
         while (j < n2)
-        {
-            arr[k] = rightArr[j];
-            j++;
-            k++;
-        }
+            arr[k++] = rightArr[j++];
 
         delete[] leftArr;
         delete[] rightArr;
@@ -156,9 +139,11 @@ namespace PerformanceEvaluation
         }
     }
 
-    void Algorithm::MergeSort(Dataset arr[], int length)
+    Array* Algorithm::MergeSort(Array& arr)
     {
-        mergeSortImpl(arr, 0, length - 1);
+        Array* sortedArray = new Array(arr);
+        mergeSortImpl(sortedArray->data(), 0, sortedArray->getLength() - 1);
+        return sortedArray;
     }
 
     // --- HeapSort Functions ---
@@ -193,9 +178,11 @@ namespace PerformanceEvaluation
         }
     }
 
-    void Algorithm::HeapSort(Dataset arr[], int length)
+    Array* Algorithm::HeapSort(Array& arr)
     {
-        heapSortImpl(arr, length);
+        Array* sortedArray = new Array(arr);
+        heapSortImpl(sortedArray->data(), sortedArray->getLength());
+        return sortedArray;
     }
 
 } // namespace PerformanceEvaluation

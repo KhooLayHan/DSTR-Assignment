@@ -12,18 +12,24 @@
 
 // Header files
 #include "Dataset.h"
-#include "DateUtility.cpp"
-#include "Assignment.cpp"
-#include "Algorithm.cpp"
+#include "DateUtility.h"  
+//#include "Assignment.cpp"   
+#include "Algorithm.h"    
 #include "Array.h"
+#include "DLL.h"
 
 static int s_AllocationCount = 0;
 
 void *operator new(size_t size)
 {
-    // std::cout << "Allocated " << size << " bytes\n";
     s_AllocationCount++;
     return malloc(size);
+}
+
+void operator delete(void *ptr, size_t) noexcept
+{
+    s_AllocationCount--;
+    free(ptr);
 }
 
 // Function to read data from CSV and insert into Array
@@ -45,31 +51,19 @@ void readCSV(const std::string &filename, PerformanceEvaluation::Array &newsArra
     while (getline(file, line))
     {
         std::stringstream ss(line);
-
-        // Read CSV values
         getline(ss, title, ',');
         getline(ss, text, ',');
         getline(ss, subject, ',');
         getline(ss, date, ',');
 
-        // Convert date from string to integer (assuming YYYY format)
-        int year = std::stoi(date.substr(date.length() - 4));
-
-        // Insert into newsArray
         newsArray.insertEnd(PerformanceEvaluation::Dataset{id++, title, text, subject, date});
     }
-
     file.close();
 }
 
-int main(/* int argc, char** argv */)
+int main()
 {
-    PerformanceEvaluation::Assignment::Question_1();
-
-    // --- START OF ARRAY SORTING IMPLEMENTATIONS ---
-
     using namespace PerformanceEvaluation;
-
     Array newsArray;
 
     // Load data from CSV files
@@ -80,35 +74,27 @@ int main(/* int argc, char** argv */)
 
     // QuickSort
     clock_t start = clock();
-    Array *sortedQuick = Algorithm::QuickSort(&newsArray);
+    Array *sortedQuick = Algorithm::QuickSort(newsArray);
     clock_t end = clock();
     std::cout << "QuickSort took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
     sortedQuick->displayFirst(5);
+    delete sortedQuick;
 
     // MergeSort
     start = clock();
-    Array *sortedMerge = Algorithm::MergeSort(&newsArray);
+    Array *sortedMerge = Algorithm::MergeSort(newsArray);
     end = clock();
     std::cout << "MergeSort took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
     sortedMerge->displayFirst(5);
+    delete sortedMerge;
 
     // HeapSort
     start = clock();
-    Array *sortedHeap = Algorithm::HeapSort(&newsArray);
+    Array *sortedHeap = Algorithm::HeapSort(newsArray); 
     end = clock();
     std::cout << "HeapSort took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
     sortedHeap->displayFirst(5);
+    delete sortedHeap;
 
-    // --- END OF ARRAY SORTING IMPLEMENTATIONS ---
-
-    std::cout << "\n"
-              << s_AllocationCount << " allocations.\n";
-
-    // Example usage of DateUtility
-    PerformanceEvaluation::DateUtility date = PerformanceEvaluation::DateUtility::parseDate("January 1, 2023");
-    std::cout << "Day: " << date.getDay("January 1, 2023") << std::endl;
-    std::cout << "Month: " << date.getMonth("January 1, 2023") << std::endl;
-    std::cout << "Year: " << date.getYear("January 1, 2023") << std::endl;
-
-    return 0;
+    std::cout << "\n" << s_AllocationCount << " allocations.\n";
 }

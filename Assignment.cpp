@@ -56,8 +56,8 @@ namespace PerformanceEvaluation
             linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
             // linked_list_true.mergeSort();
-            Algorithm::MergeSort(linked_list_true);
-            Algorithm::MergeSort(linked_list_fake);
+            // Algorithm::MergeSort(linked_list_true);
+            // Algorithm::MergeSort(linked_list_fake);
 
             // linked_list_true.displayDate();
 

@@ -3,49 +3,37 @@
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
 
-#include <array>
 #include <iostream>
 #include <string>
 #include <memory>
-#include <vector>
 
 #include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
-#include "DateUtility.cpp"
+#include "DateUtility.h"
 
 namespace PerformanceEvaluation
 {
   class Algorithm
   {
   public:
-    Algorithm() {}                                    
+    Algorithm() = default;                                    
     Algorithm(const Algorithm &) = delete;            
     Algorithm &operator=(const Algorithm &) = delete; 
-    ~Algorithm() {}                                   
+    ~Algorithm() = default;                                   
 
-    static void MergeSort(Dataset arr[], int length);
-    static void QuickSort(Dataset arr[], int length);
-    static void HeapSort(Dataset arr[], int length);
+    static Array* MergeSort(Array& arr);
+    static Array* QuickSort(Array& arr);
+    static Array* HeapSort(Array& arr);
 
   private:
     void mergeSortImpl(LinkedList &linked_list);
-    void MergeSortImpl(std::array<Dataset, 4> &linked_list);
     void mergeSort(LinkedListNode **headRef);
     LinkedListNode *mergeSortedLists(LinkedListNode *a, LinkedListNode *b);
     LinkedListNode *getMiddle(LinkedListNode *head);
 
-    // Declaration of partition function
-    static int partition(Dataset arr[], int low, int high); 
-
-  protected:
-    static Algorithm &getAlgorithm()
-    {
-      static Algorithm algorithm;
-      return algorithm;
-    }
-
-    // --- QuickSort Implementation ---
+    // Sorting Implementations
+    static int partition(Dataset arr[], int low, int high);
     static void _quickSortImpl(Dataset arr[], int low, int high);
     static void mergeSortImpl(Dataset arr[], int left, int right);
     static void merge(Dataset arr[], int left, int mid, int right);
