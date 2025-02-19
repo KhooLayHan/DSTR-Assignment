@@ -5,10 +5,10 @@
 #include <string>
 
 #include "Benchmark.h"
-#include "SimpleLogger.h"
-#include "SimpleFileLogger.cpp"
-#include "SimpleConsoleLogger.cpp"
-#include "SimpleLoggingService.cpp"
+
+#include "SimpleFileLogger.h"
+#include "SimpleConsoleLogger.h"
+#include "SimpleLoggingService.h"
 
 namespace PerformanceEvaluation {
 
