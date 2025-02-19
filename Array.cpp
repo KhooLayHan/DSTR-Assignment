@@ -5,6 +5,9 @@
 #include <string>
 #include "SimpleLogger.h"
 #include "Array.h"
+#include "SimpleFileLogger.cpp"
+#include "SimpleConsoleLogger.cpp"
+#include "SimpleLoggingService.cpp"
 
 namespace PerformanceEvaluation {
 
@@ -50,9 +53,9 @@ namespace PerformanceEvaluation {
         std::cout << "TITLE\n-----------\n";
     
         for (size_t i = 0; i < m_Size; ++i) {
-            std::cout << "ID:" << m_Array[i].id << "\n"; 
+            std::cout << "ID:" << m_Array[i].m_Id << "\n"; 
             //SimpleLogger::Info(m_Array[i].title, LogHandler::FILE);
-            std::cout << "Title:" << m_Array[i].title << "\n";  
+            std::cout << "Title:" << m_Array[i].m_Title << "\n";  
         }
     
         std::cout << "\n";
@@ -67,7 +70,7 @@ namespace PerformanceEvaluation {
         std::cout << "TEXT\n-----------\n";
     
         for (size_t i = 0; i < m_Size; ++i) {
-            std::cout << m_Array[i].text << "\n";
+            std::cout << m_Array[i].m_Text << "\n";
         }
     
         std::cout << "\n";
@@ -82,7 +85,7 @@ namespace PerformanceEvaluation {
         std::cout << "SUBJECT\n-----------\n";
     
         for (size_t i = 0; i < m_Size; ++i) {
-            std::cout << m_Array[i].subject << "\n";
+            std::cout << m_Array[i].m_Subject << "\n";
         }
     
         std::cout << "\n";
@@ -97,8 +100,11 @@ namespace PerformanceEvaluation {
         std::cout << "DATE\n-----------\n";
     
         for (size_t i = 0; i < m_Size; ++i) {
-            SimpleLogger::Info(m_Array[i].date, LogHandler::FILE);
-            // std::cout << m_Array[i].date << "\n";
+            // SimpleLogger::Info(m_Array[i].m_Date, LogHandler::FILE);
+
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseDebugLogger(console, m_Array[i].m_Date); 
+            // std::cout <  < m_Array[i].date << "\n";
         }
     
         std::cout << "\n";
@@ -135,7 +141,7 @@ namespace PerformanceEvaluation {
 
     void Array::deleteElement(const Dataset& dataset) {
         for (size_t i = 0; i < m_Size; ++i) {
-            if (m_Array[i].id == dataset.id) { 
+            if (m_Array[i].m_Id == dataset.m_Id) { 
                 for (size_t j = i; j < m_Size - 1; ++j) {
                     m_Array[j] = m_Array[j + 1];
                 }
@@ -158,11 +164,11 @@ namespace PerformanceEvaluation {
     
         for (int32_t i = 0; i < count; ++i) {
             const auto& item = m_Array[i];
-            std::cout << "\n\033[34;1mID:\033[0m "      << item.id      << "\n"
-                      << "\033[34;1mTITLE:\033[0m "   << item.title   << "\n"
-                      << "\033[34;1mTEXT:\033[0m "    << item.text    << "\n"
-                      << "\033[34;1mSUBJECT:\033[0m " << item.subject << "\n"
-                      << "\033[34;1mDATE:\033[0m "    << item.date    << "\n"
+            std::cout << "\n\033[34;1mID:\033[0m "      << item.m_Id      << "\n"
+                      << "\033[34;1mTITLE:\033[0m "   << item.m_Title   << "\n"
+                      << "\033[34;1mTEXT:\033[0m "    << item.m_Text    << "\n"
+                      << "\033[34;1mSUBJECT:\033[0m " << item.m_Subject << "\n"
+                      << "\033[34;1mDATE:\033[0m "    << item.m_Date    << "\n"
                       << "-----------\n";
         }
     
@@ -177,11 +183,11 @@ namespace PerformanceEvaluation {
     
         for (size_t i = 0; i < m_Size; ++i) {
             const auto& item = m_Array[i];
-            std::cout << "ID: "      << item.id      << "\n"
-                      << "TITLE: "   << item.title   << "\n"
-                      << "TEXT: "    << item.text    << "\n"
-                      << "SUBJECT: " << item.subject << "\n"
-                      << "DATE: "    << item.date    << "\n"
+            std::cout << "ID: "      << item.m_Id      << "\n"
+                      << "TITLE: "   << item.m_Title   << "\n"
+                      << "TEXT: "    << item.m_Text    << "\n"
+                      << "SUBJECT: " << item.m_Subject << "\n"
+                      << "DATE: "    << item.m_Date    << "\n"
                       << "-----------\n";
         }
         // SimpleLogger::Info("Success!", LogHandler::CONSOLE);

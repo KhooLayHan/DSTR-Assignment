@@ -73,3 +73,12 @@ WARN: The benchmark is still running. Stop it to get the duration.
 [Feb 19 2025|02:25:03|./Benchmark.cpp|Line 87|void PerformanceEvaluation::Benchmark::checkBenchmarkIsRunning()|Column 27]
 WARN: The benchmark is still running. Stop it to get the duration.
 
+[Feb 19 2025|13:24:44|./Benchmark.cpp|Line 87|void PerformanceEvaluation::Benchmark::checkBenchmarkIsRunning()|Column 27]
+WARN: The benchmark is still running. Stop it to get the duration.
+
+[Feb 19 2025|13:26:16|./Benchmark.cpp|Line 87|void PerformanceEvaluation::Benchmark::checkBenchmarkIsRunning()|Column 27]
+WARN: The benchmark is still running. Stop it to get the duration.
+
+[Feb 19 2025|13:29:02|./Benchmark.cpp|Line 87|void PerformanceEvaluation::Benchmark::checkBenchmarkIsRunning()|Column 27]
+WARN: The benchmark is still running. Stop it to get the duration.
+

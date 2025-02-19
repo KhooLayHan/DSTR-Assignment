@@ -203,8 +203,8 @@ namespace PerformanceEvaluation {
                 // int32_t left_month = date_utility.getMonth(left->data.date);
                 // int32_t right_month = date_utility.getMonth(right->data.date);
                 
-                auto [left_day, left_month, left_year] = date_utility.parseDate(left->data.date);
-                auto [right_day, right_month, right_year] = date_utility.parseDate(right->data.date);
+                auto [left_day, left_month, left_year] = date_utility.parseDate(left->data.m_Date);
+                auto [right_day, right_month, right_year] = date_utility.parseDate(right->data.m_Date);
 
                 // std::cout << left_year << "\t" << right_year << "\n";
 
@@ -291,8 +291,8 @@ namespace PerformanceEvaluation {
                 DateUtility date_utility;
 
                 while (i < n1 && j < n2) {
-                    auto [left_day, left_month, left_year] = date_utility.parseDate(leftArray[i].date);
-                    auto [right_day, right_month, right_year] = date_utility.parseDate(rightArray[j].date);
+                    auto [left_day, left_month, left_year] = date_utility.parseDate(leftArray[i].m_Date);
+                    auto [right_day, right_month, right_year] = date_utility.parseDate(rightArray[j].m_Date);
 
                     if (left_year < right_year || (left_year == right_year && left_month < right_month) ||
                         (left_year == right_year && left_month == right_month && left_day <= right_day)) {
@@ -326,8 +326,8 @@ namespace PerformanceEvaluation {
 
                 // Iterate through the array and rearrange elements
                 for (int j = low; j < high; ++j) {
-                    auto [day, month, year] = date_utility.parseDate(array.getElement(j).date);
-                    auto [pivot_day, pivot_month, pivot_year] = date_utility.parseDate(pivot.date);
+                    auto [day, month, year] = date_utility.parseDate(array.getElement(j).m_Date);
+                    auto [pivot_day, pivot_month, pivot_year] = date_utility.parseDate(pivot.m_Date);
 
                     // Compare the current element with the pivot
                     if (year < pivot_year || 
@@ -373,8 +373,8 @@ namespace PerformanceEvaluation {
 
                 // If left child is larger than root
                 if (left < n) {
-                    auto [left_day, left_month, left_year] = date_utility.parseDate(array.getElement(left).date);
-                    auto [root_day, root_month, root_year] = date_utility.parseDate(array.getElement(largest).date);
+                    auto [left_day, left_month, left_year] = date_utility.parseDate(array.getElement(left).m_Date);
+                    auto [root_day, root_month, root_year] = date_utility.parseDate(array.getElement(largest).m_Date);
 
                     if (left_year > root_year || (left_year == root_year && left_month > root_month) ||
                         (left_year == root_year && left_month == root_month && left_day > root_day)) {
@@ -384,8 +384,8 @@ namespace PerformanceEvaluation {
 
                 // If right child is larger than largest so far
                 if (right < n) {
-                    auto [right_day, right_month, right_year] = date_utility.parseDate(array.getElement(right).date);
-                    auto [largest_day, largest_month, largest_year] = date_utility.parseDate(array.getElement(largest).date);
+                    auto [right_day, right_month, right_year] = date_utility.parseDate(array.getElement(right).m_Date);
+                    auto [largest_day, largest_month, largest_year] = date_utility.parseDate(array.getElement(largest).m_Date);
 
                     if (right_year > largest_year || (right_year == largest_year && right_month > largest_month) ||
                         (right_year == largest_year && right_month == largest_month && right_day > largest_day)) {

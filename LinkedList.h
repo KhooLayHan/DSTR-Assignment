@@ -68,12 +68,6 @@ namespace PerformanceEvaluation {
 
             void displayDate() const;
 
-            void search(std::string_view, Criteria);
-
-            void displayAfterSearch(const std::string&, std::string_view) const;
-
-            void displayAllAfterSearch(const Dataset&, const std::string&, std::string_view) const;
-
             void displayLength(std::string_view) const;
 
             void displayLengthTrueDataset() const;

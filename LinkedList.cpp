@@ -9,6 +9,11 @@
 #include "Dataset.h"
 #include "DateUtility.cpp"
 #include "SimpleLogger.h"
+
+#include "SimpleConsoleLogger.h"
+#include "SimpleFileLogger.h"
+#include "SimpleLoggingService.h"
+
 namespace PerformanceEvaluation {
     
     void LinkedList::insertBegin(const Dataset& dataset) {
@@ -54,7 +59,9 @@ namespace PerformanceEvaluation {
             temp = temp->next;
 
         if (temp == nullptr) {
-            SimpleLogger::Fatal("Position is out of bounds.", LogHandler::FILE);
+
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseFatalLogger(console, "Position is out of bounds."); 
             
             delete node;
             node = nullptr;
@@ -74,11 +81,11 @@ namespace PerformanceEvaluation {
         LinkedListNode* temp = m_Head;
 
         while (temp != nullptr) {
-            std::cout << "ID: "         << temp->data.id      << "\n";
-            std::cout << "TITLE: "      << temp->data.title   << "\n";
-            std::cout << "TEXT: "       << temp->data.text    << "\n";
-            std::cout << "SUBJECT: "    << temp->data.subject << "\n";
-            std::cout << "DATE: "       << temp->data.date    << "\n";
+            std::cout << "ID: "         << temp->data.m_Id      << "\n";
+            std::cout << "TITLE: "      << temp->data.m_Title   << "\n";
+            std::cout << "TEXT: "       << temp->data.m_Text    << "\n";
+            std::cout << "SUBJECT: "    << temp->data.m_Subject << "\n";
+            std::cout << "DATE: "       << temp->data.m_Date    << "\n";
             
             std::cout << "\n-----------\n\n";
             temp = temp->next;
@@ -95,11 +102,11 @@ namespace PerformanceEvaluation {
         int32_t line = 0;
 
         while (temp != nullptr && line != count) {
-            std::cout << "\n\033[34;1mID:\033[0m "         << temp->data.id      << "\n";
-            std::cout << "\033[34;1mTITLE:\033[0m "      << temp->data.title   << "\n";
-            std::cout << "\033[34;1mTEXT:\033[0m "       << temp->data.text    << "\n";
-            std::cout << "\033[34;1mSUBJECT:\033[0m "    << temp->data.subject << "\n";
-            std::cout << "\033[34;1mDATE:\033[0m "       << temp->data.date    << "\n";
+            std::cout << "\n\033[34;1mID:\033[0m "         << temp->data.m_Id      << "\n";
+            std::cout << "\033[34;1mTITLE:\033[0m "      << temp->data.m_Title   << "\n";
+            std::cout << "\033[34;1mTEXT:\033[0m "       << temp->data.m_Text    << "\n";
+            std::cout << "\033[34;1mSUBJECT:\033[0m "    << temp->data.m_Subject << "\n";
+            std::cout << "\033[34;1mDATE:\033[0m "       << temp->data.m_Date    << "\n";
             
             std::cout << "\n-----------\n";
             temp = temp->next;
@@ -118,8 +125,10 @@ namespace PerformanceEvaluation {
         std::cout << "TITLE\n-----------\n";
         
         while (temp != nullptr) {
-            SimpleLogger::Info(temp->data.title, LogHandler::FILE);
-            // std::cout << temp->data.title << "\n";
+
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseInfoLogger(console, temp->data.m_Title); 
+            
             temp = temp->next;
         } 
         
@@ -134,7 +143,7 @@ namespace PerformanceEvaluation {
         std::cout << "TEXT\n-----------\n";
 
         while (temp != nullptr) {
-            std::cout << temp->data.text << "\n";
+            std::cout << temp->data.m_Text << "\n";
             temp = temp->next;
         } 
 
@@ -149,7 +158,7 @@ namespace PerformanceEvaluation {
         std::cout << "SUBJECT\n-----------\n";
         
         while (temp != nullptr) {
-            std::cout << temp->data.subject << "\n";
+            std::cout << temp->data.m_Subject << "\n";
             temp = temp->next;
         } 
 
@@ -164,8 +173,8 @@ namespace PerformanceEvaluation {
         std::cout << "DATE\n-----------\n";
 
         while (temp != nullptr) {
-            
-            SimpleLogger::Info(temp->data.date, LogHandler::FILE);
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseInfoLogger(console, temp->data.m_Date);
         
             // std::cout << temp->data.date << "\n";
             temp = temp->next;
@@ -173,47 +182,6 @@ namespace PerformanceEvaluation {
 
         std::cout << "\n";
     }
-
-    void LinkedList::search(std::string_view target, Criteria criteria) {
-        // static constexpr bool is_string_v = std::is_same_v<std::decay_t<T>, std::string>;
-        isHeadEmpty();
-
-        LinkedListNode* temp = m_Head;
-
-        while (temp != nullptr) { 
-            Dataset dataset = temp->data;
-            
-            switch (criteria) {
-                case Criteria::TITLE:
-                    displayAllAfterSearch(dataset, dataset.title, target);
-                    break;
-                case Criteria::TEXT:
-                    displayAllAfterSearch(dataset, dataset.text, target);
-                    break;
-                case Criteria::SUBJECT:
-                    displayAllAfterSearch(dataset, dataset.subject, target);
-                    break;
-                case Criteria::DATE:
-                    displayAllAfterSearch(dataset, dataset.date, target);
-                    break;
-            }
-
-            temp = temp->next;
-        };
-    }
-
-    void LinkedList::displayAfterSearch(const std::string& source, std::string_view target) const {
-        if (contains(source, target)) 
-            SimpleLogger::Info("Found: " + source, LogHandler::FILE);
-    }    
-
-    void LinkedList::displayAllAfterSearch(const Dataset& dataset, const std::string& source, std::string_view target) const {
-        if (contains(source, target)) {
-            SimpleLogger::Info(dataset.display(), LogHandler::FILE);
-            
-            // FileHandling::appendFile("./Logs/log_test.txt", source);  
-        }    
-    }    
 
     void LinkedList::displayLength(std::string_view file_path) const {
         std::cout << "The total number of articles from the " << file_path << " dataset is "
@@ -248,7 +216,8 @@ namespace PerformanceEvaluation {
 
     void LinkedList::deleteNode(const Dataset& dataset) {
         if (m_Head == nullptr) {
-            SimpleLogger::Warn("List is empty.", LogHandler::FILE);
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseWarnLogger(console, "List is empty.");
             return;
         }
 
@@ -275,7 +244,8 @@ namespace PerformanceEvaluation {
         }
 
         if (temp->next == nullptr) { 
-            SimpleLogger::Warn("Value cannot be found in the list.", LogHandler::FILE);
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseWarnLogger(console, "Value cannot be found in the list.");
             return;
         }
 
@@ -304,7 +274,9 @@ namespace PerformanceEvaluation {
         }
 
         m_Head = nullptr;
-        SimpleLogger::Info("All nodes has been deleted.", LogHandler::FILE);
+        SimpleConsoleLogger console;
+        SimpleLoggingService::UseInfoLogger(console, "All nodes has been deleted.");
+        
     }
 
     LinkedListNode* LinkedList::getHead() const {
@@ -386,14 +358,16 @@ namespace PerformanceEvaluation {
 
     void LinkedList::isHeadEmpty() const {
         if (m_Head == nullptr) {
-            SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseWarnLogger(console, "The linked list is empty.");
             return;
         }
     }
 
     void LinkedList::isHeadOrNextEmpty() const {
         if (m_Head == nullptr || m_Head->next == nullptr) {
-            SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseWarnLogger(console, "The linked list is empty.");
             return;
         }
     }
@@ -423,8 +397,8 @@ namespace PerformanceEvaluation {
         LinkedListNode* tail = dummy;
 
         DateUtility date_utility{};
-        int32_t left_year = date_utility.getYear(left->data.date);
-        int32_t right_year = date_utility.getYear(right->data.date);
+        int32_t left_year = date_utility.getYear(left->data.m_Date);
+        int32_t right_year = date_utility.getYear(right->data.m_Date);
     
         while (left != nullptr && right != nullptr) {
             if (left_year <= right_year) {

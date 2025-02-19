@@ -123,7 +123,8 @@ namespace PerformanceEvaluation
         void displayLength(std::string_view) const;
         size_t getLength() const;
         size_t getSize() const;
-        void insertEnd(const Dataset &dataset);
+        void insertEnd(const Dataset& dataset);
+        // insertEnd (String)
         void clear();
         void deleteElement(const Dataset &dataset);
         void setElement(size_t index, const Dataset &dataset);

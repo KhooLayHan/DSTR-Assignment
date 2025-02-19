@@ -6,6 +6,9 @@
 
 #include "Benchmark.h"
 #include "SimpleLogger.h"
+#include "SimpleFileLogger.cpp"
+#include "SimpleConsoleLogger.cpp"
+#include "SimpleLoggingService.cpp"
 
 namespace PerformanceEvaluation {
 
@@ -16,7 +19,10 @@ namespace PerformanceEvaluation {
 
     void Benchmark::endTimer() {
         if (is_running == false) {
-            SimpleLogger::Warn("System has not started benchmarking the program.", LogHandler::FILE);
+            // SimpleLogger::Warn("System has not started benchmarking the program.", LogHandler::FILE);
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseDebugLogger(console, "System has not started benchmarking the program."); 
+
             return;
         }   
 
@@ -84,7 +90,8 @@ namespace PerformanceEvaluation {
         if (is_running) 
             return;
 
-        SimpleLogger::Warn("The benchmark is still running. Stop it to get the duration.", LogHandler::FILE);
+        SimpleConsoleLogger console;
+        SimpleLoggingService::UseDebugLogger(console, "The benchmark is still running. Stop it to get the duration."); 
     }
 
     std::string_view Benchmark::setTimeUnit(TimeUnit time_unit) {
