@@ -1,5 +1,3 @@
-#pragma once
-
 #include <array>
 #include <iostream>
 #include <string>
@@ -52,6 +50,8 @@ namespace PerformanceEvaluation {
                  getAlgorithm().heapSortImpl(linked_list);
             }
             
+            static void 
+
             // static void SelectionSort(LinkedList& linked_list) {
             //     getAlgorithm().selectionSortImpl(linked_list);
             // }
@@ -240,15 +240,23 @@ namespace PerformanceEvaluation {
             
                 DateUtility date_utility;
             
-                auto getDateKey = [&](LinkedListNode* node) -> std::tuple<int, int, int> {
-                    return date_utility.parseDate(node->data.date);
+                // auto getDateKey = [&](LinkedListNode* node) -> std::tuple<int, int, int> {
+                //     return date_utility.parseDate(node->data.date);
+                // };
+
+                constexpr auto CompareAndSortDate = [](const DateUtility& date_utility, const std::string& first_date, const std::string& second_date) {
+                    const auto& [left_day, left_month, left_year] = date_utility.parseDate(first_date);
+                    const auto& [right_day, right_month, right_year] = date_utility.parseDate(second_date);
+                
+                    // TODO: Might need to replace this with own implementation for std::tie() 
+                    return std::tie(left_year, left_month, left_day) <= std::tie(right_year, right_month, right_day);
                 };
             
-                if (left < n && getDateKey(arr[left]) < getDateKey(arr[smallest])) {
+                if (left < n && CompareAndSortDate(date_utility, arr[left]->data.date, arr[smallest]->data.date)) {
                     smallest = left;
                 }
             
-                if (right < n && getDateKey(arr[right]) < getDateKey(arr[smallest])) {
+                if (right < n && CompareAndSortDate(date_utility, arr[right]->data.date, arr[smallest]->data.date)) {
                     smallest = right;
                 }
             

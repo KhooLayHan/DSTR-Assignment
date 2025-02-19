@@ -30,7 +30,7 @@ void* operator new(size_t size) {
 
 int main(/* int argc, char** argv */)
 {
-//    PerformanceEvaluation::Assignment::Question_1();
+   PerformanceEvaluation::Assignment::Question_1();
 //    Algorithm::QuickSort(linked_list_true);
 //    Algorithm::QuickSort(linked_list_fake);
     
@@ -39,8 +39,8 @@ int main(/* int argc, char** argv */)
 //   Algorithm::HeapSort(linked_list_true);
 //    Algorithm::HeapSort(linked_list_fake);
     
-    Algorithm::InsertionSortCircular(linked_list_true);
-    Algorithm::InsertionSortCircular(linked_list_fake);
+    // Algorithm::InsertionSortCircular(linked_list_true);
+    // Algorithm::InsertionSortCircular(linked_list_fake);
     // PerformanceEvaluation::
 
     // PerformanceEvaluation::LinkedList linked_list_true;
