@@ -39,6 +39,7 @@ namespace PerformanceEvaluation
     size_t getLength() const;
     LinkedListNode* getHead() const;
     void setHead(LinkedListNode* new_head);
+    void sortMerge(); 
 
   private:
     LinkedListNode *m_Head;

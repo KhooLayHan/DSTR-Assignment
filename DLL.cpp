@@ -5,6 +5,7 @@
 #include "DLL.h"
 #include "DateUtility.h"
 #include "SimpleLogger.h"
+#include "MergeSortDLL.h"
 
 namespace PerformanceEvaluation
 {
@@ -162,4 +163,10 @@ namespace PerformanceEvaluation
     if (m_Head == nullptr || m_Head->next == nullptr)
       return;
   }
+
+  void LinkedList::sortMerge()
+{
+    m_Head = MergeSortDLL::mergeSort(m_Head);
+}
+
 } // namespace PerformanceEvaluation
