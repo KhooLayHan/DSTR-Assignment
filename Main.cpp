@@ -30,7 +30,7 @@ void* operator new(size_t size) {
 
 int main(/* int argc, char** argv */)
 {
-   PerformanceEvaluation::Assignment::Question_1();
+//    PerformanceEvaluation::Assignment::Question_1();
 //    Algorithm::QuickSort(linked_list_true);
 //    Algorithm::QuickSort(linked_list_fake);
     
@@ -48,7 +48,7 @@ int main(/* int argc, char** argv */)
 
     // std::string file_path_true = "./CSV/true.csv"; 
     // // std::string file_path_fake = "./CSV/fake.csv";
-
+    PerformanceEvaluation::Assignment::Question_2();
     // // PerformanceEvaluation::FileHandling::readCSV(file_path_true, linked_list_true);
     // // FileHandling::readCSV(file_path_fake, linked_list_fake);
 
@@ -100,7 +100,7 @@ int main(/* int argc, char** argv */)
         // linked_list_2.display();
     }
 
-    std::cout << s_AllocationCount << " allocations.\n";
+    // std::cout << s_AllocationCount << " allocations.\n";
 }
 
     // int *x = new int[42];

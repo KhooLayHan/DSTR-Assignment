@@ -8,6 +8,7 @@
 // Data structures
 #include "Array.cpp"
 #include "LinkedList.h"
+#include "DLL.h"
 
 // Search and sort algorithms 
 #include "Algorithm.cpp"
@@ -35,38 +36,38 @@ namespace PerformanceEvaluation {
              * How can you efficiently sort the news articles by year and 
              * display the total number of articles in both datasets? 
              */
-            static void Question_1() {
-                LinkedList linked_list_true;
-                LinkedList linked_list_fake;
+            // static void Question_1() {
+            //     LinkedList linked_list_true;
+            //     LinkedList linked_list_fake;
                 
-                static constexpr int32_t MAX_DISPLAY_COUNT = 5;
-                std::string file_path_true = "./CSV/true.csv"; 
-                std::string file_path_fake = "./CSV/fake.csv";
+            //     static constexpr int32_t MAX_DISPLAY_COUNT = 5;
+            //     std::string file_path_true = "./CSV/true.csv"; 
+            //     std::string file_path_fake = "./CSV/fake.csv";
 
-                FileHandling::readCSV(file_path_true, linked_list_true);
-                FileHandling::readCSV(file_path_fake, linked_list_fake);
+            //     FileHandling::readCSV(file_path_true, linked_list_true);
+            //     FileHandling::readCSV(file_path_fake, linked_list_fake);
 
-                std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
-                linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
+            //     std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
+            //     linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
 
-                std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
-                linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
+            //     std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
+            //     linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
                 
-                // linked_list_true.mergeSort();
-                Algorithm::MergeSort(linked_list_true);
-                Algorithm::MergeSort(linked_list_fake);
+            //     // linked_list_true.mergeSort();
+            //     Algorithm::MergeSort(linked_list_true);
+            //     Algorithm::MergeSort(linked_list_fake);
 
-                // linked_list_true.displayDate();
+            //     // linked_list_true.displayDate();
                 
-                std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
-                linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
+            //     std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
+            //     linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
                 
-                std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
-                linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
+            //     std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
+            //     linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
-                linked_list_true.displayLength(file_path_true);
-                linked_list_fake.displayLength(file_path_fake);
-            }
+            //     linked_list_true.displayLength(file_path_true);
+            //     linked_list_fake.displayLength(file_path_fake);
+            // }
 
             /**
              * Problem Statement 2:
@@ -74,8 +75,49 @@ namespace PerformanceEvaluation {
              * from the year of 2016 are fake?  
              */
             static void Question2() {
-
+                LinkedList linked_list_true;
+                LinkedList linked_list_fake;
+            
+                std::string file_path_true = "./CSV/true.csv";
+                std::string file_path_fake = "./CSV/fake.csv";
+            
+                FileHandling::readCSV(file_path_true, linked_list_true);
+                FileHandling::readCSV(file_path_fake, linked_list_fake);
+            
+                std::string searchYear = "2016";
+            
+                int true_2016_count = 0;
+                int fake_2016_count = 0;
+            
+                // Search for articles from 2016 in TRUE news
+                LinkedListNode* current_true = linked_list_true.getHead();
+                while (current_true != nullptr) {
+                    if (current_true->data.date.find(searchYear) != std::string::npos) {
+                        true_2016_count++;
+                    }
+                    current_true = current_true->next;
+                }
+            
+                // Search for articles from 2016 in FAKE news
+                LinkedListNode* current_fake = linked_list_fake.getHead();
+                while (current_fake != nullptr) {
+                    if (current_fake->data.date.find(searchYear) != std::string::npos) {
+                        fake_2016_count++;
+                    }
+                    current_fake = current_fake->next;
+                }
+            
+                int total_2016_count = true_2016_count + fake_2016_count;
+            
+                double fake_percentage = (total_2016_count == 0) ? 0.0 : (static_cast<double>(fake_2016_count) / total_2016_count) * 100;
+            
+                std::cout << "True news articles from 2016: " << true_2016_count << std::endl;
+                std::cout << "Fake news articles from 2016: " << fake_2016_count << std::endl;
+                std::cout << "Percentage of fake news in 2016: " << fake_percentage << "%" << std::endl;
             }
+            
+            
+            
 
             /**
              * Problem Statement 3:

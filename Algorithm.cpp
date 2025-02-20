@@ -6,7 +6,7 @@
 
 #include "Array.cpp"
 #include "Dataset.h"
-#include "LinkedList.h"
+#include "DLL.h"
 #include "DateUtility.cpp"
 
 using namespace std;
@@ -49,8 +49,6 @@ namespace PerformanceEvaluation {
             static void HeapSort(LinkedList& linked_list) {
                  getAlgorithm().heapSortImpl(linked_list);
             }
-            
-            static void 
 
             // static void SelectionSort(LinkedList& linked_list) {
             //     getAlgorithm().selectionSortImpl(linked_list);
@@ -65,6 +63,16 @@ namespace PerformanceEvaluation {
             //     getAlgorithm().bubbleSortImpl(linked_list);
             // }
 
+            // Linear Search Function
+            static LinkedListNode* LinearSearch(LinkedList& linked_list, const string& targetDate) {
+                return getAlgorithm().linearSearchImpl(linked_list, targetDate);
+            }
+
+            // Binary Search Function
+            static LinkedListNode* BinarySearch(LinkedList& linked_list, const std::string& targetDate) {
+                return getAlgorithm().binarySearchImpl(linked_list, targetDate);
+            }
+            
         private:
             Algorithm() {}
 
@@ -100,6 +108,82 @@ namespace PerformanceEvaluation {
                 LinkedListNode* head = linked_list.getHead();
                 head = insertionSortCircular(head);
                 linked_list.setHead(head);
+            }
+
+            // Linear Search Implementation
+            LinkedListNode* linearSearchImpl(LinkedList& linked_list, const string& targetDate) {
+                DateUtility dateUtility;
+                LinkedListNode* current = linked_list.getHead();
+    
+                while (current != nullptr) {
+                    if (current->data.date == targetDate) {
+                        cout << "Record found with date: " << current->data.date << endl;
+                        return current;
+                    }
+                    current = current->next;
+                }
+    
+                cout << "Record not found with date: " << targetDate << endl;
+                return nullptr;
+            }
+
+            // Binary Search Implementation
+            LinkedListNode* binarySearchImpl(LinkedList& linked_list, const std::string& targetDate) {
+                if (!linked_list.getHead()) {
+                    return nullptr;
+                }
+            
+                LinkedListNode* left = linked_list.getHead();
+                LinkedListNode* right = nullptr;
+            
+                // Get the last node (right)
+                LinkedListNode* temp = left;
+                while (temp->next) {
+                    temp = temp->next;
+                }
+                right = temp;
+            
+                DateUtility date_utility;
+            
+                while (left && right && left != right->next) {
+                    LinkedListNode* middle = getMiddle(left, right);
+            
+                    auto [middle_day, middle_month, middle_year] = date_utility.parseDate(middle->data.date);
+                    auto [target_day, target_month, target_year] = date_utility.parseDate(targetDate);
+            
+                    if (middle_year == target_year && middle_month == target_month && middle_day == target_day) {
+                        return middle;
+                    }
+            
+                    bool isTargetBeforeMiddle = (target_year < middle_year) ||
+                                                (target_year == middle_year && target_month < middle_month) ||
+                                                (target_year == middle_year && target_month == middle_month && target_day < middle_day);
+            
+                    if (isTargetBeforeMiddle) {
+                        right = middle->prev;
+                    } else {
+                        left = middle->next;
+                    }
+                }
+            
+                return nullptr;
+            }
+            
+            LinkedListNode* getMiddle(LinkedListNode* left, LinkedListNode* right) {
+                if (!left) return nullptr;
+            
+                LinkedListNode* slow = left;
+                LinkedListNode* fast = left;
+            
+                while (fast != right && fast->next != right) {
+                    fast = fast->next;
+                    if (fast != right) {
+                        fast = fast->next;
+                        slow = slow->next;
+                    }
+                }
+            
+                return slow;
             }
 
         protected:
