@@ -27,6 +27,7 @@ namespace PerformanceEvaluation
    * Class representing a doubly linked list for storing datasets (news articles).
    * Supports insertion, deletion, and traversal of nodes.
    */
+<<<<<<< HEAD
   class LinkedListDoubly
   {
   public:
@@ -71,12 +72,44 @@ namespace PerformanceEvaluation
 
     // Get the total number of nodes in the list
     size_t GetLength() const;
+=======
+  class LinkedList
+  {
+  public:
+    // Constructor initializes an empty linked list
+    LinkedList() : m_Head(nullptr), m_Length(0) {}
+
+    // Destructor deletes all nodes in the list to free memory
+    ~LinkedList();
+
+    // Insert a new node at the beginning of the list
+    void insertBegin(const Dataset &dataset);
+
+    // Insert a new node at the end of the list
+    void insertEnd(const Dataset &dataset);
+
+    // Insert a new node at a specific position in the list
+    void insertPosition(const Dataset &dataset, size_t position);
+
+    // Delete a specific node by matching dataset
+    void deleteNode(const Dataset &dataset);
+
+    // Delete all nodes in the list
+    void deleteAll();
+
+    // Display all nodes in the list
+    void displayAll() const;
+
+    // Get the total number of nodes in the list
+    size_t getLength() const;
+>>>>>>> origin/KhooLayHan_2
 
   private:
     LinkedListDoublyNode *m_Head; // Pointer to the first node in the list
     size_t m_Length;        // Stores the number of nodes in the list
 
     // Increase the length counter when a node is added
+<<<<<<< HEAD
     void IncrementLength();
 
     // Decrease the length counter when a node is removed
@@ -84,6 +117,15 @@ namespace PerformanceEvaluation
 
     // Check if the list is empty (used in display functions)
     void IsHeadEmpty() const;
+=======
+    void incrementLength();
+
+    // Decrease the length counter when a node is removed
+    void decrementLength();
+
+    // Check if the list is empty (used in display functions)
+    void isHeadEmpty() const;
+>>>>>>> origin/KhooLayHan_2
   };
 
 } // namespace PerformanceEvaluation
