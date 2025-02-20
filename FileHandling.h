@@ -9,6 +9,8 @@
 #include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
+#include "Vector.h"
+#include "DynamicArray.h"
 
 namespace PerformanceEvaluation {
     using FilePath = std::filesystem::path;
@@ -31,10 +33,15 @@ namespace PerformanceEvaluation {
             FileHandling(FilePath&& file_path)
                 : m_FilePath(std::move(file_path)) {}
 
-            // static void ReadFile(const FilePath&, Array&);
+            static void ReadWordFromFile(const FilePath&, LinkedList&);
+            
+                // static void ReadFile(const FilePath&, Array&);
             static void ReadFile(const FilePath&, LinkedList&);
+            
             static void WriteFile(const FilePath&, const std::string&);
+            
             static void AppendFile(const FilePath&, const std::string&);
+            static void AppendFileNewline(const FilePath&, const std::string&);
             
             static void AppendFileContent(const FilePath&, const FilePath&);
 
@@ -53,4 +60,4 @@ namespace PerformanceEvaluation {
         private:
             FilePath m_FilePath;
     };
-} // namespace PerformanceEvaluation
+} // namespace PerformanceEvaluationstd::visit([](const auto& value){ return value; }, left->m_Data);

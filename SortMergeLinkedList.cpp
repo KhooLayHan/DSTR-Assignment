@@ -8,9 +8,9 @@
 
 namespace PerformanceEvaluation {
     void SortMergeLinkedList::SortBy(LinkedList& linked_list) {
-        LinkedListNode* head = linked_list.getHead();
+        LinkedListNode* head = linked_list.GetHead();
         Merge(&head);
-        linked_list.setHead(head);
+        linked_list.SetHead(head);
     }
 
     // Applies merge sort recursively 
@@ -74,6 +74,9 @@ namespace PerformanceEvaluation {
 
         LinkedListNode* result = nullptr;
 
+        // auto ss = std::visit([](const auto& value){ return value; }, left->m_Data);
+
+        // if (ss)
         if (CompareAndSortDate(date_utility, left->m_Data.m_Date, right->m_Data.m_Date)) {
             result = left;
             result->m_Next = SortAndMerge(left->m_Next, right);
