@@ -36,6 +36,7 @@ namespace PerformanceEvaluation
     void deleteNode(const Dataset &dataset);
     void deleteAll();
     void displayAll() const;
+    void displayFirst(int count) const;
     size_t getLength() const;
     LinkedListNode* getHead() const;
     void setHead(LinkedListNode* new_head);

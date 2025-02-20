@@ -1,32 +1,18 @@
-#pragma once
-
 #include <iostream>
-#include <string>
-#include <fstream>
-#include <sstream>
-
-// Struct with member variables: title, text, subject, date
+#include <ctime>
 #include "Dataset.h"
-
-// Data structures
-#include "DLL.h"
-
-// Sorting Algorithm for Doubly Linked List
-#include "MergeSortDLL.h"
-
-// File handling
-#include "FileHandling.h"
-
-// Helper classes for debugging and parsing dates
 #include "DateUtility.h"
-#include "SimpleLogger.h"
+#include "Algorithm.h"
+#include "Array.h"
+#include "DLL.h"
+#include "QuickSortDLL.h"
+#include "HeapSortDLL.h"
+#include "MergeSortDLL.h"
 
 namespace PerformanceEvaluation
 {
-    /**
-     * Reads CSV data and inserts into a Doubly Linked List.
-     */
-    void readCSV(const std::string &filename, LinkedList &newsList)
+    // Reads data from CSV into an Array
+    void readCSVArray(const std::string &filename, Array &newsArray)
     {
         std::ifstream file(filename);
         if (!file.is_open())
@@ -35,13 +21,10 @@ namespace PerformanceEvaluation
             return;
         }
 
-        std::cout << "Successfully opened: " << filename << std::endl; // Debugging line
-
         std::string line, title, text, subject, date;
-        int id = 1; // Assigning incremental ID
+        int id = 1;
 
-        // Read header line and ignore it
-        getline(file, line);
+        getline(file, line); // Ignore header
 
         while (getline(file, line))
         {
@@ -51,53 +34,110 @@ namespace PerformanceEvaluation
             getline(ss, subject, ',');
             getline(ss, date, ',');
 
-            // Insert data into the linked list
+            newsArray.insertEnd(Dataset{id++, title, text, subject, date});
+        }
+        file.close();
+    }
+
+    // Reads data from CSV into a Doubly Linked List
+    void readCSVLinkedList(const std::string &filename, LinkedList &newsList)
+    {
+        std::ifstream file(filename);
+        if (!file.is_open())
+        {
+            std::cerr << "Error opening file: " << filename << std::endl;
+            return;
+        }
+
+        std::string line, title, text, subject, date;
+        int id = 1;
+
+        getline(file, line); // Ignore header
+
+        while (getline(file, line))
+        {
+            std::stringstream ss(line);
+            getline(ss, title, ',');
+            getline(ss, text, ',');
+            getline(ss, subject, ',');
+            getline(ss, date, ',');
+
             newsList.insertEnd(Dataset{id++, title, text, subject, date});
         }
         file.close();
     }
 
-    /**
-     *  Reads CSV, applies MergeSort, and displays results.
-     */
-    void runAssignmentTests()
+    // Function to run all sorting types for ARRAY
+    void runArraySorting()
     {
-        LinkedList linked_list_true;
-        LinkedList linked_list_fake;
+        Array newsArray;
+        readCSVArray("true.csv", newsArray);
+        readCSVArray("fake.csv", newsArray);
 
-        static constexpr int32_t MAX_DISPLAY_COUNT = 5;
+        std::cout << "Total articles loaded (Array): " << newsArray.getLength() << "\n\n";
 
-        // Use the correct CSV folder path
-        std::string file_path_true = "./CSV/true.csv";
-        std::string file_path_fake = "./CSV/fake.csv";
+        clock_t start, end;
 
-        // Read CSV files into linked lists
-        readCSV(file_path_true, linked_list_true);
-        readCSV(file_path_fake, linked_list_fake);
+        // QuickSort
+        start = clock();
+        Array *sortedQuickArray = Algorithm::QuickSort(newsArray);
+        end = clock();
+        std::cout << "QuickSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        sortedQuickArray->displayFirst(5);
+        delete sortedQuickArray;
 
-        // Display before sorting
-        std::cout << "Before Sorting... TRUE NEWS\n";
-        linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
+        // MergeSort
+        start = clock();
+        Array *sortedMergeArray = Algorithm::MergeSort(newsArray);
+        end = clock();
+        std::cout << "MergeSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        sortedMergeArray->displayFirst(5);
+        delete sortedMergeArray;
 
-        std::cout << "Before Sorting... FAKE NEWS\n";
-        linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
+        // HeapSort
+        start = clock();
+        Array *sortedHeapArray = Algorithm::HeapSort(newsArray);
+        end = clock();
+        std::cout << "HeapSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        sortedHeapArray->displayFirst(5);
+        delete sortedHeapArray;
 
-        // Apply MergeSort to both datasets
-        clock_t start = clock();
-        linked_list_true.sortMerge();
-        linked_list_fake.sortMerge();
-        clock_t end = clock();
-
-        std::cout << "\nMergeSort took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
-
-        // Display after sorting
-        std::cout << "After Sorting... TRUE NEWS\n";
-        linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
-
-        std::cout << "After Sorting... FAKE NEWS\n";
-        linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
-
-        linked_list_true.displayLength(file_path_true);
-        linked_list_fake.displayLength(file_path_fake);
+        std::cout << "\n====================================================\n";
     }
-} // namespace PerformanceEvaluation
+
+    // Function to run all sorting types for DOUBLY LINKED LIST
+    void runLinkedListSorting()
+    {
+        LinkedList newsList;
+        readCSVLinkedList("true.csv", newsList);
+        readCSVLinkedList("fake.csv", newsList);
+
+        std::cout << "Total articles loaded (Linked List): " << newsList.getLength() << "\n\n";
+
+        clock_t start, end;
+
+        // MergeSort
+        LinkedList mergeSortedList = newsList;
+        start = clock();
+        mergeSortedList.setHead(MergeSortDLL::mergeSort(mergeSortedList.getHead()));
+        end = clock();
+        std::cout << "MergeSort (Linked List) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        mergeSortedList.displayFirst(5);
+
+        // QuickSort
+        LinkedList quickSortedList = newsList;
+        start = clock();
+        QuickSortDLL::quickSort(quickSortedList.getHead());
+        end = clock();
+        std::cout << "QuickSort (Linked List) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        quickSortedList.displayFirst(5);
+
+        // HeapSort
+        LinkedList heapSortedList = newsList;
+        start = clock();
+        HeapSortDLL::heapSort(heapSortedList);
+        end = clock();
+        std::cout << "HeapSort (Linked List) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        heapSortedList.displayFirst(5);
+    }
+}

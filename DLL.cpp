@@ -73,6 +73,22 @@ namespace PerformanceEvaluation
     incrementLength();
   }
 
+  void LinkedList::displayFirst(int count) const
+{
+    LinkedListNode* current = m_Head;
+    int i = 0;
+
+    while (current != nullptr && i < count)
+    {
+        std::cout << i + 1 << ". " << current->data.title << " (" << current->data.date << ")\n";
+        current = current->next;
+        i++;
+    }
+
+    if (i == 0)
+        std::cout << "No records to display.\n";
+}
+
   void LinkedList::deleteNode(const Dataset &dataset)
   {
     if (m_Head == nullptr)
