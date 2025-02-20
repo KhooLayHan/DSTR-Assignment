@@ -1,8 +1,10 @@
 #include <array>
 #include <iostream>
+#include <regex> 
 #include <string>
 #include <string_view>
 #include <sstream>
+
 #include <vector>
 
 #include "FileHandling.h"
@@ -11,6 +13,8 @@
 #include "SimpleConsoleLogger.h"
 #include "SimpleLoggingService.h"
 
+#include "DynamicArray.h"
+#include "Vector.h"
 namespace PerformanceEvaluation {
     // TODO: Update ReadFile() to support Array implementation instead, not LinkedList
     // void FileHandling::ReadFile(const FilePath& file_path, Array& array) {
@@ -43,9 +47,64 @@ namespace PerformanceEvaluation {
                 continue;
 
             const auto& [id, title, text, subject, date] = CleanParseAndMoreClean(line);
-            linked_list.insertEnd({ id, title, text, subject, date });
+            linked_list.InsertEnd({ id, title, text, subject, date });
         }
 
+        // 1051, Title: "Ex-GOP Congressman Shreds Fellow Republicans For Not ‘Howling’ For Trump’s Impeachment (VIDEO)\r\r\r\r\r\r\r"
+        
+        file.close();
+    }
+
+    void FileHandling::ReadWordFromFile(const FilePath& file_path, LinkedList& linked_list) {
+        std::ifstream file(file_path);
+        
+        CheckReadFileValidity(file_path, file);
+
+        const std::string& cleaned_file = CleanFile(file);  
+        std::istringstream stream(cleaned_file);
+
+        std::string text;
+        std::string line;
+        
+        Dataset dataset;
+        
+        while (std::getline(stream, line)) {
+            if (line == "title,text,subject,date" || line == "title,text,subject,date\r") 
+                continue;
+            
+            const auto& [id, title, text, subject, date] = CleanParseAndMoreClean(line);
+            
+            auto text_parser = [](const std::string& text) {
+                std::string word;
+                std::regex word_pattern(R"(\b([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*|(?:[A-Za-z]\.){2,})\b)");
+                
+                std::sregex_iterator it(text.begin(), text.end(), word_pattern);
+                std::sregex_iterator end;
+
+                while (it != end) {
+                    word += it->str();
+                    ++it;
+                }
+
+                return word;
+            };
+
+            FileHandling::AppendFileNewline("./Text/assignment.txt", text_parser(title));
+            FileHandling::AppendFileNewline("./Text/assignment.txt", text_parser(text));
+            FileHandling::AppendFileNewline("./Text/assignment.txt", text_parser(subject));
+            FileHandling::AppendFileNewline("./Text/assignment.txt", text_parser(date));
+            
+            LinkedListNode* temp = linked_list.GetHead();
+
+            // while (temp) {
+            //     // temp->m_Data.type
+
+            //     // temp = temp->m_Next;
+            // }
+
+            // linked_list.insertEnd({ id, title, text, subject, date });
+        }
+        
         // 1051, Title: "Ex-GOP Congressman Shreds Fellow Republicans For Not ‘Howling’ For Trump’s Impeachment (VIDEO)\r\r\r\r\r\r\r"
         
         file.close();
@@ -61,8 +120,8 @@ namespace PerformanceEvaluation {
 
         const std::string& ref_file_path = file_path; 
 
-        SimpleFileLogger file_logger;
-        SimpleLoggingService::UseInfoLogger(file_logger, "Successfully written to file " + ref_file_path + " with message: " + message + ".");
+        // SimpleFileLogger file_logger;
+        // SimpleLoggingService::UseInfoLogger(file_logger, "Successfully written to file " + ref_file_path + " with message: " + message + ".");
     }
 
     void FileHandling::AppendFile(const FilePath& file_path, const std::string& message) {
@@ -75,8 +134,22 @@ namespace PerformanceEvaluation {
         
         const std::string& ref_file_path = file_path; 
 
-        SimpleFileLogger file_logger;
-        SimpleLoggingService::UseInfoLogger(file_logger, "Successfully appended to file " + ref_file_path + " with message: " + message + ".");
+        // SimpleFileLogger file_logger;
+        // SimpleLoggingService::UseInfoLogger(file_logger, "Successfully appended to file " + ref_file_path + " with message: " + message + ".");
+    }
+    
+    void FileHandling::AppendFileNewline(const FilePath& file_path, const std::string& message) {
+        std::ofstream file(file_path, std::ios::app);
+        
+        CheckAppendFileValidity(file_path, file);
+
+        file << message << "\n";                
+        file.close();
+        
+        const std::string& ref_file_path = file_path; 
+
+        // SimpleFileLogger file_logger;
+        // SimpleLoggingService::UseInfoLogger(file_logger, "Successfully appended to file " + ref_file_path + " with message: " + message + ".");
     }
 
     void FileHandling::AppendFileContent(const FilePath& src_file_path, const FilePath& dest_file_path) {
@@ -117,7 +190,7 @@ namespace PerformanceEvaluation {
         
         if (!file) { 
             SimpleConsoleLogger console_logger;
-            SimpleLoggingService::UseWarnLogger(console_logger, "Writing file " + ref_file_path + "is not found.");
+            SimpleLoggingService::UseWarnLogger(console_logger, "Writing file " + ref_file_path + " is not found.");
 
             return; 
         }
@@ -128,7 +201,7 @@ namespace PerformanceEvaluation {
         
         if (!file) { 
             SimpleConsoleLogger console_logger;
-            SimpleLoggingService::UseWarnLogger(console_logger, "Appending file " + ref_file_path + "is not found.");
+            SimpleLoggingService::UseWarnLogger(console_logger, "Appending file " + ref_file_path + " is not found.");
 
             return; 
         }
@@ -237,10 +310,10 @@ namespace PerformanceEvaluation {
 
     Dataset FileHandling::CleanParseAndMoreClean(const std::string& line) {        
         const auto& [title, text, subject, date] = ParseCSVLine(line);
-
-        // auto clean_field = [&](const std::string& field, const std::string& placeholder) {
-        //     return field.empty() ? placeholder : field;
-        // };
+        
+        auto clean_field = [&](const std::string& field, const std::string& placeholder) {
+            return field.empty() ? placeholder : field;
+        };
 
         Dataset dataset;
         
@@ -277,7 +350,9 @@ namespace PerformanceEvaluation {
     FileHandling::OldDataset FileHandling::ParseCSVLine(const std::string& line) {
         static constexpr size_t MAX_FIELD_SIZE = 4;
         
-        std::array<std::string, MAX_FIELD_SIZE> fields;
+        std::array<std::string, 4> fields;
+
+        // std::array<std::string, MAX_FIELD_SIZE> fields;
         size_t field_index = 0;
         std::string token;
         bool in_quotes = false;

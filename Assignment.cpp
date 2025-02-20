@@ -30,6 +30,11 @@
 #include "SortMergeLinkedList.h"
 #include "Sort.h"
 
+#include "DynamicArray.h"
+#include "HashMap.h"
+
+#include <regex>
+
 /**
  * For each problem statement, you can look at how we solved each questions from the functions implemented here.
  *  
@@ -85,7 +90,7 @@ namespace PerformanceEvaluation {
                 // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
                 // linked_list_true.displayLength(file_path_true);
-                linked_list_fake.displayLength(file_path_fake);
+                linked_list_fake.DisplayLength(file_path_fake);
             }
 
             /**
@@ -110,7 +115,7 @@ namespace PerformanceEvaluation {
                 // LinkedList linked_list_fake;
                 // LinkedList linked_list_combined;
                 
-                static constexpr int32_t MAX_DISPLAY_COUNT = 5;
+                // static constexpr int32_t MAX_DISPLAY_COUNT = 5;
 
                 const FilePath& file_path_true = "./CSV/true.csv"; 
                 const FilePath& file_path_fake = "./CSV/fake.csv";
@@ -174,8 +179,8 @@ namespace PerformanceEvaluation {
                     return (numerator * 100) / denominator;
                 };
 
-                size_t numerator = linked_list_test_impartial_searched_date_2016_and_partial_searched_subject_politics.getLength();
-                size_t denominator = linked_list_test_impartial_searched_date_2016_and_impartial_searched_subject_politics.getLength();
+                size_t numerator = linked_list_test_impartial_searched_date_2016_and_partial_searched_subject_politics.GetLength();
+                size_t denominator = linked_list_test_impartial_searched_date_2016_and_impartial_searched_subject_politics.GetLength();
 
                 std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
                     << calculate_percentage(numerator, denominator) << "% of political news articles are fake.\n";
@@ -186,8 +191,58 @@ namespace PerformanceEvaluation {
              * Which words are most frequently used in fake news articles 
              * related to government topics?
              */
-            static void Question3() {
+            static void Question_3() {
+                const FilePath& file_path_fake = "./CSV/fake.csv";
+                
+                LinkedList linked_list_fake;
 
+                FileHandling::ReadFile(file_path_fake, linked_list_fake);
+                
+                LinkedList linked_list_fake_impartial_searched_subject_government = 
+                    Algorithm::LinearSearchAndCopy(linked_list_fake, std::make_unique<SearchLinkedList>().get(), "government", Criteria::SUBJECT, SearchType::IMPARTIAL);
+
+                // LinkedList linked_list_fake_impartial_searched_subject_government_and_sort_by_
+
+                HashMap<std::string, int32_t> word_map;
+                
+
+                // FileHandling::AppendFileNewline();
+
+                // auto ReadAndTokenizeEachWord = [](LinkedList& linked_list) {
+                //     LinkedListNode* temp = linked_list.getHead();
+
+                //     while (temp) {
+                //         const Dataset& dataset = temp->m_Data;
+                        
+                //         std::istringstream input_stream;
+                //         std::string word;
+                        
+                //         auto text_parser = [](const std::string& text) {
+                //             std::string word;
+                //             std::regex word_pattern(R"(\b([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*|(?:[A-Za-z]\.){2,})\b)");
+                            
+                //             std::sregex_iterator it(text.begin(), text.end(), word_pattern);
+                //             std::sregex_iterator end;
+            
+                //             while (it != end) {
+                //                 word += it->str();
+                //                 ++it;
+                //             }
+            
+                //             return word;
+                //         };
+
+                //         LinkedList linked_list_words;
+                //         linked_list_words.insertEnd();
+
+                //         dataset.ReadAll()
+
+
+                //         temp = temp->m_Next;
+                //     }
+                // };
+
+                const FilePath& file_path_test = "./CSV/test.csv";
             }
     };
 } // namespace PerformanceEvaluation

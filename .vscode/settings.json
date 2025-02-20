@@ -62,6 +62,10 @@
         "variant": "cpp",
         "source_location": "cpp",
         "codecvt": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "bitset": "cpp",
+        "list": "cpp",
+        "regex": "cpp",
+        "any": "cpp"
     }
 }

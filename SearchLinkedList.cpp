@@ -8,19 +8,19 @@
 namespace PerformanceEvaluation
 {
     LinkedListNode* SearchLinkedList::LinearSearch(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
-        LinkedListNode* temp = linked_list.getHead();
-        
-        auto is_found = [&, temp](std::string_view target, std::string_view dataset_str) {
-            if (dataset_str.empty()) {
-                SimpleConsoleLogger console;
-                SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
-            } 
-            
-            return Contains(target, dataset_str, type) ? temp : nullptr;
-        };
+        LinkedListNode* temp = linked_list.GetHead();
         
         while (temp) {
             const Dataset& dataset = temp->m_Data;
+
+            auto is_found = [&, temp](std::string_view target, std::string_view dataset_str) {
+                if (dataset_str.empty()) {
+                    SimpleConsoleLogger console;
+                    SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
+                } 
+                
+                return Contains(target, dataset_str, type) ? temp : nullptr;
+            };
 
             switch (criteria) {
                 case Criteria::TITLE:   is_found(target, ToLowerCase(dataset.m_Title));      break;
@@ -39,7 +39,7 @@ namespace PerformanceEvaluation
     LinkedList SearchLinkedList::LinearSearchAndCopy(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
         LinkedList new_list;
         LinkedListNode* new_tail = nullptr;
-        LinkedListNode* temp = linked_list.getHead();
+        LinkedListNode* temp = linked_list.GetHead();
     
         // int32_t i = 0;
         while (temp) {
@@ -54,9 +54,9 @@ namespace PerformanceEvaluation
                 if (Contains(target, dataset_str, type)) {
                     LinkedListNode* new_node = new LinkedListNode(temp->m_Data); // Deep copy
                     
-                    if (!new_list.getHead()) {
-                        new_list.insertEnd(new_node->m_Data);
-                        new_tail = new_list.getHead();
+                    if (!new_list.GetHead()) {
+                        new_list.InsertEnd(new_node->m_Data);
+                        new_tail = new_list.GetHead();
                     } else {
                         new_tail->m_Next = new_node;
                         new_tail = new_node;
@@ -81,22 +81,22 @@ namespace PerformanceEvaluation
     }
 
     void SearchLinkedList::LinearSearchAndDisplay(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
-        LinkedListNode* temp = linked_list.getHead();
-        
-        auto is_found_and_display = [&, temp](std::string_view target, std::string_view dataset_str) {
-            if (dataset_str.empty()) {
-                SimpleConsoleLogger console;
-                SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
-            }
-            
-            if (Contains(target, dataset_str, type)) {
-                // temp->m_Data.Display();
-                temp->Display();
-            }
-        };
-        
+        LinkedListNode* temp = linked_list.GetHead();
+                
         while (temp) {
             const Dataset& dataset = temp->m_Data;
+
+            auto is_found_and_display = [&, temp](std::string_view target, std::string_view dataset_str) {
+                if (dataset_str.empty()) {
+                    SimpleConsoleLogger console;
+                    SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
+                }
+                
+                if (Contains(target, dataset_str, type)) {
+                    // temp->m_Data.Display();
+                    
+                }
+            };
 
             switch (criteria) {
                 case Criteria::TITLE:   is_found_and_display(target, ToLowerCase(dataset.m_Title));   break;
@@ -108,6 +108,18 @@ namespace PerformanceEvaluation
 
             temp = temp->m_Next;
         }
+    }
+
+    void SearchLinkedList::LinearSearchAll(const LinkedList& linked_list) {
+        LinkedListNode* temp = linked_list.GetHead();
+        temp = nullptr;
+        // while (temp) {
+        //     const Dataset& dataset = temp->m_Data;
+
+        //     // for (std::string word : dataset.m_Title) {
+
+        //     // }
+        // }
     }
 
     // void Binary(std::string_view target, LinkedList& linked_list, Criteria criteria) override {
