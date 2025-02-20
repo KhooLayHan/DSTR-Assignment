@@ -60,4 +60,4 @@ namespace PerformanceEvaluation {
         private:
             FilePath m_FilePath;
     };
-} // namespace PerformanceEvaluationstd::visit([](const auto& value){ return value; }, left->m_Data);
+} // namespace PerformanceEvaluation

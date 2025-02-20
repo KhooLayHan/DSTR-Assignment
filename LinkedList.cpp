@@ -98,6 +98,11 @@ namespace PerformanceEvaluation {
 
         while (temp != nullptr && line != count) {
             // std::visit(DisplayVisitor{}, temp->m_Data);
+            std::cout << "\n\033[34;1mID:\033[0m "       << temp->m_Data.m_Id      << "\n";
+            std::cout << "\033[34;1mTITLE:\033[0m "      << temp->m_Data.m_Title   << "\n";
+            std::cout << "\033[34;1mTEXT:\033[0m "       << temp->m_Data.m_Text    << "\n";
+            std::cout << "\033[34;1mSUBJECT:\033[0m "    << temp->m_Data.m_Subject << "\n";
+            std::cout << "\033[34;1mDATE:\033[0m "       << temp->m_Data.m_Date    << "\n";
             temp = temp->m_Next;
 
             line++;
