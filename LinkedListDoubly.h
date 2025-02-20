@@ -27,48 +27,63 @@ namespace PerformanceEvaluation
    * Class representing a doubly linked list for storing datasets (news articles).
    * Supports insertion, deletion, and traversal of nodes.
    */
-  class LinkedList
+  class LinkedListDoubly
   {
   public:
     // Constructor initializes an empty linked list
-    LinkedList() : m_Head(nullptr), m_Length(0) {}
+    LinkedListDoubly() : m_Head(nullptr), m_Length(0) {}
 
     // Destructor deletes all nodes in the list to free memory
-    ~LinkedList();
+    ~LinkedListDoubly();
 
     // Insert a new node at the beginning of the list
-    void insertBegin(const Dataset &dataset);
+    void InsertBegin(const Dataset &dataset);
 
     // Insert a new node at the end of the list
-    void insertEnd(const Dataset &dataset);
+    void InsertEnd(const Dataset &dataset);
 
     // Insert a new node at a specific position in the list
-    void insertPosition(const Dataset &dataset, size_t position);
+    void InsertPosition(const Dataset &dataset, size_t position);
 
     // Delete a specific node by matching dataset
-    void deleteNode(const Dataset &dataset);
+    void DeleteNode(const Dataset &dataset);
 
     // Delete all nodes in the list
-    void deleteAll();
+    void DeleteAll();
 
     // Display all nodes in the list
-    void displayAll() const;
+    void DisplayAll() const;
+
+    // Display the first 'count' number of articles
+    void DisplayFirst(int32_t count = 5) const;
+
+    // Display only the titles of all articles
+    void DisplayTitle() const;
+
+    // Display only the text of all articles
+    void DisplayText() const;
+    
+    // Display only the subject of all articles
+    void DisplaySubject() const;
+    
+    // Display only the date of all articles
+    void DisplayDate() const;
 
     // Get the total number of nodes in the list
-    size_t getLength() const;
+    size_t GetLength() const;
 
   private:
     LinkedListDoublyNode *m_Head; // Pointer to the first node in the list
     size_t m_Length;        // Stores the number of nodes in the list
 
     // Increase the length counter when a node is added
-    void incrementLength();
+    void IncrementLength();
 
     // Decrease the length counter when a node is removed
-    void decrementLength();
+    void DecrementLength();
 
     // Check if the list is empty (used in display functions)
-    void isHeadEmpty() const;
+    void IsHeadEmpty() const;
   };
 
 } // namespace PerformanceEvaluation

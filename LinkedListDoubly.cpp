@@ -9,22 +9,13 @@
 #include "DateUtility.h"
 #include "SimpleLogger.h"
 
-#include "LinkedList.h"
+#include "LinkedListDoubly.h"
 
 namespace PerformanceEvaluation
 {
-    // Node structure for Doubly Linked List
-    struct LinkedListNode {
-        Dataset m_Data;
-        LinkedListNode *m_Next; // Pointer to the next node
-        LinkedListNode *m_Prev; // Pointer to the previous node
-
-        LinkedListNode(const Dataset &data) : m_Data(data), m_Next(nullptr), m_Prev(nullptr) {}
-    };
-
     // Insert a new node at the beginning of the list
-    void LinkedList::insertBegin(const Dataset &dataset) {
-        LinkedListNode *node = new LinkedListNode(dataset);
+    void LinkedListDoubly::InsertBegin(const Dataset &dataset) {
+        LinkedListDoublyNode *node = new LinkedListDoublyNode(dataset);
         node->m_Next = m_Head;
 
         if (m_Head != nullptr){
@@ -33,21 +24,21 @@ namespace PerformanceEvaluation
 
         m_Head = node;
 
-        incrementLength();
+        IncrementLength();
     }
 
     // Insert a new node at the end of the list
-    void LinkedList::insertEnd(const Dataset &dataset) {
-        LinkedListNode *node = new LinkedListNode(dataset);
+    void LinkedListDoubly::InsertEnd(const Dataset &dataset) {
+        LinkedListDoublyNode *node = new LinkedListDoublyNode(dataset);
 
         if (m_Head == nullptr)
         {
             m_Head = node;
-            incrementLength();
+            IncrementLength();
             return;
         }
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
 
         // Traverse to the last node
         while (temp->m_Next != nullptr)
@@ -58,19 +49,19 @@ namespace PerformanceEvaluation
         temp->m_Next = node;
         node->m_Prev = temp;
 
-        incrementLength();
+        IncrementLength();
     }
 
     // Insert a new node at a specific position
-    void LinkedList::insertPosition(const Dataset &dataset, size_t position) {
-        LinkedListNode *node = new LinkedListNode(dataset);
+    void LinkedListDoubly::InsertPosition(const Dataset &dataset, size_t position) {
+        LinkedListDoublyNode *node = new LinkedListDoublyNode(dataset);
 
         if (position == 0) {
-            insertBegin(dataset);
+            InsertBegin(dataset);
             return;
         }
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
 
         // Traverse to the desired position
         for (size_t i = 0; temp != nullptr && i < position - 1; i++)
@@ -91,14 +82,14 @@ namespace PerformanceEvaluation
 
         temp->m_Next = node;
 
-        incrementLength();
+        IncrementLength();
     }
 
     // Display all nodes in the linked list
-    void LinkedList::displayAll() const {
-        isHeadEmpty();
+    void LinkedListDoubly::DisplayAll() const {
+        IsHeadEmpty();
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
 
         while (temp != nullptr) {
             std::cout << "ID: " << temp->m_Data.m_Id << "\n";
@@ -115,10 +106,10 @@ namespace PerformanceEvaluation
     }
 
     // Display the first 'count' number of articles
-    void LinkedList::displayFirst(int32_t count) const {
-        isHeadEmpty();
+    void LinkedListDoubly::DisplayFirst(int32_t count) const {
+        IsHeadEmpty();
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
         int32_t line = 0;
 
         while (temp != nullptr && line != count) {
@@ -137,10 +128,10 @@ namespace PerformanceEvaluation
     }
 
     // Display only the titles of all articles
-    void LinkedList::displayTitle() const {
-        isHeadEmpty();
+    void LinkedListDoubly::DisplayTitle() const {
+        IsHeadEmpty();
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
         std::cout << "TITLE\n-----------\n";
 
         while (temp != nullptr)
@@ -153,10 +144,10 @@ namespace PerformanceEvaluation
     }
 
     // Display only the text content of all articles
-    void LinkedList::displayText() const {
-        isHeadEmpty();
+    void LinkedListDoubly::DisplayText() const {
+        IsHeadEmpty();
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
         std::cout << "TEXT\n-----------\n";
 
         while (temp != nullptr)
@@ -169,10 +160,10 @@ namespace PerformanceEvaluation
     }
 
     // Display only the subjects of all articles
-    void LinkedList::displaySubject() const {
-        isHeadEmpty();
+    void LinkedListDoubly::DisplaySubject() const {
+        IsHeadEmpty();
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
         std::cout << "SUBJECT\n-----------\n";
 
         while (temp != nullptr)
@@ -185,10 +176,10 @@ namespace PerformanceEvaluation
     }
 
     // Display only the publication dates of all articles
-    void LinkedList::displayDate() const {
-        isHeadEmpty();
+    void LinkedListDoubly::DisplayDate() const {
+        IsHeadEmpty();
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
         std::cout << "DATE\n-----------\n";
 
         while (temp != nullptr)
@@ -201,9 +192,9 @@ namespace PerformanceEvaluation
     }
 
     // Get the total number of articles in the linked list
-    size_t LinkedList::getLength() const {
+    size_t LinkedListDoubly::GetLength() const {
         size_t length = 0;
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
 
         while (temp)
         {
@@ -215,12 +206,12 @@ namespace PerformanceEvaluation
     }
 
     // Delete a specific node from the list
-    void LinkedList::deleteNode(const Dataset &dataset) {
+    void LinkedListDoubly::DeleteNode(const Dataset &dataset) {
         if (m_Head == nullptr)
             return;
 
         if (m_Head->m_Data == dataset) {
-            LinkedListNode *temp = m_Head;
+            LinkedListDoublyNode *temp = m_Head;
             m_Head = m_Head->m_Next;
 
             if (m_Head != nullptr)
@@ -229,11 +220,11 @@ namespace PerformanceEvaluation
             }
 
             delete temp;
-            decrementLength();
+            DecrementLength();
             return;
         }
 
-        LinkedListNode *temp = m_Head;
+        LinkedListDoublyNode *temp = m_Head;
         while (temp->m_Next != nullptr && !(temp->m_Next->m_Data == dataset))
         {
             temp = temp->m_Next;
@@ -242,7 +233,7 @@ namespace PerformanceEvaluation
         if (temp->m_Next == nullptr)
             return;
 
-        LinkedListNode *node = temp->m_Next;
+        LinkedListDoublyNode *node = temp->m_Next;
         temp->m_Next = temp->m_Next->m_Next;
 
         if (temp->m_Next != nullptr)
@@ -251,33 +242,33 @@ namespace PerformanceEvaluation
         }
 
         delete node;
-        decrementLength();
+        DecrementLength();
     }
 
     // Delete all nodes in the list
-    void LinkedList::deleteAll()
+    void LinkedListDoubly::DeleteAll()
     {
-        LinkedListNode *current = m_Head;
+        LinkedListDoublyNode *current = m_Head;
 
         while (current != nullptr)
         {
-            LinkedListNode *temp = current;
+            LinkedListDoublyNode *temp = current;
             current = current->m_Next;
             delete temp;
-            decrementLength();
+            DecrementLength();
         }
 
         m_Head = nullptr;
     }
 
     // Utility functions
-    void LinkedList::incrementLength() { m_Length++; }
-    void LinkedList::decrementLength()
+    void LinkedListDoubly::IncrementLength() { m_Length++; }
+    void LinkedListDoubly::DecrementLength()
     {
         if (m_Length > 0)
             m_Length--;
     }
-    void LinkedList::isHeadEmpty() const
+    void LinkedListDoubly::IsHeadEmpty() const
     {
         if (m_Head == nullptr)
             return;
