@@ -2,14 +2,14 @@
 
 namespace PerformanceEvaluation
 {
-    void HeapSortDLL::heapify(LinkedListNode* head, int n, int i)
+    void HeapSortDLL::heapify(LinkedListDoublyNode* head, int n, int i)
     {
-        LinkedListNode* largest = head;
+        LinkedListDoublyNode* largest = head;
         int leftIndex = 2 * i + 1;
         int rightIndex = 2 * i + 2;
 
-        LinkedListNode* left = head;
-        LinkedListNode* right = head;
+        LinkedListDoublyNode* left = head;
+        LinkedListDoublyNode* right = head;
 
         for (int j = 0; j < leftIndex && left; j++)
             left = left->next;
@@ -29,14 +29,14 @@ namespace PerformanceEvaluation
         }
     }
 
-    void HeapSortDLL::heapSort(LinkedList &list)
+    void HeapSortDLL::heapSort(LinkedListDoubly &list)
     {
         int n = list.getLength();
-        LinkedListNode* head = list.getHead();
+        LinkedListDoublyNode* head = list.getHead();
 
         for (int i = n / 2 - 1; i >= 0; i--)
         {
-            LinkedListNode* temp = head;
+            LinkedListDoublyNode* temp = head;
             for (int j = 0; j < i; j++)
                 temp = temp->next;
             heapify(temp, n, i);
@@ -44,7 +44,7 @@ namespace PerformanceEvaluation
 
         for (int i = n - 1; i > 0; i--)
         {
-            LinkedListNode* temp = head;
+            LinkedListDoublyNode* temp = head;
             for (int j = 0; j < i; j++)
                 temp = temp->next;
             std::swap(head->data, temp->data);

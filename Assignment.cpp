@@ -9,6 +9,8 @@
 #include "HeapSortDLL.h"
 #include "MergeSortDLL.h"
 
+#include "Benchmark.h"
+
 namespace PerformanceEvaluation
 {
     // Reads data from CSV into an Array
@@ -40,7 +42,7 @@ namespace PerformanceEvaluation
     }
 
     // Reads data from CSV into a Doubly Linked List
-    void readCSVLinkedList(const std::string &filename, LinkedList &newsList)
+    void readCSVLinkedListDoubly(const std::string &filename, LinkedListDoubly &newsList)
     {
         std::ifstream file(filename);
         if (!file.is_open())
@@ -79,45 +81,53 @@ namespace PerformanceEvaluation
         clock_t start, end;
 
         // QuickSort
-        start = clock();
-        Array *sortedQuickArray = Algorithm::QuickSort(newsArray);
-        end = clock();
-        std::cout << "QuickSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
-        sortedQuickArray->displayFirst(5);
-        delete sortedQuickArray;
+        // start = clock();
+        // Array *sortedQuickArray = Algorithm::QuickSort(newsArray);
+        // end = clock();
+        // std::cout << "QuickSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        // sortedQuickArray->displayFirst(5);
+        // delete sortedQuickArray;
 
-        // MergeSort
-        start = clock();
-        Array *sortedMergeArray = Algorithm::MergeSort(newsArray);
-        end = clock();
-        std::cout << "MergeSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
-        sortedMergeArray->displayFirst(5);
-        delete sortedMergeArray;
+        Benchmark benchmark;
+        benchmark.startTimer();
 
-        // HeapSort
-        start = clock();
-        Array *sortedHeapArray = Algorithm::HeapSort(newsArray);
-        end = clock();
-        std::cout << "HeapSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
-        sortedHeapArray->displayFirst(5);
-        delete sortedHeapArray;
+        // // MergeSort
+        // start = clock();
+        // Array *sortedMergeArray = Algorithm::MergeSort(newsArray);
+        // end = clock();
+        // std::cout << "MergeSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        // sortedMergeArray->displayFirst(5);
+        // delete sortedMergeArray;
+
+        // // HeapSort
+        // start = clock();
+        // Array *sortedHeapArray = Algorithm::HeapSort(newsArray);
+        // end = clock();
+        // std::cout << "HeapSort (Array) took: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds\n";
+        // sortedHeapArray->displayFirst(5);
+        // delete sortedHeapArray;
 
         std::cout << "\n====================================================\n";
+
+        benchmark.endTimer();
     }
 
     // Function to run all sorting types for DOUBLY LINKED LIST
     void runLinkedListSorting()
     {
-        LinkedList newsList;
-        readCSVLinkedList("true.csv", newsList);
-        readCSVLinkedList("fake.csv", newsList);
+        LinkedListDoubly newsList;
+        PerformanceEvaluation::readCSVLinkedListDoubly("./CSV/fake.csv", newsList);
+        // PerformanceEvaluation::readCSVLinkedListDoubly("./CSV/true.csv", newsList);
+        
+        // readCSVLinkedListDoubly("true.csv", newsList);
+        // readCSVLinkedListDoubly("fake.csv", newsList);
 
         std::cout << "Total articles loaded (Linked List): " << newsList.getLength() << "\n\n";
 
         clock_t start, end;
 
         // MergeSort
-        LinkedList mergeSortedList = newsList;
+        LinkedListDoubly mergeSortedList = newsList;
         start = clock();
         mergeSortedList.setHead(MergeSortDLL::mergeSort(mergeSortedList.getHead()));
         end = clock();
@@ -125,7 +135,7 @@ namespace PerformanceEvaluation
         mergeSortedList.displayFirst(5);
 
         // QuickSort
-        LinkedList quickSortedList = newsList;
+        LinkedListDoubly quickSortedList = newsList;
         start = clock();
         QuickSortDLL::quickSort(quickSortedList.getHead());
         end = clock();
@@ -133,7 +143,7 @@ namespace PerformanceEvaluation
         quickSortedList.displayFirst(5);
 
         // HeapSort
-        LinkedList heapSortedList = newsList;
+        LinkedListDoubly heapSortedList = newsList;
         start = clock();
         HeapSortDLL::heapSort(heapSortedList);
         end = clock();

@@ -56,6 +56,11 @@
                 "./SimpleLogger.cpp",
                 "./LinkedList.cpp",
                 "./Algorithm.cpp",
+                "./MergeSortDLL.cpp",
+                "./QuickSortDLL.cpp",
+                "./HeapSortDLL.cpp",
+                "./DLL.cpp",
+                "./Array.cpp",
                 "-o",
                 "./Main"
             ],

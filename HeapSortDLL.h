@@ -10,10 +10,10 @@ namespace PerformanceEvaluation
     class HeapSortDLL
     {
     public:
-        static void heapSort(LinkedList &list);
+        static void heapSort(LinkedListDoubly &list);
     
     private:
-        static void heapify(LinkedListNode* head, int n, int i);
+        static void heapify(LinkedListDoublyNode* head, int n, int i);
     };
 }
 

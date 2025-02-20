@@ -15,20 +15,20 @@ namespace PerformanceEvaluation
 {
   using FilePath = std::filesystem::path;
 
-  struct LinkedListNode
+  struct LinkedListDoublyNode
   {
     Dataset data;
-    LinkedListNode *next;
-    LinkedListNode *prev;
+    LinkedListDoublyNode *next;
+    LinkedListDoublyNode *prev;
 
-    LinkedListNode(const Dataset &data) : data(data), next(nullptr), prev(nullptr) {}
+    LinkedListDoublyNode(const Dataset &data) : data(data), next(nullptr), prev(nullptr) {}
   };
 
-  class LinkedList
+  class LinkedListDoubly
   {
   public:
-    LinkedList() : m_Head(nullptr), m_Length(0) {}
-    ~LinkedList();
+  LinkedListDoubly() : m_Head(nullptr), m_Length(0) {}
+    ~LinkedListDoubly() {};
 
     void insertBegin(const Dataset &dataset);
     void insertEnd(const Dataset &dataset);
@@ -38,12 +38,12 @@ namespace PerformanceEvaluation
     void displayAll() const;
     void displayFirst(int count) const;
     size_t getLength() const;
-    LinkedListNode* getHead() const;
-    void setHead(LinkedListNode* new_head);
+    LinkedListDoublyNode* getHead() const;
+    void setHead(LinkedListDoublyNode* new_head);
     void sortMerge(); 
 
   private:
-    LinkedListNode *m_Head;
+  LinkedListDoublyNode *m_Head;
     size_t m_Length;
 
     void incrementLength();

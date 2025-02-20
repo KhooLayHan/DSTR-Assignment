@@ -10,12 +10,12 @@ namespace PerformanceEvaluation
     class QuickSortDLL
     {
     public:
-        static void quickSort(LinkedListNode* head);
+        static void quickSort(LinkedListDoublyNode* head);
     
     private:
-        static LinkedListNode* partition(LinkedListNode* low, LinkedListNode* high);
-        static void quickSortHelper(LinkedListNode* low, LinkedListNode* high);
-        static LinkedListNode* getTail(LinkedListNode* node);
+        static LinkedListDoublyNode* partition(LinkedListDoublyNode* low, LinkedListDoublyNode* high);
+        static void quickSortHelper(LinkedListDoublyNode* low, LinkedListDoublyNode* high);
+        static LinkedListDoublyNode* getTail(LinkedListDoublyNode* node);
     };
 }
 

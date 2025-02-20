@@ -7,7 +7,7 @@
 
 #include "Dataset.h"
 
-#include "DateUtility.cpp"
+#include "DateUtility.h"
 #include "SimpleLogger.h"
 
 namespace PerformanceEvaluation
@@ -57,8 +57,8 @@ namespace PerformanceEvaluation
         
         DateUtility date_utility{};
 
-        int32_t year = date_utility.getYear(date);
-        int32_t other_year = date_utility.getYear(other.date);
+        int32_t year = date_utility.GetYear(date);
+        int32_t other_year = date_utility.GetYear(other.date);
         
         if (year != other_year)
             return compareYearAscending(year, other_year);

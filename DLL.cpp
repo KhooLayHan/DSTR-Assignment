@@ -9,9 +9,9 @@
 
 namespace PerformanceEvaluation
 {
-  void LinkedList::insertBegin(const Dataset &dataset)
+  void LinkedListDoubly::insertBegin(const Dataset &dataset)
   {
-    LinkedListNode *node = new LinkedListNode(dataset);
+    LinkedListDoublyNode *node = new LinkedListDoublyNode(dataset);
     node->next = m_Head;
 
     if (m_Head != nullptr)
@@ -22,9 +22,9 @@ namespace PerformanceEvaluation
     incrementLength();
   }
 
-  void LinkedList::insertEnd(const Dataset &dataset)
+  void LinkedListDoubly::insertEnd(const Dataset &dataset)
   {
-    LinkedListNode *node = new LinkedListNode(dataset);
+    LinkedListDoublyNode *node = new LinkedListDoublyNode(dataset);
     if (m_Head == nullptr)
     {
       m_Head = node;
@@ -32,7 +32,7 @@ namespace PerformanceEvaluation
       return;
     }
 
-    LinkedListNode *temp = m_Head;
+    LinkedListDoublyNode *temp = m_Head;
     while (temp->next != nullptr)
     {
       temp = temp->next;
@@ -43,9 +43,9 @@ namespace PerformanceEvaluation
     incrementLength();
   }
 
-  void LinkedList::insertPosition(const Dataset &dataset, size_t position)
+  void LinkedListDoubly::insertPosition(const Dataset &dataset, size_t position)
   {
-    LinkedListNode *node = new LinkedListNode(dataset);
+    LinkedListDoublyNode *node = new LinkedListDoublyNode(dataset);
 
     if (position == 0)
     {
@@ -53,7 +53,7 @@ namespace PerformanceEvaluation
       return;
     }
 
-    LinkedListNode *temp = m_Head;
+    LinkedListDoublyNode *temp = m_Head;
     for (size_t i = 0; temp != nullptr && i < position - 1; i++)
       temp = temp->next;
 
@@ -73,30 +73,30 @@ namespace PerformanceEvaluation
     incrementLength();
   }
 
-  void LinkedList::displayFirst(int count) const
-{
-    LinkedListNode* current = m_Head;
+  void LinkedListDoubly::displayFirst(int count) const
+  {
+    LinkedListDoublyNode *current = m_Head;
     int i = 0;
 
     while (current != nullptr && i < count)
     {
-        std::cout << i + 1 << ". " << current->data.title << " (" << current->data.date << ")\n";
-        current = current->next;
-        i++;
+      std::cout << i + 1 << ". " << current->data.title << " (" << current->data.date << ")\n";
+      current = current->next;
+      i++;
     }
 
     if (i == 0)
-        std::cout << "No records to display.\n";
-}
+      std::cout << "No records to display.\n";
+  }
 
-  void LinkedList::deleteNode(const Dataset &dataset)
+  void LinkedListDoubly::deleteNode(const Dataset &dataset)
   {
     if (m_Head == nullptr)
       return;
 
     if (m_Head->data == dataset)
     {
-      LinkedListNode *temp = m_Head;
+      LinkedListDoublyNode *temp = m_Head;
       m_Head = m_Head->next;
 
       if (m_Head != nullptr)
@@ -109,7 +109,7 @@ namespace PerformanceEvaluation
       return;
     }
 
-    LinkedListNode *temp = m_Head;
+    LinkedListDoublyNode *temp = m_Head;
     while (temp->next != nullptr && !(temp->next->data == dataset))
     {
       temp = temp->next;
@@ -118,7 +118,7 @@ namespace PerformanceEvaluation
     if (temp->next == nullptr)
       return;
 
-    LinkedListNode *node = temp->next;
+    LinkedListDoublyNode *node = temp->next;
     temp->next = temp->next->next;
 
     if (temp->next != nullptr)
@@ -130,59 +130,59 @@ namespace PerformanceEvaluation
     decrementLength();
   }
 
-  void LinkedList::deleteAll()
+  void LinkedListDoubly::deleteAll()
   {
-    LinkedListNode *current = m_Head;
+    LinkedListDoublyNode *current = m_Head;
     while (current != nullptr)
     {
-      LinkedListNode *temp = current;
+      LinkedListDoublyNode *temp = current;
       current = current->next;
       delete temp;
     }
     m_Head = nullptr;
   }
 
-  size_t LinkedList::getLength() const
+  size_t LinkedListDoubly::getLength() const
   {
     return m_Length;
   }
 
-  LinkedListNode* LinkedList::getHead() const
+  LinkedListDoublyNode *LinkedListDoubly::getHead() const
   {
     return m_Head;
   }
 
-  void LinkedList::setHead(LinkedListNode* new_head)
+  void LinkedListDoubly::setHead(LinkedListDoublyNode *new_head)
   {
     m_Head = new_head;
   }
 
-  void LinkedList::incrementLength()
+  void LinkedListDoubly::incrementLength()
   {
     m_Length++;
   }
 
-  void LinkedList::decrementLength()
+  void LinkedListDoubly::decrementLength()
   {
     if (m_Length > 0)
       m_Length--;
   }
 
-  void LinkedList::isHeadEmpty() const
+  void LinkedListDoubly::isHeadEmpty() const
   {
     if (m_Head == nullptr)
       return;
   }
 
-  void LinkedList::isHeadOrNextEmpty() const
+  void LinkedListDoubly::isHeadOrNextEmpty() const
   {
     if (m_Head == nullptr || m_Head->next == nullptr)
       return;
   }
 
-  void LinkedList::sortMerge()
-{
+  void LinkedListDoubly::sortMerge()
+  {
     m_Head = MergeSortDLL::mergeSort(m_Head);
-}
+  }
 
 } // namespace PerformanceEvaluation

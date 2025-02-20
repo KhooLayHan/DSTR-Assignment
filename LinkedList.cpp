@@ -423,8 +423,8 @@ namespace PerformanceEvaluation {
         LinkedListNode* tail = dummy;
 
         DateUtility date_utility{};
-        int32_t left_year = date_utility.getYear(left->data.date);
-        int32_t right_year = date_utility.getYear(right->data.date);
+        int32_t left_year = date_utility.GetYear(left->data.date);
+        int32_t right_year = date_utility.GetYear(right->data.date);
     
         while (left != nullptr && right != nullptr) {
             if (left_year <= right_year) {

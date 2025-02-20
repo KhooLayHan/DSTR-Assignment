@@ -5,7 +5,7 @@ namespace PerformanceEvaluation
     /*
      * Merge two sorted linked lists into one sorted list.
      */
-    LinkedListNode* MergeSortDLL::mergeSortedLists(LinkedListNode* left, LinkedListNode* right)
+    LinkedListDoublyNode* MergeSortDLL::mergeSortedLists(LinkedListDoublyNode* left, LinkedListDoublyNode* right)
     {
         if (!left) return right;
         if (!right) return left;
@@ -30,12 +30,12 @@ namespace PerformanceEvaluation
     /*
      * Split the linked list into two halves.
      */
-    LinkedListNode* MergeSortDLL::split(LinkedListNode* head)
+    LinkedListDoublyNode* MergeSortDLL::split(LinkedListDoublyNode* head)
     {
         if (!head || !head->next) return head;
 
-        LinkedListNode* slow = head;
-        LinkedListNode* fast = head->next;
+        LinkedListDoublyNode* slow = head;
+        LinkedListDoublyNode* fast = head->next;
 
         // Move `fast` two steps and `slow` one step
         while (fast && fast->next)
@@ -44,7 +44,7 @@ namespace PerformanceEvaluation
             fast = fast->next->next;
         }
 
-        LinkedListNode* mid = slow->next;
+        LinkedListDoublyNode* mid = slow->next;
         slow->next = nullptr;
         if (mid) mid->prev = nullptr;
 
@@ -54,16 +54,16 @@ namespace PerformanceEvaluation
     /*
      * Perform MergeSort on a Doubly Linked List.
      */
-    LinkedListNode* MergeSortDLL::mergeSort(LinkedListNode* head)
+    LinkedListDoublyNode* MergeSortDLL::mergeSort(LinkedListDoublyNode* head)
     {
         if (!head || !head->next) return head;
 
         // Split the list into two halves
-        LinkedListNode* mid = split(head);
+        LinkedListDoublyNode* mid = split(head);
 
         // Recursively sort both halves
-        LinkedListNode* left = mergeSort(head);
-        LinkedListNode* right = mergeSort(mid);
+        LinkedListDoublyNode* left = mergeSort(head);
+        LinkedListDoublyNode* right = mergeSort(mid);
 
         // Merge the sorted halves
         return mergeSortedLists(left, right);

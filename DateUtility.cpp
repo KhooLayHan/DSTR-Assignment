@@ -1,10 +1,11 @@
 #include <sstream>
 #include <string_view>
 
-#include "SimpleConsoleLogger.h"
-#include "SimpleLoggingService.h"
+// #include "SimpleConsoleLogger.h"
+// #include "SimpleLoggingService.h"
 
 #include "DateUtility.h"
+#include "SimpleLogger.h"
 
 namespace PerformanceEvaluation {
     DateUtility DateUtility::ParseDate(const std::string& date_str) {   
@@ -21,8 +22,8 @@ namespace PerformanceEvaluation {
     
         // Read the three expected parts (month, day, year)
         if (!(input_stream >> month >> day >> year)) {
-            SimpleConsoleLogger console;
-            SimpleLoggingService::UseWarnLogger(console, "Unable to parse date: " + date_str + ".");
+            // SimpleConsoleLogger console;
+            // SimpleLoggingService::UseWarnLogger(console, "Unable to parse date: " + date_str + ".");
 
             return {};
         }       
@@ -42,8 +43,10 @@ namespace PerformanceEvaluation {
         
         int32_t month_num = getMonth(month);
         if (month_num == -1) {
-            SimpleConsoleLogger console;
-            SimpleLoggingService::UseWarnLogger(console, "Invalid month: " + month + ".");
+            
+            SimpleLogger::Warn("Invalid month", LogHandler::CONSOLE);
+            // SimpleConsoleLogger console;
+            // SimpleLoggingService::UseWarnLogger(console, "Invalid month: " + month + ".");
 
             return {};
         }

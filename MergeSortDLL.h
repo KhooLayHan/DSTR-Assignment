@@ -11,14 +11,14 @@ namespace PerformanceEvaluation
     {
     public:
         // Function to perform MergeSort on a Doubly Linked List
-        static LinkedListNode* mergeSort(LinkedListNode* head);
+        static LinkedListDoublyNode* mergeSort(LinkedListDoublyNode* head);
 
     private:
         // Function to split the linked list into two halves
-        static LinkedListNode* split(LinkedListNode* head);
+        static LinkedListDoublyNode* split(LinkedListDoublyNode* head);
 
         // Function to merge two sorted linked lists
-        static LinkedListNode* mergeSortedLists(LinkedListNode* left, LinkedListNode* right);
+        static LinkedListDoublyNode* mergeSortedLists(LinkedListDoublyNode* left, LinkedListDoublyNode* right);
     };
 }
 
