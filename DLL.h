@@ -54,15 +54,3 @@ namespace PerformanceEvaluation
 } // namespace PerformanceEvaluation
 
 #endif // DLL_H
-
-These two file is talk about what?DLL.cp 文件
-#include <iostream>
-#include <string>
-#include <内存>
-
-#include “DLL.h”
-#include “DateUtility.h”
-#include “SimpleLogger.h”
-#include “MergeSortDLL.h”
-
-namespace PerformanceEvaluation

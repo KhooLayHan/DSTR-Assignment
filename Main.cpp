@@ -48,7 +48,7 @@ int main(/* int argc, char** argv */)
 
     // std::string file_path_true = "./CSV/true.csv"; 
     // // std::string file_path_fake = "./CSV/fake.csv";
-    PerformanceEvaluation::Assignment::Question_2();
+    // PerformanceEvaluation::Assignment::Question_2();
     // // PerformanceEvaluation::FileHandling::readCSV(file_path_true, linked_list_true);
     // // FileHandling::readCSV(file_path_fake, linked_list_fake);
 
