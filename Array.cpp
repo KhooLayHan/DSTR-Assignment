@@ -1,29 +1,28 @@
-#pragma once
-
-#include <iostream>
-#include <string>
-
-// #include "SimpleLogger.h"
+#include "Array.h"
 
 namespace PerformanceEvaluation {
 
-    // * Minimum structure for Array implementation, can add more if willing
-    struct ArrayData {
-        std::string data;
-        size_t length;
-        size_t capacity;
-    };
+    // Constructor
+    template <typename T, size_t Length>
+    Array<T, Length>::Array() {}
 
-    // template<typename Type, typename Size>
-    class Array {
+    template <typename T, size_t Length>
+    constexpr T& Array<T, Length>::operator[](size_t index) {
 
-        // Array<std::string, 25000>() {
-            
-        // }
+    }
 
-        // TODO: Write the implementation code here...
+    template <typename T, size_t Length>
+    void Array<T, Length>::DisplayFirst(int32_t count) const {
 
-        // ! Prefer array implementation to have bounds-checking 
-    };
+    }
 
+    template <typename T, size_t Length>
+    void Array<T, Length>::InsertEnd(const T& value) {
+
+    }
+
+    template <typename T, size_t Length>
+    void Array<T, Length>::DeleteElement(const T& value) {
+
+    }
 } // namespace PerformanceEvaluation

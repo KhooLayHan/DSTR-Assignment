@@ -6,20 +6,37 @@
 #include <string>
 #include <string_view>
 #include <memory>
+#include <variant>
 
 #include "Dataset.h"
+#include "VariantHelpers.h"
 
 namespace PerformanceEvaluation {
     
     // Implement a Node structure
     struct LinkedListNode {
-        Dataset data;
-        LinkedListNode* next;
-
-        LinkedListNode(const Dataset& value) 
-            : data(value), next(nullptr) {
+        // DataVariant m_Data;
+        Dataset m_Data;
+        LinkedListNode* m_Next;
+        
+        explicit LinkedListNode(const Dataset& value) 
+            : m_Data(std::move(value)), m_Next(nullptr) {
 
         }
+
+        // void Display() const {
+        //     std::cout << "\n\033[34;1mID:\033[0m "       << m_Data.m_Id      << "\n";
+        //     std::cout << "\033[34;1mTITLE:\033[0m "      << m_Data.m_Title   << "\n";
+        //     std::cout << "\033[34;1mTEXT:\033[0m "       << m_Data.m_Text    << "\n";
+        //     std::cout << "\033[34;1mSUBJECT:\033[0m "    << m_Data.m_Subject << "\n";
+        //     std::cout << "\033[34;1mDATE:\033[0m "       << m_Data.m_Date    << "\n";
+            
+        //     std::cout << "\n-----------\n";
+        // }
+
+        // void Display() const {
+        //     std::cout << "\n\033[34;1mID:\033[0m " << m_Data << "\n";
+        // }
     };
     
     // Implement the Linked List class
@@ -43,76 +60,68 @@ namespace PerformanceEvaluation {
 
                 while (m_Head != nullptr) {
                     temp = m_Head;
-                    m_Head = m_Head->next;
+                    m_Head = m_Head->m_Next;
 
                     delete temp;
                     temp = nullptr;
                 }
             }
 
-            void insertBegin(const Dataset&);
+            // void InsertBegin(const DataVariant&);
             
-            void insertEnd(const Dataset&);
+            // void InsertEnd(const DataVariant&);
 
-            void insertPosition(const Dataset&, size_t);
+            // void InsertPosition(const DataVariant&, size_t);
             
-            void displayAll() const;
+            void InsertBegin(const Dataset&);
             
-            void displayFirst(int32_t count = 10) const;
+            void InsertEnd(const Dataset&);
 
-            void displayTitle() const;
-
-            void displayText() const;
+            void InsertPosition(const Dataset&, size_t);
             
-            void displaySubject() const;
-
-            void displayDate() const;
-
-            void search(std::string_view, Criteria);
-
-            void displayAfterSearch(const std::string&, std::string_view) const;
-
-            void displayAllAfterSearch(const Dataset&, const std::string&, std::string_view) const;
-
-            void displayLength(std::string_view) const;
-
-            void displayLengthTrueDataset() const;
-
-            void displayLengthFakeDataset() const;
+            void DisplayAll() const;
             
-            size_t getLength() const;
+            void DisplayFirst(int32_t count = 10) const;
 
-            void mergeSort();
+            void DisplayTitle() const;
 
-            void deleteNode(const Dataset&);
-
-            void deleteAll();
-
-            LinkedListNode* getHead() const;
+            void DisplayText() const;
             
-            void setHead(LinkedListNode*);
+            void DisplaySubject() const;
+
+            void DisplayDate() const;
+
+            void Search(std::string_view, Criteria);
+
+            void DisplayLength(std::string_view) const;
+
+            void DisplayLengthTrueDataset() const;
+
+            void DisplayLengthFakeDataset() const;
+            
+            size_t GetLength() const;
+
+            void MergeSort();
+
+            void DeleteNode(const Dataset&);
+
+            void DeleteAll();
+
+            LinkedListNode* GetHead() const;
+            
+            void SetHead(LinkedListNode*);
 
         protected:
-            void decrementLength();
+            void DecrementLength();
 
-            void incrementLength();
+            void IncrementLength();
 
-            // constexpr bool contains(const std::string&, std::string_view) const;
-            bool contains(const std::string&, std::string_view) const;
+            bool Contains(const std::string&, std::string_view) const;
 
-            void isHeadEmpty() const;
+            void IsHeadEmpty() const;
 
-            void isHeadOrNextEmpty() const;
+            void IsHeadOrNextEmpty() const;
             
-            // Helper function to split the linked list into two halves
-            LinkedListNode* getMiddle(LinkedListNode*);
-
-            // Helper function to merge two sorted linked lists 
-            LinkedListNode* merge(LinkedListNode*, LinkedListNode*);
-
-            // Applies merge sort recursively 
-            LinkedListNode* mergeSort(LinkedListNode*);
-
         private:
             LinkedListNode* m_Head{ nullptr };
             size_t m_Length;

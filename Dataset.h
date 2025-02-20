@@ -1,8 +1,9 @@
 #pragma once
 
-#ifndef DATASET_H
-#define DATASET_H
+#ifndef DATASET_HPP
+#define DATASET_HPP
 
+#include <iostream>
 #include <string>
 #include <string_view>
 
@@ -17,21 +18,63 @@ namespace PerformanceEvaluation
 
     class Dataset {
         public:
-            int32_t id;
-            std::string title;
-            std::string text;
-            std::string subject;
-            std::string date; 
+            int32_t m_Id;
+            std::string m_Title;
+            std::string m_Text;
+            std::string m_Subject;
+            std::string m_Date; 
 
             Dataset() {}
 
-            Dataset(int32_t id) : id(id) {}
+            Dataset(int32_t id) : m_Id(id) {}
             
             Dataset(int32_t id, std::string_view title, std::string_view text, std::string_view subject, std::string_view date) 
-                : id(id), title(title), text(text), subject(subject), date(date) {
+                : m_Id(id), m_Title(title), m_Text(text), m_Subject(subject), m_Date(date) {
 
             }
 
+            bool operator==(const Dataset& other) {
+                return 
+                    m_Id        == other.m_Id       &&
+                    m_Title     == other.m_Title    &&
+                    m_Text      == other.m_Text     &&
+                    m_Subject   == other.m_Subject  &&
+                    m_Date      == other.m_Date
+                ;
+            }
+
+            void Display() const {
+                std::cout << "\n\033[34;1mID:\033[0m "       << m_Id      << "\n";
+                std::cout << "\033[34;1mTITLE:\033[0m "      << m_Title   << "\n";
+                std::cout << "\033[34;1mTEXT:\033[0m "       << m_Text    << "\n";
+                std::cout << "\033[34;1mSUBJECT:\033[0m "    << m_Subject << "\n";
+                std::cout << "\033[34;1mDATE:\033[0m "       << m_Date    << "\n";
+                
+                std::cout << "\n-----------\n";
+            }
+            
+            std::string ReadAll() const {
+                return { ReadTitle() + ReadWord() + ReadSubject() + ReadDate() };
+            }
+
+            std::string ReadTitle() const {
+                return m_Title;
+            }
+            
+            std::string ReadWord() const {
+                return m_Text;
+            }
+            
+            std::string ReadSubject() const {
+                return m_Subject;
+            }
+            
+            std::string ReadDate() const {
+                return m_Date;
+            }
+            
+        private:
+            
             // Dataset(const Dataset& dataset) {
                 // SimpleLogger::Info("Dataset: Copy constructor was called.\n", LogHandler::CONSOLE);
             // }
@@ -47,103 +90,7 @@ namespace PerformanceEvaluation
             // Dataset& operator =(Dataset&& dataset) {
             //     SimpleLogger::Info("Dataset: Move assignment was called.\n", LogHandler::CONSOLE);
             // }
-
-            bool operator==(const Dataset&) const;
-
-            bool operator<(const Dataset&);
-            
-            bool operator>(const Dataset&);
-
-            void display();
-            
-            std::string display() const;
-
-        protected:
-
-            // Primary criteria is to sort from year parsed from date, then secondary criteria is from subject 
-            bool criteria(const Dataset&);
-
-            constexpr bool compareTitleAscending(std::string_view, std::string_view) const;
-            
-            constexpr bool compareTextAscending(std::string_view, std::string_view) const;
-
-            constexpr bool compareSubjectAscending(std::string_view, std::string_view) const;
-
-            constexpr bool compareDateAscending(std::string_view, std::string_view) const;
-
-            constexpr bool compareYearAscending(int32_t, int32_t) const;
-
-            constexpr bool compareMonthAscending(int32_t, int32_t) const;
-            
-            constexpr bool compareDayAscending(int32_t, int32_t) const;
-
-            template<typename T> 
-            void swap(T value_1, T value_2) {
-                T temp = std::move(value_1);
-                value_1 = std::move(value_2);
-                value_2 = std::move(temp);
-            }
-
-            template<typename T> 
-            void swap(T value_1, T value_2, bool (*compareFunc)(const Dataset&, const Dataset&)) {
-                if (compareFunc) {
-                    T temp = std::move(value_1);
-                    value_1 = std::move(value_2);
-                    value_2 = std::move(temp);
-                }
-            }
     };
 } // namespace PerformanceEvaluation
 
 #endif
-
-            // static Date parseDate(const std::string& date_str) {           
-            //     std::unordered_map<std::string, int32_t> month_map = {
-            //         { "January",  1 }, { "February",  2 }, { "March",     3 }, 
-            //         { "April",    4 }, { "May",       5 }, { "June",      6 }, 
-            //         { "July",     7 }, { "August",    8 }, { "September", 9 }, 
-            //         { "October", 10 }, { "November", 11 }, { "December", 12 }
-            //     };
-                
-            //     std::istringstream input_stream(date_str);
-                
-            //     std::string day, month, year;
-            //     input_stream >> month >> day >> year;
-
-            //     // Remove comma from day
-            //     if (!day.empty() && day.back() == ',')
-            //         day.pop_back(); 
-
-            //     Date date;
-            //     date.month = month_map[month];
-            //     date.day = std::stoi(day);
-            //     date.year = std::stoi(year);
-
-            //     return date;
-            // }
-
-            // Primary criteria is to sort from date, then secondary criteria is from subject 
-            // bool setCriteria(const Dataset& other) {
-            //     if (date != other.date)
-            //         return compareDateAscending(date, other.date);
-
-            //     return compareSubjectAscending(subject, other.subject);
-            // }
-
-            // constexpr bool criteria(const Dataset& first_dataset, const Dataset& second_dataset) const {
-            //     // Primary criteria is to sort from year parsed from date , then secondary criteria is from subject 
-                
-            //     if (first_dataset.date != second_dataset.date)
-            //         return compareDate(first_dataset.date, second_dataset.date);
-
-            //     return compareSubject(first_dataset.subject, second_dataset.subject);
-            // }
-
-            // Primary criteria is to sort from year parsed from date, then secondary criteria is from subject
-            // constexpr bool setCriteria(const Dataset& other) const {
-            //     auto [day, month, year] = parseDate(this->date); 
-            //     auto [other_day, other_month, other_year] = parseDate(other.date);
-
-            //     return year != other_year; 
-            // }
-

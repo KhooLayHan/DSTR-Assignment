@@ -60,6 +60,12 @@
         "format": "cpp",
         "span": "cpp",
         "variant": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "codecvt": "cpp",
+        "future": "cpp",
+        "bitset": "cpp",
+        "list": "cpp",
+        "regex": "cpp",
+        "any": "cpp"
     }
 }

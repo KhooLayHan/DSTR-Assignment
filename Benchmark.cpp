@@ -1,110 +1,90 @@
-// #pragma once
-
-#include <chrono>
 #include <iostream>
 #include <string>
 
 #include "Benchmark.h"
-#include "SimpleLogger.h"
+
+#include "SimpleConsoleLogger.h"
+#include "SimpleLoggingService.h"
 
 namespace PerformanceEvaluation {
-
-    void Benchmark::startTimer() {
-        start_time = Clock::now();
-        is_running = true;
+    void Benchmark::StartTimer() {
+        m_StartTime = Clock::now();
+        m_IsRunning = true;
     }
 
-    void Benchmark::endTimer() {
-        if (is_running == false) {
-            SimpleLogger::Warn("System has not started benchmarking the program.", LogHandler::FILE);
+    void Benchmark::EndTimer() {
+        if (m_IsRunning == false) {
+            SimpleConsoleLogger console;
+            SimpleLoggingService::UseWarnLogger(console, "System has not started benchmarking the program.");
+
             return;
         }   
 
-        end_time = Clock::now();
-        is_running = false;
+        m_EndTime = Clock::now();
+        m_IsRunning = false;
 
-        duration();
+        Duration();
     }            
 
-    void Benchmark::duration(TimeUnit time_unit) {
+    void Benchmark::Duration(TimeUnit time_unit) const {
         using std::chrono::duration_cast;
         
-        checkBenchmarkIsRunning();
+        CheckBenchmarkIsRunning();
 
         // By default, it should be set to microseconds
-        auto duration = duration_cast<Microseconds>(end_time - start_time).count();
+        auto duration = duration_cast<Microseconds>(m_EndTime - m_StartTime).count();
         
         // Otherwise,check what unit is preferred and set it accordingly
         switch (time_unit) {
             case TimeUnit::SECONDS:
-                duration = duration_cast<Seconds>(end_time - start_time).count(); 
+                duration = duration_cast<Seconds>(m_EndTime - m_StartTime).count(); 
                 break;
             case TimeUnit::MICROSECONDS:
                 break;
             case TimeUnit::MILLISECONDS:
-                duration = duration_cast<Milliseconds>(end_time - start_time).count(); 
+                duration = duration_cast<Milliseconds>(m_EndTime - m_StartTime).count(); 
                 break;
             case TimeUnit::NANOSECONDS:
-                duration = duration_cast<Nanoseconds>(end_time - start_time).count(); 
+                duration = duration_cast<Nanoseconds>(m_EndTime - m_StartTime).count(); 
                 break;
         }
 
-        std::cout << "Duration taken: " << duration << setTimeUnit(time_unit) << ".\n";
+        std::cout << "Duration taken: " << duration << SetTimeUnit(time_unit) << ".\n";
     }
 
-    void Benchmark::durationSeconds() {
-        checkBenchmarkIsRunning();  
+    void Benchmark::DurationSeconds() const {
+        CheckBenchmarkIsRunning();  
 
-        auto duration = std::chrono::duration_cast<Seconds>(end_time - start_time).count();
+        auto duration = std::chrono::duration_cast<Seconds>(m_EndTime - m_StartTime).count();
         std::cout << "Duration taken: " << duration << "s\n";
     }
 
-    void Benchmark::durationMicroseconds() {
-        checkBenchmarkIsRunning();
+    void Benchmark::DurationMicroseconds() const {
+        CheckBenchmarkIsRunning();
 
-        auto duration = std::chrono::duration_cast<Microseconds>(end_time - start_time).count();
+        auto duration = std::chrono::duration_cast<Microseconds>(m_EndTime - m_StartTime).count();
         std::cout << "Duration taken: " << duration << "μs\n";
     }
 
-    void Benchmark::durationMilliseconds() {
-        checkBenchmarkIsRunning();
+    void Benchmark::DurationMilliseconds() const {
+        CheckBenchmarkIsRunning();
 
-        auto duration = std::chrono::duration_cast<Milliseconds>(end_time - start_time).count();
+        auto duration = std::chrono::duration_cast<Milliseconds>(m_EndTime - m_StartTime).count();
         std::cout << "Duration taken: " << duration << "ms\n";
     }
 
-    void Benchmark::durationNanoseconds() {
-        checkBenchmarkIsRunning();
+    void Benchmark::DurationNanoseconds() const {
+        CheckBenchmarkIsRunning();
 
-        auto duration = std::chrono::duration_cast<Nanoseconds>(end_time - start_time).count();
+        auto duration = std::chrono::duration_cast<Nanoseconds>(m_EndTime - m_StartTime).count();
         std::cout << "Duration taken: " << duration << "ns\n";
     }
 
-    void Benchmark::checkBenchmarkIsRunning() {
-        if (is_running) 
+    void Benchmark::CheckBenchmarkIsRunning() const {
+        if (m_IsRunning == false) 
             return;
 
-        SimpleLogger::Warn("The benchmark is still running. Stop it to get the duration.", LogHandler::FILE);
+        SimpleConsoleLogger console;
+        SimpleLoggingService::UseWarnLogger(console, "The benchmark is still running. Stop it to get the duration.");
     }
-
-    std::string_view Benchmark::setTimeUnit(TimeUnit time_unit) {
-        std::string_view unit = "";
-        
-        switch (time_unit) {
-            case TimeUnit::SECONDS:
-                unit = "s";
-                break;
-            case TimeUnit::MICROSECONDS:
-                unit = "μs";
-                break;
-            case TimeUnit::MILLISECONDS:
-                unit = "ms";
-                break;
-            case TimeUnit::NANOSECONDS:
-                unit = "ns";
-                break;
-        }
-
-        return unit;
-    } 
 } // namespace PerformanceEvaluation
