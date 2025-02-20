@@ -4,11 +4,10 @@
 #include <memory>
 #include <vector>
 
-#include "Array.h"
+#include "Array.cpp"
 #include "Dataset.h"
 #include "DLL.h"
 #include "DateUtility.cpp"
-
 
 using namespace std;
 
