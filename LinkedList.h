@@ -13,11 +13,11 @@ namespace PerformanceEvaluation {
     
     // Implement a Node structure
     struct LinkedListNode {
-        Dataset data;
-        LinkedListNode* next;
+        Dataset m_Data;
+        LinkedListNode* m_Next;
 
         LinkedListNode(const Dataset& value) 
-            : data(value), next(nullptr) {
+            : m_Data(value), m_Next(nullptr) {
 
         }
     };
@@ -43,7 +43,7 @@ namespace PerformanceEvaluation {
 
                 while (m_Head != nullptr) {
                     temp = m_Head;
-                    m_Head = m_Head->next;
+                    m_Head = m_Head->m_Next;
 
                     delete temp;
                     temp = nullptr;

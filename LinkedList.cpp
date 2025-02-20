@@ -7,7 +7,7 @@
 #include "LinkedList.h"
 
 #include "Dataset.h"
-#include "DateUtility.cpp"
+#include "DateUtility.h"
 #include "SimpleLogger.h"
 
 #include "SimpleConsoleLogger.h"
@@ -18,7 +18,7 @@ namespace PerformanceEvaluation {
     
     void LinkedList::insertBegin(const Dataset& dataset) {
         LinkedListNode* node = new LinkedListNode(dataset);
-        node->next = m_Head;
+        node->m_Next = m_Head;
         m_Head = node;
         
         incrementLength();
@@ -37,11 +37,11 @@ namespace PerformanceEvaluation {
 
         LinkedListNode* temp = m_Head;
         
-        while (temp->next != nullptr) {
-            temp = temp->next;
+        while (temp->m_Next != nullptr) {
+            temp = temp->m_Next;
         }
 
-        temp->next = node;
+        temp->m_Next = node;
 
         incrementLength();
     }
@@ -56,7 +56,7 @@ namespace PerformanceEvaluation {
 
         LinkedListNode* temp = m_Head;
         for (size_t i = 0; temp != nullptr && i < position - i; i++) 
-            temp = temp->next;
+            temp = temp->m_Next;
 
         if (temp == nullptr) {
 
@@ -69,8 +69,8 @@ namespace PerformanceEvaluation {
             return;
         }
 
-        node->next = temp->next;
-        temp->next = node;
+        node->m_Next = temp->m_Next;
+        temp->m_Next = node;
 
         incrementLength();
     }
@@ -81,14 +81,14 @@ namespace PerformanceEvaluation {
         LinkedListNode* temp = m_Head;
 
         while (temp != nullptr) {
-            std::cout << "ID: "         << temp->data.m_Id      << "\n";
-            std::cout << "TITLE: "      << temp->data.m_Title   << "\n";
-            std::cout << "TEXT: "       << temp->data.m_Text    << "\n";
-            std::cout << "SUBJECT: "    << temp->data.m_Subject << "\n";
-            std::cout << "DATE: "       << temp->data.m_Date    << "\n";
+            std::cout << "ID: "         << temp->m_Data.m_Id      << "\n";
+            std::cout << "TITLE: "      << temp->m_Data.m_Title   << "\n";
+            std::cout << "TEXT: "       << temp->m_Data.m_Text    << "\n";
+            std::cout << "SUBJECT: "    << temp->m_Data.m_Subject << "\n";
+            std::cout << "DATE: "       << temp->m_Data.m_Date    << "\n";
             
             std::cout << "\n-----------\n\n";
-            temp = temp->next;
+            temp = temp->m_Next;
         } 
 
         std::cout << "\n";
@@ -102,14 +102,14 @@ namespace PerformanceEvaluation {
         int32_t line = 0;
 
         while (temp != nullptr && line != count) {
-            std::cout << "\n\033[34;1mID:\033[0m "         << temp->data.m_Id      << "\n";
-            std::cout << "\033[34;1mTITLE:\033[0m "      << temp->data.m_Title   << "\n";
-            std::cout << "\033[34;1mTEXT:\033[0m "       << temp->data.m_Text    << "\n";
-            std::cout << "\033[34;1mSUBJECT:\033[0m "    << temp->data.m_Subject << "\n";
-            std::cout << "\033[34;1mDATE:\033[0m "       << temp->data.m_Date    << "\n";
+            std::cout << "\n\033[34;1mID:\033[0m "         << temp->m_Data.m_Id      << "\n";
+            std::cout << "\033[34;1mTITLE:\033[0m "      << temp->m_Data.m_Title   << "\n";
+            std::cout << "\033[34;1mTEXT:\033[0m "       << temp->m_Data.m_Text    << "\n";
+            std::cout << "\033[34;1mSUBJECT:\033[0m "    << temp->m_Data.m_Subject << "\n";
+            std::cout << "\033[34;1mDATE:\033[0m "       << temp->m_Data.m_Date    << "\n";
             
             std::cout << "\n-----------\n";
-            temp = temp->next;
+            temp = temp->m_Next;
 
             line++;
         } 
@@ -127,9 +127,9 @@ namespace PerformanceEvaluation {
         while (temp != nullptr) {
 
             SimpleConsoleLogger console;
-            SimpleLoggingService::UseInfoLogger(console, temp->data.m_Title); 
+            SimpleLoggingService::UseInfoLogger(console, temp->m_Data.m_Title); 
             
-            temp = temp->next;
+            temp = temp->m_Next;
         } 
         
         std::cout << "\n";
@@ -143,8 +143,8 @@ namespace PerformanceEvaluation {
         std::cout << "TEXT\n-----------\n";
 
         while (temp != nullptr) {
-            std::cout << temp->data.m_Text << "\n";
-            temp = temp->next;
+            std::cout << temp->m_Data.m_Text << "\n";
+            temp = temp->m_Next;
         } 
 
         std::cout << "\n";
@@ -158,8 +158,8 @@ namespace PerformanceEvaluation {
         std::cout << "SUBJECT\n-----------\n";
         
         while (temp != nullptr) {
-            std::cout << temp->data.m_Subject << "\n";
-            temp = temp->next;
+            std::cout << temp->m_Data.m_Subject << "\n";
+            temp = temp->m_Next;
         } 
 
         std::cout << "\n";
@@ -174,10 +174,10 @@ namespace PerformanceEvaluation {
 
         while (temp != nullptr) {
             SimpleConsoleLogger console;
-            SimpleLoggingService::UseInfoLogger(console, temp->data.m_Date);
+            SimpleLoggingService::UseInfoLogger(console, temp->m_Data.m_Date);
         
             // std::cout << temp->data.date << "\n";
-            temp = temp->next;
+            temp = temp->m_Next;
         } 
 
         std::cout << "\n";
@@ -199,20 +199,20 @@ namespace PerformanceEvaluation {
     }
 
     size_t LinkedList::getLength() const {
-        // size_t _length = 0;
-        // LinkedListNode* temp = m_Head;
+        size_t length = 0;
+        LinkedListNode* temp = m_Head;
         
-        // while (temp) {
-        //     _length++;
-        //     temp = temp->next;
-        // }
+        while (temp) {
+            length++;
+            temp = temp->m_Next;
+        }
         
-        return m_Length;
+        return length;
     }
 
-    void LinkedList::mergeSort() {
-        m_Head = mergeSort(m_Head);
-    }
+    // void LinkedList::mergeSort() {
+    //     m_Head = mergeSort(m_Head);
+    // }
 
     void LinkedList::deleteNode(const Dataset& dataset) {
         if (m_Head == nullptr) {
@@ -222,9 +222,9 @@ namespace PerformanceEvaluation {
         }
 
         // Deleting m_Head node scenario
-        if (m_Head->data == dataset) {
+        if (m_Head->m_Data == dataset) {
             LinkedListNode* temp = m_Head;
-            m_Head = m_Head->next;
+            m_Head = m_Head->m_Next;
             
             delete temp;
             temp = nullptr;
@@ -239,19 +239,19 @@ namespace PerformanceEvaluation {
         // Deleting middle or end node scenario
         LinkedListNode* temp = m_Head;
         
-        while (temp->next != nullptr && !(temp->next->data == dataset)) {
-            temp = temp->next;
+        while (temp->m_Next != nullptr && !(temp->m_Next->m_Data == dataset)) {
+            temp = temp->m_Next;
         }
 
-        if (temp->next == nullptr) { 
+        if (temp->m_Next == nullptr) { 
             SimpleConsoleLogger console;
             SimpleLoggingService::UseWarnLogger(console, "Value cannot be found in the list.");
             return;
         }
 
         // Node to be deleted
-        LinkedListNode* node = temp->next;
-        temp->next = temp->next->next;
+        LinkedListNode* node = temp->m_Next;
+        temp->m_Next = temp->m_Next->m_Next;
         
         delete node;
         node = nullptr;
@@ -264,7 +264,7 @@ namespace PerformanceEvaluation {
 
         while (current != nullptr) {
             LinkedListNode* temp = current;
-            current = current->next;
+            current = current->m_Next;
             
             // SimpleLogger::Info("Node has been deleted." + temp->data.title, LogHandler::CONSOLE);
             delete temp;
@@ -365,7 +365,7 @@ namespace PerformanceEvaluation {
     }
 
     void LinkedList::isHeadOrNextEmpty() const {
-        if (m_Head == nullptr || m_Head->next == nullptr) {
+        if (m_Head == nullptr || m_Head->m_Next == nullptr) {
             SimpleConsoleLogger console;
             SimpleLoggingService::UseWarnLogger(console, "The linked list is empty.");
             return;
@@ -380,75 +380,75 @@ namespace PerformanceEvaluation {
         }
 
         LinkedListNode* first_half = temp;
-        LinkedListNode* second_half = temp->next;
+        LinkedListNode* second_half = temp->m_Next;
         
         // Iterate until second_half reaches the end of node, by then first_half will be the middle node
-        while (second_half && second_half->next) {
-            first_half = first_half->next;
-            second_half = second_half->next->next;
+        while (second_half && second_half->m_Next) {
+            first_half = first_half->m_Next;
+            second_half = second_half->m_Next->m_Next;
         }
 
         return first_half; // first_half is the middle node
     }
 
     // Helper function to merge two sorted linked lists 
-    LinkedListNode* LinkedList::merge(LinkedListNode* left, LinkedListNode* right) {
-        LinkedListNode* dummy = new LinkedListNode({}); // Dummy node to simplify the merge process
-        LinkedListNode* tail = dummy;
+    // LinkedListNode* LinkedList::merge(LinkedListNode* left, LinkedListNode* right) {
+    //     LinkedListNode* dummy = new LinkedListNode({}); // Dummy node to simplify the merge process
+    //     LinkedListNode* tail = dummy;
 
-        DateUtility date_utility{};
-        int32_t left_year = date_utility.getYear(left->data.m_Date);
-        int32_t right_year = date_utility.getYear(right->data.m_Date);
+    //     DateUtility date_utility{};
+    //     int32_t left_year = date_utility.getYear(left->m_Data.m_Date);
+    //     int32_t right_year = date_utility.getYear(right->m_Data.m_Date);
     
-        while (left != nullptr && right != nullptr) {
-            if (left_year <= right_year) {
-                tail->next = left;
-                left = left->next;
-            } else {
-                tail->next = right;
-                right = right->next;
-            }
+    //     while (left != nullptr && right != nullptr) {
+    //         if (left_year <= right_year) {
+    //             tail->m_Next = left;
+    //             left = left->m_Next;
+    //         } else {
+    //             tail->m_Next = right;
+    //             right = right->m_Next;
+    //         }
 
-            tail = tail->next;
-        }
+    //         tail = tail->m_Next;
+    //     }
 
-        // Attach the remaining elements
-        if (left != nullptr) {
-            tail->next = left;
-        } else {
-            tail->next = right;
-        }
+    //     // Attach the remaining elements
+    //     if (left != nullptr) {
+    //         tail->m_Next = left;
+    //     } else {
+    //         tail->m_Next = right;
+    //     }
 
-        LinkedListNode* merged_head = dummy->next;
+    //     LinkedListNode* merged_head = dummy->m_Next;
         
-        delete dummy;
-        dummy = nullptr;
+    //     delete dummy;
+    //     dummy = nullptr;
         
-        return merged_head;
-    }
+    //     return merged_head;
+    // }
 
     // Applies merge sort recursively 
-    LinkedListNode* LinkedList::mergeSort(LinkedListNode* temp) {                
-        // List is already sorted if list is empty
-        if (temp == nullptr || temp->next == nullptr) {
-            // SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
-            return temp;
-        }
+    // LinkedListNode* LinkedList::mergeSort(LinkedListNode* temp) {                
+    //     // List is already sorted if list is empty
+    //     if (temp == nullptr || temp->m_Next == nullptr) {
+    //         // SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
+    //         return temp;
+    //     }
 
-        // Get the middle of list
-        LinkedListNode* middle = getMiddle(temp);
-        LinkedListNode* second_half = middle->next;
+    //     // Get the middle of list
+    //     LinkedListNode* middle = getMiddle(temp);
+    //     LinkedListNode* second_half = middle->m_Next;
 
-        // Split the list into two halves
-        middle->next = nullptr;
+    //     // Split the list into two halves
+    //     middle->m_Next = nullptr;
 
-        // Recursive sort
-        LinkedListNode* left = mergeSort(temp);
-        LinkedListNode* right = mergeSort(second_half);
+    //     // Recursive sort
+    //     LinkedListNode* left = mergeSort(temp);
+    //     LinkedListNode* right = mergeSort(second_half);
 
-        // Merge the sorted halves
-        return merge(left, right);
-    }
+    //     // Merge the sorted halves
+    //     return merge(left, right);
+    // }
 } // namespace PerformanceEvaluation
 
 

@@ -20,6 +20,11 @@
                 "./SimpleConsoleLogger.cpp",
                 "./SimpleLoggingService.cpp",
                 "./LinkedList.cpp",
+                "./Array.cpp",
+                "./Algorithm.cpp",
+                "./DateUtility.cpp",
+                "./SearchLinkedList.cpp",
+                "./SortMergeLinkedList.cpp",
                 "-o",
                 "./Main"
             ],
@@ -57,6 +62,10 @@
                 "./SimpleLoggingService.cpp",
                 "./LinkedList.cpp",
                 "./Array.cpp",
+                "./Algorithm.cpp",
+                "./DateUtility.cpp",
+                "./SearchLinkedList.cpp",
+                "./SortMergeLinkedList.cpp",
                 "-o",
                 "./Main"
             ],

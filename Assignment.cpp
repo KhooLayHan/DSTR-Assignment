@@ -10,7 +10,7 @@
 #include "LinkedList.h"
 
 // Search and sort algorithms 
-#include "Algorithm.cpp"
+#include "Algorithm.h"
 
 // Benchmarking
 #include "Benchmark.h"
@@ -19,9 +19,11 @@
 #include "FileHandling.h"
 
 // Helper classes for debugging and parsing dates
-#include "DateUtility.cpp"
+#include "DateUtility.h"
 #include "SimpleLogger.h"
 
+#include "SortMergeLinkedList.h"
+#include "Sort.h"
 /**
  * For each problem statement, you can look at how we solved each questions from the functions implemented here.
  *  
@@ -49,21 +51,21 @@ namespace PerformanceEvaluation {
                 std::string file_path_fake = "./CSV/fake.csv";
 
                 // Linked List
-                // FileHandling::readCSV(file_path_true, linked_list_true);
+                FileHandling::ReadFile(file_path_true, linked_list_true);
                 // FileHandling::readCSV(file_path_fake, linked_list_fake);
 
                 // Array
-                FileHandling::ReadFile(file_path_true, array_list_true);
+                // FileHandling::ReadFile(file_path_true, array_list_true);
                 // FileHandling::readCSV(file_path_fake, array_list_fake);
 
-                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
-                // linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
+                std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
+                linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
 
                 // std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
                 // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
-                std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
-                array_list_true.displayFirst(MAX_DISPLAY_COUNT);
+                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
+                // array_list_true.displayFirst(MAX_DISPLAY_COUNT);
 
                 // std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
                 // array_list_fake.displayFirst(MAX_DISPLAY_COUNT);
@@ -71,12 +73,15 @@ namespace PerformanceEvaluation {
                 // array_list_true.displayTitle();
                 
                 // Algorithm::MergeSort(linked_list_true);
+
+                Algorithm::SortBy(linked_list_true, std::make_unique<SortMergeLinkedList>().get());
+
                 // Algorithm::MergeSort(linked_list_fake);
 
                 // Algorithm::MergeSort(array_list_true);
                 // Algorithm::MergeSort(array_list_fake);
 
-                Algorithm::QuickSort(array_list_true);
+                // Algorithm::QuickSort(array_list_true);
 
                 // Algorithm::HeapSort(array_list_true);
                 
@@ -85,19 +90,19 @@ namespace PerformanceEvaluation {
                 // Algorithm::LinearSearch(array_list_true);
                 // Algorithm::LinearSearch(array_list_fake);
                 
-                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
-                // linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
+                std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
+                linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
                 
                 // std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
                 // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
-                std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
-                array_list_true.displayFirst(MAX_DISPLAY_COUNT);
+                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
+                // array_list_true.displayFirst(MAX_DISPLAY_COUNT);
 
-                // linked_list_true.displayLength(file_path_true);
+                linked_list_true.displayLength(file_path_true);
                 // linked_list_fake.displayLength(file_path_fake);
 
-                array_list_true.displayLength(file_path_true);
+                // array_list_true.displayLength(file_path_true);
 
                 benchmark.endTimer();
             }
