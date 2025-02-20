@@ -62,12 +62,12 @@ namespace PerformanceEvaluation {
                 LinkedList linked_list_true;
                 LinkedList linked_list_fake;
                 
-                // static constexpr int32_t MAX_DISPLAY_COUNT = 5;
+                static constexpr int32_t MAX_DISPLAY_COUNT = 5;
                 std::string file_path_true = "./CSV/true.csv"; 
                 std::string file_path_fake = "./CSV/fake.csv";
 
-                // FileHandling::ReadFile(file_path_true, linked_list_true);
-                FileHandling::ReadFile(file_path_fake, linked_list_fake);
+                FileHandling::ReadFile(file_path_true, linked_list_true);
+                // FileHandling::ReadFile(file_path_fake, linked_list_fake);
 
                 // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
                 // linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
@@ -83,14 +83,14 @@ namespace PerformanceEvaluation {
 
                 // // // linked_list_true.displayDate();
                 
-                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
-                // linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
+                std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
+                linked_list_true.DisplayFirst(MAX_DISPLAY_COUNT);
                 
                 // std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
                 // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
 
-                // linked_list_true.displayLength(file_path_true);
-                linked_list_fake.DisplayLength(file_path_fake);
+                linked_list_true.DisplayLength(file_path_true);
+                // linked_list_fake.DisplayLength(file_path_fake);
             }
 
             /**
