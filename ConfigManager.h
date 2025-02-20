@@ -1,33 +1,25 @@
 #pragma once
 
-#ifndef CONFIG_MANAGER_HPP
-#define CONFIG_MANAGER_HPP
-
 #include <string>
-#include <string_view>
-
 #include <unordered_map>
 
-
-
-namespace PerformanceEvaluation {
-    // struct HashMap
-    
+#include "HashMap.h"
+namespace PerformanceEvaluation {    
     class ConfigManager {
         public:
-            ConfigManager(int argc, char** argv);
+            ConfigManager();
 
             void LoadFromArgs(int argc, char** argv);
 
-            std::string Get     (std::string_view key, std::string_view placeholder) const;
-            int         GetInt  (std::string_view key, std::string_view placeholder) const;
-            bool        GetBool (std::string_view key, std::string_view placeholder) const;
+            std::string Get     (const std::string& key, const std::string& placeholder = "") const;
+            int32_t     GetInt  (const std::string& key, int32_t placeholder = 0) const;
+            bool        GetBool (const std::string& key, bool placeholder = false) const;
 
-            void Set(std::string_view key, std::string_view value);
-
+            void        Set     (const std::string& key, const std::string& value);
         private:
+            static constexpr std::string DetectPlatform();
 
+            // TODO: Replace std::unordered_map with custom implementation
+            HashMap<std::string, std::string> config;
     };
 } // namespace PerformanceEvaluation
-
-#endif 

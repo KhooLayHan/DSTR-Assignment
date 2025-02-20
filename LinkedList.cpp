@@ -14,21 +14,22 @@
 
 namespace PerformanceEvaluation {
     
-    void LinkedList::insertBegin(const Dataset& dataset) {
-        LinkedListNode* node = new LinkedListNode(dataset);
+    void LinkedList::InsertBegin(const Dataset& data) {
+        LinkedListNode* node = new LinkedListNode(data);
         node->m_Next = m_Head;
         m_Head = node;
         
-        incrementLength();
+        IncrementLength();
     }
             
-    void LinkedList::insertEnd(const Dataset& dataset) {
-        LinkedListNode* node = new LinkedListNode(dataset);
+    void LinkedList::InsertEnd(const Dataset& data) {
+        // LinkedListNode* node = new LinkedListNode(std::move(data));
+        LinkedListNode* node = new LinkedListNode(data);
 
         if (m_Head == nullptr) {
             m_Head = node;
             
-            incrementLength();
+            IncrementLength();
 
             return;
         }
@@ -41,14 +42,15 @@ namespace PerformanceEvaluation {
 
         temp->m_Next = node;
 
-        incrementLength();
+        IncrementLength();
     }
 
-    void LinkedList::insertPosition(const Dataset& dataset, size_t position) {
-        LinkedListNode* node = new LinkedListNode(dataset);
+    void LinkedList::InsertPosition(const Dataset& data, size_t position) {
+        LinkedListNode* node = new LinkedListNode(data);
+        // LinkedListNode* node = new LinkedListNode(std::move(data));
 
         if (position == 0) {
-            insertBegin(dataset);
+            InsertBegin(std::move(data));
             return;
         }
 
@@ -71,43 +73,31 @@ namespace PerformanceEvaluation {
         node->m_Next = temp->m_Next;
         temp->m_Next = node;
 
-        incrementLength();
+        IncrementLength();
     }
         
-    void LinkedList::displayAll() const {
-        isHeadEmpty();
+    void LinkedList::DisplayAll() const {
+        IsHeadEmpty();
 
         LinkedListNode* temp = m_Head;
 
         while (temp != nullptr) {
-            std::cout << "ID: "         << temp->m_Data.m_Id      << "\n";
-            std::cout << "TITLE: "      << temp->m_Data.m_Title   << "\n";
-            std::cout << "TEXT: "       << temp->m_Data.m_Text    << "\n";
-            std::cout << "SUBJECT: "    << temp->m_Data.m_Subject << "\n";
-            std::cout << "DATE: "       << temp->m_Data.m_Date    << "\n";
-            
-            std::cout << "\n-----------\n\n";
+            // std::visit(DisplayVisitor{}, temp->m_Data);
             temp = temp->m_Next;
         } 
 
         std::cout << "\n";
     }
     
-    void LinkedList::displayFirst(int32_t count) const {
-        isHeadEmpty();
+    void LinkedList::DisplayFirst(int32_t count) const {
+        IsHeadEmpty();
 
         LinkedListNode* temp = m_Head;
 
         int32_t line = 0;
 
         while (temp != nullptr && line != count) {
-            std::cout << "\n\033[34;1mID:\033[0m "       << temp->m_Data.m_Id      << "\n";
-            std::cout << "\033[34;1mTITLE:\033[0m "      << temp->m_Data.m_Title   << "\n";
-            std::cout << "\033[34;1mTEXT:\033[0m "       << temp->m_Data.m_Text    << "\n";
-            std::cout << "\033[34;1mSUBJECT:\033[0m "    << temp->m_Data.m_Subject << "\n";
-            std::cout << "\033[34;1mDATE:\033[0m "       << temp->m_Data.m_Date    << "\n";
-            
-            std::cout << "\n-----------\n";
+            // std::visit(DisplayVisitor{}, temp->m_Data);
             temp = temp->m_Next;
 
             line++;
@@ -116,8 +106,8 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
 
-    void LinkedList::displayTitle() const {
-        isHeadEmpty();
+    void LinkedList::DisplayTitle() const {
+        IsHeadEmpty();
 
         LinkedListNode* temp = m_Head;
 
@@ -132,8 +122,8 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
 
-    void LinkedList::displayText() const {
-        isHeadEmpty();
+    void LinkedList::DisplayText() const {
+        IsHeadEmpty();
 
         LinkedListNode* temp = m_Head;
 
@@ -147,8 +137,8 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
         
-    void LinkedList::displaySubject() const {
-        isHeadEmpty();
+    void LinkedList::DisplaySubject() const {
+        IsHeadEmpty();
 
         LinkedListNode* temp = m_Head;
         
@@ -162,8 +152,8 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
 
-    void LinkedList::displayDate() const {
-        isHeadEmpty();
+    void LinkedList::DisplayDate() const {
+        IsHeadEmpty();
 
         LinkedListNode* temp = m_Head;
 
@@ -180,22 +170,22 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
 
-    void LinkedList::displayLength(std::string_view file_path) const {
+    void LinkedList::DisplayLength(std::string_view file_path) const {
         std::cout << "The total number of articles from the " << file_path << " dataset is "
-            << getLength() << ".\n";
+            << GetLength() << ".\n";
     }
 
-    void LinkedList::displayLengthTrueDataset() const {
-        std::cout << "The total number of articles from the true.csv dataset is "
-            << getLength() << ".\n";
-    }
+    // void LinkedList::displayLengthTrueDataset() const {
+    //     std::cout << "The total number of articles from the true.csv dataset is "
+    //         << getLength() << ".\n";
+    // }
 
-    void LinkedList::displayLengthFakeDataset() const {
-        std::cout << "The total number of articles from the fake.csv dataset is "
-            << getLength() << ".\n";
-    }
+    // void LinkedList::DisplayLengthFakeDataset() const {
+    //     std::cout << "The total number of articles from the fake.csv dataset is "
+    //         << getLength() << ".\n";
+    // }
 
-    size_t LinkedList::getLength() const {
+    size_t LinkedList::GetLength() const {
         size_t length = 0;
         LinkedListNode* temp = m_Head;
         
@@ -231,7 +221,7 @@ namespace PerformanceEvaluation {
     //     }
     // }
 
-    void LinkedList::deleteNode(const Dataset& dataset) {
+    void LinkedList::DeleteNode(const Dataset& dataset) {
         if (m_Head == nullptr) {
             // SimpleLogger::Warn("List is empty.", LogHandler::FILE);
             return;
@@ -247,7 +237,7 @@ namespace PerformanceEvaluation {
 
             // assert(temp != nullptr && "Attempted to delete from a linked list.");
 
-            decrementLength();
+            DecrementLength();
 
             return;
         }
@@ -271,10 +261,10 @@ namespace PerformanceEvaluation {
         delete node;
         node = nullptr;
 
-        decrementLength();
+        DecrementLength();
     }
 
-    void LinkedList::deleteAll() {
+    void LinkedList::DeleteAll() {
         LinkedListNode* current = m_Head;
 
         while (current != nullptr) {
@@ -285,42 +275,42 @@ namespace PerformanceEvaluation {
             delete temp;
             temp = nullptr;
 
-            decrementLength();
+            DecrementLength();
         }
 
         m_Head = nullptr;
         // SimpleLogger::Info("All nodes has been deleted.", LogHandler::FILE);
     }
 
-    LinkedListNode* LinkedList::getHead() const {
+    LinkedListNode* LinkedList::GetHead() const {
         return m_Head;
     }
 
-    void LinkedList::setHead(LinkedListNode* new_head) {
+    void LinkedList::SetHead(LinkedListNode* new_head) {
         m_Head = new_head;
     }
 
-    void LinkedList::decrementLength() {
+    void LinkedList::DecrementLength() {
         if (m_Length > 0)
             m_Length--;
     }
 
-    void LinkedList::incrementLength() {
+    void LinkedList::IncrementLength() {
         m_Length++;
     }
 
-    bool LinkedList::contains(const std::string& m_Data, std::string_view target) const {
+    bool LinkedList::Contains(const std::string& m_Data, std::string_view target) const {
         return m_Data.find(target) != std::string::npos;
     }
 
-    void LinkedList::isHeadEmpty() const {
+    void LinkedList::IsHeadEmpty() const {
         if (m_Head == nullptr) {
             // SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
             return;
         }
     }
 
-    void LinkedList::isHeadOrNextEmpty() const {
+    void LinkedList::IsHeadOrNextEmpty() const {
         if (m_Head == nullptr || m_Head->m_Next == nullptr) {
             // SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
             return;

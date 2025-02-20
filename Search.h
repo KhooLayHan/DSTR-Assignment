@@ -28,6 +28,10 @@ namespace PerformanceEvaluation
                 LinearSearchAndDisplay(target, linked_list, criteria, type);
             }
     
+            void UserLinearSearchAllAlgorithm(const T& linked_list) {
+                // LinearSearchAll(linked_list);
+            }
+
             virtual ~Search() = default;
         protected:
             constexpr bool Contains(std::string_view target, std::string_view dataset_str, SearchType type) {
@@ -60,10 +64,23 @@ namespace PerformanceEvaluation
 
                 return result;
             }
+
+            // void SearchByCriteria(const Dataset& dataset, Criteria criteria, std::string_view target, auto (*is_found)(std::string_view, std::string_view)) {
+            //     auto found = [](std::string_view target, ){ is_found(target, dataset) };
+
+            //     switch (criteria) {
+            //         case Criteria::TITLE:   found;      break;
+            //         case Criteria::TEXT:    is_found(target, ToLowerCase(dataset.m_Text));       break;
+            //         case Criteria::SUBJECT: is_found(target, ToLowerCase(dataset.m_Subject));    break;
+            //         case Criteria::DATE:    is_found(target, ToLowerCase(dataset.m_Date));       break;
+            //         default:                is_found(target, "");
+            //     }
+            // }
         private:
             virtual N       LinearSearch            (std::string_view, const T&, Criteria, SearchType) = 0;
             virtual T       LinearSearchAndCopy     (std::string_view, const T&, Criteria, SearchType) = 0;
             virtual void    LinearSearchAndDisplay  (std::string_view, const T&, Criteria, SearchType) = 0;
+            virtual void    LinearSearchAll         (const T&) = 0;
             
             // virtual T       BinarySearch            (std::string_view, const T&, Criteria) = 0;
             // virtual T       BinarySearchAndCopy     (std::string_view, const T&, Criteria) = 0;

@@ -30,7 +30,7 @@ namespace PerformanceEvaluation
             }
 
             // Copy constructors
-            Vector(const Vector& other) : m_Length(other.m_Length), m_Capacity(other.m_Capacity) noexcept {
+            Vector(const Vector& other) noexcept : m_Length(other.m_Length), m_Capacity(other.m_Capacity) {
                 m_Data = new T[m_Capacity];
 
                 for (size_t i = 0; i != m_Length; i++) {
@@ -39,13 +39,7 @@ namespace PerformanceEvaluation
             } 
 
             // Move constructors
-            Vector(Vector&& other) : m_Data(other.m_Data), m_Length(other.m_Length), m_Capacity(other.m_Capacity) noexcept {
-                other.m_Data = nullptr;
-                other.m_Length = 0;
-                other.m_Capacity = 0;
-            } 
-
-            const Vector(Vector&& other) : m_Data(other.m_Data), m_Length(other.m_Length), m_Capacity(other.m_Capacity) const noexcept {
+            Vector(Vector&& other) noexcept : m_Data(other.m_Data), m_Length(other.m_Length), m_Capacity(other.m_Capacity) {
                 other.m_Data = nullptr;
                 other.m_Length = 0;
                 other.m_Capacity = 0;
@@ -223,19 +217,19 @@ namespace PerformanceEvaluation
                 } 
             };
 
-            Iterator Begin() noexcept {
+            Iterator begin() noexcept {
                 return Iterator(m_Data);
             }
 
-            Iterator End() noexcept {
+            Iterator end() noexcept {
                 return Iterator(m_Data + m_Length);
             }
             
-            const Iterator Begin() const noexcept {
+            const Iterator begin() const noexcept {
                 return Iterator(m_Data);
             }
 
-            const Iterator End() const noexcept {
+            const Iterator end() const noexcept {
                 return Iterator(m_Data + m_Length);
             }
         private:
