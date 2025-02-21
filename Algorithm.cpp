@@ -72,6 +72,12 @@ namespace PerformanceEvaluation {
             static LinkedListNode* BinarySearch(LinkedList& linked_list, const std::string& targetDate) {
                 return getAlgorithm().binarySearchImpl(linked_list, targetDate);
             }
+
+            // Binary Search for Singly Linked List
+            static LinkedListNode* BinarySearch(LinkedList& linked_list, const std::string& targetDate) {
+                return getAlgorithm().binarySearchSinglyImpl(linked_list, targetDate);
+            }
+            
             
         private:
             Algorithm() {}
@@ -127,7 +133,7 @@ namespace PerformanceEvaluation {
                 return nullptr;
             }
 
-            // Binary Search Implementation
+            // Binary Search Implementation for doubly linked list
             LinkedListNode* binarySearchImpl(LinkedList& linked_list, const std::string& targetDate) {
                 if (!linked_list.getHead()) {
                     return nullptr;
@@ -168,6 +174,45 @@ namespace PerformanceEvaluation {
             
                 return nullptr;
             }
+
+            // Binary Search implementation for a singly linked list
+            LinkedListNode* binarySearchSinglyImpl(LinkedList& linked_list, const std::string& targetDate) {
+                if (!linked_list.getHead()) {
+                    return nullptr;
+                }
+    
+                DateUtility date_utility;
+                LinkedListNode* left = linked_list.getHead();
+                LinkedListNode* right = nullptr;
+    
+                // Get the last node (right)
+                LinkedListNode* temp = left;
+                while (temp->next) {
+                    temp = temp->next;
+                }
+                right = temp;
+    
+                while (left != nullptr && left != right->next) {
+                    LinkedListNode* middle = getMiddle(left, right);
+    
+                    auto [middle_day, middle_month, middle_year] = date_utility.parseDate(middle->data.date);
+                    auto [target_day, target_month, target_year] = date_utility.parseDate(targetDate);
+    
+                    if (middle_year == target_year && middle_month == target_month && middle_day == target_day) {
+                        return middle; // Target found
+                    }
+    
+                    if ((target_year < middle_year) ||
+                        (target_year == middle_year && target_month < middle_month) ||
+                        (target_year == middle_year && target_month == middle_month && target_day < middle_day)) {
+                        right = getPrevious(left, middle); // Move search range to left half
+                    } else {
+                        left = middle->next; // Move search range to right half
+                    }
+                }
+    
+                return nullptr; // Target not found
+            }
             
             LinkedListNode* getMiddle(LinkedListNode* left, LinkedListNode* right) {
                 if (!left) return nullptr;
@@ -185,6 +230,17 @@ namespace PerformanceEvaluation {
             
                 return slow;
             }
+
+            LinkedListNode* getPrevious(LinkedListNode* left, LinkedListNode* target) {
+                if (left == target) return nullptr; // No previous node
+                
+                LinkedListNode* prev = left;
+                while (prev->next && prev->next != target) {
+                    prev = prev->next;
+                }
+                return prev; // Returns the node before target
+            }
+            
 
         protected:
             static Algorithm& getAlgorithm() {
