@@ -30,23 +30,12 @@ namespace PerformanceEvaluation {
 
                 OldDataset(const std::array<std::string, 4> fields) : title(fields[0]), text(fields[1]), subject(fields[2]), date(fields[3]) {}
             };
-        protected:
-            struct OldDataset {
-                std::string title;
-                std::string text;
-                std::string subject;
-                std::string date;
-
-                OldDataset(const std::array<std::string, 4> fields) : title(fields[0]), text(fields[1]), subject(fields[2]), date(fields[3]) {}
-            };
         public:
             FileHandling() {}
         
             FileHandling(const FilePath& file_path)
                 : m_FilePath(file_path) {}
-            FileHandling(const FilePath& file_path)
-                : m_FilePath(file_path) {}
-
+                
             FileHandling(FilePath&& file_path)
                 : m_FilePath(std::move(file_path)) {}
 
@@ -75,7 +64,6 @@ namespace PerformanceEvaluation {
 
             static OldDataset ParseCSVLine(const std::string&);
         private:
-            FilePath m_FilePath;
             FilePath m_FilePath;
     };
 } // namespace PerformanceEvaluation

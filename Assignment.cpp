@@ -67,7 +67,6 @@ namespace PerformanceEvaluation {
                 std::string file_path_fake = "./CSV/fake.csv";
 
                 FileHandling::ReadFile(file_path_true, linked_list_true);
-<<<<<<< HEAD
                 FileHandling::ReadFile(file_path_fake, linked_list_fake);
 
                 std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
@@ -75,43 +74,20 @@ namespace PerformanceEvaluation {
 
                 std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
                 linked_list_fake.DisplayFirst(MAX_DISPLAY_COUNT);
-=======
-                // FileHandling::ReadFile(file_path_fake, linked_list_fake);
-
-                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
-                // linked_list_true.displayFirst(MAX_DISPLAY_COUNT);
-
-                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
-                // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
->>>>>>> origin/KhooLayHan_2
                 
                 Algorithm::SortBy(linked_list_true, std::make_unique<SortMergeLinkedList>().get());
                 // // // linked_list_true.mergeSort();
 
-<<<<<<< HEAD
-=======
-                // Algorithm::MergeSort(linked_list_true);
-                // Algorithm::MergeSort(linked_list_fake);
-
->>>>>>> origin/KhooLayHan_2
                 // // // linked_list_true.displayDate();
                 
                 std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
                 linked_list_true.DisplayFirst(MAX_DISPLAY_COUNT);
                 
-<<<<<<< HEAD
                 std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
                 linked_list_fake.DisplayFirst(MAX_DISPLAY_COUNT);
 
                 linked_list_true.DisplayLength(file_path_true);
                 linked_list_fake.DisplayLength(file_path_fake);
-=======
-                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
-                // linked_list_fake.displayFirst(MAX_DISPLAY_COUNT);
-
-                linked_list_true.DisplayLength(file_path_true);
-                // linked_list_fake.DisplayLength(file_path_fake);
->>>>>>> origin/KhooLayHan_2
             }
 
             /**
@@ -132,15 +108,9 @@ namespace PerformanceEvaluation {
               // static const std::string& political_news = {
                 //     "politicsNews", "politics"
                 // }; 
-<<<<<<< HEAD
                 LinkedList linked_list_true;
                 LinkedList linked_list_fake;
                 LinkedList linked_list_combined;
-=======
-                // LinkedList linked_list_true;
-                // LinkedList linked_list_fake;
-                // LinkedList linked_list_combined;
->>>>>>> origin/KhooLayHan_2
                 
                 // static constexpr int32_t MAX_DISPLAY_COUNT = 5;
 
@@ -152,7 +122,6 @@ namespace PerformanceEvaluation {
                 // ! of true.csv and fake.csv. Otherwise, your program will run very slow and file_path_combined will be too large.
                 // ! Please manually insert new data for testing (just use a few lines from true.csv and fake.csv). 
                 
-<<<<<<< HEAD
                 FileHandling::AppendFileContent(file_path_true, file_path_combined);
                 FileHandling::AppendFileContent(file_path_fake, file_path_combined);
                 
@@ -187,23 +156,6 @@ namespace PerformanceEvaluation {
 
                 std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
                     << calculate_percentage(numerator, denominator) << "% of political news articles are fake.\n";
-=======
-                // FileHandling::AppendFileContent(file_path_true, file_path_combined);
-                // FileHandling::AppendFileContent(file_path_fake, file_path_combined);
-                
-                // FileHandling::ReadFile(file_path_true, linked_list_true);
-                // FileHandling::ReadFile(file_path_fake, linked_list_fake);
-
-                // LinkedList linked_list_combined_searched_date_2016 = Algorithm::LinearSearchAndCopy(
-                //     linked_list_combined, std::make_unique<SearchLinkedList>(), 
-                //     "2016", Criteria::DATE, SearchType::IMPARTIAL
-                // );
-
-                // LinkedList linked_list_combined_searched_date_2016_and_subject_politics = Algorithm::LinearSearchAndCopy(
-                //     linked_list_combined_searched_date_2016, std::make_unique<SearchLinkedList>(), 
-                //     "politics", Criteria::SUBJECT, SearchType::PARTIAL
-                // );
->>>>>>> origin/KhooLayHan_2
 
                 // LinkedList linked_list_true_searched_date_2016 
                 //     = Algorithm::LinearSearchAndCopy(linked_list_true, std::make_unique<SearchLinkedList>(), "2016", Criteria::DATE, SearchType::IMPARTIAL);
@@ -226,7 +178,6 @@ namespace PerformanceEvaluation {
                 
                 // FileHandling::AppendFileContent(file_path_test, file_path_assignment);
 
-<<<<<<< HEAD
                 // FileHandling::ReadFile(file_path_test, linked_list_test); 
 
                 // LinkedList linked_list_test_impartial_searched_date_2016 
@@ -249,30 +200,6 @@ namespace PerformanceEvaluation {
 
                 // std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
                 //     << calculate_percentage(numerator, denominator) << "% of political news articles are fake.\n";
-=======
-                FileHandling::ReadFile(file_path_test, linked_list_test); 
-
-                LinkedList linked_list_test_impartial_searched_date_2016 
-                    = Algorithm::LinearSearchAndCopy(linked_list_test, std::make_unique<SearchLinkedList>().get(), "2016", Criteria::DATE, SearchType::IMPARTIAL);
-
-                // True and Fake data "politics", "politicsNews"; Denominator
-                LinkedList linked_list_test_impartial_searched_date_2016_and_impartial_searched_subject_politics 
-                    = Algorithm::LinearSearchAndCopy(linked_list_test_impartial_searched_date_2016, std::make_unique<SearchLinkedList>().get(), "politics", Criteria::SUBJECT, SearchType::IMPARTIAL);
-
-                // Fake data "politics"; Numerator
-                LinkedList linked_list_test_impartial_searched_date_2016_and_partial_searched_subject_politics 
-                    = Algorithm::LinearSearchAndCopy(linked_list_test_impartial_searched_date_2016, std::make_unique<SearchLinkedList>().get(), "politics", Criteria::SUBJECT, SearchType::PARTIAL);
-
-                constexpr auto calculate_percentage = [](size_t numerator, size_t denominator) {
-                    return (numerator * 100) / denominator;
-                };
-
-                size_t numerator = linked_list_test_impartial_searched_date_2016_and_partial_searched_subject_politics.GetLength();
-                size_t denominator = linked_list_test_impartial_searched_date_2016_and_impartial_searched_subject_politics.GetLength();
-
-                std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
-                    << calculate_percentage(numerator, denominator) << "% of political news articles are fake.\n";
->>>>>>> origin/KhooLayHan_2
             }
 
             /**
