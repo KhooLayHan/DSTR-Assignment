@@ -17,7 +17,7 @@ namespace PerformanceEvaluation
 
     WordList ConvertLinkedListToWordList(const LinkedList&, HashSet<std::string>&);
 
-    WordList ConvertArrayToWordList(const Array<Dataset>&, WordList&);
+    // WordList ConvertArrayToWordList(const Array<Dataset>&, WordList&);
 
     // Extract word-count pairs and sort them
     WordListSorted CheckAndSortHashMap(HashMap<std::string, int32_t>&);

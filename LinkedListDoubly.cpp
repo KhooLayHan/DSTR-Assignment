@@ -262,12 +262,17 @@ namespace PerformanceEvaluation
     }
 
     // Utility functions
-    void LinkedListDoubly::IncrementLength() { m_Length++; }
+    void LinkedListDoubly::IncrementLength() 
+    { 
+        m_Length++; 
+    }
+    
     void LinkedListDoubly::DecrementLength()
     {
         if (m_Length > 0)
             m_Length--;
     }
+
     void LinkedListDoubly::IsHeadEmpty() const
     {
         if (m_Head == nullptr)

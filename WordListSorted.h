@@ -3,8 +3,6 @@
 #include <iostream>
 #include <string>
 
-#include "HashMap.h"
-
 namespace PerformanceEvaluation
 {   
     struct WordFreqNode {

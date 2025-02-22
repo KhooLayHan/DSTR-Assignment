@@ -17,6 +17,7 @@ namespace PerformanceEvaluation
     template<typename T, typename N = nullptr_t>
     class Search {
         public:
+            // Linear Search Linked List
             N UseLinearSearchAlgorithm(std::string_view target, const T& linked_list, Criteria criteria, SearchType type) {
                 return LinearSearch(target, linked_list, criteria, type);
             }
@@ -28,7 +29,20 @@ namespace PerformanceEvaluation
             void UseLinearSearchAndDisplayAlgorithm(std::string_view target, const T& linked_list, Criteria criteria, SearchType type) {
                 LinearSearchAndDisplay(target, linked_list, criteria, type);
             }
-    
+            
+            // Binary Search Linked List
+            N UseBinarySearchAlgorithm(std::string_view target, const T& linked_list, Criteria criteria, SearchType type) {
+                return BinarySearch(target, linked_list, criteria, type);
+            }
+            
+            T UseBinarySearchAndCopyAlgorithm(std::string_view target, const T& linked_list, Criteria criteria, SearchType type) {
+                return BinarySearchAndCopy(target, linked_list, criteria, type);
+            }
+            
+            void UseBinarySearchAndDisplayAlgorithm(std::string_view target, const T& linked_list, Criteria criteria, SearchType type) {
+                BinarySearchAndDisplay(target, linked_list, criteria, type);
+            }
+            
             // For Word Linked List
             N UseLinearSearchWordAlgorithm(std::string_view target, const T& linked_list, SearchType type) {
                 // return LinearSearchWord(target, linked_list, type);
@@ -93,12 +107,13 @@ namespace PerformanceEvaluation
             virtual T       LinearSearchAndCopy     (std::string_view, const T&, Criteria, SearchType) = 0;
             virtual void    LinearSearchAndDisplay  (std::string_view, const T&, Criteria, SearchType) = 0;
             
+            virtual N       BinarySearch            (std::string_view, const T&, Criteria, SearchType) = 0;
+            virtual T       BinarySearchAndCopy     (std::string_view, const T&, Criteria, SearchType) = 0;
+            virtual void    BinarySearchAndDisplay  (std::string_view, const T&, Criteria, SearchType) = 0;
+            
             // virtual N       LinearSearchWord            (std::string_view, const T&, SearchType) = 0;
             // virtual T       LinearSearchWordAndCopy     (std::string_view, const T&, SearchType) = 0;
             // virtual void    LinearSearchWordAndDisplay  (std::string_view, const T&, SearchType) = 0;
             
-            // virtual T       BinarySearch            (std::string_view, const T&, Criteria) = 0;
-            // virtual T       BinarySearchAndCopy     (std::string_view, const T&, Criteria) = 0;
-            // virtual void    BinarySearchAndDisplay  (std::string_view, const T&, Criteria) = 0;
     };
 } // namespace PerformanceEvaluation

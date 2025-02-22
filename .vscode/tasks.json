@@ -86,7 +86,8 @@
                 "./LinkedListDoubly.cpp",
                 "./Algorithm.cpp",
                 "./DateUtility.cpp",
-                "./SearchLinkedList.cpp",
+                "./SearchLinearLinkedList.cpp",
+                "./SearchBinaryLinkedList.cpp",
                 "./SortMergeLinkedList.cpp",
                 "./ConfigManager.cpp",
 

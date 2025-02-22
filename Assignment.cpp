@@ -27,14 +27,21 @@
 #include "SimpleLogger.h"
 
 #include "Benchmark.h"
-#include "SearchLinkedList.h"
+#include "SearchLinearLinkedList.h"
+#include "SearchBinaryLinkedList.h"
 // #include "SearchWordList.h"
-// #include "SortMergeLinkedList.h"
+#include "SortMergeLinkedList.h"
 // #include "Sort.h"
 
 #include "ConversionUtility.h"
+#include "HashMap.h"
+// #include "HashMap.h"
 
+#include "WordList.h"
 #include "WordListSorted.h"
+
+#include "HashSet.h"
+#include "Vector.h"
 
 /**
  * For each problem statement, you can look at how we solved each questions from the functions implemented here.
@@ -126,20 +133,21 @@ namespace PerformanceEvaluation {
                 
                 FileHandling::ReadFile(file_path_combined, linked_list_combined);
 
+                // Denominator
                 LinkedList linked_list_combined_impartial_search_date_2016 = Algorithm::LinearSearchAndCopy(
-                    linked_list_combined, std::make_unique<SearchLinkedList>().get(), 
+                    linked_list_combined, std::make_unique<SearchLinearLinkedList>().get(), 
                     "2016", Criteria::DATE, SearchType::IMPARTIAL
                 );
 
-                // Denominator
-                LinkedList linked_list_combined_impartial_search_date_2016_and_impartial_search_subject_politics = Algorithm::LinearSearchAndCopy(
-                    linked_list_combined_impartial_search_date_2016, std::make_unique<SearchLinkedList>().get(), 
-                    "politics", Criteria::SUBJECT, SearchType::IMPARTIAL
-                );
+                // // Denominator
+                // LinkedList linked_list_combined_impartial_search_date_2016_and_impartial_search_subject_politics = Algorithm::LinearSearchAndCopy(
+                //     linked_list_combined_impartial_search_date_2016, std::make_unique<SearchLinkedList>().get(), 
+                //     "politics", Criteria::SUBJECT, SearchType::IMPARTIAL
+                // );
 
                 // Numerator
                 LinkedList linked_list_combined_impartial_search_date_2016_and_partial_search_subject_politics = Algorithm::LinearSearchAndCopy(
-                    linked_list_combined_impartial_search_date_2016, std::make_unique<SearchLinkedList>().get(), 
+                    linked_list_combined_impartial_search_date_2016, std::make_unique<SearchLinearLinkedList>().get(), 
                     "politics", Criteria::SUBJECT, SearchType::PARTIAL
                 );
 
@@ -148,7 +156,7 @@ namespace PerformanceEvaluation {
                 };
 
                 size_t numerator = linked_list_combined_impartial_search_date_2016_and_partial_search_subject_politics.GetLength();
-                size_t denominator = linked_list_combined_impartial_search_date_2016_and_impartial_search_subject_politics.GetLength();
+                size_t denominator = linked_list_combined_impartial_search_date_2016.GetLength();
 
                 std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
                     << calculate_percentage(numerator, denominator) << "% of political news articles are fake.\n";
@@ -165,6 +173,108 @@ namespace PerformanceEvaluation {
 
                 // * ----- *
 
+                // Question 2 Extra Exclusive
+
+                Question_2_ExtraExclusive();
+
+                // LinkedListDoubly linked_list_doubly;
+                
+                LinkedList linked_list;
+                
+                const FilePath& file_path_fake = "./CSV/fake.csv";
+                LinkedList linked_list_fake;
+
+                FileHandling::ReadFile(file_path_fakelinked_list_fake);
+
+                auto search_interface = std::make_unique<SearchLinearLinkedList>();
+
+                LinkedList linked_list_impartial_searched_2016 = Algorithm::LinearSearchAndCopy(linked_list_fake, search_interface.get(), "2016", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_and_partial_search_subject_politics
+                    = Algorithm::LinearSearchAndCopy(linked_list, search_interface.get(), "politics", Criteria::SUBJECT, SearchType::PARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_january 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Jan", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_february 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Feb", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_march 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Mar", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_april 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Apr", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_may 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "May", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_june 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Jun", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_july 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Jul", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_august 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Aug", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_september 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Sep", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_october 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Oct", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_november 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Nov", Criteria::DATE, SearchType::IMPARTIAL);
+                
+                LinkedList linked_list_impartial_searched_2016_december 
+                    = Algorithm::LinearSearchAndCopy(linked_list_impartial_searched_2016_and_partial_search_subject_politics, search_interface.get(), "Dec", Criteria::DATE, SearchType::IMPARTIAL);
+
+                size_t january      = linked_list_impartial_searched_2016_january.GetLength();
+                size_t february     = linked_list_impartial_searched_2016_february.GetLength();
+                size_t march        = linked_list_impartial_searched_2016_march.GetLength();
+                size_t april        = linked_list_impartial_searched_2016_april.GetLength();
+                size_t may          = linked_list_impartial_searched_2016_may.GetLength();
+                size_t june         = linked_list_impartial_searched_2016_june.GetLength();
+                size_t july         = linked_list_impartial_searched_2016_july.GetLength();
+                size_t august       = linked_list_impartial_searched_2016_august.GetLength();
+                size_t september    = linked_list_impartial_searched_2016_september.GetLength();
+                size_t october      = linked_list_impartial_searched_2016_october.GetLength();
+                size_t november     = linked_list_impartial_searched_2016_november.GetLength();
+                size_t december     = linked_list_impartial_searched_2016_december.GetLength();
+                
+                size_t fake_2016    = linked_list_impartial_searched_2016_and_partial_search_subject_politics.GetLength(); 
+
+                float jan_fake_2016 = calculate_percentage(january, fake_2016); 
+                float feb_fake_2016 = calculate_percentage(january, fake_2016); 
+                float mar_fake_2016 = calculate_percentage(january, fake_2016); 
+                float apr_fake_2016 = calculate_percentage(january, fake_2016); 
+                float may_fake_2016 = calculate_percentage(january, fake_2016); 
+                float jun_fake_2016 = calculate_percentage(january, fake_2016); 
+                float jul_fake_2016 = calculate_percentage(january, fake_2016); 
+                float aug_fake_2016 = calculate_percentage(january, fake_2016); 
+                float sep_fake_2016 = calculate_percentage(january, fake_2016); 
+                float oct_fake_2016 = calculate_percentage(january, fake_2016); 
+                float nov_fake_2016 = calculate_percentage(january, fake_2016); 
+                float dec_fake_2016 = calculate_percentage(january, fake_2016); 
+
+                std::cout << "Percentage of Fake Political News Articles in 2016"; 
+
+                std::cout << "January   | " << jan_fake_2016 << "%\n";
+                std::cout << "February  | " << feb_fake_2016 << "%\n";
+                std::cout << "March     | " << mar_fake_2016 << "%\n";
+                std::cout << "April     | " << apr_fake_2016 << "%\n";
+                std::cout << "May       | " << may_fake_2016 << "%\n";
+                std::cout << "June      | " << jun_fake_2016 << "%\n";
+                std::cout << "July      | " << jul_fake_2016 << "%\n";
+                std::cout << "August    | " << aug_fake_2016 << "%\n";
+                std::cout << "September | " << sep_fake_2016 << "%\n";
+                std::cout << "October   | " << oct_fake_2016 << "%\n";
+                std::cout << "November  | " << nov_fake_2016 << "%\n";
+                std::cout << "December  | " << dec_fake_2016 << "%\n";
+
+                // linked_list_doubly.InsertEnd()
+
+                
                 const FilePath& file_path_test = "./CSV/test.csv";
 
                 LinkedList linked_list_test;
@@ -209,11 +319,11 @@ namespace PerformanceEvaluation {
                 LinkedList linked_list_fake;
                 FileHandling::ReadFile(file_path_fake, linked_list_fake);
 
-                auto search_interface = std::make_unique<SearchLinkedList>();
+                auto search_interface = std::make_unique<SearchLinearLinkedList>();
 
                 LinkedList linked_list_fake_impartial_searched_subject_government = 
                     Algorithm::LinearSearchAndCopy(linked_list_fake, search_interface.get(), "government", Criteria::SUBJECT, SearchType::IMPARTIAL);
-                
+
                 HashSet<std::string> stopwords = {
                     "a", "an", "and", "are", "as", "at", "be", "but", "by", 
                     "for", "if", "in", "into", "is", "it", "no", "not", "of", 
@@ -221,52 +331,17 @@ namespace PerformanceEvaluation {
                     "these", "they", "this", "to", "was", "will", "with"
                 };
 
+                // std::cout << stopwords.Size() << '\n';
+
                 WordList word_list_fake = ConvertLinkedListToWordList(linked_list_fake_impartial_searched_subject_government, stopwords);
 
                 HashMap<std::string, int32_t> word_map = GetWordCount(word_list_fake);
                 
                 WordListSorted word_list_sorted = CheckAndSortHashMap(word_map);
 
+                // * Please convert from HashMap to Sorted Array (WEI SHEN)
+
                 word_list_sorted.DisplayAll();
             }
     }; // class Assignment
 } // namespace PerformanceEvaluation
-
-
-        // PerformanceEvaluation::Benchmark benchmark;
-        // PerformanceEvaluation::LinkedList linked_list;
-        
-        
-
-                  // PerformanceEvaluation::FileHandling::appendFileContent("./CSV/true.csv", "./CSV/assignment.csv");
-        // PerformanceEvaluation::FileHandling::appendFileContent("./CSV/fake.csv", "./CSV/assignment.csv");
-        
-        // linked_list.mergeSort();
-        
-        // linked_list.displayAll();
-        // linked_list.displayTitle();
-        // linked_list.displayText();
-        // linked_list.displaySubject();
-
-        // linked_list.search("2017", PerformanceEvaluation::Criteria::DATE);
-        // std::cout << linked_list.getLength() << "\n";
-        // linked_list.displayDate();
-
-        // benchmark.duration([&]{ linked_list.displayAll(); });
-        // linked_list.displayAll();
-        // linked_list.deleteAll();
-
-
-                // std::unique_ptr<Sort<LinkedList, LinkedListNode*>> sorter = std::make_unique<SortMergeLinkedList>();
-                // linked_list_true.UseSortingAlgorithm(sorter);
-                
-                // std::cout << search_linked_list_subject_world.getLength() << "\n";
-                // search_linked_list_subject_world.displayFirst(MAX_DISPLAY_COUNT);
-
-                // Algorithm::SortBy(search_linked_list, std::make_unique<SortMergeLinkedList>());
-                
-                // auto sort_by = [](const Dataset& first_dataset, const Dataset& second_dataset){
-                //     return first_dataset.m_Subject < second_dataset.m_Subject;
-                // }
-
-                // Algorithm::SortBy(search_linked_list, std::make_unique<SortMergeLinkedList>(), sort_by());

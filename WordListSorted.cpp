@@ -38,7 +38,7 @@ namespace PerformanceEvaluation
         int i = 0;
 
         while (temp != nullptr) {
-            std::cout << "\n\033[34;1m" << i << "\033[0m " << temp->m_Word << ", " << temp->m_Count << "\n";
+            std::cout << "\n\033[34;1m" << ++i << "\033[0m " << temp->m_Word << ", " << temp->m_Count << "\n";
             
             temp = temp->m_Next;
         } 

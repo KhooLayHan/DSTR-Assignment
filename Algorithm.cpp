@@ -1,7 +1,7 @@
 #include "Algorithm.h"
 
 namespace PerformanceEvaluation {
-    // Singly Linked List Searching
+    // Singly Linked List Linear Search
     LinkedListNode* Algorithm::LinearSearch(LinkedList& linked_list, Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
         if (search_interface) {
             return search_interface->UseLinearSearchAlgorithm(target, linked_list, criteria, type);
@@ -23,8 +23,31 @@ namespace PerformanceEvaluation {
             search_interface->UseLinearSearchAndDisplayAlgorithm(target, linked_list, criteria, type);
         }
     }
+    
+    // Singly Linked List Binary Search
+    LinkedListNode* Algorithm::BinarySearch(LinkedList& linked_list, Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
+        if (search_interface) {
+            return search_interface->UseBinarySearchAlgorithm(target, linked_list, criteria, type);
+        }
+        
+        return nullptr;
+    }
+    
+    LinkedList Algorithm::BinarySearchAndCopy(LinkedList& linked_list, Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
+        if (search_interface) {
+            return search_interface->UseBinarySearchAndCopyAlgorithm(target, linked_list, criteria, type);
+        }
 
-    // Doubly Linked List searching
+        return {};
+    }
+    
+    void Algorithm::BinarySearchAndDisplay(LinkedList& linked_list, Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
+        if (search_interface) {
+            search_interface->UseBinarySearchAndDisplayAlgorithm(target, linked_list, criteria, type);
+        }
+    }
+    
+    // Doubly Linked List Linear Search
     LinkedListDoublyNode* Algorithm::LinearSearch(LinkedListDoubly& linked_list_doubly, Search<LinkedListDoubly, LinkedListDoublyNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
         if (search_interface) {
             return search_interface->UseLinearSearchAlgorithm(target, linked_list_doubly, criteria, type);

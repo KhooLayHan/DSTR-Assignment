@@ -15,9 +15,9 @@ namespace PerformanceEvaluation
    */
   struct LinkedListDoublyNode
   {
-    Dataset m_Data;         
-    LinkedListDoublyNode *m_Next; 
-    LinkedListDoublyNode *m_Prev; 
+    Dataset m_Data;
+    LinkedListDoublyNode *m_Next;
+    LinkedListDoublyNode *m_Prev;
 
     // Constructor initializes a new node with data and sets pointers to null
     LinkedListDoublyNode(const Dataset &data) : m_Data(data), m_Next(nullptr), m_Prev(nullptr) {}
@@ -34,7 +34,7 @@ namespace PerformanceEvaluation
     LinkedListDoubly() : m_Head(nullptr), m_Length(0) {}
 
     // Destructor deletes all nodes in the list to free memory
-    ~LinkedListDoubly();
+    ~LinkedListDoubly() {};
 
     // Insert a new node at the beginning of the list
     void InsertBegin(const Dataset &dataset);
@@ -62,10 +62,10 @@ namespace PerformanceEvaluation
 
     // Display only the text of all articles
     void DisplayText() const;
-    
+
     // Display only the subject of all articles
     void DisplaySubject() const;
-    
+
     // Display only the date of all articles
     void DisplayDate() const;
 
@@ -74,7 +74,7 @@ namespace PerformanceEvaluation
 
   private:
     LinkedListDoublyNode *m_Head; // Pointer to the first node in the list
-    size_t m_Length;        // Stores the number of nodes in the list
+    size_t m_Length;              // Stores the number of nodes in the list
 
     // Increase the length counter when a node is added
     void IncrementLength();

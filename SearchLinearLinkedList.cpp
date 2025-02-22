@@ -1,20 +1,17 @@
 #include <iostream>
 
-#include "SearchLinkedList.h"
+#include "SearchLinearLinkedList.h"
 
 #include "SimpleConsoleLogger.h"
 #include "SimpleLoggingService.h"
 
 namespace PerformanceEvaluation
 {
-    LinkedListNode* SearchLinkedList::LinearSearch(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
+    // Public API that returns a LinkedListNode object
+    LinkedListNode* SearchLinearLinkedList::LinearSearch(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
         LinkedListNode* temp = linked_list.GetHead();
         
         while (temp) {
-            // std::optional<Dataset> dataset = std::visit(GetDatasetVis{}, temp->m_Data);
-
-            // if (!dataset)
-            //     return nullptr;
             const Dataset& dataset = temp->m_Data;
 
             auto is_found = [&, temp](std::string_view target, std::string_view dataset_str) {
@@ -40,19 +37,14 @@ namespace PerformanceEvaluation
         return nullptr;
     } 
 
-    LinkedList SearchLinkedList::LinearSearchAndCopy(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
+    // Public API that copies to a new Linked List
+    LinkedList SearchLinearLinkedList::LinearSearchAndCopy(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
         LinkedList new_list;
         LinkedListNode* new_tail = nullptr;
         LinkedListNode* temp = linked_list.GetHead();
-    
-        // int32_t i = 0;
+
         while (temp) {
-            // std::optional<Dataset> dataset = std::visit(GetDatasetVis{}, temp->m_Data);
-
-            // if (!dataset)
-            //     return LinkedList();
-
-                const Dataset& dataset = temp->m_Data;
+            const Dataset& dataset = temp->m_Data;
                 
             auto is_found_and_copy = [&, temp](std::string_view target, std::string_view dataset_str) {
                 if (dataset_str.empty()) {
@@ -89,15 +81,11 @@ namespace PerformanceEvaluation
         return new_list;
     }
 
-    void SearchLinkedList::LinearSearchAndDisplay(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
+    // Public function to perform linear search and display results
+    void SearchLinearLinkedList::LinearSearchAndDisplay(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
         LinkedListNode* temp = linked_list.GetHead();
                 
         while (temp) {
-            // std::optional<Dataset> dataset = std::visit(GetDatasetVis{}, temp->m_Data);
-
-            // if (!dataset)
-            //     return;
-
             const Dataset& dataset = temp->m_Data;
                 
             auto is_found_and_display = [&, temp](std::string_view target, std::string_view dataset_str) {
@@ -122,56 +110,4 @@ namespace PerformanceEvaluation
             temp = temp->m_Next;
         }
     }
-
-    // void SearchLinkedList::LinearSearchAll(const LinkedList& linked_list) {
-    //     LinkedListNode* temp = linked_list.GetHead();
-    //     temp = nullptr;
-    //     // while (temp) {
-    //     //     const Dataset& dataset = temp->m_Data;
-
-    //     //     // for (std::string word : dataset.m_Title) {
-
-    //     //     // }
-    //     // }
-    // }
-
-    // void Binary(std::string_view target, LinkedList& linked_list, Criteria criteria) override {
-
-    // }
 } // namespace PerformanceEvaluation
-
-
-        // if (linked_list.getHead() == nullptr) {
-        //     SimpleConsoleLogger console;
-        //     SimpleLoggingService::UseWarnLogger(console, "The linked list is empty.");
-
-        //     return;
-        // }
-
-        // LinkedListNode* temp = linked_list.getHead();
-        
-        // while (temp != nullptr) { 
-        //     Dataset dataset = temp->data;
-            
-        //     // switch (criteria) {
-        //     //     case Criteria::TITLE:
-
-        //             if (dataset.title.find(target) != std::string::npos) {
-        //                 m_LinkedList.insertEnd(dataset);                                
-        //             } 
-        //         return m_LinkedList;
-        //             // displayAllAfterSearch(dataset, dataset.title, target);
-        //             // break;
-        //         // case Criteria::TEXT:
-        //         //     displayAllAfterSearch(dataset, dataset.text, target);
-        //         //     break;
-        //         // case Criteria::SUBJECT:
-        //         //     displayAllAfterSearch(dataset, dataset.subject, target);
-        //         //     break;
-        //         // case Criteria::DATE:
-        //         //     displayAllAfterSearch(dataset, dataset.date, target);
-        //         //     break;
-        //     // }
-
-        //     // temp = temp->next;
-        // };

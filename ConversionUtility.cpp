@@ -69,20 +69,20 @@ namespace PerformanceEvaluation
         return word_list;
     };
 
-    WordList ConvertArrayToWordList(const Array<Dataset>& array, WordList& word_list) {
-        // Array temp = linked_list.GetHead();
-        // WordListNode* word_temp = word_list.GetHead();
+    // WordList ConvertArrayToWordList(const Array<Dataset>& array, WordList& word_list) {
+    //     // Array temp = linked_list.GetHead();
+    //     // WordListNode* word_temp = word_list.GetHead();
 
-        // while (temp) {
-        //     const Dataset& dataset = temp->m_Data;
+    //     // while (temp) {
+    //     //     const Dataset& dataset = temp->m_Data;
             
-        //     word_list.InsertEnd(dataset.ReadAll());
+    //     //     word_list.InsertEnd(dataset.ReadAll());
         
-        //     temp = temp->m_Next;
-        // }
+    //     //     temp = temp->m_Next;
+    //     // }
 
-        return word_list; 
-    };
+    //     return word_list; 
+    // };
 
     // Extract word-count pairs and sort them
     WordListSorted CheckAndSortHashMap(HashMap<std::string, int32_t>& word_count) {
