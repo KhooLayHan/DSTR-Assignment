@@ -68,9 +68,9 @@ namespace PerformanceEvaluation {
                 return getAlgorithm().linearSearchImpl(linked_list, targetDate);
             }
 
-            // Binary Search Function
+            // Binary Search for Doubly Linked List
             static LinkedListNode* BinarySearch(LinkedList& linked_list, const std::string& targetDate) {
-                return getAlgorithm().binarySearchImpl(linked_list, targetDate);
+                return getAlgorithm().binarySearchDoublyImpl(linked_list, targetDate);
             }
 
             // Binary Search for Singly Linked List
@@ -133,112 +133,124 @@ namespace PerformanceEvaluation {
                 return nullptr;
             }
 
-            // Binary Search Implementation for doubly linked list
-            LinkedListNode* binarySearchImpl(LinkedList& linked_list, const std::string& targetDate) {
-                if (!linked_list.getHead()) {
-                    return nullptr;
-                }
-            
-                LinkedListNode* left = linked_list.getHead();
-                LinkedListNode* right = nullptr;
-            
-                // Get the last node (right)
-                LinkedListNode* temp = left;
-                while (temp->next) {
-                    temp = temp->next;
-                }
-                right = temp;
-            
-                DateUtility date_utility;
-            
-                while (left && right && left != right->next) {
-                    LinkedListNode* middle = getMiddle(left, right);
-            
-                    auto [middle_day, middle_month, middle_year] = date_utility.parseDate(middle->data.date);
-                    auto [target_day, target_month, target_year] = date_utility.parseDate(targetDate);
-            
-                    if (middle_year == target_year && middle_month == target_month && middle_day == target_day) {
-                        return middle;
-                    }
-            
-                    bool isTargetBeforeMiddle = (target_year < middle_year) ||
-                                                (target_year == middle_year && target_month < middle_month) ||
-                                                (target_year == middle_year && target_month == middle_month && target_day < middle_day);
-            
-                    if (isTargetBeforeMiddle) {
-                        right = middle->prev;
-                    } else {
-                        left = middle->next;
-                    }
-                }
-            
-                return nullptr;
-            }
+            // Find the middle node for Binary Search
+            LinkedListNode* FindMiddle(LinkedListNode* start, LinkedListNode* end) {
+                if (!start) return nullptr;
 
-            // Binary Search implementation for a singly linked list
-            LinkedListNode* binarySearchSinglyImpl(LinkedList& linked_list, const std::string& targetDate) {
-                if (!linked_list.getHead()) {
-                    return nullptr;
+                LinkedListNode* slow = start;
+                LinkedListNode* fast = start;
+
+                while (fast != end && fast->m_Next != end) {
+                    slow = slow->m_Next;
+                    fast = fast->m_Next->m_Next;
                 }
-    
-                DateUtility date_utility;
-                LinkedListNode* left = linked_list.getHead();
-                LinkedListNode* right = nullptr;
-    
-                // Get the last node (right)
-                LinkedListNode* temp = left;
-                while (temp->next) {
-                    temp = temp->next;
-                }
-                right = temp;
-    
-                while (left != nullptr && left != right->next) {
-                    LinkedListNode* middle = getMiddle(left, right);
-    
-                    auto [middle_day, middle_month, middle_year] = date_utility.parseDate(middle->data.date);
-                    auto [target_day, target_month, target_year] = date_utility.parseDate(targetDate);
-    
-                    if (middle_year == target_year && middle_month == target_month && middle_day == target_day) {
-                        return middle; // Target found
-                    }
-    
-                    if ((target_year < middle_year) ||
-                        (target_year == middle_year && target_month < middle_month) ||
-                        (target_year == middle_year && target_month == middle_month && target_day < middle_day)) {
-                        right = getPrevious(left, middle); // Move search range to left half
-                    } else {
-                        left = middle->next; // Move search range to right half
-                    }
-                }
-    
-                return nullptr; // Target not found
-            }
-            
-            LinkedListNode* getMiddle(LinkedListNode* left, LinkedListNode* right) {
-                if (!left) return nullptr;
-            
-                LinkedListNode* slow = left;
-                LinkedListNode* fast = left;
-            
-                while (fast != right && fast->next != right) {
-                    fast = fast->next;
-                    if (fast != right) {
-                        fast = fast->next;
-                        slow = slow->next;
-                    }
-                }
-            
+
                 return slow;
             }
+
+            // Binary Search for Doubly Linked List with Case-Insensitive Search
+            LinkedListNode* SearchLinkedList::BinarySearch(std::string_view target, LinkedListNode* start, LinkedListNode* end, Criteria criteria, SearchType type) {
+                while (start != end) {
+                    LinkedListNode* mid = FindMiddle(start, end);
+                    if (!mid) return nullptr;
+
+                    const Dataset& dataset = mid->m_Data;
+                    std::string midValue;
+
+                    // Convert the selected field to lowercase before comparison
+                    switch (criteria) {
+                        case Criteria::TITLE:   midValue = ToLowerCase(dataset.m_Title);   break;
+                        case Criteria::TEXT:    midValue = ToLowerCase(dataset.m_Text);    break;
+                        case Criteria::SUBJECT: midValue = ToLowerCase(dataset.m_Subject); break;
+                        case Criteria::DATE:    midValue = ToLowerCase(dataset.m_Date);    break;
+                        default:                midValue = "";
+                    }
+
+                    if (midValue.empty()) {
+                        SimpleConsoleLogger console;
+                        SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified.");
+                        return nullptr;
+                    }
+
+                    // Perform case-insensitive search using Contains()
+                    if (Contains(target, midValue, type)) {
+                        return mid; // Target found
+                    } else if (midValue < target) {
+                        start = mid->m_Next;  // Move right
+                    } else {
+                        end = mid;            // Move left
+                    }
+                }
+
+                return nullptr; // Not found
+            }
+
+            // Binary Search and Copy Matching Nodes into a New Linked List
+            LinkedList SearchLinkedList::BinarySearchAndCopy(std::string_view target, LinkedListNode* start, LinkedListNode* end, Criteria criteria, SearchType type) {
+                LinkedList new_list;
+                LinkedListNode* result = BinarySearch(target, start, end, criteria, type);
+                
+                if (result) {
+                    new_list.insertEnd(result->m_Data); // Copy found node
+                }
+
+                return new_list;
+            }
+
+            // Binary Search and Display Matching Nodes
+            void SearchLinkedList::BinarySearchAndDisplay(std::string_view target, LinkedListNode* start, LinkedListNode* end, Criteria criteria, SearchType type) {
+                LinkedListNode* result = BinarySearch(target, start, end, criteria, type);
+
+                if (result) {
+                    result->m_Data.Display();
+                } else {
+                    std::cout << "No matching node found.\n";
+                }
+            }
+        
 
             LinkedListNode* getPrevious(LinkedListNode* left, LinkedListNode* target) {
                 if (left == target) return nullptr; // No previous node
                 
                 LinkedListNode* prev = left;
-                while (prev->next && prev->next != target) {
-                    prev = prev->next;
+                while (prev->m_Next && prev->m_Next != target) {
+                    prev = prev->m_Next;
                 }
                 return prev; // Returns the node before target
+            }
+            
+            LinkedListNode* SearchLinkedList::BinarySearchSingly(std::string_view target, LinkedListNode* start, LinkedListNode* end, Criteria criteria, SearchType type) {
+                while (start != end) {
+                    LinkedListNode* mid = FindMiddle(start, end);
+                    if (!mid) return nullptr;
+            
+                    const Dataset& dataset = mid->m_Data;
+                    std::string midValue;
+            
+                    switch (criteria) {
+                        case Criteria::TITLE:   midValue = ToLowerCase(dataset.m_Title);   break;
+                        case Criteria::TEXT:    midValue = ToLowerCase(dataset.m_Text);    break;
+                        case Criteria::SUBJECT: midValue = ToLowerCase(dataset.m_Subject); break;
+                        case Criteria::DATE:    midValue = ToLowerCase(dataset.m_Date);    break;
+                        default:                midValue = "";
+                    }
+            
+                    if (midValue.empty()) {
+                        SimpleConsoleLogger console;
+                        SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified.");
+                        return nullptr;
+                    }
+            
+                    if (Contains(target, midValue, type)) {
+                        return mid;
+                    } else if (midValue < target) {
+                        start = mid->m_Next;
+                    } else {
+                        end = getPrevious(start, mid);
+                    }
+                }
+            
+                return nullptr;
             }
             
 
