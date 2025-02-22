@@ -147,6 +147,10 @@ namespace PerformanceEvaluation {
                 LinkedList linked_list_true;
                 LinkedList linked_list_fake;
                 LinkedList linked_list_combined;
+
+                // Array<Dataset> array_true;
+                // Array<Dataset> array_fake;
+                // Array<Dataset> array_combined;
                 
                 // static constexpr int32_t MAX_DISPLAY_COUNT = 5;
 
@@ -162,32 +166,63 @@ namespace PerformanceEvaluation {
                 FileHandling::AppendFileContent(file_path_fake, file_path_combined);
                 
                 // FileHandling::ReadFile(file_path_true, linked_list_true);
-                // FileHandling::ReadFile(file_path_fake, linked_list_fake);
+                FileHandling::ReadFile(file_path_fake, linked_list_fake);
                 
                 FileHandling::ReadFile(file_path_combined, linked_list_combined);
 
+                // IMPARTIAL Denominator&Numerator
+
+                // Denominator
                 LinkedList linked_list_combined_impartial_search_date_2016 = Algorithm::LinearSearchAndCopy(
                     linked_list_combined, std::make_unique<SearchLinkedList>().get(), 
                     "2016", Criteria::DATE, SearchType::IMPARTIAL
                 );
 
-                // Denominator
                 LinkedList linked_list_combined_impartial_search_date_2016_and_impartial_search_subject_politics = Algorithm::LinearSearchAndCopy(
                     linked_list_combined_impartial_search_date_2016, std::make_unique<SearchLinkedList>().get(), 
                     "politics", Criteria::SUBJECT, SearchType::IMPARTIAL
                 );
 
                 // Numerator
-                LinkedList linked_list_combined_impartial_search_date_2016_and_partial_search_subject_politics = Algorithm::LinearSearchAndCopy(
-                    linked_list_combined_impartial_search_date_2016, std::make_unique<SearchLinkedList>().get(), 
+                LinkedList linked_list_fake_impartial_searched_date_2016 = Algorithm::LinearSearchAndCopy(
+                    linked_list_fake, std::make_unique<SearchLinkedList>().get(), 
+                    "2016", Criteria::DATE, SearchType::IMPARTIAL
+                );
+
+                LinkedList linked_list_fake_impartial_searched_date_2016_and_impartial_search_subject_politics = Algorithm::LinearSearchAndCopy(
+                    linked_list_fake_impartial_searched_date_2016, std::make_unique<SearchLinkedList>().get(), 
+                    "politics", Criteria::SUBJECT, SearchType::IMPARTIAL
+                );
+
+                // PARTIAL Denominator&Numerator
+
+                // Denominator
+                LinkedList linked_list_combined_partial_searched_date_2016 = Algorithm::LinearSearchAndCopy(
+                    linked_list_combined, std::make_unique<SearchLinkedList>().get(), 
+                    "2016", Criteria::DATE, SearchType::PARTIAL
+                );
+
+                LinkedList linked_list_combined_partial_searched_date_2016_and_partial_search_subject_politics = Algorithm::LinearSearchAndCopy(
+                    linked_list_combined_partial_searched_date_2016, std::make_unique<SearchLinkedList>().get(), 
                     "politics", Criteria::SUBJECT, SearchType::PARTIAL
                 );
 
+                // Numerator
+                LinkedList linked_list_fake_partial_searched_date_2016 = Algorithm::LinearSearchAndCopy(
+                    linked_list_fake, std::make_unique<SearchLinkedList>().get(), 
+                    "2016", Criteria::DATE, SearchType::PARTIAL
+                );
+
+                // LinkedList linked_list_combined_impartial_search_date_2016_and_partial_search_subject_politics = Algorithm::LinearSearchAndCopy(
+                //     linked_list_combined_impartial_search_date_2016, std::make_unique<SearchLinkedList>().get(), 
+                //     "politics", Criteria::SUBJECT, SearchType::PARTIAL
+                // );
+
                 constexpr auto calculate_percentage = [](size_t numerator, size_t denominator) {
-                    return (numerator * 100) / denominator;
+                    return denominator == 0 ? 0.0 : (static_cast<double>(numerator) * 100.0) / static_cast<double>(denominator);
                 };
 
-                size_t numerator = linked_list_combined_impartial_search_date_2016_and_partial_search_subject_politics.GetLength();
+                size_t numerator = linked_list_fake_impartial_searched_date_2016_and_impartial_search_subject_politics.GetLength();
                 size_t denominator = linked_list_combined_impartial_search_date_2016_and_impartial_search_subject_politics.GetLength();
 
                 std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
