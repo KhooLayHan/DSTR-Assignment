@@ -8,6 +8,7 @@
 #include "LinkedList.h"
 
 #include "Search.h"
+#include "SortMergeArray.h"
 #include "SearchLinkedList.h"
 #include "Sort.h"
 
@@ -39,5 +40,6 @@ namespace PerformanceEvaluation {
             static void             LinearSearchAndDisplay  (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
             
             static void SortBy                  (LinkedList&, Sort<LinkedList, LinkedListNode*>*);
+            static void SortBy(Array<Dataset>& array, Sort<Array<Dataset>>* sorter);
     };
 } // namespace PerformanceEvaluation

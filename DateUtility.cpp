@@ -66,4 +66,9 @@ namespace PerformanceEvaluation {
 
         return year;
     }
+
+    int32_t DateUtility::ExtractYear(const std::string& date) const {
+        auto [day, month, year] = ParseDate(date);
+        return year;
+    }
 } // namespace PerformanceEvaluation

@@ -1,16 +1,106 @@
+// #include "SortHeapLinkedList.h"
+
+// namespace PerformanceEvaluation {
+//     void SortHeapLinkedList::SortBy(LinkedList& linked_list) {
+//         LinkedListNode* head = linked_list.GetHead();
+//         HeapSort(head);
+//         linked_list.SetHead(head);
+//     }
+    
+//     // Applies heap sort
+//     LinkedListNode* SortHeapLinkedList::HeapSort(LinkedListNode* head) {
+//         if (!head || !head->m_Next) {
+//             return head;
+//         }
+    
+//         // Convert linked list to array
+//         int length = 0;
+//         LinkedListNode* temp = head;
+//         while (temp) {
+//             length++;
+//             temp = temp->m_Next;
+//         }
+    
+//         LinkedListNode** node_array = new LinkedListNode*[length];
+    
+//         temp = head;
+//         for (size_t i = 0; i < length; i++) {
+//             node_array[i] = temp;
+//             temp = temp->m_Next;
+//         }
+    
+//         // Perform heap sort on node_array based on dates
+//         HeapSortArray(node_array, length);
+    
+//         // Reconstruct the linked list from the sorted array
+//         for (size_t i = 0; i < length - 1; ++i) {
+//             node_array[i]->m_Next = node_array[i + 1];
+//         }
+//         node_array[length - 1]->m_Next = nullptr;
+    
+//         LinkedListNode* new_head = node_array[0];
+    
+//         delete[] node_array;
+
+//         return new_head;
+//     }
+    
+//     // Convert to array
+//     void SortHeapLinkedList::HeapSortArray(LinkedListNode** arr, size_t n) {
+//         // Build Min Heap (ascending order)
+//         for (size_t i = n / 2 - 1; i >= 0; i--) {
+//             Heapify(arr, n, i);
+//         }
+    
+//         // Extract elements from heap one by one
+//         for (size_t i = n - 1; i > 0; i--) {
+//             std::swap(arr[0], arr[i]);
+//             Heapify(arr, i, 0);
+//         }
+//     }
+    
+//     // Min-heap for ascending order, ensures the smallest element is always at the top
+//     void SortHeapLinkedList::Heapify(LinkedListNode** arr, int n, int i) {
+//         int smallest = i;  // We need Min-Heap
+//         int left = 2 * i + 1;
+//         int right = 2 * i + 2;
+    
+//         DateUtility date_utility;
+    
+//         auto getDateKey = [&](LinkedListNode* node)  {
+//             return date_utility.ParseDate(node->m_Data.m_Date);
+//         };
+    
+//         // CompareAndSortDate(date_utility, arr[left]->m_Data.m_Date, arr[smallest]->m_Data.m_Date);
+
+//         if (left < n && CompareAndSortDate(date_utility, arr[left]->m_Data.m_Date, arr[smallest]->m_Data.m_Date)) {
+//             smallest = left;
+//         }
+    
+//         if (right < n && CompareAndSortDate(date_utility, arr[right]->m_Data.m_Date, arr[smallest]->m_Data.m_Date)) {
+//             smallest = right;
+//         }
+    
+//         if (smallest != i) {
+//             std::swap(arr[i], arr[smallest]);
+//             Heapify(arr, n, smallest);
+//         }
+//     }
+// } // namespace PerformanceEvaluation
+
 #include "SortHeapLinkedList.h"
 
 namespace PerformanceEvaluation {
     void SortHeapLinkedList::SortBy(LinkedList& linked_list) {
-        LinkedListNode* head = linked_list.getHead();
-        HeapSort(head);
-        linked_list.setHead(head);
+        LinkedListNode* head = linked_list.GetHead();
+        head = HeapSort(head);  // Ensure sorted head is returned
+        linked_list.SetHead(head);
     }
     
-    // Applies heap sort
+    // Applies heap sort on linked list
     LinkedListNode* SortHeapLinkedList::HeapSort(LinkedListNode* head) {
         if (!head || !head->m_Next) {
-            return head;
+            return head;  // Already sorted or empty
         }
     
         // Convert linked list to array
@@ -24,7 +114,7 @@ namespace PerformanceEvaluation {
         LinkedListNode** node_array = new LinkedListNode*[length];
     
         temp = head;
-        for (size_t i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             node_array[i] = temp;
             temp = temp->m_Next;
         }
@@ -33,45 +123,57 @@ namespace PerformanceEvaluation {
         HeapSortArray(node_array, length);
     
         // Reconstruct the linked list from the sorted array
-        for (size_t i = 0; i < length - 1; ++i) {
+        for (int i = 0; i < length - 1; ++i) {
             node_array[i]->m_Next = node_array[i + 1];
         }
         node_array[length - 1]->m_Next = nullptr;
     
         LinkedListNode* new_head = node_array[0];
     
-        delete[] node_array;
+        delete[] node_array;  // Clean up allocated memory
 
         return new_head;
     }
     
-    // Convert to array
+    // Sort array using Heap Sort
     void SortHeapLinkedList::HeapSortArray(LinkedListNode** arr, size_t n) {
         // Build Min Heap (ascending order)
-        for (size_t i = n / 2 - 1; i >= 0; i--) {
+        for (int i = (int)n / 2 - 1; i >= 0; i--) {  // FIXED: Use int to avoid unsigned wrap-around
             Heapify(arr, n, i);
         }
     
         // Extract elements from heap one by one
-        for (size_t i = n - 1; i > 0; i--) {
-            std::swap(arr[0], arr[i]);
-            Heapify(arr, i, 0);
+        for (int i = n - 1; i > 0; i--) {
+            std::swap(arr[0], arr[i]);  // Move root to the end
+            Heapify(arr, i, 0);  // Heapify the reduced heap
         }
     }
     
-    // Min-heap for ascending order, ensures the smallest element is always at the top
+    // Min-heap for ascending order
     void SortHeapLinkedList::Heapify(LinkedListNode** arr, int n, int i) {
-        int smallest = i;  // We need Min-Heap
+        int smallest = i;  // Min-Heap property: smallest should be at the root
         int left = 2 * i + 1;
         int right = 2 * i + 2;
     
         DateUtility date_utility;
     
-        auto getDateKey = [&](LinkedListNode* node)  {
-            return date_utility.ParseDate(node->m_Data.m_Date);
+        // Compare dates using CompareAndSortDate function
+
+        static constexpr auto CompareAndSortDate = [](const DateUtility& date_utility, const std::string& first_date, const std::string& second_date) {
+            const auto& [left_day, left_month, left_year] = date_utility.ParseDate(first_date);
+            const auto& [right_day, right_month, right_year] = date_utility.ParseDate(second_date);
+        
+            // TODO: Might need to replace this with own implementation for std::tie() 
+            return std::tie(left_year, left_month, left_day) <= std::tie(right_year, right_month, right_day);
         };
-    
-        // CompareAndSortDate(date_utility, arr[left]->m_Data.m_Date, arr[smallest]->m_Data.m_Date);
+
+       // const auto& [left_day, left_month, left_year] = date_utility.ParseDate(arr[right]->m_Data.m_Date);
+        //const auto& [right_day, right_month, right_year] = date_utility.ParseDate(arr[smallest]->m_Data.m_Date);
+        
+            // TODO: Might need to replace this with own implementation for std::tie() 
+       // auto dd = std::tie(left_year, left_month, left_day) <= std::tie(right_year, right_month, right_day);
+
+       // auto compare_func = CompareAndSortDate(date_utility, arr[left]->m_Data.m_Date, arr[smallest]->m_Data.m_Date);
 
         if (left < n && CompareAndSortDate(date_utility, arr[left]->m_Data.m_Date, arr[smallest]->m_Data.m_Date)) {
             smallest = left;
@@ -86,4 +188,4 @@ namespace PerformanceEvaluation {
             Heapify(arr, n, smallest);
         }
     }
-} // namespace PerformanceEvaluation
+}

@@ -28,6 +28,10 @@
 #include "Benchmark.h"
 #include "SearchLinkedList.h"
 #include "SortMergeLinkedList.h"
+#include "SortQuickLinkedList.h"
+#include "SortHeapLinkedList.h"
+#include "SortQuickArray.h"
+#include "SortHeapArray.h"
 #include "Sort.h"
 
 #include "DynamicArray.h"
@@ -61,33 +65,65 @@ namespace PerformanceEvaluation {
                       
                 LinkedList linked_list_true;
                 LinkedList linked_list_fake;
-                
+
+                Array<Dataset> array_true;
+                Array<Dataset> array_fake;
+
                 static constexpr int32_t MAX_DISPLAY_COUNT = 5;
                 std::string file_path_true = "./CSV/true.csv"; 
                 std::string file_path_fake = "./CSV/fake.csv";
 
-                FileHandling::ReadFile(file_path_true, linked_list_true);
-                FileHandling::ReadFile(file_path_fake, linked_list_fake);
+                // FileHandling::ReadFile(file_path_true, linked_list_true);
+                // FileHandling::ReadFile(file_path_fake, linked_list_fake);
+
+                FileHandling::ReadFile(file_path_true, array_true);
+                FileHandling::ReadFile(file_path_fake, array_fake);
+
+                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
+                // linked_list_true.DisplayFirst(MAX_DISPLAY_COUNT);
+
+                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
+                // linked_list_fake.DisplayFirst(MAX_DISPLAY_COUNT);
 
                 std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
-                linked_list_true.DisplayFirst(MAX_DISPLAY_COUNT);
+                array_true.DisplayFirst(MAX_DISPLAY_COUNT);
 
-                std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
-                linked_list_fake.DisplayFirst(MAX_DISPLAY_COUNT);
+                // std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
+                // array_fake.DisplayFirst(MAX_DISPLAY_COUNT);
                 
-                Algorithm::SortBy(linked_list_true, std::make_unique<SortMergeLinkedList>().get());
+                // Algorithm::SortBy(linked_list_true, std::make_unique<SortMergeLinkedList>().get());
+                // Algorithm::SortBy(linked_list_true, std::make_unique<SortQuickLinkedList>().get());
+                // Algorithm::SortBy(linked_list_true, std::make_unique<SortHeapLinkedList>().get());
+
+                // Algorithm::SortBy(array_true, std::make_unique<SortMergeArray>().get());
+                // Algorithm::SortBy(array_true, std::make_unique<SortQuickArray>().get());
+                // Algorithm::SortBy(array_true, std::make_unique<SortHeapArray>().get());
+
+                // Algorithm::SortBy(array_fake, std::make_unique<SortMergeArray>().get());
+                // Algorithm::SortBy(array_fake, std::make_unique<SortQuickArray>().get());
+                // Algorithm::SortBy(array_fake, std::make_unique<SortHeapArray>().get());
+
                 // // // linked_list_true.mergeSort();
 
                 // // // linked_list_true.displayDate();
                 
-                std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
-                linked_list_true.DisplayFirst(MAX_DISPLAY_COUNT);
+                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
+                // linked_list_true.DisplayFirst(MAX_DISPLAY_COUNT);
                 
-                std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
-                linked_list_fake.DisplayFirst(MAX_DISPLAY_COUNT);
+                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
+                // linked_list_fake.DisplayFirst(MAX_DISPLAY_COUNT);
+
+                std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE\033[0m\n";
+                array_true.DisplayFirst(MAX_DISPLAY_COUNT);
+                
+                // std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE\033[0m\n";
+                // array_fake.DisplayFirst(MAX_DISPLAY_COUNT);
 
                 linked_list_true.DisplayLength(file_path_true);
                 linked_list_fake.DisplayLength(file_path_fake);
+
+                array_true.DisplayLength(file_path_true);
+                array_fake.DisplayLength(file_path_fake);
             }
 
             /**

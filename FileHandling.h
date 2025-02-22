@@ -2,23 +2,17 @@
 
 #include <array>
 #include <filesystem>
-#include <array>
-#include <filesystem>
 #include <fstream>
 #include <memory>
 #include <string>
 
 #include "Array.h"
-#include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
 #include "Vector.h"
 #include "DynamicArray.h"
-#include "Vector.h"
-#include "DynamicArray.h"
 
 namespace PerformanceEvaluation {
-    using FilePath = std::filesystem::path;
     using FilePath = std::filesystem::path;
     class FileHandling {
         protected:
@@ -41,8 +35,8 @@ namespace PerformanceEvaluation {
 
             static void ReadWordFromFile(const FilePath&, LinkedList&);
             
-                // static void ReadFile(const FilePath&, Array&);
             static void ReadFile(const FilePath&, LinkedList&);
+            static void ReadFile(const FilePath&, Array<Dataset, 25000>&);
             
             static void WriteFile(const FilePath&, const std::string&);
             

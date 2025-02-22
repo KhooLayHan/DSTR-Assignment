@@ -26,6 +26,7 @@ namespace PerformanceEvaluation {
             int32_t GetDay(const std::string&) const;
             int32_t GetMonth(const std::string&) const;
             int32_t GetYear(const std::string&) const;
+            int32_t ExtractYear(const std::string&) const;
         public:
             int32_t m_Day;
             int32_t m_Month;

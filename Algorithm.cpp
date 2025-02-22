@@ -28,4 +28,12 @@ namespace PerformanceEvaluation {
             sort_interface->UseSortingAlgorithm(linked_list);
         }
     }
+
+    void Algorithm::SortBy(Array<Dataset>& array, Sort<Array<Dataset>>* sorter) {
+        if (sorter) {
+            sorter->UseSortingAlgorithm(array);
+        }
+        
+    }
+
 } // namespace PerformanceEvaluation
