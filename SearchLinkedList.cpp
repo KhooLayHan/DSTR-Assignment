@@ -11,6 +11,10 @@ namespace PerformanceEvaluation
         LinkedListNode* temp = linked_list.GetHead();
         
         while (temp) {
+            // std::optional<Dataset> dataset = std::visit(GetDatasetVis{}, temp->m_Data);
+
+            // if (!dataset)
+            //     return nullptr;
             const Dataset& dataset = temp->m_Data;
 
             auto is_found = [&, temp](std::string_view target, std::string_view dataset_str) {
@@ -43,8 +47,13 @@ namespace PerformanceEvaluation
     
         // int32_t i = 0;
         while (temp) {
-            const Dataset& dataset = temp->m_Data;
+            // std::optional<Dataset> dataset = std::visit(GetDatasetVis{}, temp->m_Data);
 
+            // if (!dataset)
+            //     return LinkedList();
+
+                const Dataset& dataset = temp->m_Data;
+                
             auto is_found_and_copy = [&, temp](std::string_view target, std::string_view dataset_str) {
                 if (dataset_str.empty()) {
                     SimpleConsoleLogger console;
@@ -84,8 +93,13 @@ namespace PerformanceEvaluation
         LinkedListNode* temp = linked_list.GetHead();
                 
         while (temp) {
-            const Dataset& dataset = temp->m_Data;
+            // std::optional<Dataset> dataset = std::visit(GetDatasetVis{}, temp->m_Data);
 
+            // if (!dataset)
+            //     return;
+
+            const Dataset& dataset = temp->m_Data;
+                
             auto is_found_and_display = [&, temp](std::string_view target, std::string_view dataset_str) {
                 if (dataset_str.empty()) {
                     SimpleConsoleLogger console;
@@ -93,8 +107,7 @@ namespace PerformanceEvaluation
                 }
                 
                 if (Contains(target, dataset_str, type)) {
-                    // temp->m_Data.Display();
-                    
+                    dataset.Display();
                 }
             };
 
@@ -110,17 +123,17 @@ namespace PerformanceEvaluation
         }
     }
 
-    void SearchLinkedList::LinearSearchAll(const LinkedList& linked_list) {
-        LinkedListNode* temp = linked_list.GetHead();
-        temp = nullptr;
-        // while (temp) {
-        //     const Dataset& dataset = temp->m_Data;
+    // void SearchLinkedList::LinearSearchAll(const LinkedList& linked_list) {
+    //     LinkedListNode* temp = linked_list.GetHead();
+    //     temp = nullptr;
+    //     // while (temp) {
+    //     //     const Dataset& dataset = temp->m_Data;
 
-        //     // for (std::string word : dataset.m_Title) {
+    //     //     // for (std::string word : dataset.m_Title) {
 
-        //     // }
-        // }
-    }
+    //     //     // }
+    //     // }
+    // }
 
     // void Binary(std::string_view target, LinkedList& linked_list, Criteria criteria) override {
 

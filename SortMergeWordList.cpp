@@ -4,19 +4,17 @@
 #include "SimpleConsoleLogger.h"
 #include "SimpleLoggingService.h"
 
-#include "SortMergeLinkedList.h"
-
-#include "VariantHelpers.h"
+#include "SortMergeWordList.h"
 
 namespace PerformanceEvaluation {
-    void SortMergeLinkedList::SortBy(LinkedList& linked_list) {
-        LinkedListNode* head = linked_list.GetHead();
+    void SortMergeWordList::SortBy(WordList& linked_list) {
+        WordListNode* head = linked_list.GetHead();
         Merge(&head);
         linked_list.SetHead(head);
     }
 
     // Applies merge sort recursively 
-    void SortMergeLinkedList::Merge(LinkedListNode** head) {                
+    void SortMergeWordList::Merge(WordListNode** head) {                
         // List is already sorted if list is empty
         if (!(*head) || !((*head)->m_Next)) {
             // SimpleConsoleLogger console;
@@ -25,8 +23,8 @@ namespace PerformanceEvaluation {
             return;
         }
 
-        LinkedListNode* left = nullptr;
-        LinkedListNode* right = nullptr;
+        WordListNode* left = nullptr;
+        WordListNode* right = nullptr;
 
         //Split and get middle of list
         SplitAndGetMiddle(*head, &left, &right);
@@ -39,7 +37,7 @@ namespace PerformanceEvaluation {
     }
 
     // Helper function to split the linked list into two halves
-    void SortMergeLinkedList::SplitAndGetMiddle(LinkedListNode* source, LinkedListNode** left, LinkedListNode** right) {
+    void SortMergeWordList::SplitAndGetMiddle(WordListNode* source, WordListNode** left, WordListNode** right) {
         if (!source || !(source->m_Next)) {
             SimpleConsoleLogger console;
             SimpleLoggingService::UseWarnLogger(console, "The linked list is empty.");
@@ -50,8 +48,8 @@ namespace PerformanceEvaluation {
             return;
         }
 
-        LinkedListNode* first_half = source;
-        LinkedListNode* second_half = source->m_Next;
+        WordListNode* first_half = source;
+        WordListNode* second_half = source->m_Next;
         
         // Iterate until second_half reaches the end of node, by then first_half will be the middle node
         while (second_half && second_half->m_Next) {
@@ -65,7 +63,7 @@ namespace PerformanceEvaluation {
     }
 
     // Helper function to merge two sorted linked lists 
-    LinkedListNode* SortMergeLinkedList::SortAndMerge(LinkedListNode* left, LinkedListNode* right) {
+    WordListNode* SortMergeWordList::SortAndMerge(WordListNode* left, WordListNode* right) {
         DateUtility date_utility{};
 
         // Sort by year
@@ -74,12 +72,9 @@ namespace PerformanceEvaluation {
         if (!right)
             return left;
 
-        LinkedListNode* result = nullptr;
+        WordListNode* result = nullptr;
 
-        // std::string left_date = std::visit(GetDateVis{}, left->m_Data);
-        // std::string right_date = std::visit(GetDateVis{}, right->m_Data);
-
-        if (CompareAndSortDate(date_utility, left->m_Data.m_Date, right->m_Data.m_Date)) {
+        if (CompareAndSortDate(date_utility, left->m_Data, right->m_Data)) {
             result = left;
             result->m_Next = SortAndMerge(left->m_Next, right);
         } else {

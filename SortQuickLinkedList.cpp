@@ -2,9 +2,9 @@
 
 namespace PerformanceEvaluation {
     void SortQuickLinkedList::SortBy(LinkedList& linked_list) {
-        LinkedListNode* head = linked_list.getHead();
+        LinkedListNode* head = linked_list.GetHead();
         QuickSort(head);
-        linked_list.setHead(head);
+        linked_list.SetHead(head);
     }
     
     // Applies quick sort

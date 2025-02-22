@@ -82,7 +82,14 @@ namespace PerformanceEvaluation {
         LinkedListNode* temp = m_Head;
 
         while (temp != nullptr) {
-            // std::visit(DisplayVisitor{}, temp->m_Data);
+            std::cout << "\n\033[34;1mID:\033[0m "       << temp->m_Data.m_Id      << "\n";
+            std::cout << "\033[34;1mTITLE:\033[0m "      << temp->m_Data.m_Title   << "\n";
+            std::cout << "\033[34;1mTEXT:\033[0m "       << temp->m_Data.m_Text    << "\n";
+            std::cout << "\033[34;1mSUBJECT:\033[0m "    << temp->m_Data.m_Subject << "\n";
+            std::cout << "\033[34;1mDATE:\033[0m "       << temp->m_Data.m_Date    << "\n";
+            
+            std::cout << "\n-----------\n";
+            // std::visit(DisplayAllVis{}, temp->m_Data);
             temp = temp->m_Next;
         } 
 
@@ -97,12 +104,14 @@ namespace PerformanceEvaluation {
         int32_t line = 0;
 
         while (temp != nullptr && line != count) {
-            // std::visit(DisplayVisitor{}, temp->m_Data);
             std::cout << "\n\033[34;1mID:\033[0m "       << temp->m_Data.m_Id      << "\n";
             std::cout << "\033[34;1mTITLE:\033[0m "      << temp->m_Data.m_Title   << "\n";
             std::cout << "\033[34;1mTEXT:\033[0m "       << temp->m_Data.m_Text    << "\n";
             std::cout << "\033[34;1mSUBJECT:\033[0m "    << temp->m_Data.m_Subject << "\n";
             std::cout << "\033[34;1mDATE:\033[0m "       << temp->m_Data.m_Date    << "\n";
+            
+            std::cout << "\n-----------\n";
+            // std::visit(DisplayAllVis{}, temp->m_Data);
             temp = temp->m_Next;
 
             line++;
@@ -119,8 +128,9 @@ namespace PerformanceEvaluation {
         std::cout << "TITLE\n-----------\n";
         
         while (temp != nullptr) {
-            // SimpleLogger::Info(temp->m_Data.title, LogHandler::FILE);
-            // std::cout << temp->m_Data.title << "\n";
+            std::cout << "\n\033[34;1mTITLE:\033[0m "      << temp->m_Data.m_Title   << "\n";
+            std::cout << "\n-----------\n";
+            // std::visit(DisplayTitleVis{}, temp->m_Data);
             temp = temp->m_Next;
         } 
         
@@ -135,7 +145,9 @@ namespace PerformanceEvaluation {
         std::cout << "TEXT\n-----------\n";
 
         while (temp != nullptr) {
-            std::cout << temp->m_Data.m_Text << "\n";
+            std::cout << "\n\033[34;1mTEXT:\033[0m "      << temp->m_Data.m_Text   << "\n";
+            std::cout << "\n-----------\n";
+            // std::visit(DisplayTextVis{}, temp->m_Data);
             temp = temp->m_Next;
         } 
 
@@ -150,7 +162,9 @@ namespace PerformanceEvaluation {
         std::cout << "SUBJECT\n-----------\n";
         
         while (temp != nullptr) {
-            std::cout << temp->m_Data.m_Subject << "\n";
+            std::cout << "\n\033[34;1mSUBJECT:\033[0m "      << temp->m_Data.m_Subject   << "\n";
+            std::cout << "\n-----------\n";
+            // std::visit(DisplaySubjectVis{}, temp->m_Data);
             temp = temp->m_Next;
         } 
 
@@ -165,10 +179,9 @@ namespace PerformanceEvaluation {
         std::cout << "DATE\n-----------\n";
 
         while (temp != nullptr) {
-            SimpleFileLogger file;
-            SimpleLoggingService::UseInfoLogger(file, temp->m_Data.m_Date);
-        
-            // std::cout << temp->m_Data.m_Date << "\n";
+            std::cout << "\n\033[34;1mDATE:\033[0m "      << temp->m_Data.m_Date   << "\n";
+            std::cout << "\n-----------\n";
+            // std::visit(DisplayDateVis{}, temp->m_Data);
             temp = temp->m_Next;
         } 
 
@@ -202,28 +215,20 @@ namespace PerformanceEvaluation {
         return length;
     }
 
-    // void LinkedList::LinearSearch(const std::unique_ptr<Search<LinkedList, LinkedListNode*> >& search_interface, std::string_view target, Criteria criteria) {
-    //     if (search_interface) {
-    //         search_interface->UseLinearSearchAlgorithm(target, *this, criteria);
-    //     }
+    // void LinkedList::LinearSearch(Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria) {
+    //     Algorithm::LinearSearch(*this, search_interface, targer, criteria, search_type)
     // }
     
-    // void LinkedList::LinearSearchToCopy(std::string_view target, const std::unique_ptr<Search<LinkedList, LinkedListNode*> >& search_interface, Criteria criteria) {
-    //     if (search_interface) {
-    //         search_interface->UseLinearSearchAndCopyAlgorithm(target, *this, criteria);
-    //     }
+    // void LinkedList::LinearSearchToCopy(std::string_view target, Search<LinkedList, LinkedListNode*>* search_interface, Criteria criteria) {
+    //     Algorithm::LinearSearchAndCopy
     // }
     
-    // void LinkedList::LinearSearchToDisplay(std::string_view target, const std::unique_ptr<Search<LinkedList, LinkedListNode*> >& search_interface, Criteria criteria) {
-    //     if (search_interface) {
-    //         search_interface->UseLinearSearchAndDisplayAlgorithm(target, *this, criteria);
-    //     }
+    // void LinkedList::LinearSearchToDisplay(std::string_view target, Search<LinkedList, LinkedListNode*>* search_interface, Criteria criteria) {
+    //     Algorithm::LinearSearchAndDisplay
     // }
 
-    // void LinkedList::SortBy(const std::unique_ptr<Sort<LinkedList, LinkedListNode*>>& sort_interface) {
-    //     if (sort_interface) {
-    //         sort_interface->UseSortingAlgorithm(*this);
-    //     }
+    // void LinkedList::SortBy(Sort<LinkedList, LinkedListNode*>* sort_interface) {
+    //     Algorithm::SortBy(*this, sort_interface);
     // }
 
     void LinkedList::DeleteNode(const Dataset& dataset) {

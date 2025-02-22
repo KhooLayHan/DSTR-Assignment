@@ -16,15 +16,35 @@
                 "./Main.cpp",
                 "./FileHandling.cpp",
                 "./Benchmark.cpp",
+                "./ConfigManager.cpp",
+
+                "./ConversionUtility.cpp",
+
                 "./SimpleFileLogger.cpp",
                 "./SimpleConsoleLogger.cpp",
                 "./SimpleLoggingService.cpp",
+                
+                "./WordList.cpp",
                 "./LinkedList.cpp",
                 "./LinkedListDoubly.cpp",
+                
                 "./Algorithm.cpp",
                 "./DateUtility.cpp",
+                
+                "./SearchArray.cpp",
                 "./SearchLinkedList.cpp",
+                "./SearchWordList.cpp",
+                
                 "./SortMergeLinkedList.cpp",    
+                "./SortMergeLinkedListDoubly.cpp",    
+                "./SortMergeWordList.cpp",    
+                
+                "./SortQuickLinkedList.cpp",    
+                "./SortQuickLinkedListDoubly.cpp",    
+                
+                "./SortHeapLinkedList.cpp",    
+                "./SortHeapLinkedListDoubly.cpp",    
+                
                 "-o",
                 "./Main"
             ],
@@ -61,12 +81,16 @@
                 "./SimpleConsoleLogger.cpp",
                 "./SimpleLoggingService.cpp",
                 "./LinkedList.cpp",
+                "./WordList.cpp",
+                "./WordListSorted.cpp",
                 "./LinkedListDoubly.cpp",
                 "./Algorithm.cpp",
                 "./DateUtility.cpp",
                 "./SearchLinkedList.cpp",
                 "./SortMergeLinkedList.cpp",
                 "./ConfigManager.cpp",
+
+                "./ConversionUtility.cpp",
                 "-o",
                 "./Main"
             ],

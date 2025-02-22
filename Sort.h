@@ -7,10 +7,12 @@
 
 #include "Array.h"
 #include "LinkedList.h"
+#include "WordList.h"
+#include "LinkedListDoubly.h"
 
 namespace PerformanceEvaluation
 {
-    template<typename T, typename N = nullptr_t>
+    template<typename T, typename N = void>
     class Sort {
         public:
             void UseSortingAlgorithm(T& linked_list) {
@@ -27,6 +29,11 @@ namespace PerformanceEvaluation
             
                 // TODO: Might need to replace this with own implementation for std::tie() 
                 return std::tie(left_year, left_month, left_day) <= std::tie(right_year, right_month, right_day);
+            };
+
+            // Ascending order
+            constexpr auto Compare(const std::string& first_word, const std::string& second_word) {
+                return first_word > second_word;
             };
     };
 } // namespace PerformanceEvaluation

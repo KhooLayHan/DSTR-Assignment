@@ -7,11 +7,9 @@
 #include <string_view>
 #include <memory>
 #include <variant>
-#include <regex>
 
-// #include "FileHandling.h"
 #include "Dataset.h"
-// #include "Array.h"
+#include "VariantHelpers.h"
 
 // #include "Sort.h"
 // #include "Search.h"
@@ -22,11 +20,11 @@ namespace PerformanceEvaluation {
     // Implement a Node structure
     struct LinkedListNode {
         // DataVariant m_Data;
-        Dataset m_Data;
+        std::string m_Data;
         LinkedListNode* m_Next;
         
-        explicit LinkedListNode(const Dataset& value) 
-            : m_Data(std::move(value)), m_Next(nullptr) {
+        explicit LinkedListNode(const std::string& value) 
+            : m_Data(value), m_Next(nullptr) {
 
         }
     };
@@ -101,14 +99,13 @@ namespace PerformanceEvaluation {
 
             // void SortBy(Sort<LinkedList, LinkedListNode*>* sort_interface);
 
-            void DeleteNode(const Dataset&);
+            void DeleteNode(const DataVariant&);
 
             void DeleteAll();
 
             LinkedListNode* GetHead() const;
             
             void SetHead(LinkedListNode*);
-
         protected:
             void DecrementLength();
 

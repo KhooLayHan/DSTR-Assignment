@@ -2,9 +2,9 @@
 
 namespace PerformanceEvaluation {
     void SortHeapLinkedList::SortBy(LinkedList& linked_list) {
-        LinkedListNode* head = linked_list.getHead();
+        LinkedListNode* head = linked_list.GetHead();
         HeapSort(head);
-        linked_list.setHead(head);
+        linked_list.SetHead(head);
     }
     
     // Applies heap sort

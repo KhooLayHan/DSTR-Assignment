@@ -16,7 +16,7 @@ namespace PerformanceEvaluation {
         size_t capacity;
     };
     
-    template <typename T, size_t Length>
+    template <typename T, size_t Length = 25000>
     class Array {
         public:
         // TODO: Write the implementation code here...

@@ -47,7 +47,10 @@ namespace PerformanceEvaluation {
                 continue;
 
             const auto& [id, title, text, subject, date] = CleanParseAndMoreClean(line);
-            linked_list.InsertEnd({ id, title, text, subject, date });
+
+            linked_list.InsertEnd(Dataset{ id, title, text, subject, date });
+
+            // linked_list.InsertEnd({ id, title, text, subject, date });
         }
 
         // 1051, Title: "Ex-GOP Congressman Shreds Fellow Republicans For Not ‘Howling’ For Trump’s Impeachment (VIDEO)\r\r\r\r\r\r\r"
@@ -55,7 +58,7 @@ namespace PerformanceEvaluation {
         file.close();
     }
 
-    void FileHandling::ReadWordFromFile(const FilePath& file_path, LinkedList& linked_list) {
+    void FileHandling::ReadWordFromFile(const FilePath& file_path, WordList& linked_list) {
         std::ifstream file(file_path);
         
         CheckReadFileValidity(file_path, file);
@@ -65,8 +68,6 @@ namespace PerformanceEvaluation {
 
         std::string text;
         std::string line;
-        
-        Dataset dataset;
         
         while (std::getline(stream, line)) {
             if (line == "title,text,subject,date" || line == "title,text,subject,date\r") 
@@ -89,12 +90,20 @@ namespace PerformanceEvaluation {
                 return word;
             };
 
-            FileHandling::AppendFileNewline("./Text/assignment.txt", text_parser(title));
-            FileHandling::AppendFileNewline("./Text/assignment.txt", text_parser(text));
-            FileHandling::AppendFileNewline("./Text/assignment.txt", text_parser(subject));
-            FileHandling::AppendFileNewline("./Text/assignment.txt", text_parser(date));
+            const std::string& parsed_title = text_parser(title);
+            const std::string& parsed_text = text_parser(text);
+            const std::string& parsed_subject = text_parser(subject);
+            const std::string& parsed_date = text_parser(date);
+
+            FileHandling::AppendFileNewline("./Text/assignment.txt", parsed_title);
+            FileHandling::AppendFileNewline("./Text/assignment.txt", parsed_text);
+            FileHandling::AppendFileNewline("./Text/assignment.txt", parsed_subject);
+            FileHandling::AppendFileNewline("./Text/assignment.txt", parsed_date);
             
-            LinkedListNode* temp = linked_list.GetHead();
+            linked_list.InsertEnd(parsed_title);
+            linked_list.InsertEnd(parsed_text);
+            linked_list.InsertEnd(parsed_subject);
+            linked_list.InsertEnd(parsed_date);
 
             // while (temp) {
             //     // temp->m_Data.type
@@ -311,9 +320,9 @@ namespace PerformanceEvaluation {
     Dataset FileHandling::CleanParseAndMoreClean(const std::string& line) {        
         const auto& [title, text, subject, date] = ParseCSVLine(line);
         
-        auto clean_field = [&](const std::string& field, const std::string& placeholder) {
-            return field.empty() ? placeholder : field;
-        };
+        // auto clean_field = [&](const std::string& field, const std::string& placeholder) {
+        //     return field.empty() ? placeholder : field;
+        // };
 
         Dataset dataset;
         

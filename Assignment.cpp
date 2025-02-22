@@ -7,6 +7,7 @@
 
 // Data structures
 #include "Array.h"
+// #include "WordList.h"
 #include "LinkedList.h"
 
 // Search and sort algorithms 
@@ -27,13 +28,13 @@
 
 #include "Benchmark.h"
 #include "SearchLinkedList.h"
-#include "SortMergeLinkedList.h"
-#include "Sort.h"
+// #include "SearchWordList.h"
+// #include "SortMergeLinkedList.h"
+// #include "Sort.h"
 
-#include "DynamicArray.h"
-#include "HashMap.h"
+#include "ConversionUtility.h"
 
-#include <regex>
+#include "WordListSorted.h"
 
 /**
  * For each problem statement, you can look at how we solved each questions from the functions implemented here.
@@ -41,13 +42,6 @@
  */
 
 namespace PerformanceEvaluation {
-
-    template <typename Func>
-    auto test = [](Func func) {
-        std::cout << "Start Testing...\n";
-        func();
-        std::cout << "End Testing...\n";
-    };
 
     class Assignment {
         public:
@@ -75,7 +69,9 @@ namespace PerformanceEvaluation {
                 std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
                 linked_list_fake.DisplayFirst(MAX_DISPLAY_COUNT);
                 
-                Algorithm::SortBy(linked_list_true, std::make_unique<SortMergeLinkedList>().get());
+                // auto interface = std::make_unique<SortMergeLinkedList>();
+
+                // Algorithm::SortBy(linked_list_true, interface.get());
                 // // // linked_list_true.mergeSort();
 
                 // // // linked_list_true.displayDate();
@@ -209,58 +205,31 @@ namespace PerformanceEvaluation {
              */
             static void Question_3() {
                 const FilePath& file_path_fake = "./CSV/fake.csv";
-                
+
                 LinkedList linked_list_fake;
-
                 FileHandling::ReadFile(file_path_fake, linked_list_fake);
-                
+
+                auto search_interface = std::make_unique<SearchLinkedList>();
+
                 LinkedList linked_list_fake_impartial_searched_subject_government = 
-                    Algorithm::LinearSearchAndCopy(linked_list_fake, std::make_unique<SearchLinkedList>().get(), "government", Criteria::SUBJECT, SearchType::IMPARTIAL);
-
-                // LinkedList linked_list_fake_impartial_searched_subject_government_and_sort_by_
-
-                HashMap<std::string, int32_t> word_map;
+                    Algorithm::LinearSearchAndCopy(linked_list_fake, search_interface.get(), "government", Criteria::SUBJECT, SearchType::IMPARTIAL);
                 
+                HashSet<std::string> stopwords = {
+                    "a", "an", "and", "are", "as", "at", "be", "but", "by", 
+                    "for", "if", "in", "into", "is", "it", "no", "not", "of", 
+                    "on", "or", "such", "that", "the", "their", "then", "there", 
+                    "these", "they", "this", "to", "was", "will", "with"
+                };
 
-                // FileHandling::AppendFileNewline();
+                WordList word_list_fake = ConvertLinkedListToWordList(linked_list_fake_impartial_searched_subject_government, stopwords);
 
-                // auto ReadAndTokenizeEachWord = [](LinkedList& linked_list) {
-                //     LinkedListNode* temp = linked_list.getHead();
+                HashMap<std::string, int32_t> word_map = GetWordCount(word_list_fake);
+                
+                WordListSorted word_list_sorted = CheckAndSortHashMap(word_map);
 
-                //     while (temp) {
-                //         const Dataset& dataset = temp->m_Data;
-                        
-                //         std::istringstream input_stream;
-                //         std::string word;
-                        
-                //         auto text_parser = [](const std::string& text) {
-                //             std::string word;
-                //             std::regex word_pattern(R"(\b([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*|(?:[A-Za-z]\.){2,})\b)");
-                            
-                //             std::sregex_iterator it(text.begin(), text.end(), word_pattern);
-                //             std::sregex_iterator end;
-            
-                //             while (it != end) {
-                //                 word += it->str();
-                //                 ++it;
-                //             }
-            
-                //             return word;
-                //         };
-
-                //         LinkedList linked_list_words;
-                //         linked_list_words.insertEnd();
-
-                //         dataset.ReadAll()
-
-
-                //         temp = temp->m_Next;
-                //     }
-                // };
-
-                const FilePath& file_path_test = "./CSV/test.csv";
+                word_list_sorted.DisplayAll();
             }
-    };
+    }; // class Assignment
 } // namespace PerformanceEvaluation
 
 

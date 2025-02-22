@@ -6,9 +6,10 @@
 
 #include "Array.h"
 #include "LinkedList.h"
+#include "WordList.h"
 
 #include "Search.h"
-#include "SearchLinkedList.h"
+// #include "SearchLinkedList.h"
 #include "Sort.h"
 
 namespace PerformanceEvaluation {
@@ -17,12 +18,9 @@ namespace PerformanceEvaluation {
 
     /*
     * Sorting algorithms
-    * 1. Bubble Sort
-    * 2. Selection Sort
-    * 3. Insertion Sort
-    * 4. Merge Sort
-    * 5. Quick Sort
-    * 6. Heap Sort
+    * 1. Merge Sort
+    * 2. Quick Sort
+    * 3. Heap Sort
     * ... 
     **/ 
 
@@ -38,6 +36,16 @@ namespace PerformanceEvaluation {
             static LinkedList       LinearSearchAndCopy     (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
             static void             LinearSearchAndDisplay  (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
             
+            static LinkedListDoublyNode*    LinearSearch            (LinkedListDoubly&, Search<LinkedListDoubly, LinkedListDoublyNode*>*, std::string_view, Criteria, SearchType);
+            static LinkedListDoubly         LinearSearchAndCopy     (LinkedListDoubly&, Search<LinkedListDoubly, LinkedListDoublyNode*>*, std::string_view, Criteria, SearchType);
+            static void                     LinearSearchAndDisplay  (LinkedListDoubly&, Search<LinkedListDoubly, LinkedListDoublyNode*>*, std::string_view, Criteria, SearchType);
+            
             static void SortBy                  (LinkedList&, Sort<LinkedList, LinkedListNode*>*);
+            static void SortBy                  (LinkedListDoubly&, Sort<LinkedListDoubly, LinkedListNode*>*);
+            
+            // For Linked List Words
+            static WordList         LinearSearchWordAndCopy     (WordList&, Search<WordList, WordListNode*>*, std::string_view, SearchType);
+            // static LinkedListDoubly LinearSearchAndCopy     (WordListDoubly&, Search<WordListDoubly, WordListDoublyNode*>*, std::string_view, Criteria, SearchType);
+            static void             SortBy                  (WordList&, Sort<WordList, WordListNode*>*);
     };
 } // namespace PerformanceEvaluation

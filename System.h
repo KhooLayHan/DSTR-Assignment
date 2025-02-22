@@ -27,14 +27,14 @@ void* operator new(size_t size) {
 namespace PerformanceEvaluation {
     class System {      
         public:
-            static void Init(int argc, char** argv) {
+            static void Init(/* int argc, char** argv */) {
                 assert(!s_Instance && "System is not initialize.");
                 
                 s_Instance = new System;
 
-                ConfigManager config;
+                // ConfigManager config;
 
-                config.LoadFromArgs(argc, argv);
+                // config.LoadFromArgs(argc, argv);
             }
 
             static void Run() {

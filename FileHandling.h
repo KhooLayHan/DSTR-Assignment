@@ -9,6 +9,7 @@
 #include "Array.h"
 #include "Dataset.h"
 #include "LinkedList.h"
+#include "WordList.h"
 #include "Vector.h"
 #include "DynamicArray.h"
 
@@ -33,7 +34,7 @@ namespace PerformanceEvaluation {
             FileHandling(FilePath&& file_path)
                 : m_FilePath(std::move(file_path)) {}
 
-            static void ReadWordFromFile(const FilePath&, LinkedList&);
+            static void ReadWordFromFile(const FilePath&, WordList&);
             
                 // static void ReadFile(const FilePath&, Array&);
             static void ReadFile(const FilePath&, LinkedList&);
