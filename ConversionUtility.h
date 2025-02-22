@@ -1,15 +1,14 @@
 #pragma once
 
-#include <regex>
-
 #include "Array.h"
-#include "WordList.h"
-#include "WordListSorted.h"
+#include "Dataset.h"
+#include "FileHandling.h"
 #include "HashMap.h"
+#include "HashSet.h"
 #include "LinkedList.h"
 #include "Vector.h"
-#include "HashSet.h"
-#include "Dataset.h"
+#include "WordList.h"
+#include "WordListSorted.h"
 
 namespace PerformanceEvaluation
 {
@@ -33,4 +32,12 @@ namespace PerformanceEvaluation
             return *this;
         }
     };
+
+    // Miscellaneous Question 2 Extra Exclusive
+    void Question_2_ExtraExclusive(const FilePath& file_path = "./CSV/fake.csv");
+
+    constexpr double CalculatePercentage(size_t numerator, size_t denominator) {
+        return static_cast<double>((numerator * 100) / denominator);
+    };;
+
 } // namespace PerformanceEvaluation

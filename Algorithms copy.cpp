@@ -250,3 +250,40 @@
 //             //         }
 //             //     }
 //             // }
+
+                // LinkedListDoubly linked_list_doubly;
+                
+                // linked_list_doubly.InsertEnd()
+
+                
+                const FilePath& file_path_test = "./CSV/test.csv";
+
+                LinkedList linked_list_test;
+                LinkedList linked_list_assignment;
+
+                // ! Please manually remove the contents of assignment.csv to prevent from the file being too large
+                
+                // FileHandling::AppendFileContent(file_path_test, file_path_assignment);
+
+                // FileHandling::ReadFile(file_path_test, linked_list_test); 
+
+                // LinkedList linked_list_test_impartial_searched_date_2016 
+                //     = Algorithm::LinearSearchAndCopy(linked_list_test, std::make_unique<SearchLinkedList>().get(), "2016", Criteria::DATE, SearchType::IMPARTIAL);
+
+                // // True and Fake data "politics", "politicsNews"; Denominator
+                // LinkedList linked_list_test_impartial_searched_date_2016_and_impartial_searched_subject_politics 
+                //     = Algorithm::LinearSearchAndCopy(linked_list_test_impartial_searched_date_2016, std::make_unique<SearchLinkedList>().get(), "politics", Criteria::SUBJECT, SearchType::IMPARTIAL);
+
+                // // Fake data "politics"; Numerator
+                // LinkedList linked_list_test_impartial_searched_date_2016_and_partial_searched_subject_politics 
+                //     = Algorithm::LinearSearchAndCopy(linked_list_test_impartial_searched_date_2016, std::make_unique<SearchLinkedList>().get(), "politics", Criteria::SUBJECT, SearchType::PARTIAL);
+
+                // constexpr auto calculate_percentage = [](size_t numerator, size_t denominator) {
+                //     return (numerator * 100) / denominator;
+                // };
+
+                // size_t numerator = linked_list_test_impartial_searched_date_2016_and_partial_searched_subject_politics.GetLength();
+                // size_t denominator = linked_list_test_impartial_searched_date_2016_and_impartial_searched_subject_politics.GetLength();
+
+                // std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
+                //     << calculate_percentage(numerator, denominator) << "% of political news articles are fake.\n";
