@@ -695,9 +695,9 @@ namespace PerformanceEvaluation {
     
         // If there are more than 4 fields, then error!
         if (field_index > MAX_FIELD_SIZE - 1) {
-            std::cout << token << "\n";
-            SimpleConsoleLogger console;
-            SimpleLoggingService::UseFatalLogger(console, "Unexpected number of fields in line; field_index == " + field_index + '.');
+            // std::cout << token << "\n";
+            // SimpleConsoleLogger console;
+            // SimpleLoggingService::UseFatalLogger(console, "Unexpected number of fields in line; field_index == " + field_index + '.');
         }
         
         // Add the last field

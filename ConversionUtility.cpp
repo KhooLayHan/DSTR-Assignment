@@ -4,6 +4,8 @@
 #include "SearchLinearLinkedList.h"
 #include "Algorithm.h"
 
+#include <stringstream>
+
 namespace PerformanceEvaluation
 {
     HashMap<std::string, int32_t> GetWordCount(const WordList& word_linked_list) {
@@ -23,7 +25,11 @@ namespace PerformanceEvaluation
                 word_count.Insert(word, 1);
 
             i++;
-            std::cout << i << " " << word << ": " << word_count[word] << "\n";
+
+            std::stringstream ss;
+            ss << i << " " << word << ": " << word_count[word] << "\n";
+           
+            FileHandling::AppendFileNewline(ss.str());
 
             temp = temp->m_Next;
         }

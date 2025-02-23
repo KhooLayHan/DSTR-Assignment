@@ -95,22 +95,6 @@ namespace PerformanceEvaluation {
         return length;
     }
 
-    // void WordList::LinearSearch(Search<WordList, WordListNode*>* search_interface, std::string_view target, Criteria criteria) {
-    //     Algorithm::LinearSearch(*this, search_interface, targer, criteria, search_type)
-    // }
-    
-    // void WordList::LinearSearchToCopy(std::string_view target, Search<WordList, WordListNode*>* search_interface, Criteria criteria) {
-    //     Algorithm::LinearSearchAndCopy
-    // }
-    
-    // void WordList::LinearSearchToDisplay(std::string_view target, Search<WordList, WordListNode*>* search_interface, Criteria criteria) {
-    //     Algorithm::LinearSearchAndDisplay
-    // }
-
-    // void WordList::SortBy(Sort<WordList, WordListNode*>* sort_interface) {
-    //     Algorithm::SortBy(*this, sort_interface);
-    // }
-
     void WordList::DeleteNode(const std::string& dataset) {
         if (m_Head == nullptr) {
             // SimpleLogger::Warn("List is empty.", LogHandler::FILE);

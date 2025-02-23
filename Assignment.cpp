@@ -189,7 +189,7 @@ namespace PerformanceEvaluation {
             "a", "an", "and", "are", "as", "at", "be", "but", "by", 
             "for", "if", "in", "into", "is", "it", "no", "not", "of", 
             "on", "or", "such", "that", "the", "their", "then", "there", 
-            "these", "they", "this", "to", "was", "will", "with"
+            "these", "they", "this", "to", "was", "will", "with", "the"
         };
 
         WordList word_list_fake = ConvertLinkedListToWordList(linked_list_fake_impartial_searched_subject_government, stopwords);

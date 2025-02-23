@@ -12,11 +12,11 @@
 int main(int argc, char** argv)
 {
     // PerformanceEvaluation::Assignment::Question_1_LinkedList();
-    PerformanceEvaluation::Assignment::Question_2_Array();
+    // PerformanceEvaluation::Assignment::Question_2_Array();
     // PerformanceEvaluation::Assignment::Question_3();
 
 
-    // PerformanceEvaluation::System::Init(argc, argv);
-    // PerformanceEvaluation::System::Run();
-    // PerformanceEvaluation::System::ShutDown();
+    PerformanceEvaluation::System::Init(argc, argv);
+    PerformanceEvaluation::System::Run();
+    PerformanceEvaluation::System::ShutDown();
 }
