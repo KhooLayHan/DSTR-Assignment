@@ -11,6 +11,10 @@ namespace PerformanceEvaluation
     template <typename T>
     class Vector {
         public:
+            using difference_type = std::ptrdiff_t; // Required for std::distance
+            // using iterator_category = std::forward_iterator_tag; // Or bidirectional/random access if extended
+            
+
             Vector() : m_Length(0), m_Capacity(1) {
                 m_Data = new T[m_Capacity];
             }
@@ -22,6 +26,25 @@ namespace PerformanceEvaluation
                 size_t i = 0;
                 for (const auto& item : init_list) {
                     m_Data[i++] = item;
+                }
+            }
+
+            // New range-based constructor
+            template <typename InputIt>
+            Vector(InputIt first, InputIt last) {
+                int count = 0;
+                for (auto it = first; it != last; ++it) {
+                    count++;
+                }
+
+                // m_Length = std::distance(first, last);
+                m_Length = count;
+                m_Capacity = m_Length;
+                m_Data = new T[m_Capacity];
+
+                size_t i = 0;
+                for (auto it = first; it != last; ++it) {
+                    m_Data[i++] = *it;
                 }
             }
 
@@ -46,7 +69,7 @@ namespace PerformanceEvaluation
             } 
 
             // Copy assignment
-            constexpr Vector& operator=(const Vector& other) noexcept {
+            constexpr Vector& operator=(const Vector<T>& other) noexcept {
                 if (this != &other) { // Self-assignment check
                     delete[] m_Data; // Free current memory
                     
@@ -58,32 +81,18 @@ namespace PerformanceEvaluation
                         m_Data[i] = other.m_Data[i];
                 }
 
-                return *this;
-            }
-
-            constexpr const Vector& operator=(const Vector& other) const noexcept {
-                if (this != &other) { // Self-assignment check
-                    delete[] m_Data; // Free current memory
-                    
-                    m_Length = other.m_Length;
-                    m_Capacity = other.m_Capacity;
-                    m_Data = new T[m_Capacity];
-                    
-                    for (size_t i = 0; i != m_Length; i++) 
-                        m_Data[i] = other.m_Data[i];
-                }
-                
                 return *this;
             }
 
             // Move assignment
-            constexpr Vector& operator=(T&& other) noexcept {
+            constexpr Vector& operator=(Vector<T>&& other) noexcept {
                 if (this != &other) { // Self-assignment check
                     delete[] m_Data; // Free current memory
                     
+                    m_Data = other.m_Data;
                     m_Length = other.m_Length;
                     m_Capacity = other.m_Capacity;
-                    m_Data = new T[m_Capacity];
+                    // m_Data = new T[m_Capacity];
                     
                     other.m_Data = nullptr; // Null the other vector's data
                     other.m_Length = 0; 
@@ -93,36 +102,40 @@ namespace PerformanceEvaluation
                 return *this;
             }
 
-            constexpr const Vector& operator=(T&& other) const noexcept {
-                if (this != &other) { // Self-assignment check
-                    delete[] m_Data; // Free current memory
+            // constexpr const Vector& operator=(T&& other) const noexcept {
+            //     if (this != &other) { // Self-assignment check
+            //         delete[] m_Data; // Free current memory
                     
-                    m_Length = other.m_Length;
-                    m_Capacity = other.m_Capacity;
-                    m_Data = new T[m_Capacity];
+            //         m_Length = other.m_Length;
+            //         m_Capacity = other.m_Capacity;
+            //         m_Data = new T[m_Capacity];
                     
-                    other.m_Data = nullptr; // Null the other vector's data
-                    other.m_Length = 0; 
-                    other.m_Capacity = 0; 
-                }
+            //         other.m_Data = nullptr; // Null the other vector's data
+            //         other.m_Length = 0; 
+            //         other.m_Capacity = 0; 
+            //     }
                 
-                return *this;
-            }
+            //     return *this;
+            // }
 
             // Overloading [] operator
             constexpr T& operator[](size_t index) noexcept {
-                assert(index < m_Length && "Index specified is out of bounds!");
-
+                if (index >= m_Capacity) 
+                    Resize(index + 1); // Ensures capacity is sufficient
+                if (index >= m_Length) 
+                    m_Length = index + 1; // Adjusts length to include new index
+                
                 return m_Data[index];
             }
             
             constexpr const T& operator[](size_t index) const noexcept {
-                assert(index < m_Length && "Index specified is out of bounds!");
-
+                if (index > m_Length)
+                    assert(index <= m_Length && "Index specified is out of bounds!");
+                
                 return m_Data[index];
             }
 
-            void Clear() const noexcept {
+            void Clear() noexcept {
                 m_Length = 0;
             }
             
@@ -168,7 +181,7 @@ namespace PerformanceEvaluation
             }
 
             void Resize(size_t capacity) {
-                assert(capacity > m_Length && "New capacity must be greater than current length!");
+                assert(capacity >= m_Length && "New capacity must be greater than current length!");
 
                 T* data = new T[capacity];
 
@@ -191,30 +204,100 @@ namespace PerformanceEvaluation
             } 
 
             struct Iterator {
+                using iterator_category = std::random_access_iterator_tag;
+                using value_type = T;
+                using difference_type = std::ptrdiff_t;
+                using pointer = T*;
+                using reference = T&;
+
                 T* m_Pointer;
 
-                Iterator(T* pointer) : m_Pointer(pointer) {
+                explicit Iterator(T* pointer) : m_Pointer(pointer) {}
 
-                }
-
-                T& operator*() {
+                reference operator*() {
                     return *m_Pointer;
                 }
 
-                T* operator->() {
+                pointer operator->() {
                     return m_Pointer;
                 }
 
-                Iterator& operator++(size_t) {
+                // Prefix increment
+                Iterator& operator++() {
+                    ++m_Pointer;
+                    return *this;
+                }
+
+                // Postfix increment
+                Iterator operator++(int) {
                     Iterator temp = *this;
                     ++(*this);
-
                     return temp;
                 }
 
-                constexpr bool operator!=(const Iterator& other) const noexcept {
+                // Prefix decrement
+                Iterator& operator--() {
+                    --m_Pointer;
+                    return *this;
+                }
+
+                // Postfix decrement
+                Iterator operator--(int) {
+                    Iterator temp = *this;
+                    --(*this);
+                    return temp;
+                }
+
+                // Iterator arithmetic
+                Iterator operator+(difference_type offset) const {
+                    return Iterator(m_Pointer + offset);
+                }
+
+                Iterator operator-(difference_type offset) const {
+                    return Iterator(m_Pointer - offset);
+                }
+
+                difference_type operator-(const Iterator& other) const {
+                    return m_Pointer - other.m_Pointer;
+                }
+
+                Iterator& operator+=(difference_type offset) {
+                    m_Pointer += offset;
+                    return *this;
+                }
+
+                Iterator& operator-=(difference_type offset) {
+                    m_Pointer -= offset;
+                    return *this;
+                }
+
+                reference operator[](difference_type index) const {
+                    return *(m_Pointer + index);
+                }
+
+                bool operator!=(const Iterator& other) const noexcept {
                     return m_Pointer != other.m_Pointer;
-                } 
+                }
+
+                bool operator==(const Iterator& other) const noexcept {
+                    return m_Pointer == other.m_Pointer;
+                }
+
+                bool operator<(const Iterator& other) const noexcept {
+                    return m_Pointer < other.m_Pointer;
+                }
+
+                bool operator>(const Iterator& other) const noexcept {
+                    return m_Pointer > other.m_Pointer;
+                }
+
+                bool operator<=(const Iterator& other) const noexcept {
+                    return m_Pointer <= other.m_Pointer;
+                }
+
+                bool operator>=(const Iterator& other) const noexcept {
+                    return m_Pointer >= other.m_Pointer;
+                }
             };
 
             Iterator begin() noexcept {
@@ -225,13 +308,26 @@ namespace PerformanceEvaluation
                 return Iterator(m_Data + m_Length);
             }
             
-            const Iterator begin() const noexcept {
+            Iterator begin() const noexcept {
                 return Iterator(m_Data);
             }
 
-            const Iterator end() const noexcept {
+            Iterator end() const noexcept {
                 return Iterator(m_Data + m_Length);
             }
+
+            // !
+
+            // Iterator(DynamicArray<BucketsNode<Key, Value>>& buckets, size_t index)
+            //     : m_Buckets(buckets), m_BucketIndex(index), m_Current(nullptr) {
+            //     while (m_BucketIndex < m_Buckets.GetLength() && !m_Buckets[m_BucketIndex].GetHead()) {
+            //         ++m_BucketIndex;
+            //     }
+            //     if (m_BucketIndex < m_Buckets.GetLength()) {
+            //         m_Current = m_Buckets[m_BucketIndex].GetHead();
+            //     }
+            // }
+
         private:
             T* m_Data;
             size_t m_Length;

@@ -2,6 +2,7 @@
 
 namespace PerformanceEvaluation {
 
+
     // template <typename T, size_t Length>
     // void Array<T, Length>::DisplayFirst(int32_t count) const {
     //     if (m_Size == 0) {

@@ -1,13 +1,13 @@
 #include <iostream>
 
-#include "SearchLinkedList.h"
+#include "SearchLinearLinkedList.h"
 
 #include "SimpleConsoleLogger.h"
 #include "SimpleLoggingService.h"
 
 namespace PerformanceEvaluation
 {
-    LinkedListNode* SearchLinkedList::LinearSearch(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
+    LinkedListNode* SearchLinearLinkedList::LinearSearch(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
         LinkedListNode* temp = linked_list.GetHead();
         
         while (temp) {
@@ -36,7 +36,7 @@ namespace PerformanceEvaluation
         return nullptr;
     } 
 
-    LinkedList SearchLinkedList::LinearSearchAndCopy(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
+    LinkedList SearchLinearLinkedList::LinearSearchAndCopy(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
         LinkedList new_list;
         LinkedListNode* new_tail = nullptr;
         LinkedListNode* temp = linked_list.GetHead();
@@ -80,7 +80,7 @@ namespace PerformanceEvaluation
         return new_list;
     }
 
-    void SearchLinkedList::LinearSearchAndDisplay(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
+    void SearchLinearLinkedList::LinearSearchAndDisplay(std::string_view target, const LinkedList& linked_list, Criteria criteria, SearchType type) {
         LinkedListNode* temp = linked_list.GetHead();
                 
         while (temp) {
@@ -110,9 +110,9 @@ namespace PerformanceEvaluation
         }
     }
 
-    void SearchLinkedList::LinearSearchAll(const LinkedList& linked_list) {
-        LinkedListNode* temp = linked_list.GetHead();
-        temp = nullptr;
+    // void SearchLinkedList::LinearSearchAll(const LinkedList& linked_list) {
+    //     LinkedListNode* temp = linked_list.GetHead();
+    //     temp = nullptr;
         // while (temp) {
         //     const Dataset& dataset = temp->m_Data;
 
@@ -120,7 +120,7 @@ namespace PerformanceEvaluation
 
         //     // }
         // }
-    }
+    // }
 
     // void Binary(std::string_view target, LinkedList& linked_list, Criteria criteria) override {
 

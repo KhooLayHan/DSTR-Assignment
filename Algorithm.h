@@ -9,7 +9,8 @@
 
 #include "Search.h"
 #include "SortMergeArray.h"
-#include "SearchLinkedList.h"
+#include "SearchLinearLinkedList.h"
+#include "SearchLinearArray.h"
 #include "Sort.h"
 
 namespace PerformanceEvaluation {
@@ -36,6 +37,10 @@ namespace PerformanceEvaluation {
     class Algorithm {
         public:
             static LinkedListNode*  LinearSearch            (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
+
+            // static Array<Dataset> LinearSearchAndCopy(Array<Dataset>& array, Search<Array<Dataset>>* search_interface, 
+            //     std::string_view target, Criteria criteria, SearchType type);
+
             static LinkedList       LinearSearchAndCopy     (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
             static void             LinearSearchAndDisplay  (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
             

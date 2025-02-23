@@ -7,12 +7,12 @@
 
 namespace PerformanceEvaluation
 {
-    class SearchLinkedList : public Search<LinkedList, LinkedListNode*> {
+    class SearchLinearLinkedList : public Search<LinkedList, LinkedListNode*> {
         public:
             LinkedListNode* LinearSearch            (std::string_view, const LinkedList&, Criteria, SearchType) override;
             LinkedList      LinearSearchAndCopy     (std::string_view, const LinkedList&, Criteria, SearchType) override;
             void            LinearSearchAndDisplay  (std::string_view, const LinkedList&, Criteria, SearchType) override;
-            void            LinearSearchAll         (const LinkedList&) override;
+            // void            LinearSearchAll         (const LinkedList&) override;
 
             // LinkedListNode* BinarySearch            (std::string_view, const LinkedList&, Criteria) override;
             // LinkedList*     BinarySearchAndCopy     (std::string_view, const LinkedList&, Criteria) override;

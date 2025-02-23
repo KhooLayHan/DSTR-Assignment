@@ -1,242 +1,153 @@
 #pragma once
 
 #include <iostream>
-#include <string>
+#include <functional>
+#include <cassert>
 
-#include "Buckets.h"
 #include "DynamicArray.h"
+#include "Buckets.h"
 
-namespace PerformanceEvaluation
-{
-    template <typename Key, typename Value>
+namespace PerformanceEvaluation {
+
+    template <typename K, typename V>
     class HashMap {
-        public:
-            HashMap(size_t bucket_count = 5) 
-                : m_BucketCount(bucket_count), m_Buckets(bucket_count), m_Length(0) {
-                for (size_t i = 0; i != m_BucketCount; i++) {
-                    m_Buckets.Insert(i, new Buckets<Key, Value>);
-                }
-            }
-
-            Value& operator[](const Key& key) {
-                int32_t index = HashFunction(key);
-                BucketNode<Key, Value>* found = m_Buckets[index]->Find(key);
-
-                if (!found) {
-                    m_Buckets[index]->Insert(key, Value()); 
-                    found = m_Buckets[index]->Find(key);
-
-                    ++m_Length;
-                }
-
-                return found->m_Value;
-            }
-
-            bool Contains(const Key& key) const {
-                return Count(key) > 0;
-            }
-
-            int32_t Count(const Key& key) const {
-                int32_t index = HashFunction(key);
-                return m_Buckets[index]->Find(key) ? 1 : 0;
-            }
-
-            Value* Find(const Key& key) {
-                int32_t index = HashFunction(key);
-
-                BucketNode<Key, Value>* found = m_Buckets[index]->Find(key);
-                return found ? &found->m_Value : nullptr;
-            }
-
-            void Insert(const Key& key, const Value& value) {
-                int32_t index = HashFunction(key);
-                
-                if (!m_Buckets[index]->Find(key)) {
-                    m_Buckets[index]->Insert(key, value);
-
-                    ++m_Length;
-                }
-            }
-
-            void Emplace(Key key, Value value) {
-                Insert(std::move(key), std::move(value));
-            }
-
-            void Clear() {
-                for (size_t i = 0; i != m_BucketCount; i++) {
-                    m_Buckets[i]->Clear();
-                }
-
-                m_Length = 0;
-            }
-
-            size_t GetLength() const {
-                return m_Length;
-            }
-
-            bool IsEmpty() const {
-                return m_Length == 0;
-            }
-
-            size_t GetBucketCount() const {
-                return m_BucketCount;
-            }
-
-            void Rehash(size_t bucket_count) {
-                if (bucket_count <= m_BucketCount)  
-                    return;
-                
-                DynamicArray<Buckets<Key, Value>*> buckets(bucket_count);
-
-                for (size_t i = 0; i != bucket_count; i++) 
-                    buckets.Insert(i, new Buckets<Key, Value>);
-
-                for (size_t i = 0; i != m_BucketCount; i++) {
-                    BucketNode<Key, Value>* temp = m_Buckets[i]->GetHead();
-
-                    while (temp) {
-                        size_t index = HashFunction(temp->m_Key, bucket_count);
-                        buckets[index]->Insert(temp->m_Key, temp->m_Value);
-
-                        temp = temp->m_Next;    
-                    }
-
-                    delete m_Buckets[i];
-                }
-
-                m_Buckets = std::move(buckets);
-                m_BucketCount = bucket_count;
-            }
-
-            // int32_t Get(const std::string& key) {
-            //     int32_t index = HashFunction(key);
-
-            //     BucketNode* found_node = m_Buckets[index]->Find(key);
-
-            //     return found_node ? found_node->m_Value : -1; 
-            // }
-
-            void Display() const {
-                for (size_t i = 0; i != m_BucketCount; i++) {
-                    std::cout << "Bucket " << i << ": ";
-                    
-                    BucketNode<Key, Value>* temp = m_Buckets[i]->GetHead();
-
-                    while (temp) {
-                        std::cout << "[" << temp->m_Key << ": " << temp->m_Value << "] <-> ";
-                        temp = temp->m_Next;
-                    }
-
-                    std::cout << "NULL\n";
-                }
-            }
-
-            
-
-            ~HashMap() {
-                for (size_t i = 0; i != m_BucketCount; i++) {
-                    delete m_Buckets[i];
-                    m_Buckets[i] = nullptr;
-                }
-            }
-        private:
-            int32_t HashFunction(const Key& key, size_t bucket_count = 0) const {
-                int32_t hash = 0;
-                size_t modulus = bucket_count ? bucket_count : m_BucketCount;
-
-                for (char c : key)
-                    hash = (hash * 31 + c) % modulus;
-                
-                return hash;
-            }
-
-            size_t m_BucketCount;
-            DynamicArray<Buckets<Key, Value>*> m_Buckets;
-            size_t m_Length;
-    };
-} // namespace PerformanceEvaluation
-
-// class HashTable {
-//     public:
-//         class Iterator {
-//         public:
-//             Iterator(BucketNode* node, size_t bucketIndex, HashTable* table) 
-//                 : m_Current(node), m_BucketIndex(bucketIndex), m_Table(table) {
-//                 AdvanceToNextValid();
-//             }
-
-//             std::pair<std::string, int32_t> operator*() const {
-//                 return {m_Current->m_Key, m_Current->m_Value};
-//             }
-
-//             Iterator& operator++() {
-//                 if (m_Current) m_Current = m_Current->m_Next;
-//                 AdvanceToNextValid();
-//                 return *this;
-//             }
-
-//             bool operator!=(const Iterator& other) const {
-//                 return m_Current != other.m_Current;
-//             }
-        
-//         private:
-//             void AdvanceToNextValid() {
-//                 while (!m_Current && m_BucketIndex < m_Table->m_BucketCount - 1) {
-//                     m_BucketIndex++;
-//                     m_Current = m_Table->m_Buckets[m_BucketIndex]->Head();
-//                 }
-//             }
-
-//             BucketNode* m_Current;
-//             size_t m_BucketIndex;
-//             HashTable* m_Table;
-//         };
-
-//         HashTable(size_t length = 5) : m_BucketCount(length), m_Buckets(length) {
-//             for (size_t i = 0; i != m_BucketCount; i++) {
-//                 m_Buckets.Insert(i, new Buckets);
-//             }
-//         }
-
-//         void Insert(const std::string& key, int32_t value) {
-//             int32_t index = HashFunction(key);
-//             m_Buckets[index]->Insert(key, value);
-//         }
-
-//         int32_t Get(const std::string& key) {
-//             int32_t index = HashFunction(key);
-//             BucketNode* found_node = m_Buckets[index]->Find(key);
-//             return found_node ? found_node->m_Value : -1; 
-//         }
-
-//         void Display() {
-//             for (size_t i = 0; i != m_BucketCount; i++) {
-//                 std::cout << "Bucket " << i << ": ";
-//                 m_Buckets[i]->Display();
-//             }
-//         }
-
-//         Iterator begin() {
-//             return Iterator(nullptr, 0, this);
-//         }
-
-//         Iterator end() {
-//             return Iterator(nullptr, m_BucketCount, this);
-//         }
-
-//         ~HashTable() {
-//             for (size_t i = 0; i != m_BucketCount; i++) 
-//                 delete m_Buckets[i];
-//         }
+    private:
+        DynamicArray<Buckets<K, V>> m_Buckets;
+        std::hash<K> m_HashFunction;
+        size_t m_BucketCount;
+        size_t m_Size;
     
-//     private:
-//         int32_t HashFunction(const std::string& key) {
-//             int32_t hash = 0;
-//             for (char c : key)
-//                 hash = (hash * 31 + c) % m_BucketCount;
-//             return hash;
-//         }
+    public:
+        constexpr explicit HashMap(size_t capacity = 1000) noexcept : m_Buckets(capacity), m_BucketCount(capacity), m_Size(0) {}
+        
+        constexpr void Insert(const K& key, const V& value) noexcept {
+            size_t index = m_HashFunction(key) % m_BucketCount;
+            BucketNode<K, V>* existing = m_Buckets[index].Find(key);
+            if (existing) {
+                existing->m_Value = value;
+            } else {
+                m_Buckets[index].Insert(key, value);
+                ++m_Size;
+            }
+        }
+        
+        constexpr bool Remove(const K& key) noexcept {
+            size_t index = m_HashFunction(key) % m_BucketCount;
+            if (m_Buckets[index].Remove(key)) {
+                --m_Size;
+                return true;
+            }
+            return false;
+        }
+        
+        [[nodiscard]] constexpr V* Find(const K& key) const noexcept {
+            size_t index = m_HashFunction(key) % m_BucketCount;
+            BucketNode<K, V>* node = m_Buckets[index].Find(key);
+            return node ? &node->m_Value : nullptr;
+        }
+        
+        constexpr void Clear() noexcept {
+            for (size_t i = 0; i < m_BucketCount; ++i) {
+                m_Buckets[i].Clear();
+            }
+            m_Size = 0;
+        }
+        
+        constexpr void PrintAll() const noexcept {
+            for (size_t i = 0; i < m_BucketCount; ++i) {
+                std::cout << "BUCKET" << i << ": \n";
+                for (auto it = m_Buckets[i].begin(); it != m_Buckets[i].end(); ++it) {
+                    std::cout << "{ " << it->first << ": " << it->second << " }\n";
+                }
+                std::cout << "\n";
+            }
+        }
+        
+        constexpr V& operator[](const K& key) noexcept {
+            size_t index = m_HashFunction(key) % m_BucketCount;
+            BucketNode<K, V>* existing = m_Buckets[index].Find(key);
+            if (existing) {
+                return existing->m_Value;
+            }
+            m_Buckets[index].Insert(key, V());
+            return m_Buckets[index].Find(key)->m_Value;
+        }
+        
+        [[nodiscard]] constexpr bool Contains(const K& key) noexcept {
+            size_t index = m_HashFunction(key) % m_BucketCount;
+            return m_Buckets[index].Find(key) != nullptr;
+        }
+        
+        [[nodiscard]] constexpr size_t Size() const noexcept { return m_Size; }
+        [[nodiscard]] constexpr bool Empty() const noexcept { return m_Size == 0; }
+        [[nodiscard]] constexpr size_t BucketCount() const noexcept { return m_BucketCount; }
+        
+        constexpr void Rehash(size_t new_bucket_count) noexcept {
+            DynamicArray<Buckets<K, V>> new_buckets(new_bucket_count);
+            for (size_t i = 0; i < m_BucketCount; ++i) {
+                for (auto it = m_Buckets[i].begin(); it != m_Buckets[i].end(); ++it) {
+                    size_t new_index = m_HashFunction(it->first) % new_bucket_count;
+                    new_buckets[new_index].Insert(it->first, it->second);
+                }
+            }
+            m_Buckets = std::move(new_buckets);
+            m_BucketCount = new_bucket_count;
+        }
+        
+        constexpr void Reserve(size_t new_capacity) noexcept {
+            if (new_capacity > m_BucketCount) {
+                Rehash(new_capacity);
+            }
+        }
 
-//         DynamicArray<Buckets*> m_Buckets;
-//         size_t m_BucketCount;
-// };
+        class Iterator {
+        private:
+            DynamicArray<Buckets<K, V>>& m_Buckets;
+            size_t m_BucketIndex;
+            BucketNode<K, V>* m_Current;
+        
+        public:
+            using difference_type = std::ptrdiff_t;
+            using iterator_category = std::forward_iterator_tag;
+        
+            constexpr Iterator(DynamicArray<Buckets<K, V>>& buckets, size_t index) noexcept 
+                : m_Buckets(buckets), m_BucketIndex(index), m_Current(nullptr) {
+                while (m_BucketIndex < m_Buckets.GetLength() && !m_Buckets[m_BucketIndex].GetHead()) {
+                    ++m_BucketIndex;
+                }
+                if (m_BucketIndex < m_Buckets.GetLength()) {
+                    m_Current = m_Buckets[m_BucketIndex].GetHead();
+                }
+            }
+        
+            constexpr bool operator!=(const Iterator& other) const noexcept {
+                return m_BucketIndex != other.m_BucketIndex || m_Current != other.m_Current;
+            }
+        
+            constexpr bool operator==(const Iterator& other) const noexcept {
+                return m_BucketIndex == other.m_BucketIndex && m_Current == other.m_Current;
+            }
+
+            constexpr std::pair<K, V> operator*() const noexcept {
+                return {m_Current->m_Key, m_Current->m_Value};
+            }
+        
+            constexpr Iterator& operator++() noexcept {
+                if (m_Current) m_Current = m_Current->m_Next;
+                while (!m_Current && ++m_BucketIndex < m_Buckets.GetLength()) {
+                    m_Current = m_Buckets[m_BucketIndex].GetHead();
+                }
+                return *this;
+            }
+        
+            constexpr Iterator operator++(int) noexcept {
+                Iterator temp = *this;
+                ++(*this);
+                return temp;
+            }
+        };
+        
+        [[nodiscard]] constexpr Iterator begin() noexcept { return Iterator(m_Buckets, 0); }
+        [[nodiscard]] constexpr Iterator end() noexcept { return Iterator(m_Buckets, m_Buckets.GetLength()); }
+    };
+}

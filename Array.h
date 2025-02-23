@@ -4,6 +4,8 @@
 #include <array>
 #include <iostream>
 #include <string>
+#include <memory> 
+#include <algorithm>
 
 #include "Dataset.h"
 namespace PerformanceEvaluation {
@@ -23,9 +25,16 @@ namespace PerformanceEvaluation {
 
         // ! Prefer array implementation to have bounds-checking
         
-            Array() : m_Size(0) {} // Default constructor
+            Array() : m_Size(0) {}
 
-            Array(const T& data) : m_Data(data) {} 
+            // Array() : m_Data(), (0) {} // Default constructor
+
+            // ✅ Copy constructor for safe copying
+            Array(const Array& other) : m_Size(other.m_Size) {
+                for (size_t i = 0; i < other.m_Size; i++) {
+                    m_Data[i] = other.m_Data[i];
+                }
+            }
 
             ~Array() {} // Destructor
             
@@ -69,13 +78,109 @@ namespace PerformanceEvaluation {
                 if (m_Size < Length) {
                     m_Data[m_Size++] = value;
                 } else {
-                    std::cerr << "Array is full. Cannot insert more elements." << std::endl;
+                    //std::cerr << "Array is full. Cannot insert more elements." << std::endl;
+                    return;
                 }
             }
 
             void DisplayLength(std::string_view file_path) const {
                 std::cout << "The total number of elements in the array from " << file_path << " dataset is "
                     << m_Size << ".\n";
+            }
+
+            double CalculateFakeNewsPercentage(const Array<Dataset>& trueDataset, const Array<Dataset>& fakeDataset) {
+                size_t totalPolitical2016 = 0;
+                size_t fakePolitical2016 = 0;
+            
+                // Lambda function to process dataset
+                auto processDataset = [&](const Array<Dataset>& dataset, bool isFake) {
+                    for (size_t i = 0; i < dataset.Size(); i++) {
+                        const Dataset& article = dataset[i];
+            
+                        // Check if the article is from 2016 and related to politics
+                        if (article.m_Date.find("2016") != std::string::npos && 
+                            article.m_Subject.find("politics") != std::string::npos) {
+                            totalPolitical2016++;  // Count valid political news
+                            if (isFake) fakePolitical2016++;  // Count only fake news
+                        }
+                    }
+                };
+            
+                // Process both datasets
+                processDataset(trueDataset, false);
+                processDataset(fakeDataset, true);
+            
+                // Avoid division by zero
+                if (totalPolitical2016 == 0) return 0.0;
+            
+                return (static_cast<double>(fakePolitical2016) / totalPolitical2016) * 100.0;
+            }
+
+            double CalculateFakeNewsPercentageLinear(const Array<Dataset> &true_news, const Array<Dataset> &fake_news) {
+                int fake_political_count = 0;
+                int total_political_count = 0;
+    
+                for (const auto &article : fake_news) {
+                    if (article.m_Subject == "politics" && article.m_Date == "2016") {
+                        fake_political_count++;
+                    }
+                }
+    
+                for (const auto &article : true_news) {
+                    if (article.m_Subject == "politics" && article.m_Date == "2016") {
+                        total_political_count++;
+                    }
+                }
+    
+                total_political_count += fake_political_count;
+    
+                if (total_political_count == 0) return 0.0;
+    
+                return (static_cast<double>(fake_political_count) / total_political_count) * 100;
+            }
+    
+            bool BinarySearch(const Array<Dataset> &dataset, const std::string &subject, const std::string &date) {
+                int left = 0, right = dataset.Size() - 1;
+    
+                while (left <= right) {
+                    int mid = left + (right - left) / 2;
+    
+                    if (dataset[mid].m_Subject == subject && dataset[mid].m_Date == date) {
+                        return true;
+                    } 
+                    else if (dataset[mid].m_Subject < subject || 
+                            (dataset[mid].m_Subject == subject && dataset[mid].m_Date < date)) {
+                        left = mid + 1;
+                    } 
+                    else {
+                        right = mid - 1;
+                    }
+                }
+                return false;
+            }
+    
+            double CalculateFakeNewsPercentageBinary(Array<Dataset> &true_news, Array<Dataset> &fake_news) {
+                int fake_political_count = 0;
+                int total_political_count = 0;
+    
+                // Sort the datasets before binary search
+                std::sort(true_news.begin(), true_news.end(), [](const Dataset &a, const Dataset &b) {
+                    return a.m_Subject == b.m_Subject ? a.m_Date < b.m_Date : a.m_Subject < b.m_Subject;
+                });
+    
+                std::sort(fake_news.begin(), fake_news.end(), [](const Dataset &a, const Dataset &b) {
+                    return a.m_Subject == b.m_Subject ? a.m_Date < b.m_Date : a.m_Subject < b.m_Subject;
+                });
+    
+                // Use Binary Search only when needed
+                fake_political_count = BinarySearch(fake_news, "politics", "2016") ? 1 : 0;
+                total_political_count = BinarySearch(true_news, "politics", "2016") ? 1 : 0;
+    
+                total_political_count += fake_political_count;
+    
+                if (total_political_count == 0) return 0.0;
+    
+                return (static_cast<double>(fake_political_count) / total_political_count) * 100;
             }
 
             T* getHead() const {
@@ -89,6 +194,12 @@ namespace PerformanceEvaluation {
             size_t Size() const {
                 return m_Size;
             }
+
+            T* begin() { return m_Data; }
+            T* end() { return m_Data + m_Size; }
+
+            const T* begin() const { return m_Data; }
+            const T* end() const { return m_Data + m_Size; }
 
             void DeleteElement(const T&);
         private:

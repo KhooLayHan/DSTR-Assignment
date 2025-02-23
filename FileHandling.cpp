@@ -55,7 +55,7 @@ namespace PerformanceEvaluation {
         file.close();
     }
 
-    void FileHandling::ReadFile(const FilePath& file_path, Array<Dataset, 25000>& array) {
+    void FileHandling::ReadFile(const FilePath& file_path, Array<Dataset>& array) {
         std::ifstream file(file_path);
         
         CheckReadFileValidity(file_path, file);

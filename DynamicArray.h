@@ -5,13 +5,15 @@
 #include <memory>
 #include <string>
 
+#include "Iterator.h"
+
 namespace PerformanceEvaluation
 {
     // Implementation of DynamicArray that requires manual resizing unlike Vector
     template <typename T>
     class DynamicArray {
         public:
-            DynamicArray(size_t initial_capacity = 5) : m_Capacity(initial_capacity), m_Length(0) {
+            DynamicArray(size_t initial_capacity = 2500) : m_Capacity(initial_capacity), m_Length(0) {
                 m_Data = new T[m_Capacity];
             }
 
@@ -54,14 +56,19 @@ namespace PerformanceEvaluation
             }
 
             // Access elements
-            T& operator[](size_t index) noexcept {
-                assert(index < m_Length && "Index specified is out of bounds!");
-                
+            constexpr T& operator[](size_t index) noexcept {
+                if (index >= m_Capacity) {
+                    Resize(index + 1);
+                }
+                if (index >= m_Length) {
+                    m_Length = index + 1;
+                }
                 return m_Data[index];
             }
 
-            const T& operator[](size_t index) const noexcept {
-                assert(index < m_Length && "Index specified is out of bounds!");
+            constexpr const T& operator[](size_t index) const noexcept {
+                if (index > m_Length)
+                    assert(index <= m_Length && "Index specified is out of bounds!");
                 
                 return m_Data[index];
             }
@@ -74,6 +81,9 @@ namespace PerformanceEvaluation
                 return m_Capacity;
             }
 
+            Iterator<T> begin() { return Iterator<T>(m_Data); }
+            Iterator<T> end() { return Iterator<T>(m_Data + m_Length); }
+
             ~DynamicArray() {
                 delete[] m_Data;
                 m_Data = nullptr; 
@@ -83,4 +93,4 @@ namespace PerformanceEvaluation
             size_t m_Capacity;
             size_t m_Length;
     };
-} // namespace PerformanceEvaluaion
+} // namespace PerformanceEvaluation

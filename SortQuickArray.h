@@ -9,7 +9,7 @@
 #include "DateUtility.h"
 
 namespace PerformanceEvaluation {
-    class SortQuickArray : public Sort<Array<Dataset, 25000>> {
+    class SortQuickArray : public Sort<Array<Dataset>> {
     public:
         // Function to sort the given array using quicksort
         void SortBy(Array<Dataset>& array) override;

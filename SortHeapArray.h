@@ -9,7 +9,7 @@
 #include "DateUtility.h"
 
 namespace PerformanceEvaluation {
-    class SortHeapArray : public Sort<Array<Dataset, 25000>> {
+    class SortHeapArray : public Sort<Array<Dataset>> {
     public:
         // Function to sort the given array using Heap Sort
         void SortBy(Array<Dataset>& array) override;

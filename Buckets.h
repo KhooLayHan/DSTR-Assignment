@@ -4,6 +4,8 @@
 #include <memory>
 #include <string>
 
+#include "Iterator.h"
+
 namespace PerformanceEvaluation
 {   
     template <typename Key, typename Value>
@@ -11,11 +13,11 @@ namespace PerformanceEvaluation
         Key m_Key;
         Value m_Value;
         
-        BucketNode* m_Next;
         BucketNode* m_Previous;
+        BucketNode* m_Next;
         
-        BucketNode(Key key, Value value) 
-            : m_Key(std::move(key)), m_Value(std::move(value)), m_Previous(nullptr), m_Next(nullptr) {
+        BucketNode(const Key& key, const Value& value) 
+            : m_Key(key), m_Value(value), m_Previous(nullptr), m_Next(nullptr) {
             
         } 
     };
@@ -24,8 +26,12 @@ namespace PerformanceEvaluation
     template <typename Key, typename Value>
     class Buckets {
         public:
-            Buckets() : m_Head(nullptr), m_Tail(nullptr) {
+            Buckets() : m_Head(nullptr) {
 
+            }
+
+            ~Buckets() {
+                Clear();
             }
 
             void Insert(const Key& key, const Value& value) {
@@ -36,19 +42,52 @@ namespace PerformanceEvaluation
                     return;
                 }
 
-                BucketNode<Key, Value>* node = new BucketNode<Key, Value>(key, value);
+                // BucketNode<Key, Value>* node = new BucketNode<Key, Value>(key, value);
 
+                // if (!m_Head) {
+                //     m_Head = node;
+                //     m_Tail = node; 
+                // } else {
+                //     m_Tail->m_Next = node;
+                //     node->m_Previous = m_Tail;
+                //     m_Tail = node;
+                // }
+
+                BucketNode<Key, Value>* new_node = new BucketNode<Key, Value>(key, value);
+                
                 if (!m_Head) {
-                    m_Head = node;
-                    m_Tail = node; 
-                } else {
-                    m_Tail->m_Next = node;
-                    node->m_Previous = m_Tail;
-                    m_Tail = node;
+                    m_Head = new_node;
+                    return;
                 }
+
+                new_node->m_Next = m_Head;
+                m_Head->m_Previous = new_node;
+                m_Head = new_node;
             }
 
-            BucketNode<Key, Value>* Find(const Key& key) const {
+            bool Remove(const Key& key) {
+                BucketNode<Key, Value>* curr = m_Head;
+                
+                while (curr) {
+                    if (curr->m_Key == key) {
+                        if (curr->m_Previous) 
+                            curr->m_Previous->m_Next = curr->m_Next;
+                        if (curr->m_Next) 
+                            curr->m_Next->m_Previous = curr->m_Previous;
+                        if (curr == m_Head) 
+                            m_Head = curr->m_Next;
+                        
+                        delete curr;
+                        return true;
+                    }
+                    
+                    curr = curr->m_Next;
+                }
+                
+                return false;
+            }
+
+            BucketNode<Key, Value>* Find(const Key& key) noexcept {
                 BucketNode<Key, Value>* temp = m_Head;
 
                 while (temp) {
@@ -61,17 +100,6 @@ namespace PerformanceEvaluation
                 return nullptr;
             }
 
-            // void Display() {
-            //     BucketNode<Key, Value>* temp = m_Head;
-
-            //     while (temp) {
-            //         std::cout << "[" << temp->m_Key << ": " << temp->m_Value << "] <-> ";
-            //         temp = temp->m_Next;
-            //     }
-
-            //     std::cout << "NULL\n";
-            // }
-
             void Clear() {
                 BucketNode<Key, Value>* temp = m_Head;
                 
@@ -83,18 +111,20 @@ namespace PerformanceEvaluation
                 }
 
                 m_Head = nullptr;
-                m_Tail = nullptr;
             }
 
             BucketNode<Key, Value>* GetHead() const {
                 return m_Head;
             }
 
-            ~Buckets() {
-                Clear();
-            }
+            BucketNode<Key, Value>* begin() { return m_Head; }
+
+            // Iterator support for Buckets
+            // Iterator<BucketNode<Key, Value>> begin() { return Iterator<BucketNode<Key, Value>>(m_Head); }
+            Iterator<BucketNode<Key, Value>> end() { return Iterator<BucketNode<Key, Value>>(nullptr); }
+
         private:
             BucketNode<Key, Value>* m_Head;
-            BucketNode<Key, Value>* m_Tail;
+            // BucketNode<Key, Value>* m_Tail;
     };
 } // namespace PerformanceEvaluation

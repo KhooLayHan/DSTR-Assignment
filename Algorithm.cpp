@@ -33,7 +33,14 @@ namespace PerformanceEvaluation {
         if (sorter) {
             sorter->UseSortingAlgorithm(array);
         }
-        
     }
+
+    // Array<Dataset> Algorithm::LinearSearchAndCopy(Array<Dataset>& array, Search<Array<Dataset>>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
+    //     if (search_interface) {
+    //         return search_interface->UseLinearSearchAndCopyAlgorithm1(target, array, criteria, type);
+    //     }
+
+    //     return {};
+    // }
 
 } // namespace PerformanceEvaluation

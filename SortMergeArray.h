@@ -8,7 +8,7 @@
 #include "Sort.h"
 
 namespace PerformanceEvaluation {
-    class SortMergeArray : public Sort<Array<Dataset, 25000>> {
+    class SortMergeArray : public Sort<Array<Dataset>> {
     public:
         // Function to sort the given array using merge sort
         void SortBy(Array<Dataset>& array) override;

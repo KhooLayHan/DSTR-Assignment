@@ -12,7 +12,6 @@ namespace PerformanceEvaluation
         PARTIAL = 0,
         IMPARTIAL = 1,
     };
-
     template<typename T, typename N = nullptr_t>
     class Search {
         public:
@@ -80,10 +79,40 @@ namespace PerformanceEvaluation
             virtual N       LinearSearch            (std::string_view, const T&, Criteria, SearchType) = 0;
             virtual T       LinearSearchAndCopy     (std::string_view, const T&, Criteria, SearchType) = 0;
             virtual void    LinearSearchAndDisplay  (std::string_view, const T&, Criteria, SearchType) = 0;
-            virtual void    LinearSearchAll         (const T&) = 0;
+            // virtual void    LinearSearchAll         (const T&) = 0;
             
             // virtual T       BinarySearch            (std::string_view, const T&, Criteria) = 0;
             // virtual T       BinarySearchAndCopy     (std::string_view, const T&, Criteria) = 0;
             // virtual void    BinarySearchAndDisplay  (std::string_view, const T&, Criteria) = 0;
+
+            // virtual T       LinearSearchAndCopy     (std::string_view, const T&, Criteria, SearchType) = 0;
+    };
+
+    template<>
+    class Search<Array<Dataset>> {
+        public:
+            virtual Array<Dataset> UseLinearSearchAndCopyAlgorithm1(std::string_view target, const Array<Dataset>& array, Criteria criteria, SearchType type) = 0;
+
+            virtual ~Search() = default;
+
+        protected:
+            constexpr bool Contains(std::string_view target, std::string_view dataset_str, SearchType type) {
+                return (type == SearchType::IMPARTIAL) ? 
+                        (dataset_str.find(target) != std::string::npos) : 
+                        (dataset_str == target);
+            }
+
+            // To convert an entire string to lowercase
+            constexpr std::string ToLowerCase(std::string_view dataset) {
+                std::string result;
+                // dataset.size(), ""
+                // result.length() += dataset.size();
+
+                for (const auto& character : dataset) {
+                    result += std::tolower(character);
+                }
+
+                return result;
+            }
     };
 } // namespace PerformanceEvaluation
