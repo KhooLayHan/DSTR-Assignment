@@ -23,11 +23,11 @@ namespace PerformanceEvaluation {
         public:
             Benchmark() 
                 : m_IsRunning(false) {
-                StartTimer();
+                // StartTimer();
             }
 
             ~Benchmark() {
-                EndTimer();
+                // EndTimer();
             }
            
             void StartTimer();    

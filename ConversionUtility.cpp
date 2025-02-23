@@ -73,21 +73,6 @@ namespace PerformanceEvaluation
         return word_list;
     };
 
-    // WordList ConvertArrayToWordList(const Array<Dataset>& array, WordList& word_list) {
-    //     // Array temp = linked_list.GetHead();
-    //     // WordListNode* word_temp = word_list.GetHead();
-
-    //     // while (temp) {
-    //     //     const Dataset& dataset = temp->m_Data;
-            
-    //     //     word_list.InsertEnd(dataset.ReadAll());
-        
-    //     //     temp = temp->m_Next;
-    //     // }
-
-    //     return word_list; 
-    // };
-
     // Extract word-count pairs and sort them
     WordListSorted CheckAndSortHashMap(HashMap<std::string, int32_t>& word_count) {
         WordListSorted sorted_list;
@@ -191,28 +176,23 @@ namespace PerformanceEvaluation
         std::cout << "November  | " << nov_fake_2016 << "%\n";
         std::cout << "December  | " << dec_fake_2016 << "%\n";   
     }
+
+    void DisplayFirst(size_t count, const DynamicArray<Dataset>& array) {
+        if (array.GetLength() == 0) {
+            std::cout << "The array is empty." << std::endl;
+            return;
+        }
+    
+        count = (count > array.GetLength()) ? array.GetLength() : count; // Ensure we don't exceed array size
+    
+        for (size_t i = 0; i < count; i++) {
+            const Dataset& data = array[i];
+            std::cout << "ID: " << data.m_Id << "\n"
+                      << "Title: " << data.m_Title << "\n"
+                      << "Text: " << data.m_Text << "\n"
+                      << "Subject: " << data.m_Subject << "\n"
+                      << "Date: " << data.m_Date << "\n"
+                      << "-----------------------\n";
+        }
+    }
 } // namespace PerformanceEvaluation
-
-
-                // auto gg = [](HashMap<std::string, int32_t>& word_count) {
-                //     Vector<KeyValue> sorted_word_counts(word_count.begin(), word_count.end());
-                    
-                //     // Vector<KeyValue> sorted_word_counts;
-
-                //     for (const auto& it = word_count.begin(); it != word_count.end(); ++it) {
-
-                //     }
-
-                //     for (size_t i = 0; i != word_count.BucketCount(); i++) {
-                //         auto& bucket = word_count.m_Buckets[i];
-                //     }
-
-                //     // Sort by descending frequency 
-                //     std::sort(sorted_word_counts.begin(), sorted_word_counts.end(), [](const KeyValue& a, const KeyValue& b) {
-                //         return a.m_Value > b.m_Value; 
-                //     });
-
-                //     return sorted_word_counts;
-                // };
-
-                // auto rrr = gg(word_map);

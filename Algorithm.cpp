@@ -83,21 +83,6 @@ namespace PerformanceEvaluation {
     //     }
     // }
 
-    
-    WordList Algorithm::LinearSearchWordAndCopy(WordList& linked_list, Search<WordList, WordListNode*>* search_interface, std::string_view target, SearchType type) {
-        if (search_interface) {
-            return search_interface->UseLinearSearchWordAndCopyAlgorithm(target, linked_list, type);
-        }
-
-        return {};
-    }
-
-    void Algorithm::SortBy(WordList& linked_list, Sort<WordList, WordListNode*>* sort_interface) {
-        if (sort_interface) {
-            sort_interface->UseSortingAlgorithm(linked_list);
-        }
-    };
-
     void Algorithm::SortBy(Array<Dataset>& array, Sort<Array<Dataset>>* sorter) {
         if (sorter) {
             sorter->UseSortingAlgorithm(array);

@@ -5,6 +5,7 @@
 #include <string_view>
 
 #include "Array.h"
+#include "DynamicArray.h"
 #include "LinkedList.h"
 #include "WordList.h"
 #include "SortMergeArray.h"
@@ -48,15 +49,9 @@ namespace PerformanceEvaluation {
             static LinkedListDoubly         LinearSearchAndCopy     (LinkedListDoubly&, Search<LinkedListDoubly, LinkedListDoublyNode*>*, std::string_view, Criteria, SearchType);
             static void                     LinearSearchAndDisplay  (LinkedListDoubly&, Search<LinkedListDoubly, LinkedListDoublyNode*>*, std::string_view, Criteria, SearchType);
             
-            
             static void SortBy                  (LinkedList&, Sort<LinkedList, LinkedListNode*>*);
             static void SortBy                  (LinkedListDoubly&, Sort<LinkedListDoubly, LinkedListNode*>*);
 
             static void SortBy(Array<Dataset>& array, Sort<Array<Dataset>>* sorter);
-            
-            // For Linked List Words
-            static WordList         LinearSearchWordAndCopy     (WordList&, Search<WordList, WordListNode*>*, std::string_view, SearchType);
-            // static LinkedListDoubly LinearSearchAndCopy     (WordListDoubly&, Search<WordListDoubly, WordListDoublyNode*>*, std::string_view, Criteria, SearchType);
-            static void             SortBy                  (WordList&, Sort<WordList, WordListNode*>*);
     };
 } // namespace PerformanceEvaluation

@@ -27,6 +27,10 @@ namespace PerformanceEvaluation {
             config["SOURCE_LOCATION_SUPPORTED"] = env_source_location_supported;
         if (const char* env_file_size_limit = std::getenv("FILE_SIZE_LIMIT"))
             config["FILE_SIZE_LIMIT"] = env_file_size_limit;
+        if (const char* env_platform = std::getenv("PLATFORM"))
+            config["PLATFORM"] = env_platform;
+        if (const char* env_cpp_standard = std::getenv("CPP_STANDARD"))
+            config["CPP_STANDARD"] = env_cpp_standard;
     };
 
     // Parse command-line arguments of argv 
@@ -48,10 +52,15 @@ namespace PerformanceEvaluation {
         }
     };
 
-    void ConfigManager::PrintConfig() const {
+    void ConfigManager::PrintConfig() {
         std::cout << "[CONFIGURATION SETTINGS]\n";
         
-        // config.PrintAll();
+        std::cout << "DEBUG: " << config.Get("DEBUG") << "\n";
+        std::cout << "LOG_LEVEL: " << config.Get("LOG_LEVEL") << "\n";
+        std::cout << "SOURCE_LOCATION_SUPPORTED: " << config.Get("SOURCE_LOCATION_SUPPORTED") << "\n";
+        std::cout << "FILE_SIZE_LIMIT: " << config.Get("FILE_SIZE_LIMIT") << "\n";
+        std::cout << "PLATFORM: " << config.Get("PLATFORM") << "\n";
+        std::cout << "CPP_STANDARD: " << config.Get("CPP_STANDARD") << "\n\n";
     }
 
     std::string ConfigManager::Get(const std::string& key, const std::string& placeholder) {        

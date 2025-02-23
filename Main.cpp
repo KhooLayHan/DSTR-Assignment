@@ -11,8 +11,8 @@
 
 int main(int argc, char** argv)
 {
-    PerformanceEvaluation::Assignment::Question_1();
-    // PerformanceEvaluation::Assignment::Question_2();
+    // PerformanceEvaluation::Assignment::Question_1_LinkedList();
+    PerformanceEvaluation::Assignment::Question_2_Array();
     // PerformanceEvaluation::Assignment::Question_3();
 
 

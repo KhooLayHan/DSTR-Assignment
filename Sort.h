@@ -27,7 +27,6 @@ namespace PerformanceEvaluation
                 const auto& [left_day, left_month, left_year] = date_utility.ParseDate(first_date);
                 const auto& [right_day, right_month, right_year] = date_utility.ParseDate(second_date);
             
-                // TODO: Might need to replace this with own implementation for std::tie() 
                 return std::tie(left_year, left_month, left_day) <= std::tie(right_year, right_month, right_day);
             };
 

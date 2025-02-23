@@ -49,35 +49,35 @@ namespace PerformanceEvaluation {
                 break;
         }
 
-        std::cout << "Duration taken: " << duration << SetTimeUnit(time_unit) << ".\n";
+        std::cout << "\nDuration taken: " << duration << SetTimeUnit(time_unit) << ".\n";
     }
 
     void Benchmark::DurationSeconds() const {
         CheckBenchmarkIsRunning();  
 
         auto duration = std::chrono::duration_cast<Seconds>(m_EndTime - m_StartTime).count();
-        std::cout << "Duration taken: " << duration << "s\n";
+        std::cout << "\nDuration taken: " << duration << "s\n";
     }
 
     void Benchmark::DurationMicroseconds() const {
         CheckBenchmarkIsRunning();
 
         auto duration = std::chrono::duration_cast<Microseconds>(m_EndTime - m_StartTime).count();
-        std::cout << "Duration taken: " << duration << "μs\n";
+        std::cout << "\nDuration taken: " << duration << "μs\n";
     }
 
     void Benchmark::DurationMilliseconds() const {
         CheckBenchmarkIsRunning();
 
         auto duration = std::chrono::duration_cast<Milliseconds>(m_EndTime - m_StartTime).count();
-        std::cout << "Duration taken: " << duration << "ms\n";
+        std::cout << "\nDuration taken: " << duration << "ms\n";
     }
 
     void Benchmark::DurationNanoseconds() const {
         CheckBenchmarkIsRunning();
 
         auto duration = std::chrono::duration_cast<Nanoseconds>(m_EndTime - m_StartTime).count();
-        std::cout << "Duration taken: " << duration << "ns\n";
+        std::cout << "\nDuration taken: " << duration << "ns\n";
     }
 
     void Benchmark::CheckBenchmarkIsRunning() const {

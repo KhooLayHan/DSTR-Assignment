@@ -23,7 +23,6 @@ namespace PerformanceEvaluation {
     }
             
     void LinkedList::InsertEnd(const Dataset& data) {
-        // LinkedListNode* node = new LinkedListNode(std::move(data));
         LinkedListNode* node = new LinkedListNode(data);
 
         if (m_Head == nullptr) {
@@ -47,7 +46,6 @@ namespace PerformanceEvaluation {
 
     void LinkedList::InsertPosition(const Dataset& data, size_t position) {
         LinkedListNode* node = new LinkedListNode(data);
-        // LinkedListNode* node = new LinkedListNode(std::move(data));
 
         if (position == 0) {
             InsertBegin(std::move(data));
@@ -89,7 +87,7 @@ namespace PerformanceEvaluation {
             std::cout << "\033[34;1mDATE:\033[0m "       << temp->m_Data.m_Date    << "\n";
             
             std::cout << "\n-----------\n";
-            // std::visit(DisplayAllVis{}, temp->m_Data);
+
             temp = temp->m_Next;
         } 
 
@@ -111,7 +109,7 @@ namespace PerformanceEvaluation {
             std::cout << "\033[34;1mDATE:\033[0m "       << temp->m_Data.m_Date    << "\n";
             
             std::cout << "\n-----------\n";
-            // std::visit(DisplayAllVis{}, temp->m_Data);
+
             temp = temp->m_Next;
 
             line++;
@@ -130,7 +128,7 @@ namespace PerformanceEvaluation {
         while (temp != nullptr) {
             std::cout << "\n\033[34;1mTITLE:\033[0m "      << temp->m_Data.m_Title   << "\n";
             std::cout << "\n-----------\n";
-            // std::visit(DisplayTitleVis{}, temp->m_Data);
+
             temp = temp->m_Next;
         } 
         
@@ -147,7 +145,7 @@ namespace PerformanceEvaluation {
         while (temp != nullptr) {
             std::cout << "\n\033[34;1mTEXT:\033[0m "      << temp->m_Data.m_Text   << "\n";
             std::cout << "\n-----------\n";
-            // std::visit(DisplayTextVis{}, temp->m_Data);
+
             temp = temp->m_Next;
         } 
 
@@ -164,7 +162,7 @@ namespace PerformanceEvaluation {
         while (temp != nullptr) {
             std::cout << "\n\033[34;1mSUBJECT:\033[0m "      << temp->m_Data.m_Subject   << "\n";
             std::cout << "\n-----------\n";
-            // std::visit(DisplaySubjectVis{}, temp->m_Data);
+
             temp = temp->m_Next;
         } 
 
@@ -291,6 +289,14 @@ namespace PerformanceEvaluation {
         m_Head = nullptr;
         // SimpleLogger::Info("All nodes has been deleted.", LogHandler::FILE);
     }
+
+    // void WriteToFileAll() {
+    //     LinkedListNode* temp = m_Head;
+
+    //     while (temp != nullptr) {
+    //         FileHandling::
+    //     }
+    // }
 
     LinkedListNode* LinkedList::GetHead() const {
         return m_Head;

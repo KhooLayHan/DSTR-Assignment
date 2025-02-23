@@ -22,7 +22,7 @@ namespace PerformanceEvaluation {
         
             void CreateFileOnStartup(const std::string& filename);
         
-            void PrintConfig() const;
+            void PrintConfig();
         private:
             static constexpr std::string DetectPlatform();
             static constexpr std::string DetectCppVersion();

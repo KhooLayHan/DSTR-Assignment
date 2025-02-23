@@ -10,6 +10,8 @@
 #include "WordList.h"
 #include "WordListSorted.h"
 
+#include "DynamicArray.h"
+
 namespace PerformanceEvaluation
 {
     HashMap<std::string, int32_t> GetWordCount(const WordList&);
@@ -39,5 +41,7 @@ namespace PerformanceEvaluation
     constexpr double CalculatePercentage(size_t numerator, size_t denominator) {
         return static_cast<double>((numerator * 100) / denominator);
     };;
+
+    void DisplayFirst(size_t, const DynamicArray<Dataset>*);
 
 } // namespace PerformanceEvaluation

@@ -94,6 +94,7 @@
                 "./SearchBinaryLinkedList.cpp",
                 "./SortMergeLinkedList.cpp",
                 "./SortMergeArray.cpp",   
+                "./SearchLinearArrayDynamic.cpp",
                 "./SortQuickArray.cpp",  
                 "./SortHeapArray.cpp",  
                 "./ConfigManager.cpp",

@@ -3,14 +3,7 @@
 #ifndef SYSTEM_HPP
 #define SYSTEM_HPP
 
-// C Headers
-#include <cstdio>
-
-// C++ Headers
-#include <cassert>
-#include <iomanip>
-#include <iostream>
-#include <string>
+#include "Benchmark.h"
 
 // Header files
 #include "ConfigManager.h"
@@ -54,9 +47,17 @@ namespace PerformanceEvaluation {
 
                 std::cout << "---Performance Evaluation---\n";
                 std::cout << "---      By Group 36     ---\n";
+                
+                std::cout << "1. Khoo Lay Han TP079817\n2. Chuah Wei Shen TP065295\n3. Ong Ye Hong TP074096\n4. Sally Abdulrahim Abdulrahman Al-Samie TP075399\n";
+
+                s_Instance->config.PrintConfig();
             }
 
             static void Run() {
+                Benchmark benchmark;
+                
+                // benchmark.MeasureDuration([](){ Assignment::Question_1_Array(); });
+                benchmark.MeasureDuration([](){ Assignment::Question_1_LinkedList(); });
             }
             
             static void ShutDown() {
@@ -91,12 +92,11 @@ namespace PerformanceEvaluation {
             System& operator=(const System&) = delete;
         private:
             System() {
-                std::cout << "System constructor.\n";  
             }
 
             ~System() {
-                std::cout << "System destructor.\n";
-                std::cout << s_AllocationCount << " allocations.\n";
+                std::cout << "\nSystem has succesfully shutdown.";
+                std::cout << '\n' << s_AllocationCount << " allocations.\n";
             }
 
             inline static System* s_Instance = nullptr;

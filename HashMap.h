@@ -60,25 +60,15 @@ namespace PerformanceEvaluation {
         }
         
         constexpr void PrintAll() noexcept {
-            // for (size_t i = 0; i < m_BucketCount; ++i) {
-            //     std::cout << "BUCKET" << i << ": \n";
-            //     for (auto it = m_Buckets[i].begin(); it != m_Buckets[i].end(); ++it) {
-            //         std::cout << "{ " << it->first << ": " << it->second << " }\n";
-            //     }
-            //     std::cout << "\n";
-            // }
+            for (size_t i = 0; i < m_BucketCount; ++i) {
+                std::cout << "BUCKET" << i << ": \n";
+                for (auto it = m_Buckets[i].begin(); it != m_Buckets[i].end(); ++it) {
+                    std::cout << "{ " << it->first << ": " << it->second << " }\n";
+                }
+                std::cout << "\n";
+            }
         }
-        
-        // constexpr void PrintAll() noexcept {
-            // for (size_t i = 0; i < m_BucketCount; ++i) {
-            //     std::cout << "BUCKET" << i << ": \n";
-            //     for (auto it = m_Buckets[i].begin(); it != m_Buckets[i].end(); ++it) {
-            //         std::cout << "{ " << it->first << ": " << it->second << " }\n";
-            //     }
-            //     std::cout << "\n";
-            // }
-        // }
-        
+             
         constexpr V& operator[](const K& key) noexcept {
             size_t index = m_HashFunction(key) % m_BucketCount;
             BucketNode<K, V>* existing = m_Buckets[index].Find(key);
@@ -114,6 +104,15 @@ namespace PerformanceEvaluation {
             if (new_capacity > m_BucketCount) {
                 Rehash(new_capacity);
             }
+        }
+
+        [[nodiscard]] constexpr V& Get(const K& key) {
+            size_t index = m_HashFunction(key) % m_BucketCount;
+            BucketNode<K, V>* node = m_Buckets[index].Find(key);
+            if (!node) {
+                throw std::out_of_range("Key not found in HashMap");
+            }
+            return node->m_Value;
         }
 
         class Iterator {

@@ -26,8 +26,6 @@ namespace PerformanceEvaluation
 
             Dataset() {}
 
-            Dataset(int32_t id) : m_Id(id) {}
-            
             Dataset(int32_t id, std::string_view title, std::string_view text, std::string_view subject, std::string_view date) 
                 : m_Id(id), m_Title(title), m_Text(text), m_Subject(subject), m_Date(date) {
 
@@ -72,25 +70,8 @@ namespace PerformanceEvaluation
             std::string ReadDate() const {
                 return m_Date;
             }
-            
-        private:
-            
-            // Dataset(const Dataset& dataset) {
-                // SimpleLogger::Info("Dataset: Copy constructor was called.\n", LogHandler::CONSOLE);
-            // }
-
-            // Dataset(Dataset&& dataset) {
-            //     SimpleLogger::Info("Dataset: Move constructor was called.\n", LogHandler::CONSOLE);
-            // }
-            
-            // Dataset& operator =(const Dataset& dataset) {
-            //     SimpleLogger::Info("Dataset: Copy assignment was called.\n", LogHandler::CONSOLE);
-            // }
-            
-            // Dataset& operator =(Dataset&& dataset) {
-            //     SimpleLogger::Info("Dataset: Move assignment was called.\n", LogHandler::CONSOLE);
-            // }
     };
 } // namespace PerformanceEvaluation
+
 
 #endif

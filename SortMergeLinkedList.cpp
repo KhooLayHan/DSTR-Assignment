@@ -6,8 +6,6 @@
 
 #include "SortMergeLinkedList.h"
 
-#include "VariantHelpers.h"
-
 namespace PerformanceEvaluation {
     void SortMergeLinkedList::SortBy(LinkedList& linked_list) {
         LinkedListNode* head = linked_list.GetHead();
@@ -75,9 +73,6 @@ namespace PerformanceEvaluation {
             return left;
 
         LinkedListNode* result = nullptr;
-
-        // std::string left_date = std::visit(GetDateVis{}, left->m_Data);
-        // std::string right_date = std::visit(GetDateVis{}, right->m_Data);
 
         if (CompareAndSortDate(date_utility, left->m_Data.m_Date, right->m_Data.m_Date)) {
             result = left;

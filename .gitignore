@@ -18,3 +18,9 @@ Thumbs.db
 *.dll
 *.o
 *.pyc
+
+# Ignore all large CSV files
+*.csv
+
+# Ignore all Assignment Guidelines files
+*.docx

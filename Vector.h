@@ -14,7 +14,6 @@ namespace PerformanceEvaluation
             using difference_type = std::ptrdiff_t; // Required for std::distance
             // using iterator_category = std::forward_iterator_tag; // Or bidirectional/random access if extended
             
-
             Vector() : m_Length(0), m_Capacity(1) {
                 m_Data = new T[m_Capacity];
             }
@@ -317,16 +316,6 @@ namespace PerformanceEvaluation
             }
 
             // !
-
-            // Iterator(DynamicArray<BucketsNode<Key, Value>>& buckets, size_t index)
-            //     : m_Buckets(buckets), m_BucketIndex(index), m_Current(nullptr) {
-            //     while (m_BucketIndex < m_Buckets.GetLength() && !m_Buckets[m_BucketIndex].GetHead()) {
-            //         ++m_BucketIndex;
-            //     }
-            //     if (m_BucketIndex < m_Buckets.GetLength()) {
-            //         m_Current = m_Buckets[m_BucketIndex].GetHead();
-            //     }
-            // }
 
         private:
             T* m_Data;

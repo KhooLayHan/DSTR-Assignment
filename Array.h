@@ -25,6 +25,8 @@ namespace PerformanceEvaluation {
         // ! Prefer array implementation to have bounds-checking
         
             Array() : m_Size(0) {}
+            
+            // Array() : m_Size(0) {}
 
             // Array() : m_Data(), (0) {} // Default constructor
 

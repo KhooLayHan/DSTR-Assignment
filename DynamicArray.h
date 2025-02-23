@@ -33,7 +33,7 @@ namespace PerformanceEvaluation
                 m_Data = data;
                 m_Capacity = capacity;
             }
-        
+
             // Insert at index
             void Insert(size_t index, const T& value) {
                 if (index >= m_Capacity)
