@@ -7,6 +7,7 @@
 #include "Array.h"
 #include "LinkedList.h"
 #include "WordList.h"
+#include "SortMergeArray.h"
 
 #include "Search.h"
 // #include "SearchLinkedList.h"
@@ -50,6 +51,8 @@ namespace PerformanceEvaluation {
             
             static void SortBy                  (LinkedList&, Sort<LinkedList, LinkedListNode*>*);
             static void SortBy                  (LinkedListDoubly&, Sort<LinkedListDoubly, LinkedListNode*>*);
+
+            static void SortBy(Array<Dataset>& array, Sort<Array<Dataset>>* sorter);
             
             // For Linked List Words
             static WordList         LinearSearchWordAndCopy     (WordList&, Search<WordList, WordListNode*>*, std::string_view, SearchType);

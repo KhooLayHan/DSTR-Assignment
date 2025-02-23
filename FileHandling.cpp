@@ -58,6 +58,27 @@ namespace PerformanceEvaluation {
         file.close();
     }
 
+    void FileHandling::ReadFile(const FilePath& file_path, Array<Dataset>& array) {
+        std::ifstream file(file_path);
+        
+        CheckReadFileValidity(file_path, file);
+
+        std::string line;
+        
+        while (std::getline(file, line)) {
+            if (line == "title,text,subject,date" || line == "title,text,subject,date\r") 
+                continue;
+
+            // Parse the line into dataset fields
+            const auto& [id, title, text, subject, date] = CleanParseAndMoreClean(line);
+            
+            // Insert parsed data into the array
+            array.InsertEnd({ id, title, text, subject, date });
+        }
+
+        file.close();
+    }
+
     void FileHandling::ReadWordFromFile(const FilePath& file_path, WordList& linked_list) {
         std::ifstream file(file_path);
         

@@ -16,6 +16,10 @@
 #include "ConfigManager.h"
 #include "Assignment.cpp"
 
+#if __cplusplus < 202002L
+    #error "Minimum C++20 is necessary to run the program. Please update accordingly."
+#endif
+
 static int s_AllocationCount = 0; 
 
 void* operator new(size_t size) {
@@ -27,22 +31,53 @@ void* operator new(size_t size) {
 namespace PerformanceEvaluation {
     class System {      
         public:
-            static void Init(/* int argc, char** argv */) {
+            static void Init(int argc, char** argv) {
                 assert(!s_Instance && "System is not initialize.");
                 
                 s_Instance = new System;
 
-                // ConfigManager config;
+                s_Instance->config.LoadFromArgs(argc, argv);
+              
+                s_Instance->config.EnsureFileSizeLimit("./CSV/combined.csv");
+                
+                s_Instance->config.EnsureFileSizeLimit("./Solutions/question_1.txt");
+                s_Instance->config.EnsureFileSizeLimit("./Solutions/question_2.txt");
+                s_Instance->config.EnsureFileSizeLimit("./Solutions/question_3.txt");
+                
+                // s_Instance->config.CreateFileOnStartup("./CSV/question_4.txt");
+                // s_Instance->config.CreateFileOnStartup("./CSV/question_5.txt");
+                // s_Instance->config.CreateFileOnStartup("./CSV/question_6.txt");
+                // s_Instance->config.CreateFileOnStartup("./CSV/question_7.txt");
+                // s_Instance->config.CreateFileOnStartup("./CSV/question_8.txt");
+                // s_Instance->config.CreateFileOnStartup("./CSV/question_9.txt");
+                // s_Instance->config.CreateFileOnStartup("./CSV/question_10.txt");
 
-                // config.LoadFromArgs(argc, argv);
+                std::cout << "---Performance Evaluation---\n";
+                std::cout << "---      By Group 36     ---\n";
             }
 
             static void Run() {
             }
             
             static void ShutDown() {
-                delete s_Instance;
-                s_Instance = nullptr;
+                if (s_Instance) {
+                    s_Instance->config.DestroyFileOnShutdown("./CSV/combined.csv");
+                    
+                    s_Instance->config.DestroyFileOnShutdown("./Solutions/question_1.txt");
+                    s_Instance->config.DestroyFileOnShutdown("./Solutions/question_2.txt");
+                    s_Instance->config.DestroyFileOnShutdown("./Solutions/question_3.txt");
+
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_4.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_5.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_6.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_7.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_8.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_9.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_10.txt");
+
+                    delete s_Instance;
+                    s_Instance = nullptr;
+                }
             }
         protected:
             static System& GetInstance() {
@@ -65,6 +100,7 @@ namespace PerformanceEvaluation {
             }
 
             inline static System* s_Instance = nullptr;
+            ConfigManager config;
     };
 }
 

@@ -44,6 +44,10 @@
                 
                 "./SortHeapLinkedList.cpp",    
                 "./SortHeapLinkedListDoubly.cpp",    
+
+                "./SortMergeArray.cpp",   
+                "./SortQuickArray.cpp",  
+                "./SortHeapArray.cpp",  
                 
                 "-o",
                 "./Main"
@@ -89,6 +93,9 @@
                 "./SearchLinearLinkedList.cpp",
                 "./SearchBinaryLinkedList.cpp",
                 "./SortMergeLinkedList.cpp",
+                "./SortMergeArray.cpp",   
+                "./SortQuickArray.cpp",  
+                "./SortHeapArray.cpp",  
                 "./ConfigManager.cpp",
 
                 "./ConversionUtility.cpp",

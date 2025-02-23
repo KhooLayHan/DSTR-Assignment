@@ -31,18 +31,29 @@ namespace PerformanceEvaluation {
         void SimpleConsoleLogger::PrintConsole(std::string_view message, LogLevel level, const Location& location) const {
             static int32_t id;
 
-            std::cerr 
-                << ++id << " [" 
-                << __DATE__ << "|"
-                << __TIME__ << "|"
-                << location.file_name() << "|" 
-                << "Line " << location.line() << "|"
-                << location.function_name() << "|"
-                << "Column " << location.column() 
-                << "]\n"
-                << SetLogLevel(level) << ": " << message 
-                << "\n\n"
-            ;        
+            if (level == LogLevel::DEBUG || level == LogLevel::INFO) {
+                std::cout 
+                    << ++id << " ["
+                    << __DATE__ << "|"
+                    << __TIME__ 
+                    << "]"
+                    << SetLogLevel(level) << ": " << message
+                    << "\n\n"
+                ;
+            } else {
+                std::cerr 
+                    << ++id << " [" 
+                    << __DATE__ << "|"
+                    << __TIME__ << "|"
+                    << location.file_name() << "|" 
+                    << "Line " << location.line() << "|"
+                    << location.function_name() << "|"
+                    << "Column " << location.column() 
+                    << "]\n"
+                    << SetLogLevel(level) << ": " << message 
+                    << "\n\n"
+                ;        
+            }
         }
     #else
         void SimpleConsoleLogger::Log(std::string_view message, const char* file, int32_t line, LogLevel level) const {
@@ -52,18 +63,29 @@ namespace PerformanceEvaluation {
         void SimpleLogger::PrintConsole(std::string_view message, const char* file, int32_t line, LogLevel level) const {
             static int32_t id;
 
-            std::cerr 
-                << ++id << " [" 
-                << __DATE__ << "|"
-                << __TIME__ << "|"
-                << file << "|" // __FILE__
-                << "Line " << line << "|" // __LINE__
-                // * Note: __FUNCTION__ is not standard C++ 
-                // * Note: __COLUMN__ predefined macro does not exist 
-                << "]\n" 
-                << SimpleLogger::SetLogLevel(level) << ": " << message
-                << "\n"
-            ;
+            if (level == LogLevel::DEBUG || level == LogLevel::INFO) {
+                std::cout 
+                    << ++id << " ["
+                    << __DATE__ << "|"
+                    << __TIME__ 
+                    << "]"
+                    << SetLogLevel(level) << ": " << message
+                    << "\n\n"
+                ;
+            } else {
+                std::cerr 
+                    << ++id << " [" 
+                    << __DATE__ << "|"
+                    << __TIME__ << "|"
+                    << location.file_name() << "|" 
+                    << "Line " << location.line() << "|"
+                    << location.function_name() << "|"
+                    << "Column " << location.column() 
+                    << "]\n"
+                    << SetLogLevel(level) << ": " << message 
+                    << "\n\n"
+                ;        
+            }
         }
     #endif
 }

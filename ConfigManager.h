@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <unordered_map>
 
 #include "HashMap.h"
 namespace PerformanceEvaluation {    
@@ -11,15 +10,23 @@ namespace PerformanceEvaluation {
 
             void LoadFromArgs(int argc, char** argv);
 
-            std::string Get     (const std::string& key, const std::string& placeholder = "") const;
-            int32_t     GetInt  (const std::string& key, int32_t placeholder = 0) const;
-            bool        GetBool (const std::string& key, bool placeholder = false) const;
+            std::string Get     (const std::string& key, const std::string& placeholder = "");
+            int32_t     GetInt  (const std::string& key, int32_t placeholder = 0);
+            bool        GetBool (const std::string& key);
 
             void        Set     (const std::string& key, const std::string& value);
+            
+            void EnsureFileSizeLimit(const std::string& filename);
+        
+            void DestroyFileOnShutdown(const std::string& filename);
+        
+            void CreateFileOnStartup(const std::string& filename);
+        
+            void PrintConfig() const;
         private:
             static constexpr std::string DetectPlatform();
+            static constexpr std::string DetectCppVersion();
 
-            // TODO: Replace std::unordered_map with custom implementation
             HashMap<std::string, std::string> config;
     };
 } // namespace PerformanceEvaluation

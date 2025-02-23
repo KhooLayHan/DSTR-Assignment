@@ -45,7 +45,10 @@ namespace PerformanceEvaluation {
                 << "\n\n"
             ;
 
-            FileHandling::AppendFile("./Logs/error_log.txt", output_stream.str());
+            if (level == LogLevel::INFO || level == LogLevel::DEBUG) 
+                FileHandling::AppendFile("./Logs/error_log.txt", output_stream.str());
+            else
+                FileHandling::AppendFile("./Logs/log.txt", output_stream.str());    
         }
     #else
         void SimpleFileLogger::Log(std::string_view message, const char* file, int32_t line, LogLevel level) const {
@@ -67,8 +70,11 @@ namespace PerformanceEvaluation {
                 << SetLogLevel(level) << ": " << message 
                 << "\n\n"
             ;
-    
-            FileHandling::AppendFile("./Logs/error_log.txt", output_stream.str());
+            
+            if (level == LogLevel::INFO || level == LogLevel::DEBUG) 
+                FileHandling::AppendFile("./Logs/error_log.txt", output_stream.str());
+            else
+                FileHandling::AppendFile("./Logs/log.txt", output_stream.str());  
         }
     #endif
 }

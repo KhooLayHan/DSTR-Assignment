@@ -38,6 +38,7 @@ namespace PerformanceEvaluation {
             
                 // static void ReadFile(const FilePath&, Array&);
             static void ReadFile(const FilePath&, LinkedList&);
+            static void ReadFile(const FilePath&, Array<Dataset>&);
             
             static void WriteFile(const FilePath&, const std::string&);
             
