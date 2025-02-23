@@ -4,7 +4,7 @@
 #include "SearchLinearLinkedList.h"
 #include "Algorithm.h"
 
-#include <stringstream>
+#include <sstream>
 
 namespace PerformanceEvaluation
 {
