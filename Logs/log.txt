@@ -1,3 +1,9 @@
 [Feb 20 2025|18:19:21|./Benchmark.cpp|Line 87|void PerformanceEvaluation::Benchmark::checkBenchmarkIsRunning()|Column 27]
 WARN: The benchmark is still running. Stop it to get the duration.
 
+[Feb 23 2025|17:43:59|./Benchmark.cpp|Line 87|void PerformanceEvaluation::Benchmark::checkBenchmarkIsRunning()|Column 27]
+WARN: The benchmark is still running. Stop it to get the duration.
+
+[Feb 23 2025|17:43:59|./Benchmark.cpp|Line 19|void PerformanceEvaluation::Benchmark::endTimer()|Column 31]
+WARN: System has not started benchmarking the program.
+

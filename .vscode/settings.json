@@ -60,6 +60,7 @@
         "format": "cpp",
         "span": "cpp",
         "variant": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "codecvt": "cpp"
     }
 }

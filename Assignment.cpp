@@ -78,7 +78,7 @@ namespace PerformanceEvaluation
 
         std::cout << "Total articles loaded (Array): " << newsArray.getLength() << "\n\n";
 
-        clock_t start, end;
+        // clock_t start, end;
 
         // QuickSort
         // start = clock();
@@ -90,6 +90,7 @@ namespace PerformanceEvaluation
 
         Benchmark benchmark;
         benchmark.startTimer();
+        benchmark.endTimer();
 
         // // MergeSort
         // start = clock();

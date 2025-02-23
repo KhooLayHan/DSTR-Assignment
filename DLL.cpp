@@ -75,18 +75,23 @@ namespace PerformanceEvaluation
 
   void LinkedListDoubly::displayFirst(int count) const
   {
-    LinkedListDoublyNode *current = m_Head;
-    int i = 0;
-
-    while (current != nullptr && i < count)
-    {
-      std::cout << i + 1 << ". " << current->data.title << " (" << current->data.date << ")\n";
-      current = current->next;
-      i++;
-    }
-
-    if (i == 0)
-      std::cout << "No records to display.\n";
+      LinkedListDoublyNode *current = m_Head;
+      int i = 0;
+  
+      while (current != nullptr && i < count)
+      {
+          // Debugging: Print the dataset's raw data
+          std::cout << "DEBUG: Title = " << current->data.title << ", Date = [" << current->data.date << "]\n";
+  
+          // Display the article with its date
+          std::cout << i + 1 << ". " << current->data.title << " (" << current->data.date << ")\n";
+  
+          current = current->next;
+          i++;
+      }
+  
+      if (i == 0)
+          std::cout << "No records to display.\n";
   }
 
   void LinkedListDoubly::deleteNode(const Dataset &dataset)
