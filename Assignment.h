@@ -59,7 +59,6 @@ namespace PerformanceEvaluation {
              * display the total number of articles in both datasets? 
              */
             static void Question_1_Array();
-
             static void Question_1_LinkedList();
 
             /**
@@ -68,7 +67,6 @@ namespace PerformanceEvaluation {
              * from the year of 2016 are fake?  
              */
             static void Question_2_Array();
-
             static void Question_2_LinkedList();
 
             /**
@@ -76,6 +74,7 @@ namespace PerformanceEvaluation {
              * Which words are most frequently used in fake news articles 
              * related to government topics?
              */
-            static void Question_3();
+            static void Question_3_Array();
+            static void Question_3_LinkedList();
     }; // class Assignment
 } // namespace PerformanceEvaluation

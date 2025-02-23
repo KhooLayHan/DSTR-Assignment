@@ -163,6 +163,8 @@ namespace PerformanceEvaluation {
         };
         
         [[nodiscard]] constexpr Iterator begin() noexcept { return Iterator(m_Buckets, 0); }
+        [[nodiscard]] constexpr Iterator begin() const noexcept { return Iterator(m_Buckets, 0); }
         [[nodiscard]] constexpr Iterator end() noexcept { return Iterator(m_Buckets, m_Buckets.GetLength()); }
+        [[nodiscard]] constexpr Iterator end() const noexcept { return Iterator(m_Buckets, m_Buckets.GetLength()); }
     };
 }

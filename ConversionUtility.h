@@ -15,13 +15,18 @@
 namespace PerformanceEvaluation
 {
     HashMap<std::string, int32_t> GetWordCount(const WordList&);
-
+    
+    HashMap<std::string, int32_t> GetWordCount(const DynamicArray<std::string>&);
+ 
     WordList ConvertLinkedListToWordList(const LinkedList&, HashSet<std::string>&);
 
-    // WordList ConvertArrayToWordList(const Array<Dataset>&, WordList&);
+    DynamicArray<std::string> ConvertDynamicArrayToWordArray(const DynamicArray<Dataset>&, HashSet<std::string>&);
 
-    // Extract word-count pairs and sort them
-    WordListSorted CheckAndSortHashMap(HashMap<std::string, int32_t>&);
+    // Extract word-count pairs and sort them to sorted linked list
+    WordListSorted CheckAndSortHashMapLinkedList(HashMap<std::string, int32_t>&);
+    
+    // Extract word-count pairs and sort them to sorted word array
+    DynamicArray<std::string> CheckAndSortHashMapArray(HashMap<std::string, int32_t>&);
 
     struct KeyValue {
         std::string m_Key;
@@ -42,6 +47,7 @@ namespace PerformanceEvaluation
         return static_cast<double>((numerator * 100) / denominator);
     };;
 
-    void DisplayFirst(size_t, const DynamicArray<Dataset>*);
+    void DisplayFirst(size_t, const DynamicArray<Dataset>&);
+    void DisplayAll(const DynamicArray<std::string>&);
 
 } // namespace PerformanceEvaluation

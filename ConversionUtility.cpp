@@ -4,7 +4,7 @@
 #include "SearchLinearLinkedList.h"
 #include "Algorithm.h"
 
-#include <sstream>
+// #include <sstream>
 
 namespace PerformanceEvaluation
 {
@@ -26,12 +26,31 @@ namespace PerformanceEvaluation
 
             i++;
 
-            std::stringstream ss;
-            ss << i << " " << word << ": " << word_count[word] << "\n";
+            std::string str = i + " " + word + ": " + std::to_string(word_count[word]) + "\n";
            
-            FileHandling::AppendFileNewline(ss.str());
+            FileHandling::AppendFileNewline("./Solutions/question_3_array.txt", str);
 
             temp = temp->m_Next;
+        }
+
+        return word_count;
+    };
+
+    HashMap<std::string, int32_t> GetWordCount(const DynamicArray<std::string>& word_array) {
+        HashMap<std::string, int> word_count;
+
+        for (size_t i = 0; i != word_array.GetLength(); i++) {
+            std::string word = word_array[i];
+            std::transform(word.begin(), word.end(), word.begin(), ::tolower);
+            
+            if (word_count.Contains(word))
+                word_count[word]++;
+            else    
+                word_count.Insert(word, 1);
+
+            std::string str =  i + " " + word + ": " + std::to_string(word_count[word]) + "\n";
+           
+            FileHandling::AppendFileNewline("./Solutions/question_3_array.txt", str);
         }
 
         return word_count;
@@ -41,10 +60,11 @@ namespace PerformanceEvaluation
         LinkedListNode* temp = linked_list.GetHead();
         WordList word_list;
 
-        int j = 0;
+        int line = 0;
 
-        while (temp && j != 1) {
-            if (j == 1) 
+        // Hard-coded that ends ups only reading the first line in fake.csv
+        while (temp && line != 1) {
+            if (line == 1) 
                 break;
             
             const Dataset& dataset = temp->m_Data;
@@ -73,14 +93,56 @@ namespace PerformanceEvaluation
             }
         
             temp = temp->m_Next;
-            j++;
+            line++;
         }
 
         return word_list;
     };
 
-    // Extract word-count pairs and sort them
-    WordListSorted CheckAndSortHashMap(HashMap<std::string, int32_t>& word_count) {
+    DynamicArray<std::string> ConvertDynamicArrayToWordArray(const DynamicArray<Dataset>& array, HashSet<std::string>& stopwords) {
+        DynamicArray<std::string> word_array;
+    
+        int line = 0;
+    
+        // Hard-coded that ends ups only reading the first line in fake.csv
+        // while (temp && line != 1) {
+        for (size_t i = 0; i != array.GetLength(); i++) {
+            if (line == 1)
+                break;
+    
+            const Dataset& dataset = array[0];
+    
+            auto text_parser = [](const std::string& text) {
+                DynamicArray<std::string> words;
+                std::regex word_pattern(R"(\b([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*|(?:[A-Za-z]\.){2,})\b)");
+    
+                std::sregex_iterator it(text.begin(), text.end(), word_pattern);
+                std::sregex_iterator end;
+    
+                while (it != end) {
+                    words.Insert(words.GetLength(), it->str());
+                    ++it;
+                }
+    
+                return words;
+            };
+    
+            DynamicArray<std::string> words = text_parser(dataset.m_Title + " " + dataset.m_Text);
+    
+            for (size_t i = 0; i != words.GetLength(); i++) {
+                if (!stopwords.Contains(words[i])) {
+                    word_array.Insert(word_array.GetLength(), words[i]);
+                }
+            }
+
+            line++;
+        }
+    
+        return word_array;
+    }
+
+    // Extract word-count pairs and sort them to sorted word list
+    WordListSorted CheckAndSortHashMapLinkedList(HashMap<std::string, int32_t>& word_count) {
         WordListSorted sorted_list;
 
         for (const auto& [key, value] : word_count) {
@@ -88,6 +150,20 @@ namespace PerformanceEvaluation
         }
 
         return sorted_list;
+    }
+    
+    // Extract word-count pairs and sort them to dynamic array
+    DynamicArray<std::string> CheckAndSortHashMapArray(HashMap<std::string, int32_t>& word_count) {
+        DynamicArray<std::string> sorted_array;
+
+        for (auto it = word_count.begin(); it != word_count.end(); ++it)
+            sorted_array.Insert(sorted_array.GetLength(), (*it).first);
+
+        // for (const auto& [key, value] : word_count) {
+        //     sorted_list.InsertSorted(key, value);
+        // }
+
+        return sorted_array;
     }
 
     void Question_2_ExtraExclusive(const FilePath& file_path) {        
@@ -199,6 +275,17 @@ namespace PerformanceEvaluation
                       << "Subject: " << data.m_Subject << "\n"
                       << "Date: " << data.m_Date << "\n"
                       << "-----------------------\n";
+        }
+    }
+
+    void DisplayAll(const DynamicArray<std::string>& array) {
+        if (array.GetLength() == 0) {
+            std::cout << "The array is empty." << std::endl;
+            return;
+        }
+    
+        for (size_t i = 0; i < array.GetLength(); i++) {
+            std::cout << array[i] << "\n";
         }
     }
 } // namespace PerformanceEvaluation

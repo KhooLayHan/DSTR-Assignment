@@ -174,7 +174,34 @@ namespace PerformanceEvaluation {
             << percent << " of political news articles are fake.\n";
     }
 
-    void Assignment::Question_3() {
+    void Assignment::Question_3_Array() {
+        const FilePath& file_path_fake = "./CSV/fake.csv";
+
+        DynamicArray<Dataset> array_fake;
+        FileHandling::ReadFile(file_path_fake, array_fake);
+
+        SearchLinearDynamicArray search_linear;
+        
+        DynamicArray<Dataset> array_fake_impartial_searched_subject_government = 
+            search_linear.LinearSearchAndCopy("government", array_fake, Criteria::SUBJECT, SearchType::IMPARTIAL);
+
+        HashSet<std::string> stopwords = {
+            "a", "an", "and", "are", "as", "at", "be", "but", "by", 
+            "for", "if", "in", "into", "is", "it", "no", "not", "of", 
+            "on", "or", "such", "that", "the", "their", "then", "there", 
+            "these", "they", "this", "to", "was", "will", "with", "the"
+        };
+
+        DynamicArray<std::string> word_array_fake = ConvertDynamicArrayToWordArray(array_fake_impartial_searched_subject_government, stopwords);
+
+        HashMap<std::string, int32_t> word_map = GetWordCount(word_array_fake);
+        
+        DynamicArray<std::string> word_array_sorted = CheckAndSortHashMapArray(word_map);
+
+        DisplayAll(word_array_sorted);
+    }
+
+    void Assignment::Question_3_LinkedList() {
         const FilePath& file_path_fake = "./CSV/fake.csv";
 
         LinkedList linked_list_fake;
@@ -196,9 +223,7 @@ namespace PerformanceEvaluation {
 
         HashMap<std::string, int32_t> word_map = GetWordCount(word_list_fake);
         
-        WordListSorted word_list_sorted = CheckAndSortHashMap(word_map);
-
-        // * Please convert from HashMap to Sorted Array (WEI SHEN)
+        WordListSorted word_list_sorted = CheckAndSortHashMapLinkedList(word_map);
 
         word_list_sorted.DisplayAll();
     }
