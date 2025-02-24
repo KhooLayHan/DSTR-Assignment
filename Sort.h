@@ -8,7 +8,6 @@
 #include "Array.h"
 #include "LinkedList.h"
 #include "WordList.h"
-#include "LinkedListDoubly.h"
 
 namespace PerformanceEvaluation
 {

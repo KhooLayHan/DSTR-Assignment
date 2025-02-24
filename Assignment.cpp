@@ -71,14 +71,6 @@ namespace PerformanceEvaluation {
     }
 
     void Assignment::Question_2_Array() {
-        // * Step 1: Combine both true.csv and fake.csv, called combined.csv
-        // * Step 2: Impartial search all articles with value "2016" from combined.csv
-        // * Step 3: Partial search all articles with value "politics" to get fake articles 
-        // * Step 4: Impartial search all articles with value "politics" to get true and fake articles that has value "politics" ("politics" and "politicsNews")
-        // * Step 5: New partial searched linked list will be numerator 
-        // * Step 6: New impartial searched linked list will be denominator 
-        // * Step 7: Get ratio and percentage of partial / impartial 
-
         // Percentage of Fake News = (Number of Fake Political News Articles in 2016 / Total Political News Articles in 2016) × 100
             
         DynamicArray<Dataset> array_true;
@@ -115,7 +107,7 @@ namespace PerformanceEvaluation {
         double percent = CalculatePercentage(numerator, denominator);
 
         std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
-            << percent << " of political news articles are fake.\n";
+            << percent << "% of political news articles are fake.\n";
     }
 
     void Assignment::Question_2_LinkedList() {
@@ -161,7 +153,7 @@ namespace PerformanceEvaluation {
         double percent = CalculatePercentage(numerator, denominator);
 
         std::cout << "Out of " << denominator << " true and fake articles from the year 2016, " 
-            << percent << " of political news articles are fake.\n";
+            << percent << "% of political news articles are fake.\n";
     }
 
     void Assignment::Question_3_Array() {

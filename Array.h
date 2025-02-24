@@ -14,8 +14,6 @@ namespace PerformanceEvaluation {
         public:
             Array() : m_Size(0) {}
 
-            // Array() : m_Data(), (0) {} // Default constructor
-
             // ✅ Copy constructor for safe copying
             Array(const Array& other) : m_Size(other.m_Size) {
                 for (size_t i = 0; i < other.m_Size; i++) {

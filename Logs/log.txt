@@ -25,3 +25,54 @@ INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/co
 [Feb 24 2025|12:49:04|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const FilePath&, const FilePath&)|Column 44]
 INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
 
+[Feb 24 2025|13:42:38|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|13:42:38|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|13:42:38|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|13:42:38|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|13:45:52|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+
+[Feb 24 2025|13:45:52|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|13:45:52|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|15:33:30|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+
+[Feb 24 2025|17:07:48|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+
+[Feb 24 2025|17:28:14|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+
+[Feb 24 2025|17:28:14|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|17:28:14|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|17:28:14|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|17:28:14|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const PerformanceEvaluation::FilePath&, const PerformanceEvaluation::FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|17:56:06|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+
+[Feb 24 2025|18:01:59|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+
+[Feb 24 2025|18:11:08|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+

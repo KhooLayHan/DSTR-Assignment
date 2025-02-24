@@ -46,29 +46,6 @@ namespace PerformanceEvaluation {
             search_interface->UseBinarySearchAndDisplayAlgorithm(target, linked_list, criteria, type);
         }
     }
-    
-    // Doubly Linked List Linear Search
-    LinkedListDoublyNode* Algorithm::LinearSearch(LinkedListDoubly& linked_list_doubly, Search<LinkedListDoubly, LinkedListDoublyNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
-        if (search_interface) {
-            return search_interface->UseLinearSearchAlgorithm(target, linked_list_doubly, criteria, type);
-        }
-
-        return nullptr;
-    }
-
-    LinkedListDoubly Algorithm::LinearSearchAndCopy(LinkedListDoubly& linked_list_doubly, Search<LinkedListDoubly, LinkedListDoublyNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
-        if (search_interface) {
-            return search_interface->UseLinearSearchAndCopyAlgorithm(target, linked_list_doubly, criteria, type);
-        }
-
-        return {};
-    }
-    
-    void Algorithm::LinearSearchAndDisplay(LinkedListDoubly& linked_list_doubly, Search<LinkedListDoubly, LinkedListDoublyNode*>* search_interface, std::string_view target, Criteria criteria, SearchType type) {
-        if (search_interface) {
-            search_interface->UseLinearSearchAndDisplayAlgorithm(target, linked_list_doubly, criteria, type);
-        }
-    }
 
     // Sorting
     void Algorithm::SortBy(LinkedList& linked_list, Sort<LinkedList, LinkedListNode*>* sort_interface) {
@@ -76,12 +53,6 @@ namespace PerformanceEvaluation {
             sort_interface->UseSortingAlgorithm(linked_list);
         }
     }
-
-    // void Algorithm::SortBy(LinkedListDoubly& linked_list_doubly, Sort<LinkedListDoubly, LinkedListDoublyNode*>* sort_interface) {
-    //     if (sort_interface) {
-    //         sort_interface->UseSortingAlgorithm(linked_list_doubly);
-    //     }
-    // }
 
     void Algorithm::SortBy(Array<Dataset>& array, Sort<Array<Dataset>>* sorter) {
         if (sorter) {

@@ -11,7 +11,6 @@
 #include "SortMergeArray.h"
 
 #include "Search.h"
-// #include "SearchLinkedList.h"
 #include "Sort.h"
 
 namespace PerformanceEvaluation {
@@ -44,13 +43,7 @@ namespace PerformanceEvaluation {
             static LinkedList       BinarySearchAndCopy     (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
             static void             BinarySearchAndDisplay  (LinkedList&, Search<LinkedList, LinkedListNode*>*, std::string_view, Criteria, SearchType);
             
-            // Linear Seach Doubly Linked List 
-            static LinkedListDoublyNode*    LinearSearch            (LinkedListDoubly&, Search<LinkedListDoubly, LinkedListDoublyNode*>*, std::string_view, Criteria, SearchType);
-            static LinkedListDoubly         LinearSearchAndCopy     (LinkedListDoubly&, Search<LinkedListDoubly, LinkedListDoublyNode*>*, std::string_view, Criteria, SearchType);
-            static void                     LinearSearchAndDisplay  (LinkedListDoubly&, Search<LinkedListDoubly, LinkedListDoublyNode*>*, std::string_view, Criteria, SearchType);
-            
             static void SortBy                  (LinkedList&, Sort<LinkedList, LinkedListNode*>*);
-            static void SortBy                  (LinkedListDoubly&, Sort<LinkedListDoubly, LinkedListNode*>*);
 
             static void SortBy(Array<Dataset>& array, Sort<Array<Dataset>>* sorter);
     };

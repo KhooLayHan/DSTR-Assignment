@@ -26,7 +26,6 @@
                 
                 "./WordList.cpp",
                 "./LinkedList.cpp",
-                "./LinkedListDoubly.cpp",
                 
                 "./Algorithm.cpp",
                 "./DateUtility.cpp",
@@ -36,14 +35,11 @@
                 "./SearchWordList.cpp",
                 
                 "./SortMergeLinkedList.cpp",    
-                "./SortMergeLinkedListDoubly.cpp",    
                 "./SortMergeWordList.cpp",    
                 
-                "./SortQuickLinkedList.cpp",    
-                "./SortQuickLinkedListDoubly.cpp",    
+                "./SortQuickLinkedList.cpp",
                 
                 "./SortHeapLinkedList.cpp",    
-                "./SortHeapLinkedListDoubly.cpp",    
 
                 "./SortMergeArray.cpp",   
                 "./SortQuickArray.cpp",  
@@ -87,7 +83,6 @@
                 "./LinkedList.cpp",
                 "./WordList.cpp",
                 "./WordListSorted.cpp",
-                "./LinkedListDoubly.cpp",
                 "./Algorithm.cpp",
                 "./DateUtility.cpp",
                 "./SearchLinearLinkedList.cpp",
@@ -135,7 +130,6 @@
                 "./LinkedList.cpp",
                 "./WordList.cpp",
                 "./WordListSorted.cpp",
-                "./LinkedListDoubly.cpp",
                 "./Algorithm.cpp",
                 "./DateUtility.cpp",
                 "./SearchLinearLinkedList.cpp",

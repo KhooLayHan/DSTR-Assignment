@@ -49,8 +49,8 @@ namespace PerformanceEvaluation
     void Question_2_Array_ExtraExclusive(const FilePath& true_file_path = "./CSV/true.csv", const FilePath& fake_file_path = "./CSV/fake.csv");
 
     constexpr double CalculatePercentage(size_t numerator, size_t denominator) {
-        return denominator == 0 ? 0.0 : std::round((static_cast<double>(numerator) / denominator) * 10000) / 100.0;
-    };
+        return denominator == 0 ? 0.0 : std::round((static_cast<double>(numerator) / denominator) * 1000000) / 10000.0;
+    }
 
     void DisplayFirst(size_t, const DynamicArray<Dataset>&);
     void DisplayAll(const DynamicArray<std::string>&);
