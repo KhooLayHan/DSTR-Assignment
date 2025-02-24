@@ -2,6 +2,7 @@
 
 namespace PerformanceEvaluation
 {
+    // Sourced from ChatGPT
     template <typename T>
     class Iterator {
         public:

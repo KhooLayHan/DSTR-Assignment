@@ -4,6 +4,7 @@
 
 namespace PerformanceEvaluation
 {
+    // Sourced from ChatGPT
     template <typename Key, typename Value>
     class HashMapIterator {
     public:

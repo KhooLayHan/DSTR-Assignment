@@ -4,6 +4,8 @@
 #define LINKED_LIST_CLONER_HPP
 
 namespace PerformanceEvaluation {
+    // Sourced from ChatGPT
+
     // Generic LinkedListNode structure to ensure compatibility with Singly, Doubly, and Circular Linked List
     template <typename T>
     struct LinkedListNode {

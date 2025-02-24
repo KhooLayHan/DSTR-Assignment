@@ -158,6 +158,7 @@ namespace PerformanceEvaluation
                 m_Length++;
             }
 
+            // Sourced from ChatGPT
             template <typename... Args>
             void EmplaceBack(Args&&... args) {
                 if (m_Length == m_Capacity)
@@ -314,8 +315,6 @@ namespace PerformanceEvaluation
             Iterator end() const noexcept {
                 return Iterator(m_Data + m_Length);
             }
-
-            // !
 
         private:
             T* m_Data;

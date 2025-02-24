@@ -1,4 +1,3 @@
-#pragma once
 #include "Assignment.h"
 
 namespace PerformanceEvaluation {

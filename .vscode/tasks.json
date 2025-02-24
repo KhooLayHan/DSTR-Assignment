@@ -44,7 +44,7 @@
                 "./SortMergeArray.cpp",   
                 "./SortQuickArray.cpp",  
                 "./SortHeapArray.cpp",  
-                
+            
                 "-o",
                 "./Main"
             ],
@@ -140,7 +140,6 @@
                 "./SortQuickArray.cpp",  
                 "./SortHeapArray.cpp",  
                 "./ConfigManager.cpp",
-
                 "./ConversionUtility.cpp",
                 "-o",
                 "${fileDirname}/Main"

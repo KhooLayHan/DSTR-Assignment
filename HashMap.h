@@ -9,6 +9,7 @@
 
 namespace PerformanceEvaluation {
 
+    // Sourced from ChatGPT
     template <typename K, typename V>
     class HashMap {
     private:
