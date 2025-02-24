@@ -76,3 +76,6 @@ INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
 [Feb 24 2025|18:11:08|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
 INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
 
+[Feb 24 2025|22:03:50|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const std::string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+

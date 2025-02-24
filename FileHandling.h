@@ -16,11 +16,14 @@ namespace PerformanceEvaluation {
     class FileHandling {
 
         public:
+            // Default constructor for FileHandling
             FileHandling() {}
         
+            // Constructor that initializes the file path
             FileHandling(const FilePath& file_path)
                 : m_FilePath(file_path) {}
 
+            // Constructor that moves the file path
             FileHandling(FilePath&& file_path)
                 : m_FilePath(std::move(file_path)) {}
 
@@ -45,6 +48,6 @@ namespace PerformanceEvaluation {
 
             static std::array<std::string, 4> ParseCSVLine(const std::string&);
         private:
-            FilePath m_FilePath;
+            FilePath m_FilePath; // Stores the file path associated with this object
     };
 } // namespace PerformanceEvaluation

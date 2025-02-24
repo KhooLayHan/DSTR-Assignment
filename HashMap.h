@@ -18,19 +18,22 @@ namespace PerformanceEvaluation {
         size_t m_Size;
     
     public:
+        // Constructor that initializes the HashMap with a specified capacity
         constexpr explicit HashMap(size_t capacity = 1000) noexcept : m_Buckets(capacity), m_BucketCount(capacity), m_Size(0) {}
         
+        // Inserts a key-value pair into the HashMap
         constexpr void Insert(const K& key, const V& value) noexcept {
             size_t index = m_HashFunction(key) % m_BucketCount;
             BucketNode<K, V>* existing = m_Buckets[index].Find(key);
             if (existing) {
-                existing->m_Value = value;
+                existing->m_Value = value; // Update value if key exists
             } else {
-                m_Buckets[index].Insert(key, value);
+                m_Buckets[index].Insert(key, value); // Insert new key-value pair
                 ++m_Size;
             }
         }
         
+        // Removes a key-value pair from the HashMap
         constexpr bool Remove(const K& key) noexcept {
             size_t index = m_HashFunction(key) % m_BucketCount;
             if (m_Buckets[index].Remove(key)) {
@@ -40,18 +43,21 @@ namespace PerformanceEvaluation {
             return false;
         }
         
+        // Finds a value associated with a given key (modifiable)
         [[nodiscard]] constexpr V* Find(const K& key) noexcept {
             size_t index = m_HashFunction(key) % m_BucketCount;
             BucketNode<K, V>* node = m_Buckets[index].Find(key);
             return node ? &node->m_Value : nullptr;
         }
         
+        // Finds a value associated with a given key (constant)
         [[nodiscard]] constexpr V* Find(const K& key) const noexcept {
             size_t index = m_HashFunction(key) % m_BucketCount;
             BucketNode<K, V>* node = m_Buckets[index].Find(key);
             return node ? &node->m_Value : nullptr;
         }
         
+        // Clears all key-value pairs in the HashMap
         constexpr void Clear() noexcept {
             for (size_t i = 0; i < m_BucketCount; ++i) {
                 m_Buckets[i].Clear();
@@ -59,6 +65,7 @@ namespace PerformanceEvaluation {
             m_Size = 0;
         }
         
+        // Prints all key-value pairs in the HashMap
         constexpr void PrintAll() noexcept {
             for (size_t i = 0; i < m_BucketCount; ++i) {
                 std::cout << "BUCKET" << i << ": \n";
@@ -69,6 +76,7 @@ namespace PerformanceEvaluation {
             }
         }
              
+        // Accesses or inserts a value associated with the given key
         constexpr V& operator[](const K& key) noexcept {
             size_t index = m_HashFunction(key) % m_BucketCount;
             BucketNode<K, V>* existing = m_Buckets[index].Find(key);
@@ -79,15 +87,20 @@ namespace PerformanceEvaluation {
             return m_Buckets[index].Find(key)->m_Value;
         }
         
+        // Checks if the HashMap contains a given key
         [[nodiscard]] constexpr bool Contains(const K& key) noexcept {
             size_t index = m_HashFunction(key) % m_BucketCount;
             return m_Buckets[index].Find(key) != nullptr;
         }
         
+        // Returns the number of elements in the HashMap
         [[nodiscard]] constexpr size_t Size() const noexcept { return m_Size; }
+        // Checks if the HashMap is empty
         [[nodiscard]] constexpr bool Empty() const noexcept { return m_Size == 0; }
+        // Returns the number of buckets in the HashMap
         [[nodiscard]] constexpr size_t BucketCount() const noexcept { return m_BucketCount; }
         
+        // Rehashes the HashMap with a new bucket count
         constexpr void Rehash(size_t new_bucket_count) noexcept {
             DynamicArray<Buckets<K, V>> new_buckets(new_bucket_count);
             for (size_t i = 0; i < m_BucketCount; ++i) {
@@ -100,12 +113,14 @@ namespace PerformanceEvaluation {
             m_BucketCount = new_bucket_count;
         }
         
+        // Reserves space for at least new_capacity buckets
         constexpr void Reserve(size_t new_capacity) noexcept {
             if (new_capacity > m_BucketCount) {
                 Rehash(new_capacity);
             }
         }
 
+        // Retrieves the value associated with a key, throwing an error if not found
         [[nodiscard]] constexpr V& Get(const K& key) {
             size_t index = m_HashFunction(key) % m_BucketCount;
             BucketNode<K, V>* node = m_Buckets[index].Find(key);
@@ -125,6 +140,7 @@ namespace PerformanceEvaluation {
             using difference_type = std::ptrdiff_t;
             using iterator_category = std::forward_iterator_tag;
         
+            // Constructor that initializes the iterator at a specific bucket index
             constexpr Iterator(DynamicArray<Buckets<K, V>>& buckets, size_t index) noexcept 
                 : m_Buckets(buckets), m_BucketIndex(index), m_Current(nullptr) {
                 while (m_BucketIndex < m_Buckets.GetLength() && !m_Buckets[m_BucketIndex].GetHead()) {

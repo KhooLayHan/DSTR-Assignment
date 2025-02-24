@@ -14,6 +14,7 @@
 
 namespace PerformanceEvaluation {
     
+    // Insert a new node at the beginning of the linked list.
     void LinkedList::InsertBegin(const Dataset& data) {
         LinkedListNode* node = new LinkedListNode(data);
         node->m_Next = m_Head;
@@ -22,6 +23,7 @@ namespace PerformanceEvaluation {
         IncrementLength();
     }
             
+    // Insert a new node at the end of the linked list.
     void LinkedList::InsertEnd(const Dataset& data) {
         LinkedListNode* node = new LinkedListNode(data);
 
@@ -44,6 +46,7 @@ namespace PerformanceEvaluation {
         IncrementLength();
     }
 
+    // Insert a node at a specific position in the linked list.
     void LinkedList::InsertPosition(const Dataset& data, size_t position) {
         LinkedListNode* node = new LinkedListNode(data);
 
@@ -74,6 +77,7 @@ namespace PerformanceEvaluation {
         IncrementLength();
     }
         
+    // Display all nodes in the linked list.
     void LinkedList::DisplayAll() const {
         IsHeadEmpty();
 
@@ -94,6 +98,7 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
     
+    // Display the first 'count' nodes in the linked list.
     void LinkedList::DisplayFirst(int32_t count) const {
         IsHeadEmpty();
 
@@ -118,6 +123,7 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
 
+    // Display only the titles of all nodes.
     void LinkedList::DisplayTitle() const {
         IsHeadEmpty();
 
@@ -135,6 +141,7 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
 
+    // Display only the text of all nodes.
     void LinkedList::DisplayText() const {
         IsHeadEmpty();
 
@@ -152,6 +159,7 @@ namespace PerformanceEvaluation {
         std::cout << "\n";
     }
         
+    // Display only the subject of all nodes.
     void LinkedList::DisplaySubject() const {
         IsHeadEmpty();
 
@@ -191,16 +199,6 @@ namespace PerformanceEvaluation {
             << GetLength() << ".\n";
     }
 
-    // void LinkedList::displayLengthTrueDataset() const {
-    //     std::cout << "The total number of articles from the true.csv dataset is "
-    //         << getLength() << ".\n";
-    // }
-
-    // void LinkedList::DisplayLengthFakeDataset() const {
-    //     std::cout << "The total number of articles from the fake.csv dataset is "
-    //         << getLength() << ".\n";
-    // }
-
     size_t LinkedList::GetLength() const {
         size_t length = 0;
         LinkedListNode* temp = m_Head;
@@ -213,22 +211,7 @@ namespace PerformanceEvaluation {
         return length;
     }
 
-    // void LinkedList::LinearSearch(Search<LinkedList, LinkedListNode*>* search_interface, std::string_view target, Criteria criteria) {
-    //     Algorithm::LinearSearch(*this, search_interface, targer, criteria, search_type)
-    // }
-    
-    // void LinkedList::LinearSearchToCopy(std::string_view target, Search<LinkedList, LinkedListNode*>* search_interface, Criteria criteria) {
-    //     Algorithm::LinearSearchAndCopy
-    // }
-    
-    // void LinkedList::LinearSearchToDisplay(std::string_view target, Search<LinkedList, LinkedListNode*>* search_interface, Criteria criteria) {
-    //     Algorithm::LinearSearchAndDisplay
-    // }
-
-    // void LinkedList::SortBy(Sort<LinkedList, LinkedListNode*>* sort_interface) {
-    //     Algorithm::SortBy(*this, sort_interface);
-    // }
-
+    // Delete a node containing a specific dataset.
     void LinkedList::DeleteNode(const Dataset& dataset) {
         if (m_Head == nullptr) {
             // SimpleLogger::Warn("List is empty.", LogHandler::FILE);
@@ -272,6 +255,7 @@ namespace PerformanceEvaluation {
         DecrementLength();
     }
 
+    // Delete all nodes in the linked list.
     void LinkedList::DeleteAll() {
         LinkedListNode* current = m_Head;
 
@@ -290,35 +274,33 @@ namespace PerformanceEvaluation {
         // SimpleLogger::Info("All nodes has been deleted.", LogHandler::FILE);
     }
 
-    // void WriteToFileAll() {
-    //     LinkedListNode* temp = m_Head;
-
-    //     while (temp != nullptr) {
-    //         FileHandling::
-    //     }
-    // }
-
+    // Get the head node of the linked list.
     LinkedListNode* LinkedList::GetHead() const {
         return m_Head;
     }
 
+    // Set a new head node.
     void LinkedList::SetHead(LinkedListNode* new_head) {
         m_Head = new_head;
     }
 
+    // Decrease the length of the linked list.
     void LinkedList::DecrementLength() {
         if (m_Length > 0)
             m_Length--;
     }
 
+     // Increase the length of the linked list.
     void LinkedList::IncrementLength() {
         m_Length++;
     }
 
+    // Check if the given string contains the target substring.
     bool LinkedList::Contains(const std::string& m_Data, std::string_view target) const {
         return m_Data.find(target) != std::string::npos;
     }
 
+    // Check if the head node is empty.
     void LinkedList::IsHeadEmpty() const {
         if (m_Head == nullptr) {
             // SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);
@@ -326,6 +308,7 @@ namespace PerformanceEvaluation {
         }
     }
 
+    // Check if the head or next node is empty.
     void LinkedList::IsHeadOrNextEmpty() const {
         if (m_Head == nullptr || m_Head->m_Next == nullptr) {
             // SimpleLogger::Warn("The linked list is empty.", LogHandler::FILE);

@@ -54,16 +54,19 @@ namespace PerformanceEvaluation {
         return { std::stoi(day), month_num, std::stoi(year) };
     }
 
+    // Extracts and returns the day from a given date string
     int32_t DateUtility::GetDay(const std::string& date) const {
         auto [day, month, year] = ParseDate(date);
         return day;
     }
     
+    // Extracts and returns the month from a given date string (Note: incorrect return should be `month`)
     int32_t DateUtility::GetMonth(const std::string& date) const {
         auto [day, month, year] = ParseDate(date);
         return year;
     }
     
+    // Extracts and returns the year from a given date string
     int32_t DateUtility::GetYear(const std::string& date) const {
         auto [day, month, year] = ParseDate(date);
 
