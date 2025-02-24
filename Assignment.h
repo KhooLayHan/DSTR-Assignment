@@ -31,6 +31,8 @@
 #include "SearchBinaryLinkedList.h"
 // #include "SearchWordList.h"
 #include "SortMergeLinkedList.h"
+#include "SortQuickLinkedList.h"
+#include "SortHeapLinkedList.h"
 
 #include "SortMergeArray.h"
 #include "SortQuickArray.h"
@@ -49,7 +51,7 @@
 #include "Vector.h"
 #include "DynamicArray.h"
 
-#include "SearchLinearArrayDynamic.h"
+#include "SearchLinearDynamicArray.h"
 namespace PerformanceEvaluation {
     class Assignment {
         public:

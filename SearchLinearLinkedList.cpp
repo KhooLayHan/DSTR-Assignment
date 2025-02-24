@@ -16,8 +16,8 @@ namespace PerformanceEvaluation
 
             auto is_found = [&, temp](std::string_view target, std::string_view dataset_str) {
                 if (dataset_str.empty()) {
-                    SimpleConsoleLogger console;
-                    SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
+                    // SimpleConsoleLogger console;
+                    // SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
                 } 
                 
                 return Contains(target, dataset_str, type) ? temp : nullptr;
@@ -48,8 +48,8 @@ namespace PerformanceEvaluation
                 
             auto is_found_and_copy = [&, temp](std::string_view target, std::string_view dataset_str) {
                 if (dataset_str.empty()) {
-                    SimpleConsoleLogger console;
-                    SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
+                    // SimpleConsoleLogger console;
+                    // SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
                 }
                 
                 if (Contains(target, dataset_str, type)) {
@@ -90,8 +90,8 @@ namespace PerformanceEvaluation
                 
             auto is_found_and_display = [&, temp](std::string_view target, std::string_view dataset_str) {
                 if (dataset_str.empty()) {
-                    SimpleConsoleLogger console;
-                    SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
+                    // SimpleConsoleLogger console;
+                    // SimpleLoggingService::UseWarnLogger(console, "Criteria to search for target node was not specified, defaulted to empty string.");
                 }
                 
                 if (Contains(target, dataset_str, type)) {

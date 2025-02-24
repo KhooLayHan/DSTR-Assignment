@@ -1,0 +1,2656 @@
+top: 1
+
+five: 1
+
+food: 1
+
+stamp: 1
+
+fraud: 1
+
+takedowns: 1
+
+2017: 1
+
+do: 1
+
+you: 1
+
+see: 1
+
+the: 1
+
+common: 1
+
+thread: 1
+
+after: 1
+
+obama: 1
+
+years: 1
+
+record: 1
+
+food: 2
+
+stamp: 2
+
+usage: 1
+
+president: 1
+
+trump: 1
+
+pushing: 1
+
+new: 1
+
+initiatives: 1
+
+get: 1
+
+people: 1
+
+off: 1
+
+government: 1
+
+dole: 1
+
+the: 2
+
+number: 1
+
+higher: 1
+
+than: 1
+
+39: 1
+
+5: 1
+
+million: 1
+
+all-time: 1
+
+high: 1
+
+47: 1
+
+6: 1
+
+million: 2
+
+2015: 1
+
+you: 2
+
+see: 2
+
+explosion: 1
+
+graph: 1
+
+below: 1
+
+the: 3
+
+fraud: 2
+
+food: 3
+
+stamp: 3
+
+program: 1
+
+so: 1
+
+rampant: 1
+
+easy: 1
+
+commit: 1
+
+we: 1
+
+ve: 1
+
+become: 1
+
+global: 1
+
+magnet: 1
+
+grifters: 1
+
+who: 1
+
+immigrate: 1
+
+set: 1
+
+up: 1
+
+shop: 1
+
+cash: 1
+
+money: 1
+
+food: 4
+
+stamps: 1
+
+this: 1
+
+program: 2
+
+ripe: 1
+
+reform: 1
+
+what: 1
+
+s: 1
+
+most: 1
+
+disturbing: 1
+
+very: 1
+
+lenient: 1
+
+penalty: 1
+
+crime: 1
+
+food: 5
+
+stamp: 4
+
+fraud: 3
+
+the: 4
+
+fraudsters: 1
+
+usually: 1
+
+given: 1
+
+very: 2
+
+light: 1
+
+jail: 1
+
+sentence: 1
+
+ordered: 1
+
+pay: 1
+
+back: 1
+
+money: 2
+
+the: 5
+
+problem: 1
+
+money: 3
+
+has: 1
+
+probably: 1
+
+gone: 1
+
+overseas: 1
+
+never: 1
+
+paid: 1
+
+back: 2
+
+these: 1
+
+grifters: 2
+
+fade: 1
+
+woodwork: 1
+
+only: 1
+
+resurface: 1
+
+when: 1
+
+reoffend: 1
+
+the: 6
+
+top: 2
+
+5: 2
+
+food: 6
+
+stamp: 5
+
+fraud: 4
+
+cases: 1
+
+from: 1
+
+2017: 2
+
+after: 2
+
+obama: 2
+
+years: 2
+
+record: 2
+
+food: 7
+
+stamp: 6
+
+usage: 2
+
+president: 2
+
+trump: 2
+
+pushing: 2
+
+new: 2
+
+initiatives: 2
+
+get: 2
+
+people: 2
+
+off: 2
+
+government: 2
+
+dole: 2
+
+the: 7
+
+number: 2
+
+higher: 2
+
+than: 2
+
+39: 2
+
+5: 3
+
+million: 3
+
+all-time: 2
+
+high: 2
+
+47: 2
+
+6: 2
+
+million: 4
+
+2015: 2
+
+you: 3
+
+see: 3
+
+explosion: 2
+
+graph: 2
+
+below: 2
+
+the: 8
+
+fraud: 5
+
+food: 8
+
+stamp: 7
+
+program: 3
+
+so: 2
+
+rampant: 2
+
+easy: 2
+
+commit: 2
+
+we: 2
+
+ve: 2
+
+become: 2
+
+global: 2
+
+magnet: 2
+
+grifters: 3
+
+who: 2
+
+immigrate: 2
+
+set: 2
+
+up: 2
+
+shop: 2
+
+cash: 2
+
+money: 4
+
+food: 9
+
+stamps: 2
+
+this: 2
+
+program: 4
+
+ripe: 2
+
+reform: 2
+
+what: 2
+
+s: 2
+
+most: 2
+
+disturbing: 2
+
+very: 3
+
+lenient: 2
+
+penalty: 2
+
+crime: 2
+
+food: 10
+
+stamp: 8
+
+fraud: 6
+
+the: 9
+
+fraudsters: 2
+
+usually: 2
+
+given: 2
+
+very: 4
+
+light: 2
+
+jail: 2
+
+sentence: 2
+
+ordered: 2
+
+pay: 2
+
+back: 3
+
+money: 5
+
+the: 10
+
+problem: 2
+
+money: 6
+
+has: 2
+
+probably: 2
+
+gone: 2
+
+overseas: 2
+
+never: 2
+
+paid: 2
+
+back: 4
+
+these: 2
+
+grifters: 4
+
+fade: 2
+
+woodwork: 2
+
+only: 2
+
+resurface: 2
+
+when: 2
+
+reoffend: 2
+
+the: 11
+
+top: 3
+
+5: 4
+
+food: 11
+
+stamp: 9
+
+fraud: 7
+
+cases: 2
+
+from: 2
+
+2017: 3
+
+the: 12
+
+food: 12
+
+stamp: 10
+
+program: 5
+
+federally-funded: 1
+
+program: 6
+
+administered: 1
+
+u: 1
+
+s: 3
+
+department: 1
+
+agriculture: 1
+
+usda: 1
+
+federal: 1
+
+investigators: 1
+
+most: 3
+
+often: 1
+
+ones: 1
+
+who: 3
+
+catch: 1
+
+those: 1
+
+engaged: 1
+
+fraudulent: 1
+
+activities: 1
+
+investigators: 2
+
+often: 2
+
+uncover: 1
+
+millions: 1
+
+dollars: 1
+
+worth: 1
+
+food: 13
+
+stamp: 11
+
+fraud: 8
+
+mostly: 1
+
+from: 3
+
+people: 3
+
+who: 4
+
+run: 1
+
+convenience: 1
+
+stores: 1
+
+low-income: 1
+
+areas: 1
+
+where: 1
+
+many: 1
+
+patrons: 1
+
+receive: 1
+
+food: 14
+
+stamps: 3
+
+through: 1
+
+supplemental: 1
+
+nutrition: 1
+
+assistance: 1
+
+program: 7
+
+snap: 1
+
+to: 1
+
+show: 1
+
+how: 1
+
+many: 2
+
+millions: 2
+
+dollars: 2
+
+criminals: 1
+
+have: 1
+
+taken: 1
+
+away: 1
+
+from: 4
+
+federal: 2
+
+government: 3
+
+here: 1
+
+5: 5
+
+biggest: 1
+
+takedowns: 2
+
+food: 15
+
+stamp: 12
+
+fraud: 9
+
+2017: 4
+
+immigrant: 1
+
+fraud: 10
+
+is: 1
+
+the: 13
+
+common: 2
+
+thread: 2
+
+1: 1
+
+ohio: 1
+
+convenience: 2
+
+store: 1
+
+owner: 1
+
+sentenced: 1
+
+33: 1
+
+months: 1
+
+prison: 1
+
+2: 1
+
+8: 1
+
+million: 5
+
+food: 16
+
+stamp: 13
+
+frauda: 1
+
+former: 1
+
+ohio: 2
+
+convenience: 3
+
+store: 2
+
+owner: 2
+
+got: 1
+
+caught: 1
+
+carrying: 1
+
+out: 1
+
+2: 2
+
+8: 2
+
+million: 6
+
+food: 17
+
+stamp: 14
+
+fraud: 11
+
+scheme: 1
+
+where: 2
+
+he: 1
+
+allowed: 1
+
+benefit: 1
+
+recipients: 1
+
+exchange: 1
+
+food: 18
+
+stamps: 4
+
+cash: 3
+
+the: 14
+
+usda: 2
+
+revealed: 1
+
+audit: 1
+
+store: 3
+
+breaden: 1
+
+market: 1
+
+cashed: 1
+
+snap: 2
+
+benefits: 1
+
+more: 1
+
+than: 3
+
+ten: 1
+
+times: 1
+
+amount: 1
+
+larger: 1
+
+stores: 2
+
+area: 1
+
+raising: 1
+
+red: 1
+
+flags: 1
+
+among: 1
+
+investigators: 3
+
+a: 1
+
+judge: 1
+
+eventually: 1
+
+convicted: 1
+
+sentenced: 2
+
+george: 1
+
+rafidi: 1
+
+62: 1
+
+33: 2
+
+months: 2
+
+prison: 2
+
+february: 1
+
+ordered: 3
+
+him: 1
+
+pay: 3
+
+2: 3
+
+8: 3
+
+million: 7
+
+back: 5
+
+2: 4
+
+florida: 1
+
+investigators: 4
+
+discover: 1
+
+more: 2
+
+than: 4
+
+20: 1
+
+million: 8
+
+food: 19
+
+stamp: 15
+
+fraudthe: 1
+
+agency: 1
+
+said: 1
+
+uncovered: 1
+
+majority: 1
+
+fraud: 12
+
+when: 3
+
+paging: 1
+
+through: 2
+
+snap: 3
+
+benefit: 2
+
+applications: 1
+
+stating: 1
+
+fraudulent: 2
+
+household: 1
+
+information: 1
+
+3: 1
+
+baltimore: 1
+
+man: 1
+
+sentenced: 3
+
+four: 1
+
+years: 3
+
+3: 2
+
+7: 1
+
+million: 9
+
+food: 20
+
+stamp: 16
+
+frauda: 2
+
+baltimore: 2
+
+store: 4
+
+owner: 3
+
+got: 2
+
+slapped: 1
+
+four-year: 1
+
+prison: 3
+
+sentence: 3
+
+carrying: 2
+
+out: 2
+
+3: 3
+
+7: 2
+
+million: 10
+
+worth: 2
+
+food: 21
+
+stamp: 17
+
+fraud: 13
+
+mohammad: 1
+
+shafiq: 1
+
+51: 1
+
+one: 1
+
+14: 1
+
+other: 1
+
+baltimore-area: 1
+
+retailers: 1
+
+sentenced: 4
+
+16: 1
+
+million: 11
+
+worth: 3
+
+food: 22
+
+stamp: 18
+
+fraud: 14
+
+where: 3
+
+exchanged: 1
+
+snap: 4
+
+benefits: 2
+
+cash: 4
+
+the: 15
+
+judge: 2
+
+ordered: 4
+
+shafiq: 2
+
+pay: 4
+
+back: 6
+
+3: 4
+
+7: 3
+
+million: 12
+
+federal: 3
+
+government: 4
+
+serve: 1
+
+three: 1
+
+years: 4
+
+supervised: 1
+
+release: 1
+
+following: 1
+
+end: 1
+
+his: 1
+
+sentence: 4
+
+4: 1
+
+three: 2
+
+wisconsin: 1
+
+men: 1
+
+who: 5
+
+carried: 1
+
+out: 3
+
+1: 2
+
+2: 5
+
+million: 13
+
+food: 23
+
+stamp: 19
+
+fraud: 15
+
+sentenced: 5
+
+hard: 1
+
+timea: 1
+
+judge: 3
+
+sentenced: 6
+
+three: 3
+
+milwaukee: 1
+
+wisconsin: 2
+
+convenience: 4
+
+store: 5
+
+owners: 1
+
+kanwar: 1
+
+gill: 1
+
+67: 1
+
+raviinder: 1
+
+gill: 2
+
+27: 1
+
+george: 2
+
+nance: 1
+
+59: 1
+
+prison: 4
+
+terms: 1
+
+ranging: 1
+
+from: 5
+
+15-20: 1
+
+months: 3
+
+october: 1
+
+after: 3
+
+three: 4
+
+had: 1
+
+been: 1
+
+found: 1
+
+guilty: 1
+
+exchanging: 1
+
+cash: 5
+
+snap: 5
+
+benefits: 3
+
+their: 1
+
+store: 6
+
+quick: 1
+
+n: 1
+
+ez: 1
+
+had: 2
+
+been: 2
+
+authorized: 1
+
+retailer: 1
+
+accepts: 1
+
+food: 24
+
+stamp: 20
+
+benefits: 4
+
+1: 3
+
+2: 6
+
+million: 14
+
+benefits: 5
+
+store: 7
+
+redeemed: 1
+
+far: 1
+
+beyond: 1
+
+amount: 2
+
+small: 1
+
+convenience: 5
+
+store: 8
+
+expected: 1
+
+redeem: 1
+
+records: 1
+
+show: 2
+
+all: 1
+
+three: 5
+
+men: 2
+
+had: 3
+
+been: 3
+
+ordered: 5
+
+pay: 5
+
+back: 7
+
+1: 4
+
+2: 7
+
+million: 15
+
+fraudulently: 1
+
+earned: 1
+
+money: 7
+
+an: 1
+
+iraqi: 1
+
+immigrant: 2
+
+pleaded: 1
+
+guilty: 2
+
+1: 5
+
+4: 2
+
+million: 16
+
+food: 25
+
+stamp: 21
+
+fraud: 16
+
+november: 1
+
+conspiring: 1
+
+others: 1
+
+defraud: 1
+
+u: 2
+
+s: 4
+
+government: 5
+
+ali: 1
+
+ratib: 1
+
+daham: 1
+
+40: 1
+
+maine: 1
+
+gave: 1
+
+customers: 1
+
+cash: 6
+
+exchange: 2
+
+snap: 6
+
+women: 1
+
+infant: 1
+
+children: 1
+
+wic: 1
+
+program: 8
+
+benefits: 6
+
+he: 2
+
+redeemed: 2
+
+full: 1
+
+value: 1
+
+benefits: 7
+
+obtain: 1
+
+more: 3
+
+money: 8
+
+from: 6
+
+government: 6
+
+fraudulently: 2
+
+the: 16
+
+naturalized: 1
+
+u: 3
+
+s: 5
+
+citizen: 1
+
+expected: 2
+
+face: 1
+
+harsh: 1
+
+prison: 5
+
+sentence: 5
+
+his: 2
+
+crime: 3
+
+he: 3
+
+faces: 1
+
+up: 3
+
+20: 2
+
+years: 5
+
+behind: 1
+
+bars: 1
+
+most: 4
+
+likely: 1
+
+expected: 3
+
+pay: 6
+
+back: 8
+
+1: 6
+
+4: 3
+
+million: 17
+
+government: 7
+
+via: 1
+
+breitbart: 1
+
+top: 1
+
+five: 1
+
+food: 1
+
+stamp: 1
+
+fraud: 1
+
+takedowns: 1
+
+2017: 1
+
+do: 1
+
+you: 1
+
+see: 1
+
+the: 1
+
+common: 1
+
+thread: 1
+
+after: 1
+
+obama: 1
+
+years: 1
+
+record: 1
+
+food: 2
+
+stamp: 2
+
+usage: 1
+
+president: 1
+
+trump: 1
+
+pushing: 1
+
+new: 1
+
+initiatives: 1
+
+get: 1
+
+people: 1
+
+off: 1
+
+government: 1
+
+dole: 1
+
+the: 2
+
+number: 1
+
+higher: 1
+
+than: 1
+
+39: 1
+
+5: 1
+
+million: 1
+
+all-time: 1
+
+high: 1
+
+47: 1
+
+6: 1
+
+million: 2
+
+2015: 1
+
+you: 2
+
+see: 2
+
+explosion: 1
+
+graph: 1
+
+below: 1
+
+the: 3
+
+fraud: 2
+
+food: 3
+
+stamp: 3
+
+program: 1
+
+so: 1
+
+rampant: 1
+
+easy: 1
+
+commit: 1
+
+we: 1
+
+ve: 1
+
+become: 1
+
+global: 1
+
+magnet: 1
+
+grifters: 1
+
+who: 1
+
+immigrate: 1
+
+set: 1
+
+up: 1
+
+shop: 1
+
+cash: 1
+
+money: 1
+
+food: 4
+
+stamps: 1
+
+this: 1
+
+program: 2
+
+ripe: 1
+
+reform: 1
+
+what: 1
+
+s: 1
+
+most: 1
+
+disturbing: 1
+
+very: 1
+
+lenient: 1
+
+penalty: 1
+
+crime: 1
+
+food: 5
+
+stamp: 4
+
+fraud: 3
+
+the: 4
+
+fraudsters: 1
+
+usually: 1
+
+given: 1
+
+very: 2
+
+light: 1
+
+jail: 1
+
+sentence: 1
+
+ordered: 1
+
+pay: 1
+
+back: 1
+
+money: 2
+
+the: 5
+
+problem: 1
+
+money: 3
+
+has: 1
+
+probably: 1
+
+gone: 1
+
+overseas: 1
+
+never: 1
+
+paid: 1
+
+back: 2
+
+these: 1
+
+grifters: 2
+
+fade: 1
+
+woodwork: 1
+
+only: 1
+
+resurface: 1
+
+when: 1
+
+reoffend: 1
+
+the: 6
+
+top: 2
+
+5: 2
+
+food: 6
+
+stamp: 5
+
+fraud: 4
+
+cases: 1
+
+from: 1
+
+2017: 2
+
+after: 2
+
+obama: 2
+
+years: 2
+
+record: 2
+
+food: 7
+
+stamp: 6
+
+usage: 2
+
+president: 2
+
+trump: 2
+
+pushing: 2
+
+new: 2
+
+initiatives: 2
+
+get: 2
+
+people: 2
+
+off: 2
+
+government: 2
+
+dole: 2
+
+the: 7
+
+number: 2
+
+higher: 2
+
+than: 2
+
+39: 2
+
+5: 3
+
+million: 3
+
+all-time: 2
+
+high: 2
+
+47: 2
+
+6: 2
+
+million: 4
+
+2015: 2
+
+you: 3
+
+see: 3
+
+explosion: 2
+
+graph: 2
+
+below: 2
+
+the: 8
+
+fraud: 5
+
+food: 8
+
+stamp: 7
+
+program: 3
+
+so: 2
+
+rampant: 2
+
+easy: 2
+
+commit: 2
+
+we: 2
+
+ve: 2
+
+become: 2
+
+global: 2
+
+magnet: 2
+
+grifters: 3
+
+who: 2
+
+immigrate: 2
+
+set: 2
+
+up: 2
+
+shop: 2
+
+cash: 2
+
+money: 4
+
+food: 9
+
+stamps: 2
+
+this: 2
+
+program: 4
+
+ripe: 2
+
+reform: 2
+
+what: 2
+
+s: 2
+
+most: 2
+
+disturbing: 2
+
+very: 3
+
+lenient: 2
+
+penalty: 2
+
+crime: 2
+
+food: 10
+
+stamp: 8
+
+fraud: 6
+
+the: 9
+
+fraudsters: 2
+
+usually: 2
+
+given: 2
+
+very: 4
+
+light: 2
+
+jail: 2
+
+sentence: 2
+
+ordered: 2
+
+pay: 2
+
+back: 3
+
+money: 5
+
+the: 10
+
+problem: 2
+
+money: 6
+
+has: 2
+
+probably: 2
+
+gone: 2
+
+overseas: 2
+
+never: 2
+
+paid: 2
+
+back: 4
+
+these: 2
+
+grifters: 4
+
+fade: 2
+
+woodwork: 2
+
+only: 2
+
+resurface: 2
+
+when: 2
+
+reoffend: 2
+
+the: 11
+
+top: 3
+
+5: 4
+
+food: 11
+
+stamp: 9
+
+fraud: 7
+
+cases: 2
+
+from: 2
+
+2017: 3
+
+the: 12
+
+food: 12
+
+stamp: 10
+
+program: 5
+
+federally-funded: 1
+
+program: 6
+
+administered: 1
+
+u: 1
+
+s: 3
+
+department: 1
+
+agriculture: 1
+
+usda: 1
+
+federal: 1
+
+investigators: 1
+
+most: 3
+
+often: 1
+
+ones: 1
+
+who: 3
+
+catch: 1
+
+those: 1
+
+engaged: 1
+
+fraudulent: 1
+
+activities: 1
+
+investigators: 2
+
+often: 2
+
+uncover: 1
+
+millions: 1
+
+dollars: 1
+
+worth: 1
+
+food: 13
+
+stamp: 11
+
+fraud: 8
+
+mostly: 1
+
+from: 3
+
+people: 3
+
+who: 4
+
+run: 1
+
+convenience: 1
+
+stores: 1
+
+low-income: 1
+
+areas: 1
+
+where: 1
+
+many: 1
+
+patrons: 1
+
+receive: 1
+
+food: 14
+
+stamps: 3
+
+through: 1
+
+supplemental: 1
+
+nutrition: 1
+
+assistance: 1
+
+program: 7
+
+snap: 1
+
+to: 1
+
+show: 1
+
+how: 1
+
+many: 2
+
+millions: 2
+
+dollars: 2
+
+criminals: 1
+
+have: 1
+
+taken: 1
+
+away: 1
+
+from: 4
+
+federal: 2
+
+government: 3
+
+here: 1
+
+5: 5
+
+biggest: 1
+
+takedowns: 2
+
+food: 15
+
+stamp: 12
+
+fraud: 9
+
+2017: 4
+
+immigrant: 1
+
+fraud: 10
+
+is: 1
+
+the: 13
+
+common: 2
+
+thread: 2
+
+1: 1
+
+ohio: 1
+
+convenience: 2
+
+store: 1
+
+owner: 1
+
+sentenced: 1
+
+33: 1
+
+months: 1
+
+prison: 1
+
+2: 1
+
+8: 1
+
+million: 5
+
+food: 16
+
+stamp: 13
+
+frauda: 1
+
+former: 1
+
+ohio: 2
+
+convenience: 3
+
+store: 2
+
+owner: 2
+
+got: 1
+
+caught: 1
+
+carrying: 1
+
+out: 1
+
+2: 2
+
+8: 2
+
+million: 6
+
+food: 17
+
+stamp: 14
+
+fraud: 11
+
+scheme: 1
+
+where: 2
+
+he: 1
+
+allowed: 1
+
+benefit: 1
+
+recipients: 1
+
+exchange: 1
+
+food: 18
+
+stamps: 4
+
+cash: 3
+
+the: 14
+
+usda: 2
+
+revealed: 1
+
+audit: 1
+
+store: 3
+
+breaden: 1
+
+market: 1
+
+cashed: 1
+
+snap: 2
+
+benefits: 1
+
+more: 1
+
+than: 3
+
+ten: 1
+
+times: 1
+
+amount: 1
+
+larger: 1
+
+stores: 2
+
+area: 1
+
+raising: 1
+
+red: 1
+
+flags: 1
+
+among: 1
+
+investigators: 3
+
+a: 1
+
+judge: 1
+
+eventually: 1
+
+convicted: 1
+
+sentenced: 2
+
+george: 1
+
+rafidi: 1
+
+62: 1
+
+33: 2
+
+months: 2
+
+prison: 2
+
+february: 1
+
+ordered: 3
+
+him: 1
+
+pay: 3
+
+2: 3
+
+8: 3
+
+million: 7
+
+back: 5
+
+2: 4
+
+florida: 1
+
+investigators: 4
+
+discover: 1
+
+more: 2
+
+than: 4
+
+20: 1
+
+million: 8
+
+food: 19
+
+stamp: 15
+
+fraudthe: 1
+
+agency: 1
+
+said: 1
+
+uncovered: 1
+
+majority: 1
+
+fraud: 12
+
+when: 3
+
+paging: 1
+
+through: 2
+
+snap: 3
+
+benefit: 2
+
+applications: 1
+
+stating: 1
+
+fraudulent: 2
+
+household: 1
+
+information: 1
+
+3: 1
+
+baltimore: 1
+
+man: 1
+
+sentenced: 3
+
+four: 1
+
+years: 3
+
+3: 2
+
+7: 1
+
+million: 9
+
+food: 20
+
+stamp: 16
+
+frauda: 2
+
+baltimore: 2
+
+store: 4
+
+owner: 3
+
+got: 2
+
+slapped: 1
+
+four-year: 1
+
+prison: 3
+
+sentence: 3
+
+carrying: 2
+
+out: 2
+
+3: 3
+
+7: 2
+
+million: 10
+
+worth: 2
+
+food: 21
+
+stamp: 17
+
+fraud: 13
+
+mohammad: 1
+
+shafiq: 1
+
+51: 1
+
+one: 1
+
+14: 1
+
+other: 1
+
+baltimore-area: 1
+
+retailers: 1
+
+sentenced: 4
+
+16: 1
+
+million: 11
+
+worth: 3
+
+food: 22
+
+stamp: 18
+
+fraud: 14
+
+where: 3
+
+exchanged: 1
+
+snap: 4
+
+benefits: 2
+
+cash: 4
+
+the: 15
+
+judge: 2
+
+ordered: 4
+
+shafiq: 2
+
+pay: 4
+
+back: 6
+
+3: 4
+
+7: 3
+
+million: 12
+
+federal: 3
+
+government: 4
+
+serve: 1
+
+three: 1
+
+years: 4
+
+supervised: 1
+
+release: 1
+
+following: 1
+
+end: 1
+
+his: 1
+
+sentence: 4
+
+4: 1
+
+three: 2
+
+wisconsin: 1
+
+men: 1
+
+who: 5
+
+carried: 1
+
+out: 3
+
+1: 2
+
+2: 5
+
+million: 13
+
+food: 23
+
+stamp: 19
+
+fraud: 15
+
+sentenced: 5
+
+hard: 1
+
+timea: 1
+
+judge: 3
+
+sentenced: 6
+
+three: 3
+
+milwaukee: 1
+
+wisconsin: 2
+
+convenience: 4
+
+store: 5
+
+owners: 1
+
+kanwar: 1
+
+gill: 1
+
+67: 1
+
+raviinder: 1
+
+gill: 2
+
+27: 1
+
+george: 2
+
+nance: 1
+
+59: 1
+
+prison: 4
+
+terms: 1
+
+ranging: 1
+
+from: 5
+
+15-20: 1
+
+months: 3
+
+october: 1
+
+after: 3
+
+three: 4
+
+had: 1
+
+been: 1
+
+found: 1
+
+guilty: 1
+
+exchanging: 1
+
+cash: 5
+
+snap: 5
+
+benefits: 3
+
+their: 1
+
+store: 6
+
+quick: 1
+
+n: 1
+
+ez: 1
+
+had: 2
+
+been: 2
+
+authorized: 1
+
+retailer: 1
+
+accepts: 1
+
+food: 24
+
+stamp: 20
+
+benefits: 4
+
+1: 3
+
+2: 6
+
+million: 14
+
+benefits: 5
+
+store: 7
+
+redeemed: 1
+
+far: 1
+
+beyond: 1
+
+amount: 2
+
+small: 1
+
+convenience: 5
+
+store: 8
+
+expected: 1
+
+redeem: 1
+
+records: 1
+
+show: 2
+
+all: 1
+
+three: 5
+
+men: 2
+
+had: 3
+
+been: 3
+
+ordered: 5
+
+pay: 5
+
+back: 7
+
+1: 4
+
+2: 7
+
+million: 15
+
+fraudulently: 1
+
+earned: 1
+
+money: 7
+
+an: 1
+
+iraqi: 1
+
+immigrant: 2
+
+pleaded: 1
+
+guilty: 2
+
+1: 5
+
+4: 2
+
+million: 16
+
+food: 25
+
+stamp: 21
+
+fraud: 16
+
+november: 1
+
+conspiring: 1
+
+others: 1
+
+defraud: 1
+
+u: 2
+
+s: 4
+
+government: 5
+
+ali: 1
+
+ratib: 1
+
+daham: 1
+
+40: 1
+
+maine: 1
+
+gave: 1
+
+customers: 1
+
+cash: 6
+
+exchange: 2
+
+snap: 6
+
+women: 1
+
+infant: 1
+
+children: 1
+
+wic: 1
+
+program: 8
+
+benefits: 6
+
+he: 2
+
+redeemed: 2
+
+full: 1
+
+value: 1
+
+benefits: 7
+
+obtain: 1
+
+more: 3
+
+money: 8
+
+from: 6
+
+government: 6
+
+fraudulently: 2
+
+the: 16
+
+naturalized: 1
+
+u: 3
+
+s: 5
+
+citizen: 1
+
+expected: 2
+
+face: 1
+
+harsh: 1
+
+prison: 5
+
+sentence: 5
+
+his: 2
+
+crime: 3
+
+he: 3
+
+faces: 1
+
+up: 3
+
+20: 2
+
+years: 5
+
+behind: 1
+
+bars: 1
+
+most: 4
+
+likely: 1
+
+expected: 3
+
+pay: 6
+
+back: 8
+
+1: 6
+
+4: 3
+
+million: 17
+
+government: 7
+
+via: 1
+
+breitbart: 1
+

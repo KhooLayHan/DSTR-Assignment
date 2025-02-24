@@ -1,0 +1,27 @@
+[Feb 24 2025|11:11:47|./ConfigManager.cpp|Line 107|void PerformanceEvaluation::ConfigManager::DestroyFileOnShutdown(const string&)|Column 48]
+INFO: Deleting file on shutdown: ./CSV/combined.csv.
+
+[Feb 24 2025|11:34:20|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const FilePath&, const FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|11:34:20|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const FilePath&, const FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|12:02:32|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+
+[Feb 24 2025|12:17:15|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const FilePath&, const FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|12:17:15|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const FilePath&, const FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|12:49:04|./ConfigManager.cpp|Line 96|void PerformanceEvaluation::ConfigManager::EnsureFileSizeLimit(const string&)|Column 48]
+INFO: File ./CSV/combined.csv exceeds size limit. Deleting and recreating it.
+
+[Feb 24 2025|12:49:04|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const FilePath&, const FilePath&)|Column 44]
+INFO: Contents of file ./CSV/true.csv was successfully appended to file ./CSV/combined.csv.
+
+[Feb 24 2025|12:49:04|./FileHandling.cpp|Line 483|static void PerformanceEvaluation::FileHandling::AppendFileContent(const FilePath&, const FilePath&)|Column 44]
+INFO: Contents of file ./CSV/fake.csv was successfully appended to file ./CSV/combined.csv.
+

@@ -66,6 +66,8 @@
         "bitset": "cpp",
         "list": "cpp",
         "regex": "cpp",
-        "any": "cpp"
+        "any": "cpp",
+        "cstring": "cpp",
+        "map": "cpp"
     }
 }

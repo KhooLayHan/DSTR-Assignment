@@ -10,11 +10,11 @@ namespace PerformanceEvaluation {
         protected:
             void SortBy(LinkedList&) override;
         private:
+            // Function to count the length of the linked list
+            size_t GetLength(LinkedListNode*);
+            
             // Applies heap sort
             LinkedListNode* HeapSort(LinkedListNode*);
-
-            // Convert to array
-            void HeapSortArray(LinkedListNode**, size_t);        
         
             // Min-heap for ascending order, ensures the smallest element is always at the top
             void Heapify(LinkedListNode**, int32_t, int32_t);

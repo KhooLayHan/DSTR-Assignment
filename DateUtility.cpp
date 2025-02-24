@@ -15,6 +15,9 @@ namespace PerformanceEvaluation {
             { "October", 10 }, { "November", 11 }, { "December", 12 }
         };
 
+        if (date_str.empty())
+            return {};
+
         std::istringstream input_stream(date_str);
         
         std::string day, month, year;

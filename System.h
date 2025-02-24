@@ -32,19 +32,14 @@ namespace PerformanceEvaluation {
                 s_Instance->config.LoadFromArgs(argc, argv);
               
                 s_Instance->config.EnsureFileSizeLimit("./CSV/combined.csv");
+                s_Instance->config.EnsureFileSizeLimit("./Logs/log.txt");
+                s_Instance->config.EnsureFileSizeLimit("./Logs/error_log.txt");
                 
                 s_Instance->config.EnsureFileSizeLimit("./Solutions/question_1.txt");
                 s_Instance->config.EnsureFileSizeLimit("./Solutions/question_2.txt");
-                s_Instance->config.EnsureFileSizeLimit("./Solutions/question_3.txt");
-                
-                // s_Instance->config.CreateFileOnStartup("./CSV/question_4.txt");
-                // s_Instance->config.CreateFileOnStartup("./CSV/question_5.txt");
-                // s_Instance->config.CreateFileOnStartup("./CSV/question_6.txt");
-                // s_Instance->config.CreateFileOnStartup("./CSV/question_7.txt");
-                // s_Instance->config.CreateFileOnStartup("./CSV/question_8.txt");
-                // s_Instance->config.CreateFileOnStartup("./CSV/question_9.txt");
-                // s_Instance->config.CreateFileOnStartup("./CSV/question_10.txt");
-
+                s_Instance->config.EnsureFileSizeLimit("./Solutions/question_3_array.txt");
+                s_Instance->config.EnsureFileSizeLimit("./Solutions/question_3_linked_list.txt");
+            
                 std::cout << "---Performance Evaluation---\n";
                 std::cout << "---      By Group 36     ---\n";
                 
@@ -56,25 +51,83 @@ namespace PerformanceEvaluation {
             static void Run() {
                 Benchmark benchmark;
                 
-                // benchmark.MeasureDuration([](){ Assignment::Question_1_Array(); });
-                benchmark.MeasureDuration([](){ Assignment::Question_1_LinkedList(); });
+                bool has_input = true;
+                std::string input;
+                
+                auto init_header = []() {                    
+                    std::cout << "\nPlease choose a question: \n"; 
+                    std::cout << "1a: Question 1 Array          | 1b: Question 1 Linked List\n"; 
+                    std::cout << "2a: Question 2 Array          | 2b: Question 2 Linked List\n"; 
+                    std::cout << "3a: Question 3 Array          | 3b: Question 3 Linked List\n"; 
+                    std::cout << "4a: Question 2 Extra Array    | 4b: Question 2 Extra Linked List\n"; 
+                    std::cout << "5: Shutdown\n\n"; 
+    
+                    std::cout << "Input: ";
+                };
+                
+                init_header();
+                std::cin >> input;
+
+                while (has_input == true) {
+                    if (input == "1a") {
+                        benchmark.MeasureDuration([](){ Assignment::Question_1_Array(); });
+                        init_header();
+                        std::cin >> input;
+                    }
+                    else if (input == "1b") {
+                        benchmark.MeasureDuration([](){ Assignment::Question_1_LinkedList(); });
+                        init_header();
+                        std::cin >> input;
+                    }
+                    else if (input == "2a") {
+                        benchmark.MeasureDuration([](){ Assignment::Question_2_Array(); });
+                        init_header();
+                        std::cin >> input;
+                    }
+                    else if (input == "2b") {
+                        benchmark.MeasureDuration([](){ Assignment::Question_2_LinkedList(); });
+                        init_header();
+                        std::cin >> input;
+                    }
+                    else if (input == "3a") {
+                        benchmark.MeasureDuration([](){ Assignment::Question_3_Array(); });
+                        init_header();
+                        std::cin >> input;
+                    }
+                    else if (input == "3b") {
+                        benchmark.MeasureDuration([](){ Assignment::Question_3_Array(); });
+                        init_header();
+                        std::cin >> input;    
+                    }
+                    else if (input == "4a") {
+                        benchmark.MeasureDuration([](){ Question_2_Array_ExtraExclusive(); });
+                        init_header();
+                        std::cin >> input;
+                    }
+                    else if (input == "4b") {
+                        benchmark.MeasureDuration([](){ Question_2_LinkedList_ExtraExclusive(); });
+                        init_header();
+                        std::cin >> input;
+                    } 
+                    else if (input == "5") {
+                        has_input = false;  
+                    }
+                    else {
+                        std::cout << "Inputted value was not registered. Please try again.\n";
+                        init_header();
+                        std::cin >> input; 
+                    }
+                }
             }
             
             static void ShutDown() {
                 if (s_Instance) {
                     s_Instance->config.DestroyFileOnShutdown("./CSV/combined.csv");
                     
-                    s_Instance->config.DestroyFileOnShutdown("./Solutions/question_1.txt");
-                    s_Instance->config.DestroyFileOnShutdown("./Solutions/question_2.txt");
-                    s_Instance->config.DestroyFileOnShutdown("./Solutions/question_3.txt");
-
-                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_4.txt");
-                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_5.txt");
-                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_6.txt");
-                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_7.txt");
-                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_8.txt");
-                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_9.txt");
-                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_10.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_1.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_2.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_3_array.txt");
+                    // s_Instance->config.DestroyFileOnShutdown("./Solutions/question_3_linked_list.txt");
 
                     delete s_Instance;
                     s_Instance = nullptr;

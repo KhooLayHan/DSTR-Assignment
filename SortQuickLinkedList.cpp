@@ -2,27 +2,25 @@
 
 namespace PerformanceEvaluation {
     void SortQuickLinkedList::SortBy(LinkedList& linked_list) {
-        LinkedListNode* head = linked_list.GetHead();
-        QuickSort(head);
-        linked_list.SetHead(head);
+        linked_list.SetHead(QuickSort(linked_list.GetHead()));  // Use the returned sorted head
     }
-    
+
     // Applies quick sort
     LinkedListNode* SortQuickLinkedList::QuickSort(LinkedListNode* head) {
         if (!head || !head->m_Next) {
             return head;
         }
-    
+
         LinkedListNode *left = nullptr, *right = nullptr;
-        LinkedListNode *pivot = Partition(head, &left, &right);
-    
+        LinkedListNode* pivot = Partition(head, &left, &right);
+
         left = QuickSort(left);
         right = QuickSort(right);
-    
+
+        // Merge left part and pivot
         LinkedListNode* result = nullptr;
         LinkedListNode* tail = nullptr;
-    
-        // Connect left part to pivot
+
         if (left) {
             result = left;
             tail = left;
@@ -33,27 +31,30 @@ namespace PerformanceEvaluation {
         } else {
             result = pivot;
         }
-    
+
         pivot->m_Next = right;
-    
+
         return result;
     }
      
-    // Partition the linked list around a pivot, ensuring smaller values comes before it and is to the left
+    // Partition the linked list around a pivot, ensuring smaller values come before it
     LinkedListNode* SortQuickLinkedList::Partition(LinkedListNode* head, LinkedListNode** left, LinkedListNode** right) {
         DateUtility date_utility;
-    
+
         LinkedListNode* pivot = head;
         LinkedListNode* current = head->m_Next;
-        pivot->m_Next = nullptr;
-    
+        pivot->m_Next = nullptr;  // Isolate the pivot node
+
+        *left = nullptr;
+        *right = nullptr;
+
         LinkedListNode* left_tail = nullptr;
         LinkedListNode* right_tail = nullptr;
-    
+
         while (current) {
-            LinkedListNode* m_Next = current->m_Next;
-            current->m_Next = nullptr;
-    
+            LinkedListNode* next = current->m_Next;
+            current->m_Next = nullptr;  // Detach current node
+
             if (CompareAndSortDate(date_utility, current->m_Data.m_Date, pivot->m_Data.m_Date)) {
                 if (!*left) {
                     *left = current;
@@ -72,9 +73,9 @@ namespace PerformanceEvaluation {
                 }
             }
 
-            current = m_Next;
+            current = next;
         }
-    
+
         return pivot;
     }
 } // namespace PerformanceEvaluation

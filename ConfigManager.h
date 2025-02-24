@@ -24,8 +24,8 @@ namespace PerformanceEvaluation {
         
             void PrintConfig();
         private:
-            static constexpr std::string DetectPlatform();
-            static constexpr std::string DetectCppVersion();
+            static std::string DetectPlatform();
+            static std::string DetectCppVersion();
 
             HashMap<std::string, std::string> config;
     };

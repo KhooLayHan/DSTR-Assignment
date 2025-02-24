@@ -250,8 +250,6 @@
 #include <string_view>
 #include <sstream>
 
-#include <vector>
-
 #include "FileHandling.h"
 
 #include "SimpleFileLogger.h"

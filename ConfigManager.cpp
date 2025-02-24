@@ -9,6 +9,12 @@
 #include "SimpleFileLogger.h"
 #include "SimpleLoggingService.h"
 
+#define RESET   "\033[0m"  // Reset color
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define CYAN    "\033[36m"
 namespace PerformanceEvaluation {
     ConfigManager::ConfigManager() {
         config["DEBUG"] = "0"; // Default: Debugging disabled
@@ -53,14 +59,14 @@ namespace PerformanceEvaluation {
     };
 
     void ConfigManager::PrintConfig() {
-        std::cout << "[CONFIGURATION SETTINGS]\n";
+        std::cout << "\n[CONFIGURATION SETTINGS]\n";
         
-        std::cout << "DEBUG: " << config.Get("DEBUG") << "\n";
-        std::cout << "LOG_LEVEL: " << config.Get("LOG_LEVEL") << "\n";
-        std::cout << "SOURCE_LOCATION_SUPPORTED: " << config.Get("SOURCE_LOCATION_SUPPORTED") << "\n";
-        std::cout << "FILE_SIZE_LIMIT: " << config.Get("FILE_SIZE_LIMIT") << "\n";
-        std::cout << "PLATFORM: " << config.Get("PLATFORM") << "\n";
-        std::cout << "CPP_STANDARD: " << config.Get("CPP_STANDARD") << "\n\n";
+        std::cout << RED    << "DEBUG: " << RESET << config.Get("DEBUG") << "\n";
+        std::cout << GREEN  << "LOG_LEVEL: " << RESET << config.Get("LOG_LEVEL") << "\n";
+        std::cout << YELLOW << "SOURCE_LOCATION_SUPPORTED: " << RESET << config.Get("SOURCE_LOCATION_SUPPORTED") << "\n";
+        std::cout << BLUE   << "FILE_SIZE_LIMIT: " << RESET << config.Get("FILE_SIZE_LIMIT") << "\n";
+        std::cout << CYAN   << "PLATFORM: " << RESET << config.Get("PLATFORM") << "\n";
+        std::cout << GREEN  << "CPP_STANDARD: " << RESET << config.Get("CPP_STANDARD") << "\n\n";
     }
 
     std::string ConfigManager::Get(const std::string& key, const std::string& placeholder) {        
@@ -113,7 +119,7 @@ namespace PerformanceEvaluation {
         }
     }
 
-    constexpr std::string ConfigManager::DetectPlatform() {
+    std::string ConfigManager::DetectPlatform() {
         #if defined(_WIN32)
             return "Windows";
         #elif defined(__linux__)
@@ -125,7 +131,7 @@ namespace PerformanceEvaluation {
         #endif
     }
 
-    constexpr std::string ConfigManager::DetectCppVersion() {
+    std::string ConfigManager::DetectCppVersion() {
         #if __cplusplus >= 202002L
             return "C++20";
         #elif __cplusplus >= 201703L

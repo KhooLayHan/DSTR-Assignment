@@ -52,8 +52,7 @@ namespace PerformanceEvaluation {
 
         std::cout << "\033[35;1mBefore Sorting...\033[31;1mTRUE\033[0m\n";
         linked_list_true.DisplayFirst(MAX_DISPLAY_COUNT);
-
-        auto interface = std::make_unique<SortMergeLinkedList>();
+;
         Algorithm::SortBy(linked_list_true, std::make_unique<SortMergeLinkedList>().get());
         
         std::cout << "\033[35;1mAfter Sorting...\033[31;1mTRUE.CSV\033[0m\n";
@@ -61,7 +60,7 @@ namespace PerformanceEvaluation {
         
         std::cout << "\033[35;1mBefore Sorting...\033[31;1mFAKE\033[0m\n";
         linked_list_fake.DisplayFirst(MAX_DISPLAY_COUNT);
-
+        
         Algorithm::SortBy(linked_list_fake, std::make_unique<SortMergeLinkedList>().get());
         
         std::cout << "\033[35;1mAfter Sorting...\033[31;1mFAKE.CSV\033[0m\n";
@@ -79,6 +78,8 @@ namespace PerformanceEvaluation {
         // * Step 5: New partial searched linked list will be numerator 
         // * Step 6: New impartial searched linked list will be denominator 
         // * Step 7: Get ratio and percentage of partial / impartial 
+
+        // Percentage of Fake News = (Number of Fake Political News Articles in 2016 / Total Political News Articles in 2016) × 100
             
         DynamicArray<Dataset> array_true;
         DynamicArray<Dataset> array_fake;
@@ -107,17 +108,6 @@ namespace PerformanceEvaluation {
 
         DynamicArray<Dataset> array_fake_impartial_search_date_2016_and_impartial_search_subject_politics 
             = search_linear.LinearSearchAndCopy("politics", array_fake_impartial_search_date_2016, Criteria::SUBJECT, SearchType::IMPARTIAL);
-
-        // // Numerator
-        // LinkedList linked_list_fake_impartial_search_date_2016 = Algorithm::LinearSearchAndCopy(
-        //     linked_list_fake, std::make_unique<SearchLinearLinkedList>().get(), 
-        //     "politics", Criteria::SUBJECT, SearchType::IMPARTIAL
-        // );
-
-        // LinkedList linked_list_fake_impartial_search_date_2016_and_impartial_searched_subject_politics =  Algorithm::LinearSearchAndCopy(
-        //     linked_list_fake, std::make_unique<SearchLinearLinkedList>().get(), 
-        //     "politics", Criteria::SUBJECT, SearchType::IMPARTIAL
-        // );
 
         size_t numerator = array_fake_impartial_search_date_2016_and_impartial_search_subject_politics.GetLength();
         size_t denominator = array_combined_impartial_search_date_2016_and_impartial_search_subject_politics.GetLength();
