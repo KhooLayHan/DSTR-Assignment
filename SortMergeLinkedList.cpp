@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 
-#include "SimpleConsoleLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleConsoleLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
-#include "SortMergeLinkedList.h"
+#include "SortMergeLinkedList.hpp"
 
 namespace PerformanceEvaluation {
     void SortMergeLinkedList::SortBy(LinkedList& linked_list) {

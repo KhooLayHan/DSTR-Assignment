@@ -6,10 +6,10 @@
 #include <memory>
 #include <string>
 
-#include "Array.h"
-#include "Dataset.h"
-#include "LinkedList.h"
-#include "DynamicArray.h"
+#include "Array.hpp"
+#include "Dataset.hpp"
+#include "LinkedList.hpp"
+#include "DynamicArray.hpp"
 
 namespace PerformanceEvaluation {
     using FilePath = std::filesystem::path;

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "SimpleConsoleLogger.h"
+#include "SimpleConsoleLogger.hpp"
 
 namespace PerformanceEvaluation {
     #ifdef SOURCE_LOCATION_SUPPORTED

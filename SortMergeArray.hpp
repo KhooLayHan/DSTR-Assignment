@@ -3,9 +3,9 @@
 #ifndef SORTMERGEARRAY_H
 #define SORTMERGEARRAY_H
 
-#include "Array.h"
-#include "Dataset.h"
-#include "Sort.h"
+#include "Array.hpp"
+#include "Dataset.hpp"
+#include "Sort.hpp"
 
 namespace PerformanceEvaluation {
     class SortMergeArray : public Sort<Array<Dataset>> {

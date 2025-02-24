@@ -3,7 +3,7 @@
 
 // Header files
 
-#include "System.h"
+#include "System.hpp"
 
 int main(int argc, char** argv)
 {

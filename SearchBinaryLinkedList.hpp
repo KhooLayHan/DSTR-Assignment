@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SearchBinary.h"
+#include "SearchBinary.hpp"
 
 namespace PerformanceEvaluation
 {

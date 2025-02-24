@@ -2,11 +2,11 @@
 #include <string_view>
 #include <sstream>
 
-#include "FileHandling.h"
+#include "FileHandling.hpp"
 
-#include "SimpleFileLogger.h"
-#include "SimpleConsoleLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleFileLogger.hpp"
+#include "SimpleConsoleLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
 namespace PerformanceEvaluation {
 

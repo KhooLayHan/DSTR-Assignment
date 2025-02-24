@@ -3,14 +3,14 @@
 #include <string_view>
 #include <memory>
 
-#include "DateUtility.h"
-#include "SimpleLogger.h"
+#include "DateUtility.hpp"
+#include "SimpleLogger.hpp"
 
-#include "SimpleConsoleLogger.h"
-#include "SimpleFileLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleConsoleLogger.hpp"
+#include "SimpleFileLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
-#include "LinkedList.h"
+#include "LinkedList.hpp"
 
 namespace PerformanceEvaluation {
     

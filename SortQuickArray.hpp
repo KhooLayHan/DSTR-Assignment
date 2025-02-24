@@ -3,10 +3,10 @@
 #ifndef SORTQUICKARRAY_H
 #define SORTQUICKARRAY_H
 
-#include "Array.h"
-#include "Dataset.h"
-#include "Sort.h"
-#include "DateUtility.h"
+#include "Array.hpp"
+#include "Dataset.hpp"
+#include "Sort.hpp"
+#include "DateUtility.hpp"
 
 namespace PerformanceEvaluation {
     class SortQuickArray : public Sort<Array<Dataset>> {

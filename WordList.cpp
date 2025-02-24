@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "SimpleConsoleLogger.h"
-#include "SimpleFileLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleConsoleLogger.hpp"
+#include "SimpleFileLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
-#include "WordList.h"
+#include "WordList.hpp"
 
 namespace PerformanceEvaluation {
     

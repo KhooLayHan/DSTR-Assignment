@@ -1,13 +1,13 @@
-#include "ConfigManager.h"
+#include "ConfigManager.hpp"
 
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 
-#include "SimpleConsoleLogger.h"
+#include "SimpleConsoleLogger.hpp"
 
-#include "SimpleFileLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleFileLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
 #define RESET   "\033[0m"  // Reset color
 #define RED     "\033[31m"

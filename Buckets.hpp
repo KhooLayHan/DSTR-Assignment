@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "Iterator.h"
+#include "Iterator.hpp"
 
 namespace PerformanceEvaluation
 {   

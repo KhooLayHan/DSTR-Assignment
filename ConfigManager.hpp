@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "HashMap.h"
+#include "HashMap.hpp"
 namespace PerformanceEvaluation {    
     class ConfigManager {
         public:

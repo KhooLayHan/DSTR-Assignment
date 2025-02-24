@@ -1,7 +1,7 @@
-#include "WordListSorted.h"
+#include "WordListSorted.hpp"
 
-#include "SimpleConsoleLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleConsoleLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
 namespace PerformanceEvaluation
 {   

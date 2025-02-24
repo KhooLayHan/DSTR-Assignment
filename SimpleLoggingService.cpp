@@ -1,4 +1,4 @@
-#include "SimpleLoggingService.h"
+#include "SimpleLoggingService.hpp"
 
 namespace PerformanceEvaluation {
     void SimpleLoggingService::UseLogger(const SimpleLogger& logger, std::string_view message, LogLevel level, const Location& location) {

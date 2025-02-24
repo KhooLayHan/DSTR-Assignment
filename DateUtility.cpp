@@ -1,10 +1,10 @@
 #include <sstream>
 #include <string_view>
 
-#include "SimpleConsoleLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleConsoleLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
-#include "DateUtility.h"
+#include "DateUtility.hpp"
 
 namespace PerformanceEvaluation {
     DateUtility DateUtility::ParseDate(const std::string& date_str) {   

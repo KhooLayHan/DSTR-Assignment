@@ -3,7 +3,7 @@
 #ifndef SORT_HEAP_LINKED_LIST_HPP
 #define SORT_HEAP_LINKED_LIST_HPP
 
-#include "Sort.h"
+#include "Sort.hpp"
 
 namespace PerformanceEvaluation {
     class SortHeapLinkedList final : public Sort<LinkedList, LinkedListNode*> {

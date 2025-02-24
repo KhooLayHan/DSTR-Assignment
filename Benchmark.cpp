@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 
-#include "Benchmark.h"
+#include "Benchmark.hpp"
 
-#include "SimpleConsoleLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleConsoleLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
 namespace PerformanceEvaluation {
     void Benchmark::StartTimer() {

@@ -3,11 +3,11 @@
 #ifndef SORT_HPP
 #define SORT_HPP
 
-#include "DateUtility.h"
+#include "DateUtility.hpp"
 
-#include "Array.h"
-#include "LinkedList.h"
-#include "WordList.h"
+#include "Array.hpp"
+#include "LinkedList.hpp"
+#include "WordList.hpp"
 
 namespace PerformanceEvaluation
 {

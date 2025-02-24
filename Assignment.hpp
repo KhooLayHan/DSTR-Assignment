@@ -3,55 +3,55 @@
 #include <string>
 
 // Struct with member variables: title, text, subject, date
-#include "Dataset.h"
+#include "Dataset.hpp"
 
 // Data structures
-#include "Array.h"
-// #include "WordList.h"
-#include "LinkedList.h"
+#include "Array.hpp"
+// #include "WordList.hpp"
+#include "LinkedList.hpp"
 
 // Search and sort algorithms 
-#include "Algorithm.h"
+#include "Algorithm.hpp"
 
 // Benchmarking
-#include "Benchmark.h"
+#include "Benchmark.hpp"
 
 #include <future>
 #include <memory>
 
 // File handling
-#include "FileHandling.h"
+#include "FileHandling.hpp"
 
 // Helper classes for debugging and parsing dates
-#include "DateUtility.h"
-#include "SimpleLogger.h"
+#include "DateUtility.hpp"
+#include "SimpleLogger.hpp"
 
-#include "Benchmark.h"
-#include "SearchLinearLinkedList.h"
-#include "SearchBinaryLinkedList.h"
-// #include "SearchWordList.h"
-#include "SortMergeLinkedList.h"
-#include "SortQuickLinkedList.h"
-#include "SortHeapLinkedList.h"
+#include "Benchmark.hpp"
+#include "SearchLinearLinkedList.hpp"
+#include "SearchBinaryLinkedList.hpp"
+// #include "SearchWordList.hpp"
+#include "SortMergeLinkedList.hpp"
+#include "SortQuickLinkedList.hpp"
+#include "SortHeapLinkedList.hpp"
 
-#include "SortMergeArray.h"
-#include "SortQuickArray.h"
-#include "SortHeapArray.h"
+#include "SortMergeArray.hpp"
+#include "SortQuickArray.hpp"
+#include "SortHeapArray.hpp"
 
-#include "Sort.h"
+#include "Sort.hpp"
 
-#include "ConversionUtility.h"
-#include "HashMap.h"
-// #include "HashMap.h"
+#include "ConversionUtility.hpp"
+#include "HashMap.hpp"
+// #include "HashMap.hpp"
 
-#include "WordList.h"
-#include "WordListSorted.h"
+#include "WordList.hpp"
+#include "WordListSorted.hpp"
 
-#include "HashSet.h"
-#include "Vector.h"
-#include "DynamicArray.h"
+#include "HashSet.hpp"
+#include "Vector.hpp"
+#include "DynamicArray.hpp"
 
-#include "SearchLinearDynamicArray.h"
+#include "SearchLinearDynamicArray.hpp"
 namespace PerformanceEvaluation {
     class Assignment {
         public:

@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "SearchLinearLinkedList.h"
+#include "SearchLinearLinkedList.hpp"
 
-#include "SimpleConsoleLogger.h"
-#include "SimpleLoggingService.h"
+#include "SimpleConsoleLogger.hpp"
+#include "SimpleLoggingService.hpp"
 
 namespace PerformanceEvaluation
 {

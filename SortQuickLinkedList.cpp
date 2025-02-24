@@ -1,4 +1,4 @@
-#include "SortQuickLinkedList.h"
+#include "SortQuickLinkedList.hpp"
 
 namespace PerformanceEvaluation {
     void SortQuickLinkedList::SortBy(LinkedList& linked_list) {

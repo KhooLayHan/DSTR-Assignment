@@ -4,14 +4,14 @@
 #include <string>
 #include <string_view>
 
-#include "Array.h"
-#include "DynamicArray.h"
-#include "LinkedList.h"
-#include "WordList.h"
-#include "SortMergeArray.h"
+#include "Array.hpp"
+#include "DynamicArray.hpp"
+#include "LinkedList.hpp"
+#include "WordList.hpp"
+#include "SortMergeArray.hpp"
 
-#include "Search.h"
-#include "Sort.h"
+#include "Search.hpp"
+#include "Sort.hpp"
 
 namespace PerformanceEvaluation {
 

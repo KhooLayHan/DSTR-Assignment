@@ -1,4 +1,4 @@
-#include "SortHeapLinkedList.h"
+#include "SortHeapLinkedList.hpp"
 
 namespace PerformanceEvaluation {
     void SortHeapLinkedList::SortBy(LinkedList& linked_list) {

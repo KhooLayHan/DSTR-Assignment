@@ -1,4 +1,4 @@
-#include "SortQuickArray.h"
+#include "SortQuickArray.hpp"
 
 namespace PerformanceEvaluation {
     void SortQuickArray::SortBy(Array<Dataset>& array) {

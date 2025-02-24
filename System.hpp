@@ -3,10 +3,10 @@
 #ifndef SYSTEM_HPP
 #define SYSTEM_HPP
 
-#include "Benchmark.h"
+#include "Benchmark.hpp"
 
 // Header files
-#include "ConfigManager.h"
+#include "ConfigManager.hpp"
 #include "Assignment.cpp"
 
 #if __cplusplus < 202002L

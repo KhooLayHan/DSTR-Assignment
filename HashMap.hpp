@@ -4,8 +4,8 @@
 #include <functional>
 #include <cassert>
 
-#include "DynamicArray.h"
-#include "Buckets.h"
+#include "DynamicArray.hpp"
+#include "Buckets.hpp"
 
 namespace PerformanceEvaluation {
 

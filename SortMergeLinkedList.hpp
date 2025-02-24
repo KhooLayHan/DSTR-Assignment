@@ -3,7 +3,7 @@
 #ifndef SORT_MERGE_LINKED_LIST_HPP
 #define SORT_MERGE_LINKED_LIST_HPP
 
-#include "Sort.h"
+#include "Sort.hpp"
 
 namespace PerformanceEvaluation {
     class SortMergeLinkedList final : public Sort<LinkedList, LinkedListNode*> {

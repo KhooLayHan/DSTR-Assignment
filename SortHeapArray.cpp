@@ -1,4 +1,4 @@
-#include "SortHeapArray.h"
+#include "SortHeapArray.hpp"
 
 namespace PerformanceEvaluation {
     void SortHeapArray::SortBy(Array<Dataset>& array) {

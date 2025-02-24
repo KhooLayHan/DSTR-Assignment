@@ -1,7 +1,7 @@
 #include <sstream>
 
-#include "FileHandling.h"
-#include "SimpleFileLogger.h"
+#include "FileHandling.hpp"
+#include "SimpleFileLogger.hpp"
 
 namespace PerformanceEvaluation {
     #ifdef SOURCE_LOCATION_SUPPORTED

@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-#include "SimpleLogger.h"
+#include "SimpleLogger.hpp"
 
 namespace PerformanceEvaluation {
     enum class TimeUnit {

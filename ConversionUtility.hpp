@@ -2,17 +2,17 @@
 
 #include <cmath>
 
-#include "Array.h"
-#include "Dataset.h"
-#include "FileHandling.h"
-#include "HashMap.h"
-#include "HashSet.h"
-#include "LinkedList.h"
-#include "Vector.h"
-#include "WordList.h"
-#include "WordListSorted.h"
+#include "Array.hpp"
+#include "Dataset.hpp"
+#include "FileHandling.hpp"
+#include "HashMap.hpp"
+#include "HashSet.hpp"
+#include "LinkedList.hpp"
+#include "Vector.hpp"
+#include "WordList.hpp"
+#include "WordListSorted.hpp"
 
-#include "DynamicArray.h"
+#include "DynamicArray.hpp"
 
 #include <functional>
 namespace PerformanceEvaluation

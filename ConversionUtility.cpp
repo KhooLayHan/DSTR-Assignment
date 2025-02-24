@@ -1,9 +1,9 @@
-#include "ConversionUtility.h"
+#include "ConversionUtility.hpp"
 
-#include "FileHandling.h"
-#include "SearchLinearLinkedList.h"
-#include "SearchLinearDynamicArray.h"
-#include "Algorithm.h"
+#include "FileHandling.hpp"
+#include "SearchLinearLinkedList.hpp"
+#include "SearchLinearDynamicArray.hpp"
+#include "Algorithm.hpp"
 #include <iomanip>
 
 namespace PerformanceEvaluation

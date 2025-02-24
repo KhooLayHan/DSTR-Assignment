@@ -1,9 +1,9 @@
 #pragma once
 
-#include "DynamicArray.h"
-#include "Dataset.h"
+#include "DynamicArray.hpp"
+#include "Dataset.hpp"
 
-#include "Search.h"
+#include "Search.hpp"
 
 namespace PerformanceEvaluation
 {

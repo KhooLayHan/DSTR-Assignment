@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SimpleLogger.h"
+#include "SimpleLogger.hpp"
 
 namespace PerformanceEvaluation {
     class SimpleFileLogger final : public SimpleLogger {        

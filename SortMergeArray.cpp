@@ -1,4 +1,4 @@
-#include "SortMergeArray.h"
+#include "SortMergeArray.hpp"
 
 namespace PerformanceEvaluation {
     void SortMergeArray::SortBy(Array<Dataset>& array) {

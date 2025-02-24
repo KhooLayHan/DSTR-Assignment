@@ -3,9 +3,9 @@
 #include <string>
 #include <string_view>
 
-#include "Array.h"
-#include "LinkedList.h"
-#include "WordList.h"
+#include "Array.hpp"
+#include "LinkedList.hpp"
+#include "WordList.hpp"
 
 namespace PerformanceEvaluation
 {

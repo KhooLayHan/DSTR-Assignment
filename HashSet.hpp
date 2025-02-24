@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HashMap.h"
+#include "HashMap.hpp"
 
 #include <initializer_list>
 
