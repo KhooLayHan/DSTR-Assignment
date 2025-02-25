@@ -13,6 +13,7 @@
                 "--std=c++20",
                 "-O0",
                 "-g",
+
                 "./Main.cpp",
                 "./FileHandling.cpp",
                 "./Benchmark.cpp",
@@ -80,6 +81,7 @@
                 "./SimpleFileLogger.cpp",
                 "./SimpleConsoleLogger.cpp",
                 "./SimpleLoggingService.cpp",
+         
                 "./LinkedList.cpp",
                 "./WordList.cpp",
                 "./WordListSorted.cpp",

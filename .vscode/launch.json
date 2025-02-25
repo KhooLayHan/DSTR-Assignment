@@ -53,7 +53,7 @@
             "name": "C++20 Release: Launch DSTR Assignment",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/Main",
+            "program": "${workspaceFolder}/release/assignment_1/Main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
