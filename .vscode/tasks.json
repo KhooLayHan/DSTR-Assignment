@@ -30,11 +30,7 @@
                 
                 "./Algorithm.cpp",
                 "./DateUtility.cpp",
-                
-                "./SearchArray.cpp",
-                "./SearchLinkedList.cpp",
-                "./SearchWordList.cpp",
-                
+                         
                 "./SortMergeLinkedList.cpp",    
                 "./SortMergeWordList.cpp",    
                 
